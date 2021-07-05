@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_app_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cylinder20">
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoadingActivity"></activity>
+        <activity android:name=".PresettingActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".WelcomeActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
