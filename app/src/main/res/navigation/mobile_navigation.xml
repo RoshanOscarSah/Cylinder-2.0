@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
+    android:fitsSystemWindows="true"
+
     app:startDestination="@+id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.eachut.cylinder.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_entry"
         tools:layout="@layout/fragment_home" />
 
     <fragment
@@ -18,8 +20,21 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
+        android:id="@+id/navigation_stock"
+        android:name="com.eachut.cylinder.ui.stock.StockFragment"
+        android:label="@string/title_stock"
+        tools:layout="@layout/fragment_stock" />
+
+    <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.eachut.cylinder.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_profiles"
+        android:name="com.eachut.cylinder.ui.profiles.ProfilesFragment"
+        android:label="@string/title_profiles"
+        tools:layout="@layout/fragment_profiles" />
+
 </navigation>
