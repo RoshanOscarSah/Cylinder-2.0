@@ -8,5 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="inactive">#8E8E93</color>
+    <color name="dark_fade">#000000</color>
+    <color name="sendreceive_fade">#995FB2F6</color>
+    <color name="sendreceive">#5FB2F6</color>
+    <color name="selectedLanguage">#940000</color>
+    <color name="notselectedLanguage">#ff9595</color>
     <color name="ic_app_background">#DA6157</color>
 </resources>
