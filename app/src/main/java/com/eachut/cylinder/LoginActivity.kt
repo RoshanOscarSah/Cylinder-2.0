@@ -123,7 +123,7 @@ class LoginActivity : AppCompatActivity() {
 
 //                // Set a click listener for popup's button widget
             changePassword.setOnClickListener {
-                val intent = Intent(this, WelcomeActivity::class.java)
+                val intent = Intent(this, ChangedefpassActivity::class.java)
                 startActivity(intent)
             }
 
