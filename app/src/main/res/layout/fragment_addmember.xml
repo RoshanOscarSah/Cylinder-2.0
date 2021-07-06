@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.profiles.Addmember">
+    tools:context=".ui.profiles.AddmemberFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -234,7 +234,7 @@
                     android:orientation="horizontal">
                     <!--            send-->
                     <LinearLayout
-                        android:id="@+id/admin"
+                        android:id="@+id/llAdmin"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
                         android:layout_marginRight="13dp"
@@ -242,11 +242,11 @@
                         android:background="@drawable/send_recieve_bg"
                         android:backgroundTint="#5FB2F6">
                         <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="150dp"
+                            android:layout_height="50dp"
                             android:layout_weight="1"
                             android:layout_gravity="left|center_vertical"
-                            android:src="@drawable/ic_warehouse"/>
+                            android:src="@drawable/ic_team_building"/>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -256,27 +256,29 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Admin"
+                                android:textAlignment="textEnd"
                                 android:layout_marginRight="10dp"
                                 android:layout_marginTop="10dp"
                                 android:textColor="#99FFFFFF"
                                 android:textStyle="normal"
-                                android:textSize="12dp"/>
+                                android:textSize="12dp"
+                                android:gravity="end" />
 
 
                             <ImageView
-                                android:id="@+id/ivSendFangro"
+                                android:id="@+id/ivSendCheck"
                                 android:visibility="visible"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="30dp"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="30dp"
                                 android:layout_gravity="right|center_vertical"
-                                android:src="@drawable/ic_fangro"/>
+                                android:src="@drawable/ic_checked"/>
                         </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/employe"
+                        android:id="@+id/llemploye"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
                         android:layout_marginLeft="13dp"
@@ -298,14 +300,14 @@
                                 android:textStyle="normal"
                                 android:textSize="12dp" />
                             <ImageView
-                                android:id="@+id/ivRecieveFangro"
-                                android:visibility="invisible"
+                                android:id="@+id/ivRecieveCheck"
+                                android:visibility="visible"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="30dp"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginLeft="-120dp"
                                 android:layout_gravity="right|center_vertical"
-                                android:src="@drawable/ic_fangro"/>
+                                android:src="@drawable/ic_checked"/>
                         </LinearLayout>
                         <ImageView
                             android:layout_width="match_parent"
