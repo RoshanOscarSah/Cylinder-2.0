@@ -78,6 +78,9 @@ class ProfilesFragment : Fragment() {
             binding.ivCancalSearchProfiles.isVisible = false
         }
 
+        //add
+
+
 // FILTER
         binding.ivFilterProfiles.setOnClickListener { view ->
 
