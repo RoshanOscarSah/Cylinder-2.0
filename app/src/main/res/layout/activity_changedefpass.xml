@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/root_layout"
-    tools:context=".LoginActivity">
+    tools:context=".ChangedefpassActivity">
 
 
 
@@ -24,18 +24,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
+            android:gravity="left"
             android:padding="20dp">
-            <ToggleButton
-                android:id="@+id/setting"
-                android:paddingTop="5dp"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="#0003DAC5"
-                android:textOff=""
-                android:textOn=""
-                android:checked="false"
-                android:drawableTop="@drawable/ic_settings"/>
+            <ImageView
+                android:id="@+id/backChangedefpass"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_arrow_back"/>
 
         </LinearLayout>
 
@@ -43,18 +39,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="@string/title_login"
+            android:text="@string/title_ChangeDefaultPassword"
             android:fontFamily="@font/sofia_pro_black_az"
             android:textAlignment="center"
-            android:textSize="40sp"
+            android:textSize="25sp"
             android:foregroundGravity="top"
             android:paddingTop="25dp"
-            android:paddingBottom="50dp"
+            android:paddingBottom="25dp"
             android:textStyle="bold"
             android:textFontWeight="900"
             android:gravity="center_horizontal" />
         <EditText
-            android:id="@+id/etUsername"
+            android:id="@+id/etdefUsername"
             android:paddingLeft="25dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,8 +73,8 @@
             android:orientation="horizontal">
 
             <EditText
-                android:layout_weight="5"
-                android:id="@+id/etPassword"
+                android:layout_weight="2"
+                android:id="@+id/etdefPassword"
                 android:paddingLeft="25dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,13 +83,50 @@
                 android:fontFamily="@font/sofia_pro_regular_az"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:hint="@string/title_Password"
+                android:hint="@string/title_DefaultPassword"
                 android:textColor="@color/black"
                 android:shadowColor="@color/black"
                 app:backgroundTint="#fff"/>
 
             <ToggleButton
-                android:id="@+id/togglePasswordView"
+                android:id="@+id/toggledefPasswordView"
+                android:layout_weight="1"
+                android:layout_width="20dp"
+                android:layout_margin="15dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_eye"
+                android:textOff=""
+                android:textOn=""
+                android:checked="false"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_rectangle_password"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etnewPassword"
+                android:layout_weight="5"
+                android:paddingLeft="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:inputType="textPassword"
+                android:fontFamily="@font/sofia_pro_regular_az"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:hint="@string/title_NewPassword"
+                android:textColor="@color/black"
+                android:shadowColor="@color/black"
+                app:backgroundTint="#fff"/>
+
+            <ToggleButton
+                android:id="@+id/togglenewPasswordView"
                 android:layout_weight="1"
                 android:layout_width="20dp"
                 android:layout_margin="15dp"
@@ -116,28 +149,18 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/loginbtn"
+                android:id="@+id/changepassbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/title_login"
+                android:text="@string/title_ChangePassword"
                 android:layout_gravity="center"
-                android:layout_marginLeft="25dp"
                 android:textAlignment="center"
                 android:fontFamily="@font/sofia_pro_semi_bold_az"
-                android:textSize="32sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:textFontWeight="900"
                 android:textColor="#f55a63"
                 android:layout_weight="3"/>
-
-            <ImageView
-                android:id="@+id/fingerReader"
-                android:layout_width="10dp"
-                android:layout_height="50dp"
-                android:layout_marginRight="25dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/ic_fingerprint"/>
 
         </LinearLayout>
 

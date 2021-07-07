@@ -19,6 +19,9 @@
     <string name="title_PoweredbyEachut">Powered by Eachut</string>
     <string name="title_Touchid">Touch id</string>
     <string name="title_ChangePassword">Change Password</string>
+    <string name="title_NewPassword">new Password</string>
+    <string name="title_DefaultPassword">default Password</string>
+    <string name="title_ChangeDefaultPassword">Change Default Password</string>
     <!--    entry-->
     <string name="title_Reseller">Reseller</string>
     <string name="title_Company">Company</string>
@@ -81,4 +84,6 @@
     <!--    loading-->
     <string name="title_Loading">Loading</string>
     <string name="title_SelectedLanguage">Selected Language</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
