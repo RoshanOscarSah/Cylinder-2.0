@@ -3,7 +3,7 @@
     package="com.eachut.cylinder">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -11,11 +11,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_app_round"
         android:supportsRtl="true"
+<<<<<<<<< Temporary merge branch 1
+        android:theme="@style/Theme.Cylinder20">
+        <activity android:name=".ChangedefpassActivity"></activity>
+        <activity android:name=".LoadingActivity" />
+=========
         android:theme="@style/Theme.Cylinder20"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddNewMemberActivity"></activity>
-        <activity android:name=".LoadingActivity" />
-        <activity android:name=".ChangedefpassActivity" />
+        <activity android:name=".LoadingActivity"></activity>
+>>>>>>>>> Temporary merge branch 2
         <activity android:name=".PresettingActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".WelcomeActivity" />
@@ -28,13 +32,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/app_name"></activity>
     </application>
 
 </manifest>
