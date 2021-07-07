@@ -1,2 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <!--    app-->
+    <string name="app_name">Cylinder 2.0</string>
+    <!--    nav-->
+    <string name="title_entry"> प्रविष्टि </string>
+    <string name="title_dashboard"> ड्यासबोर्ड </string>
+    <string name="title_stock"> स्टक </string>
+    <string name="title_notifications"> सूचना </string>
+    <string name="title_profiles"> प्रोफाइल </string>
+    <!--    welcome-->
+    <string name="title_welcome"> स्वागतम् </string>
+    <string name="title_Letsgetstarted"> सुरु गरौं </string>
+    <string name="title_SelectLanguage"> भाषा छनोट गर्नुस </string>
+    <!--    login-->
+    <string name="title_login"> लग इन </string>
+    <string name="title_Username"> प्रयोगकर्ता नाम </string>
+    <string name="title_Password"> पासवर्ड </string>
+    <string name="title_RakeshKiranaPasal"> राकेश किराना पसल </string>
+    <string name="title_PoweredbyEachut">Eachut द्वारा संचालित </string>
+    <string name="title_Touchid"> टच आईडी </string>
+    <string name="title_ChangePassword"> पासवर्ड परिवर्तन गर्नुहोस् </string>
+    <!--    entry-->
+    <string name="title_Reseller"> पुनर्विक्रेता </string>
+    <string name="title_Company"> कम्पनी </string>
+    <string name="title_SelectReseller"> पुनर्विक्रेता छान्नुहोस् </string>
+    <string name="title_SelectCompany"> कम्पनी छान्नुहोस् </string>
+    <string name="title_Full"> पुरा </string>
+    <string name="title_Half"> आधा </string>
+    <string name="title_Empty"> खाली </string>
+    <string name="title_Regular"> नियमित </string>
+    <string name="title_Leak"> चुहावट </string>
+    <string name="title_Sold"> बेचियो </string>
+    <string name="title_Send"> पठाउनुहोस् </string>
+    <string name="title_Receive"> प्राप्त गर्नुहोस् </string>
+    <string name="title_Amount"> रकम </string>
+    <string name="title_Ratenoofcylinder"> दर * सिलिन्डरको संख्या </string>
+    <string name="title_Remarks"> टिप्पणीहरू </string>
+    <string name="title_Comments"> प्रतिक्रियाहरु…</string>
+    <!--bill-->
+    <string name="title_Bhokraha2"> भोक्राहा – २ </string>
+    <string name="title_Receipt"> रसिद </string>
+    <string name="title_Prima"> प्रिमा </string>
+    <string name="title_Kamakhya"> कामख्या </string>
+    <string name="title_Suvidha"> सुविधा </string>
+    <string name="title_Others"> अन्य </string>
+    <string name="title_Rate"> दर </string>
+    <string name="title_Purchase"> खरीद </string>
+    <string name="title_Due"> बाँकी </string>
+    <string name="title_Cylinder"> सिलिन्डर </string>
+    <string name="title_Cash"> नगद </string>
+    <string name="title_Download"> डाउनलोड </string>
+    <string name="title_SendMessage">सन्देश पठाउनुहोस् </string>
+    <string name="title_Submit"> बुझाउनुहोस् </string>
+    <!--dashboard-->
+    <string name="title_TotalReseller"> कुल पुनर्विक्रेता </string>
+    <string name="title_Latest"> पछिल्लो </string>
+    <string name="title_Profit"> नाफा </string>
+    <string name="title_Investment"> लगानी </string>
+    <string name="title_GasSold"> ग्यास बिक्री </string>
+    <string name="title_CylinderSold"> सिलिन्डर बिक्री </string>
+    <string name="title_NextOrder"> अर्को अर्डर </string>
+    <string name="title_FullLeft"> पुरा बाकी </string>
+    <string name="title_BestSelling"> सर्वश्रेष्ठ बेच्ने </string>
+    <!--stock-->
+    <string name="title_Total"> कुल </string>
+    <!--notification-->
+    <string name="title_All"> सबै </string>
+    <string name="title_Schedule"> तालिका </string>
+    <string name="title_Search"> खोज्नुहोस् </string>
+    <string name="title_NewReseller"> नयाँ पुनर्विक्रेता </string>
+    <string name="title_OrderNow"> अब अर्डर गर्नुहोस् </string>
+    <string name="title_Today"> आज </string>
+    <string name="title_Yesterday"> हिजो </string>
+    <string name="title_Week"> हप्ता </string>
+    <string name="title_Month"> महिना </string>
+    <string name="title_Year"> बर्ष </string>
+    <string name="Done"> भयो </string>
+    <!--profiles-->
+    <string name="title_Member"> सदस्य </string>
+
+    <!--    loading-->
+    <string name="title_Loading">Loading</string>
+    <string name="title_SelectedLanguage">Selected Language</string>
+</resources>
