@@ -5,6 +5,7 @@ import com.eachut.cylinder.api.ServiceBuilder
 import com.eachut.cylinder.api.UserAPI
 import com.eachut.cylinder.entity.User
 import com.eachut.cylinder.response.AddNewMemberResponse
+import com.eachut.cylinder.response.ChangePasswordResponse
 import com.eachut.cylinder.response.LoginResponse
 
 class UserRepository
@@ -33,4 +34,9 @@ class UserRepository
             userAPI.checkMember(username,password)
         }
     }
+//    suspend fun changepassword(user):ChangePasswordResponse{
+//        return apiRequest {
+//            userAPI.changepassword(user)
+//        }
+//    }
 }

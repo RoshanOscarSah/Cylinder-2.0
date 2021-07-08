@@ -2,6 +2,7 @@ package com.eachut.cylinder.api
 
 import com.eachut.cylinder.entity.User
 import com.eachut.cylinder.response.AddNewMemberResponse
+import com.eachut.cylinder.response.ChangePasswordResponse
 import com.eachut.cylinder.response.LoginResponse
 import retrofit2.Response
 import retrofit2.http.*

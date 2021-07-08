@@ -183,7 +183,7 @@ class LoginActivity : AppCompatActivity() {
 //           }
 //
 //       }
-            //Login Member
+//            Login Member
        CoroutineScope(Dispatchers.IO).launch {
            try{
                val username = etUsername.text.toString()
@@ -209,7 +209,13 @@ class LoginActivity : AppCompatActivity() {
            }
            catch(e:Exception){
                withContext(Main){
-                   Toast.makeText(this@LoginActivity,"Error: ${e}" , Toast.LENGTH_SHORT).show()
+                   Toast.makeText(this@LoginActivity,"Please Change your default password" , Toast.LENGTH_SHORT).show()
+                   startActivity(
+                           Intent(
+                               this@LoginActivity,
+                               ChangedefpassActivity::class.java
+                           )
+                       )
                }
            }
 
