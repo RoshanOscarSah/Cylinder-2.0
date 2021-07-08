@@ -21,11 +21,18 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.transition.TransitionManager
+import com.eachut.cylinder.repository.UserRepository
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var loginbtn: TextView
+    private lateinit var etUsername:TextView
     private lateinit var etPassword: EditText
     private lateinit var togglePasswordView: ToggleButton
     private lateinit var fingerReader: ImageView
@@ -37,6 +44,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         loginbtn = findViewById(R.id.loginbtn)
+        etUsername = findViewById(R.id.etUsername)
         etPassword = findViewById(R.id.etPassword)
         togglePasswordView = findViewById(R.id.togglePasswordView)
         fingerReader = findViewById(R.id.fingerReader)
@@ -144,8 +152,68 @@ class LoginActivity : AppCompatActivity() {
 
 
         loginbtn.setOnClickListener{
-            val intent = Intent(this, LoadingActivity::class.java)
-            startActivity(intent)
+
+//       CoroutineScope(Dispatchers.IO).launch {
+//           try{
+//               val username = etUsername.text.toString()
+//               val password = etPassword.text.toString()
+//               val userRepository = UserRepository()
+//               val userResponse = userRepository.checkUser(username , password)
+//               if(userResponse.success==true){
+//                   withContext(Main){
+//                       Toast.makeText(this@LoginActivity,"Login Success" , Toast.LENGTH_SHORT).show()
+//                       startActivity(
+//                           Intent(
+//                               this@LoginActivity,
+//                               AddNewMemberActivity::class.java
+//                           )
+//                       )
+//                   }
+//               }
+//               else{
+//                   withContext(Main){
+//                       Toast.makeText(this@LoginActivity,"Error : Login unsuccessful" , Toast.LENGTH_SHORT).show()
+//                   }
+//               }
+//           }
+//           catch(e:Exception){
+//               withContext(Main){
+//                   Toast.makeText(this@LoginActivity,"Error: ${e}" , Toast.LENGTH_SHORT).show()
+//               }
+//           }
+//
+//       }
+            //Login Member
+       CoroutineScope(Dispatchers.IO).launch {
+           try{
+               val username = etUsername.text.toString()
+               val password = etPassword.text.toString()
+               val userRepository = UserRepository()
+               val userResponse = userRepository.checkMember(username , password)
+               if(userResponse.success==true){
+                   withContext(Main){
+                       Toast.makeText(this@LoginActivity,"Login Success" , Toast.LENGTH_SHORT).show()
+//                       startActivity(
+//                           Intent(
+//                               this@LoginActivity,
+//                               ChangedefpassActivity::class.java
+//                           )
+//                       )
+                   }
+               }
+               else{
+                   withContext(Main){
+                       Toast.makeText(this@LoginActivity,"Error : Login unsuccessful" , Toast.LENGTH_SHORT).show()
+                   }
+               }
+           }
+           catch(e:Exception){
+               withContext(Main){
+                   Toast.makeText(this@LoginActivity,"Error: ${e}" , Toast.LENGTH_SHORT).show()
+               }
+           }
+
+       }
         }
 
         fingerReader.setOnClickListener {
