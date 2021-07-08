@@ -32,13 +32,13 @@ class AddNewMemberActivity : AppCompatActivity() {
 
         loginbtn.setOnClickListener {
 
-            val Firstname = etUsername.text.toString()
-            val Lastname = lstname.text.toString()
-            val Phonenumber = phonenum.text.toString()
-            val Address = address.text.toString()
-            val Comission = cylincom.text.toString()
+            val first_name = etUsername.text.toString()
+            val last_name = lstname.text.toString()
+            val phone_number = phonenum.text.toString()
+            val address = address.text.toString()
+            val comission_percent = cylincom.text.toString()
 
-            val user = User(Firstname = Firstname, Lastname = Lastname,Phonenumber = Phonenumber,Address = Address,Comission = Comission)
+            val user = User(first_name = first_name, last_name = last_name,phone_number = phone_number,address = address,comission_percent = comission_percent)
 
             CoroutineScope(Dispatchers.IO).launch {
                 try {

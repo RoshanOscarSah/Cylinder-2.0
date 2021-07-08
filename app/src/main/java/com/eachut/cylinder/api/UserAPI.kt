@@ -12,10 +12,10 @@ interface UserAPI {
 
     //Login Admin
     @FormUrlEncoded
-    @POST("/admin/login")
+    @POST("/login")
     suspend fun checkUser(
-            @Field("Username") Username : String,
-            @Field("Password") Password : String
+            @Field("username") username : String,
+            @Field("password") password : String
     ): Response<LoginResponse>
 
     //Add Member Admin
@@ -24,22 +24,25 @@ interface UserAPI {
         @Body user: User
     ):Response<AddNewMemberResponse>
 
-    // Login Member
-    @FormUrlEncoded
-    @POST("/login")
-    suspend fun checkMember(
-        @Field("Username") Username : String,
-        @Field("Password") Password : String
-    ): Response<LoginResponse>
 
     //Change Password
+    //changing password using token/authorization
+//    @PUT("/changePassword")
+//    suspend fun changepassword(
+//        @Header("Authorization") token:String,
+//        @Path("id")id:String,
+//        @Body user: User
+//    ):Response<ChangePasswordResponse>
 
-    @PUT("/changepassword")
-    suspend fun changepassword(
-        @Header("Authorization") token:String,
-        @Path("id")id:String,
-        @Body user: User
+    //changing password using username
+    @FormUrlEncoded
+    @PUT("/changePassword")
+    suspend fun changePassword(
+        @Field("username") username : String,
+        @Field("password") password : String,
+        @Field("new_password") new_password : String
     ):Response<ChangePasswordResponse>
+
 
 
 }

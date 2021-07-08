@@ -28,15 +28,15 @@ class UserRepository
         }
     }
 
-    //    Login Member
-    suspend fun  checkMember(username:String,password:String): LoginResponse {
-        return apiRequest {
-            userAPI.checkMember(username,password)
-        }
-    }
 //    suspend fun changepassword(user):ChangePasswordResponse{
 //        return apiRequest {
 //            userAPI.changepassword(user)
 //        }
 //    }
+
+    suspend fun changePassword(username: String, password: String, new_password:String):ChangePasswordResponse {
+        return apiRequest {
+            userAPI.changePassword(username, password, new_password)
+        }
+    }
 }
