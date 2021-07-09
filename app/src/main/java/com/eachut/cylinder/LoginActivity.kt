@@ -17,6 +17,7 @@ import android.transition.Slide
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -32,27 +33,22 @@ import java.util.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var loginbtn: TextView
-    private lateinit var etUsername:TextView
     private lateinit var etPassword: EditText
     private lateinit var togglePasswordView: ToggleButton
     private lateinit var fingerReader: ImageView
     private lateinit var setting: ToggleButton
     private lateinit var animateFallDiagnol: LinearLayout
     private lateinit var root_layout: LinearLayout
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         loginbtn = findViewById(R.id.loginbtn)
-        etUsername = findViewById(R.id.etUsername)
         etPassword = findViewById(R.id.etPassword)
         togglePasswordView = findViewById(R.id.togglePasswordView)
         fingerReader = findViewById(R.id.fingerReader)
         setting = findViewById(R.id.setting)
         animateFallDiagnol = findViewById(R.id.animateFallDiagnol)
         root_layout = findViewById(R.id.root_layout)
-
-
 
 //        val animSetXY = AnimatorSet()
 //
@@ -70,42 +66,34 @@ class LoginActivity : AppCompatActivity() {
 //        animSetXY.interpolator = AccelerateDecelerateInterpolator()
 //        animSetXY.duration = 500
 //        animSetXY.start()
-
         setting.setOnCheckedChangeListener { _, isChecked ->
-
 //            animation
             val animation = ObjectAnimator.ofFloat(setting, "rotation", 0f, 180f)
             animation.duration = 500
             animation.interpolator = AccelerateDecelerateInterpolator()
             animation.start()
-
             //starting popup
             val display = windowManager.defaultDisplay
             val size = Point()
             display.getSize(size)
             val width: Int = size.x
-
             // Initialize a new layout inflater instance
             val inflater: LayoutInflater =
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-
             // Inflate a custom view using layout inflater
             val view = inflater.inflate(R.layout.activity_presetting, null)
-
             // Initialize a new instance of popup window
             val popupWindow = PopupWindow(
                 view, // Custom view to show in popup window
-                LinearLayout.LayoutParams.MATCH_PARENT, // Width of popup window
+                MATCH_PARENT, // Width of popup window
                 1300, // Window height
             )
             popupWindow.setWidth(width-50);
             popupWindow.setFocusable(true);
-
             // Set an elevation for the popup window
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 popupWindow.elevation = 10.0F
             }
-
 
             // If API level 23 or higher then execute the code
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -113,29 +101,70 @@ class LoginActivity : AppCompatActivity() {
                 val slideIn = Slide()
                 slideIn.slideEdge = Gravity.TOP
                 popupWindow.enterTransition = slideIn
-
                 // Slide animation for popup window exit transition
                 val slideOut = Slide()
                 slideOut.slideEdge = Gravity.TOP
                 popupWindow.exitTransition = slideOut
-
             }
-
             // Get the widgets reference from custom view
             val changePassword = view.findViewById<TextView>(R.id.changePassword)
             val nepali1 = view.findViewById<Button>(R.id.nepali1)
             val english1 = view.findViewById<Button>(R.id.english1)
 //
-
-
-
-//                // Set a click listener for popup's button widget
+            //            loadLocate
+            val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
+            val language = sharedPreferences.getString("My_Lang","")
+            Log.d("OSCAR","L : $language")
+            if (language == "ne"){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.d("OSCAR","L a")
+                    english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
+                    nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
+                };
+            }else{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.d("OSCAR","L b")
+                    english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
+                    nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
+                };
+            }
+            //                // Set a click listener for popup's button widget
             changePassword.setOnClickListener {
-                val intent = Intent(this, ChangedefpassActivity::class.java)
+                val intent = Intent(this, WelcomeActivity::class.java)
                 startActivity(intent)
             }
-
-
+            english1.setOnClickListener {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.d("OSCAR","L 1")
+                    english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
+                    nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
+                    val locale = Locale("en")
+                    Locale.setDefault(locale)
+                    val config = Configuration()
+                    config.locale = locale
+                    baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+                    val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+                    editor.putString("My_Lang","en")
+                    editor.apply()
+                    recreate()
+                };
+            }
+            nepali1.setOnClickListener {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.d("OSCAR","L 2")
+                    english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
+                    nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
+                    val locale = Locale("ne")
+                    Locale.setDefault(locale)
+                    val config = Configuration()
+                    config.locale = locale
+                    baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+                    val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+                    editor.putString("My_Lang","ne")
+                    editor.apply()
+                    recreate()
+                };
+            }
 
             // Finally, show the popup window on app
             TransitionManager.beginDelayedTransition(root_layout)
@@ -145,55 +174,16 @@ class LoginActivity : AppCompatActivity() {
                 0, // X offset
                 350 // Y offset
             )
-        }
 
+        }
 
         loginbtn.setOnClickListener{
-            CoroutineScope(Dispatchers.IO).launch {
-                try{
-                    val username = etUsername.text.toString()
-                    val password = etPassword.text.toString()
-                    val userRepository = UserRepository()
-                    val userResponse = userRepository.checkUser(username , password)
-                    if(userResponse.success==true){
-                        if(userResponse.user?.isAdmin!!){
-                            withContext(Main){
-                                Toast.makeText(this@LoginActivity,"The user is Admin" , Toast.LENGTH_SHORT).show()
-                            }
-                        }else{
-                            if(userResponse.user.change_password!!){
-                                startActivity(
-                                   Intent(
-                                       this@LoginActivity,
-                                       ChangedefpassActivity::class.java
-                                   )
-                               )
-                            }else{
-                                withContext(Main){
-                                    Toast.makeText(this@LoginActivity,"You Are Welcome" , Toast.LENGTH_SHORT).show()
-                                }
-                            }
-                        }
-                    }
-                    else{
-                        withContext(Main){
-                            Toast.makeText(this@LoginActivity,"Error : Login unsuccessful" , Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-                //need to be checked
-                catch(e:Exception){
-                    withContext(Main){
-                        Toast.makeText(this@LoginActivity,"Error: ${e}" , Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
+            val intent = Intent(this, LoadingActivity::class.java)
+            startActivity(intent)
         }
-
         fingerReader.setOnClickListener {
             Snackbar.make(fingerReader, "Fingerprint not implimented yet!", Snackbar.LENGTH_SHORT).show()
         }
-
         togglePasswordView.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 // The toggle is enabled
@@ -205,8 +195,9 @@ class LoginActivity : AppCompatActivity() {
                 etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         }
-    }
 
+
+    }
     // to show popup
     fun showDialog() {
         val dialogBuilder = AlertDialog.Builder(this)
@@ -216,4 +207,29 @@ class LoginActivity : AppCompatActivity() {
         val b = dialogBuilder.create()
         b.show()
     }
+//    private fun showPopup(view: View) {
+//        val popup = PopupMenu(this, view)
+//        popup.inflate(R.menu.nameinmenu)
+//
+//        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
+//
+//            when (item!!.itemId) {
+//                R.id.header1 -> {
+//                    Toast.makeText(this@LoginActivity, item.title, Toast.LENGTH_SHORT).show()
+//                }
+//                R.id.header2 -> {
+//                    Toast.makeText(this@LoginActivity, item.title, Toast.LENGTH_SHORT).show()
+//                }
+//                R.id.header3 -> {
+//                    Toast.makeText(this@LoginActivity, item.title, Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//            true
+//        })
+//
+//        popup.show()
+//    }
+
+
 }
