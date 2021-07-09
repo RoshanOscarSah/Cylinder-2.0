@@ -6,6 +6,12 @@ import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.widget.*
+import com.eachut.cylinder.repository.UserRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.lang.Exception
 
 class ChangedefpassActivity : AppCompatActivity() {
     private lateinit var backChangedefpass: ImageView
@@ -35,8 +41,40 @@ class ChangedefpassActivity : AppCompatActivity() {
         }
 
         changepassbtn.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(this@ChangedefpassActivity,"Clicked" , Toast.LENGTH_SHORT).show()
+                    }
+                    val username = etdefUsername.text.toString()
+                    val password = etdefPassword.text.toString()
+                    val new_password = etnewPassword.text.toString()
+                    val userRepository = UserRepository()
+                    val userResponse = userRepository.changePassword(username, password, new_password)
+                    if(userResponse.success==true){
+                        withContext(Dispatchers.Main){
+                            Toast.makeText(this@ChangedefpassActivity,"password changed" , Toast.LENGTH_SHORT).show()
+                            startActivity(
+                                Intent(
+                                    this@ChangedefpassActivity,
+                                    LoginActivity::class.java
+                                )
+                            )
+                        }
+                    }else{
+                        withContext(Dispatchers.Main){
+                            Toast.makeText(this@ChangedefpassActivity,userResponse.message.toString() , Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }catch (e:Exception){
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(this@ChangedefpassActivity,"$e" , Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+//            val intent = Intent(this, LoginActivity::class.java)
+//            startActivity(intent)
         }
 
         togglenewPasswordView.setOnCheckedChangeListener { _, isChecked ->

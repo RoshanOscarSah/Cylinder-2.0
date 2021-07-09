@@ -21,11 +21,18 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.transition.TransitionManager
+import com.eachut.cylinder.repository.UserRepository
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var loginbtn: TextView
+    private lateinit var etUsername:TextView
     private lateinit var etPassword: EditText
     private lateinit var togglePasswordView: ToggleButton
     private lateinit var fingerReader: ImageView
@@ -37,6 +44,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         loginbtn = findViewById(R.id.loginbtn)
+        etUsername = findViewById(R.id.etUsername)
         etPassword = findViewById(R.id.etPassword)
         togglePasswordView = findViewById(R.id.togglePasswordView)
         fingerReader = findViewById(R.id.fingerReader)
@@ -137,15 +145,49 @@ class LoginActivity : AppCompatActivity() {
                 0, // X offset
                 350 // Y offset
             )
-
-
-
         }
 
 
         loginbtn.setOnClickListener{
-            val intent = Intent(this, LoadingActivity::class.java)
-            startActivity(intent)
+            CoroutineScope(Dispatchers.IO).launch {
+                try{
+                    val username = etUsername.text.toString()
+                    val password = etPassword.text.toString()
+                    val userRepository = UserRepository()
+                    val userResponse = userRepository.checkUser(username , password)
+                    if(userResponse.success==true){
+                        if(userResponse.user?.isAdmin!!){
+                            withContext(Main){
+                                Toast.makeText(this@LoginActivity,"The user is Admin" , Toast.LENGTH_SHORT).show()
+                            }
+                        }else{
+                            if(userResponse.user.change_password!!){
+                                startActivity(
+                                   Intent(
+                                       this@LoginActivity,
+                                       ChangedefpassActivity::class.java
+                                   )
+                               )
+                            }else{
+                                withContext(Main){
+                                    Toast.makeText(this@LoginActivity,"You Are Welcome" , Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        withContext(Main){
+                            Toast.makeText(this@LoginActivity,"Error : Login unsuccessful" , Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                //need to be checked
+                catch(e:Exception){
+                    withContext(Main){
+                        Toast.makeText(this@LoginActivity,"Error: ${e}" , Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
 
         fingerReader.setOnClickListener {
