@@ -41,6 +41,4 @@ interface UserAPI {
         @Field("password") password : String,
         @Field("new_password") new_password : String
     ):Response<ChangePasswordResponse>
-
-
 }
