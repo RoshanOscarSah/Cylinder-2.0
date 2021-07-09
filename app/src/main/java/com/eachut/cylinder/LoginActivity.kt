@@ -171,12 +171,6 @@ class LoginActivity : AppCompatActivity() {
                             }else{
                                 withContext(Main){
                                     Toast.makeText(this@LoginActivity,"You Are Welcome" , Toast.LENGTH_SHORT).show()
-                                    startActivity(
-                                        Intent(
-                                            this@LoginActivity,
-                                            ChangedefpassActivity::class.java
-                                        )
-                                    )
                                 }
                             }
                         }
