@@ -14,8 +14,8 @@ interface UserAPI {
     @FormUrlEncoded
     @POST("/login")
     suspend fun checkUser(
-            @Field("username") username : String,
-            @Field("password") password : String
+        @Field("username") username : String,
+        @Field("password") password : String
     ): Response<LoginResponse>
 
     //Add Member Admin
@@ -23,7 +23,6 @@ interface UserAPI {
     suspend fun addnewmemberadmin(
         @Body user: User
     ):Response<AddNewMemberResponse>
-
 
     //Change Password
     //changing password using token/authorization
@@ -42,7 +41,4 @@ interface UserAPI {
         @Field("password") password : String,
         @Field("new_password") new_password : String
     ):Response<ChangePasswordResponse>
-
-
-
 }

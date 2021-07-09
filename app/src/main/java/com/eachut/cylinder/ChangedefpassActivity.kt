@@ -50,10 +50,16 @@ class ChangedefpassActivity : AppCompatActivity() {
                     val password = etdefPassword.text.toString()
                     val new_password = etnewPassword.text.toString()
                     val userRepository = UserRepository()
-                    val userResponse = userRepository.changePassword(username, password, new_password)
+                    val userResponse = userRepository.changepassword(username, password, new_password)
                     if(userResponse.success==true){
                         withContext(Dispatchers.Main){
                             Toast.makeText(this@ChangedefpassActivity,"password changed" , Toast.LENGTH_SHORT).show()
+                            startActivity(
+                                Intent(
+                                    this@ChangedefpassActivity,
+                                    LoginActivity::class.java
+                                )
+                            )
                         }
                     }else{
                         withContext(Dispatchers.Main){
