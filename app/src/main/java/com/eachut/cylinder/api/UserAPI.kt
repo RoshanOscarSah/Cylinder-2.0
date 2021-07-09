@@ -33,13 +33,13 @@ interface UserAPI {
     ): Response<LoginResponse>
 
     //Change Password
-//
-//    @PUT("/changepassword")
-//    suspend fun changepassword(
-//        @Header("Authorization") token:String,
-//        @Path("id")id:String,
-//        @Body user: User
-//    ):Response<ChangePasswordResponse>
+
+    @PUT("/changepassword")
+    suspend fun changepassword(
+        @Header("Authorization") token:String,
+        @Path("id")id:String,
+        @Body user: User
+    ):Response<ChangePasswordResponse>
 
 
 }

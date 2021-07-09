@@ -145,81 +145,49 @@ class LoginActivity : AppCompatActivity() {
                 0, // X offset
                 350 // Y offset
             )
-
-
-
         }
 
 
         loginbtn.setOnClickListener{
-
-//       CoroutineScope(Dispatchers.IO).launch {
-//           try{
-//               val username = etUsername.text.toString()
-//               val password = etPassword.text.toString()
-//               val userRepository = UserRepository()
-//               val userResponse = userRepository.checkUser(username , password)
-//               if(userResponse.success==true){
-//                   withContext(Main){
-//                       Toast.makeText(this@LoginActivity,"Login Success" , Toast.LENGTH_SHORT).show()
-//                       startActivity(
-//                           Intent(
-//                               this@LoginActivity,
-//                               AddNewMemberActivity::class.java
-//                           )
-//                       )
-//                   }
-//               }
-//               else{
-//                   withContext(Main){
-//                       Toast.makeText(this@LoginActivity,"Error : Login unsuccessful" , Toast.LENGTH_SHORT).show()
-//                   }
-//               }
-//           }
-//           catch(e:Exception){
-//               withContext(Main){
-//                   Toast.makeText(this@LoginActivity,"Error: ${e}" , Toast.LENGTH_SHORT).show()
-//               }
-//           }
-//
-//       }
-//            Login Member
-       CoroutineScope(Dispatchers.IO).launch {
-           try{
-               val username = etUsername.text.toString()
-               val password = etPassword.text.toString()
-               val userRepository = UserRepository()
-               val userResponse = userRepository.checkMember(username , password)
-               if(userResponse.success==true){
-                   withContext(Main){
-                       Toast.makeText(this@LoginActivity,"Login Success" , Toast.LENGTH_SHORT).show()
-//                       startActivity(
-//                           Intent(
-//                               this@LoginActivity,
-//                               ChangedefpassActivity::class.java
-//                           )
-//                       )
-                   }
-               }
-               else{
-                   withContext(Main){
-                       Toast.makeText(this@LoginActivity,"Error : Login unsuccessful" , Toast.LENGTH_SHORT).show()
-                   }
-               }
-           }
-           catch(e:Exception){
-               withContext(Main){
-                   Toast.makeText(this@LoginActivity,"Please Change your default password" , Toast.LENGTH_SHORT).show()
-                   startActivity(
-                           Intent(
-                               this@LoginActivity,
-                               ChangedefpassActivity::class.java
-                           )
-                       )
-               }
-           }
-
-       }
+            CoroutineScope(Dispatchers.IO).launch {
+                try{
+                    val username = etUsername.text.toString()
+                    val password = etPassword.text.toString()
+                    val userRepository = UserRepository()
+                    val userResponse = userRepository.checkUser(username , password)
+                    if(userResponse.success==true){
+                        if(userResponse.user?.isAdmin!!){
+                            withContext(Main){
+                                Toast.makeText(this@LoginActivity,"The user is Admin" , Toast.LENGTH_SHORT).show()
+                            }
+                        }else{
+                            if(userResponse.user.change_password!!){
+                                startActivity(
+                                   Intent(
+                                       this@LoginActivity,
+                                       ChangedefpassActivity::class.java
+                                   )
+                               )
+                            }else{
+                                withContext(Main){
+                                    Toast.makeText(this@LoginActivity,"You Are Welcome" , Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        withContext(Main){
+                            Toast.makeText(this@LoginActivity,"Error : Login unsuccessful" , Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                //need to be checked
+                catch(e:Exception){
+                    withContext(Main){
+                        Toast.makeText(this@LoginActivity,"Error: ${e}" , Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
 
         fingerReader.setOnClickListener {
