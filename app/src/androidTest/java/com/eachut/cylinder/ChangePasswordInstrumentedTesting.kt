@@ -15,23 +15,26 @@ class ChangePasswordInstrumentedTesting {
     @Test
     fun testChangePasswordUI(){
         Espresso.onView(ViewMatchers.withId(R.id.etdefUsername))
-            .perform(ViewActions.typeText("UnishBhattarai"))
+            .perform(ViewActions.typeText("AnishNepal"))
 
         Espresso.closeSoftKeyboard()
 
         Espresso.onView(ViewMatchers.withId(R.id.etdefPassword))
-            .perform(ViewActions.typeText("Unish1234"))
+            .perform(ViewActions.typeText("anish100"))
 
         Espresso.closeSoftKeyboard()
 
         Espresso.onView(ViewMatchers.withId(R.id.etnewPassword))
-            .perform(ViewActions.typeText("Unish12345"))
+            .perform(ViewActions.typeText("anish10"))
 
+        Espresso.closeSoftKeyboard()
 
         Espresso.onView(ViewMatchers.withId(R.id.changepassbtn))
             .perform(ViewActions.click())
 
-        Espresso.onView(ViewMatchers.withId(R.id.etUsername))
+        Thread.sleep(5000)
+
+        Espresso.onView(ViewMatchers.withId(R.id.root_layout))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 }

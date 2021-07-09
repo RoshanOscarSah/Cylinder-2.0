@@ -127,7 +127,23 @@ class LoginActivity : AppCompatActivity() {
             val english1 = view.findViewById<Button>(R.id.english1)
 //
 
-
+            //            loadLocate
+            val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
+            val language = sharedPreferences.getString("My_Lang","")
+            Log.d("OSCAR","L : $language")
+            if (language == "ne"){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.d("OSCAR","L a")
+                    english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
+                    nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
+                };
+            }else{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.d("OSCAR","L b")
+                    english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
+                    nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
+                };
+            }
 
 //                // Set a click listener for popup's button widget
             changePassword.setOnClickListener {
@@ -135,7 +151,38 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
-
+            english1.setOnClickListener {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.d("OSCAR","L 1")
+                    english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
+                    nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
+                    val locale = Locale("en")
+                    Locale.setDefault(locale)
+                    val config = Configuration()
+                    config.locale = locale
+                    baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+                    val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+                    editor.putString("My_Lang","en")
+                    editor.apply()
+                    recreate()
+                };
+            }
+            nepali1.setOnClickListener {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.d("OSCAR","L 2")
+                    english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
+                    nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
+                    val locale = Locale("ne")
+                    Locale.setDefault(locale)
+                    val config = Configuration()
+                    config.locale = locale
+                    baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+                    val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+                    editor.putString("My_Lang","ne")
+                    editor.apply()
+                    recreate()
+                };
+            }
 
             // Finally, show the popup window on app
             TransitionManager.beginDelayedTransition(root_layout)
