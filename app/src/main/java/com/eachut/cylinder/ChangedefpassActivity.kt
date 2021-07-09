@@ -54,6 +54,12 @@ class ChangedefpassActivity : AppCompatActivity() {
                     if(userResponse.success==true){
                         withContext(Dispatchers.Main){
                             Toast.makeText(this@ChangedefpassActivity,"password changed" , Toast.LENGTH_SHORT).show()
+                            startActivity(
+                                Intent(
+                                    this@ChangedefpassActivity,
+                                    LoginActivity::class.java
+                                )
+                            )
                         }
                     }else{
                         withContext(Dispatchers.Main){
