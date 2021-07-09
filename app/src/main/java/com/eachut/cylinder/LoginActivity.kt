@@ -205,11 +205,6 @@ class LoginActivity : AppCompatActivity() {
                 etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         }
-
-
-
-
-
     }
 
     // to show popup
