@@ -37,8 +37,8 @@ interface UserAPI {
     @PUT("/changepassword")
     suspend fun changepassword(
         @Header("Authorization") token:String,
-        @Path("id")id:String,
-        @Body user: User
+        @Path("id") id:String,
+        @Body user: String
     ):Response<ChangePasswordResponse>
 
 

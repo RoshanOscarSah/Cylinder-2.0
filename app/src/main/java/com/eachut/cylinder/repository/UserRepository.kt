@@ -34,9 +34,11 @@ class UserRepository
 //        }
 //    }
 
-    suspend fun changePassword(username: String, password: String, new_password:String):ChangePasswordResponse {
+    //change garnu pachi
+
+    suspend fun changepassword(username: String, password: String, new_password:String):ChangePasswordResponse {
         return apiRequest {
-            userAPI.changePassword(username, password, new_password)
+            userAPI.changepassword(username, password, new_password)
         }
     }
 }
