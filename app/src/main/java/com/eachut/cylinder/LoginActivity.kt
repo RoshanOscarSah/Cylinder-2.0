@@ -8,6 +8,8 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Point
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,8 +22,6 @@ import android.view.LayoutInflater
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.biometric.BiometricManager
-import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.transition.TransitionManager
 import com.eachut.cylinder.repository.UserRepository
@@ -238,6 +238,12 @@ class LoginActivity : AppCompatActivity() {
                                 withContext(Main){
                                     Toast.makeText(this@LoginActivity,"You Are Welcome" , Toast.LENGTH_SHORT).show()
                                 }
+                                startActivity(
+                                    Intent(
+                                        this@LoginActivity,
+                                        LoadingActivity::class.java
+                                    )
+                                )
                             }
                         }
                     }

@@ -38,7 +38,7 @@ class UserRepository
 
     suspend fun changepassword(username: String, password: String, new_password:String):ChangePasswordResponse {
         return apiRequest {
-            userAPI.changepassword(username, password, new_password)
+            userAPI.changePassword(username, password, new_password)
         }
     }
 }
