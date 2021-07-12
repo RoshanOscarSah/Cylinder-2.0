@@ -2,10 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.eachut.cylinder">
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -14,9 +13,11 @@
         android:roundIcon="@mipmap/ic_app_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cylinder20"
-        android:usesCleartextTraffic="true" >
-        <activity android:name=".ChangedefpassActivity"/>
-        <activity android:name=".LoadingActivity"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ui.profiles.GetResellerProfile"></activity>
+        <activity android:name=".ChangedefpassActivity" />
+        <activity
+            android:name=".LoadingActivity"
             android:theme="@style/Theme.Cylinder20" />
         <activity android:name=".PresettingActivity" />
         <activity android:name=".LoginActivity" />
@@ -27,8 +28,10 @@
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
