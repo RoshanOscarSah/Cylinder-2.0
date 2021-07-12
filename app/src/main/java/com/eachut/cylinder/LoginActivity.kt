@@ -8,6 +8,8 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Point
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,9 +22,12 @@ import android.view.LayoutInflater
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.transition.TransitionManager
 import com.eachut.cylinder.repository.UserRepository
 import com.google.android.material.snackbar.Snackbar
+import io.fajarca.project.biometricauthentication.helper.AuthenticationError
+import io.fajarca.project.biometricauthentication.helper.navigateTo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
@@ -31,6 +36,10 @@ import kotlinx.coroutines.withContext
 import java.util.*
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var biometricPrompt : BiometricPrompt
+    private lateinit var biometricManager: BiometricManager
+
     private lateinit var loginbtn: TextView
     private lateinit var etUsername:TextView
     private lateinit var etPassword: EditText
@@ -51,6 +60,16 @@ class LoginActivity : AppCompatActivity() {
         setting = findViewById(R.id.setting)
         animateFallDiagnol = findViewById(R.id.animateFallDiagnol)
         root_layout = findViewById(R.id.root_layout)
+
+
+        setupBiometricAuthentication()
+        checkBiometricFeatureState()
+
+        fingerReader.setOnClickListener {
+            if (isBiometricFeatureAvailable()) {
+                biometricPrompt.authenticate(buildBiometricPrompt())
+            }
+        }
 
 
 
@@ -127,7 +146,23 @@ class LoginActivity : AppCompatActivity() {
             val english1 = view.findViewById<Button>(R.id.english1)
 //
 
-
+            //            loadLocate
+            val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
+            val language = sharedPreferences.getString("My_Lang","")
+            Log.d("OSCAR","L : $language")
+            if (language == "ne"){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.d("OSCAR","L a")
+                    english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
+                    nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
+                };
+            }else{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.d("OSCAR","L b")
+                    english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
+                    nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
+                };
+            }
 
 //                // Set a click listener for popup's button widget
             changePassword.setOnClickListener {
@@ -135,7 +170,38 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
-
+            english1.setOnClickListener {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.d("OSCAR","L 1")
+                    english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
+                    nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
+                    val locale = Locale("en")
+                    Locale.setDefault(locale)
+                    val config = Configuration()
+                    config.locale = locale
+                    baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+                    val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+                    editor.putString("My_Lang","en")
+                    editor.apply()
+                    recreate()
+                };
+            }
+            nepali1.setOnClickListener {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.d("OSCAR","L 2")
+                    english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
+                    nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
+                    val locale = Locale("ne")
+                    Locale.setDefault(locale)
+                    val config = Configuration()
+                    config.locale = locale
+                    baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+                    val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+                    editor.putString("My_Lang","ne")
+                    editor.apply()
+                    recreate()
+                };
+            }
 
             // Finally, show the popup window on app
             TransitionManager.beginDelayedTransition(root_layout)
@@ -172,6 +238,12 @@ class LoginActivity : AppCompatActivity() {
                                 withContext(Main){
                                     Toast.makeText(this@LoginActivity,"You Are Welcome" , Toast.LENGTH_SHORT).show()
                                 }
+                                startActivity(
+                                    Intent(
+                                        this@LoginActivity,
+                                        LoadingActivity::class.java
+                                    )
+                                )
                             }
                         }
                     }
@@ -190,9 +262,9 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        fingerReader.setOnClickListener {
+       /* fingerReader.setOnClickListener {
             Snackbar.make(fingerReader, "Fingerprint not implimented yet!", Snackbar.LENGTH_SHORT).show()
-        }
+        }*/
 
         togglePasswordView.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -205,6 +277,58 @@ class LoginActivity : AppCompatActivity() {
                 etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         }
+
+
+
+
+
+    }
+
+    private fun setupBiometricAuthentication() {
+        biometricManager = BiometricManager.from(this)
+        val executor = ContextCompat.getMainExecutor(this)
+        biometricPrompt = BiometricPrompt(this, executor, biometricCallback)
+    }
+
+    private fun checkBiometricFeatureState() {
+        when (biometricManager.canAuthenticate()) {
+            BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> setErrorNotice("Sorry. It seems your device has no biometric hardware")
+            BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> setErrorNotice("Biometric features are currently unavailable.")
+            BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> setErrorNotice("You have not registered any biometric credentials")
+            BiometricManager.BIOMETRIC_SUCCESS -> {}
+        }
+    }
+
+    private fun buildBiometricPrompt(): BiometricPrompt.PromptInfo {
+        return BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Verify your identity")
+            .setDescription("Confirm your identity so we can verify it's you")
+            .setNegativeButtonText("Cancel")
+            .setConfirmationRequired(false) //Allows user to authenticate without performing an action, such as pressing a button, after their biometric credential is accepted.
+            .build()
+    }
+
+    private fun isBiometricFeatureAvailable(): Boolean {
+        return biometricManager.canAuthenticate() == BiometricManager.BIOMETRIC_SUCCESS
+    }
+
+    private val biometricCallback = object : BiometricPrompt.AuthenticationCallback() {
+        override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+            super.onAuthenticationSucceeded(result)
+            navigateTo<MainActivity>()
+        }
+
+        override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+            super.onAuthenticationError(errorCode, errString)
+
+            if (errorCode != AuthenticationError.AUTHENTICATION_DIALOG_DISMISSED.errorCode && errorCode != AuthenticationError.CANCELLED.errorCode) {
+                setErrorNotice(errString.toString())
+            }
+        }
+    }
+
+    private fun setErrorNotice(errorMessage: String) {
+
     }
 
     // to show popup
