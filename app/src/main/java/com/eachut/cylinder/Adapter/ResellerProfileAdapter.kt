@@ -4,5 +4,5 @@ import android.content.Context
 
 class ResellerProfileAdapter (
     private val context: Context,
-    private val lstlicense: MutableList<ResellerProfileAdapter>
+    private val lstResellerList: MutableList<ResellerProfileAdapter>
 )
