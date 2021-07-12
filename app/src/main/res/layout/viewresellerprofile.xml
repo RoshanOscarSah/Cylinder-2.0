@@ -71,6 +71,7 @@
                 android:layout_weight="1">
 
                 <ImageView
+                    android:id="@+id/iv_Call"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginTop="5dp"
@@ -130,7 +131,7 @@
                         android:src="@drawable/ic_profile_databg"/>
 
                     <TextView
-                        android:id="@+id/TV_money"
+                        android:id="@+id/TV_Price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -183,7 +184,7 @@
                         android:src="@drawable/ic_profile_databg"/>
 
                     <TextView
-                        android:id="@+id/tv_Cylinder"
+                        android:id="@+id/tv_Halfcylinder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -235,6 +236,7 @@
                         android:src="@drawable/ic_profile_databg"/>
 
                     <TextView
+                        android:id="@+id/tv_leckcyclinder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -294,6 +296,7 @@
                         android:layout_height="35dp"/>
 
                     <TextView
+                        android:id="@+id/tv_Tag"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -346,6 +349,7 @@
                         android:layout_height="35dp"/>
 
                     <TextView
+                        android:id="@+id/tv_Burn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -398,6 +402,7 @@
                         android:layout_height="35dp"/>
 
                     <TextView
+                        android:id="@+id/tv_Cylinder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
