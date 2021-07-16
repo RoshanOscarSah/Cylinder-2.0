@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
-import com.eachut.cylinder.entity.User
-import com.eachut.cylinder.repository.UserRepository
 import kotlinx.coroutines.*
-import org.w3c.dom.Text
 
 class AddNewMemberActivity : AppCompatActivity() {
 
@@ -38,39 +35,39 @@ class AddNewMemberActivity : AppCompatActivity() {
             val address = address.text.toString()
             val comission_percent = cylincom.text.toString()
 
-            val user = User(first_name = first_name, last_name = last_name,phone_number = phone_number,address = address,comission_percent = comission_percent)
+//            val user = User(first_name = first_name, last_name = last_name,phone_number = phone_number,address = address,comission_percent = comission_percent)
 
-            CoroutineScope(Dispatchers.IO).launch {
-                try {
-                    val userRepository = UserRepository()
-                    val response = userRepository.addnewmemberadmin(user)
-                    if (response.success == true){
-                        startActivity(Intent(this@AddNewMemberActivity,AddNewMemberActivity::class.java))
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(
-                                this@AddNewMemberActivity,
-                                "Member Successful",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-                    else{
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(
-                                this@AddNewMemberActivity,
-                                "Member Not Added",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-                } catch (ex: Exception) {
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(this@AddNewMemberActivity,
-                            ex.toString(),
-                            Toast.LENGTH_SHORT).show()
-                    }
-                }
-                }
+//            CoroutineScope(Dispatchers.IO).launch {
+//                try {
+//                    val userRepository = UserRepository()
+//                    val response = userRepository.addnewmemberadmin(user)
+//                    if (response.success == true){
+//                        startActivity(Intent(this@AddNewMemberActivity,AddNewMemberActivity::class.java))
+//                        withContext(Dispatchers.Main) {
+//                            Toast.makeText(
+//                                this@AddNewMemberActivity,
+//                                "Member Successful",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//                        }
+//                    }
+//                    else{
+//                        withContext(Dispatchers.Main) {
+//                            Toast.makeText(
+//                                this@AddNewMemberActivity,
+//                                "Member Not Added",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//                        }
+//                    }
+//                } catch (ex: Exception) {
+//                    withContext(Dispatchers.Main) {
+//                        Toast.makeText(this@AddNewMemberActivity,
+//                            ex.toString(),
+//                            Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//                }
             }
 
         }

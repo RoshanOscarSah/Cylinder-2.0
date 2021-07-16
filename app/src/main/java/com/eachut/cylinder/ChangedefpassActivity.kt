@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.widget.*
-import com.eachut.cylinder.repository.UserRepository
+import com.eachut.cylinder.repository.MemberRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -49,9 +49,9 @@ class ChangedefpassActivity : AppCompatActivity() {
                     val username = etdefUsername.text.toString()
                     val password = etdefPassword.text.toString()
                     val new_password = etnewPassword.text.toString()
-                    val userRepository = UserRepository()
-                    val userResponse = userRepository.changepassword(username, password, new_password)
-                    if(userResponse.success==true){
+                    val memberRepository = MemberRepository()
+                    val memberResponse = memberRepository.changePassword(username, password, new_password)
+                    if(memberResponse.success==true){
                         withContext(Dispatchers.Main){
                             Toast.makeText(this@ChangedefpassActivity,"password changed" , Toast.LENGTH_SHORT).show()
                             startActivity(
@@ -63,7 +63,7 @@ class ChangedefpassActivity : AppCompatActivity() {
                         }
                     }else{
                         withContext(Dispatchers.Main){
-                            Toast.makeText(this@ChangedefpassActivity,userResponse.message.toString() , Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@ChangedefpassActivity,memberResponse.message.toString() , Toast.LENGTH_SHORT).show()
                         }
                     }
                 }catch (e:Exception){

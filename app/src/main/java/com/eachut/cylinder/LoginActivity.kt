@@ -24,8 +24,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.transition.TransitionManager
-import com.eachut.cylinder.repository.UserRepository
-import com.google.android.material.snackbar.Snackbar
+import com.eachut.cylinder.repository.MemberRepository
 import io.fajarca.project.biometricauthentication.helper.AuthenticationError
 import io.fajarca.project.biometricauthentication.helper.navigateTo
 import kotlinx.coroutines.CoroutineScope
@@ -217,34 +216,31 @@ class LoginActivity : AppCompatActivity() {
         loginbtn.setOnClickListener{
             CoroutineScope(Dispatchers.IO).launch {
                 try{
-                    val username = etUsername.text.toString()
-                    val password = etPassword.text.toString()
-                    val userRepository = UserRepository()
-                    val userResponse = userRepository.checkUser(username , password)
-                    if(userResponse.success==true){
-                        if(userResponse.user?.isAdmin!!){
+                    val Username = etUsername.text.toString()
+                    val Password = etPassword.text.toString()
+                    val memberRepository = MemberRepository()
+                    val memberResponse = memberRepository.checkMember(Username , Password)
+                    if(memberResponse.success==true){
+                        if(memberResponse.member?.isfirst!!){
                             withContext(Main){
-                                Toast.makeText(this@LoginActivity,"The user is Admin" , Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@LoginActivity,"Please Change Your Password" , Toast.LENGTH_SHORT).show()
                             }
-                        }else{
-                            if(userResponse.user.change_password!!){
-                                startActivity(
-                                   Intent(
-                                       this@LoginActivity,
-                                       ChangedefpassActivity::class.java
-                                   )
-                               )
-                            }else{
-                                withContext(Main){
-                                    Toast.makeText(this@LoginActivity,"You Are Welcome" , Toast.LENGTH_SHORT).show()
-                                }
-                                startActivity(
-                                    Intent(
-                                        this@LoginActivity,
-                                        LoadingActivity::class.java
-                                    )
+                            startActivity(
+                                Intent(
+                                    this@LoginActivity,
+                                    ChangedefpassActivity::class.java
                                 )
+                            )
+                        }else{
+                            withContext(Main){
+                                Toast.makeText(this@LoginActivity,"You Are Welcome" , Toast.LENGTH_SHORT).show()
                             }
+                            startActivity(
+                                Intent(
+                                    this@LoginActivity,
+                                    LoadingActivity::class.java
+                                )
+                            )
                         }
                     }
                     else{
