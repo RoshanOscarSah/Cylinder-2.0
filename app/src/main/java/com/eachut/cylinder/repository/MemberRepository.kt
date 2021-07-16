@@ -3,6 +3,7 @@ package com.eachut.cylinder.repository
 import com.eachut.cylinder.api.MemberAPI
 import com.eachut.cylinder.api.MyApiRequest
 import com.eachut.cylinder.api.ServiceBuilder
+import com.eachut.cylinder.entity.Member
 import com.eachut.cylinder.response.AddNewMemberResponse
 import com.eachut.cylinder.response.ChangePasswordResponse
 import com.eachut.cylinder.response.LoginResponse
@@ -39,12 +40,12 @@ class MemberRepository
             memberAPI.changePassword(Username, Password, Npassword)
         }
     }
-//    //update Product
-//    suspend fun updateProduct(id:String, product: Product):AddProductResponse{
-//        return apiRequest {
-//            productAPI.updateProduct(ServiceBuilder.token!!, id, product)
-//        }
-//    }
+    //update Product
+    suspend fun updateMember(id:String, member: Member):AddNewMemberResponse{
+        return apiRequest {
+            memberAPI.updateMember(id, member)
+        }
+    }
 
 
 

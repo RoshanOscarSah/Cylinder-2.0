@@ -5,6 +5,7 @@ import com.eachut.cylinder.api.ResellerAPI
 import com.eachut.cylinder.api.ServiceBuilder
 import com.eachut.cylinder.entity.Reseller
 import com.eachut.cylinder.response.AddNewResellerResponse
+import com.eachut.cylinder.response.GetAllResellerResponse
 import com.eachut.cylinder.response.GetResellerResponse
 
 class ResellerRepository : MyApiRequest() {
@@ -18,9 +19,24 @@ class ResellerRepository : MyApiRequest() {
         }
     }
 
-        suspend fun resellerList():GetResellerResponse{
+    //get Reseller
+        suspend fun allresellerList():GetAllResellerResponse{
         return apiRequest {
-            resellerAPI.resellerList()
+            resellerAPI.allresellerList()
+        }
+    }
+
+    //get single reseller
+    suspend fun resellerList(id:String):GetResellerResponse{
+        return apiRequest {
+            resellerAPI.resellerList(id)
+        }
+    }
+
+    //update reseller
+    suspend fun updateReseller(id:String, reseller: Reseller):AddNewResellerResponse{
+        return apiRequest {
+            resellerAPI.updateReseller(id, reseller)
         }
     }
 

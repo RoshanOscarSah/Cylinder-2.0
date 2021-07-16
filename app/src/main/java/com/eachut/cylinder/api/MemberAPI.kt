@@ -41,12 +41,12 @@ interface MemberAPI {
         @Field("Npassword") Npassword : String
     ):Response<ChangePasswordResponse>
 
-//    @PUT("product/updateProduct/{id}")
-//    suspend fun updateProduct(
+    @PUT("/member/update/{id}")
+    suspend fun updateMember(
 //        @Header("Authorization") token: String,
-//        @Path ("id") id: String,
-//        @Body product: Product
-//    ): Response<AddProductResponse>
+        @Path ("id") id: String,
+        @Body member: Member
+    ): Response<AddNewMemberResponse>
 
 
 
