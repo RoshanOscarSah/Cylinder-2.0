@@ -46,10 +46,6 @@ class MemberRepository
 //        }
 //    }
 
-//    suspend fun getMyProduct():GetMyProductResponse{
-//        return apiRequest {
-//            productAPI.getMyProduct(ServiceBuilder.token!!)
-//        }
-//    }
+
 
 }

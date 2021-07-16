@@ -48,9 +48,6 @@ interface MemberAPI {
 //        @Body product: Product
 //    ): Response<AddProductResponse>
 
-//    @GET("product/android/getAllProduct")
-//    suspend fun getAllProduct(
-//        @Header("Authorization") token : String,
-//    ): Response<GetAllProductResponse>
+
 
 }

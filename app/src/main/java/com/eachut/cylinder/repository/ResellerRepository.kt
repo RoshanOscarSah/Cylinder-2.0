@@ -5,6 +5,7 @@ import com.eachut.cylinder.api.ResellerAPI
 import com.eachut.cylinder.api.ServiceBuilder
 import com.eachut.cylinder.entity.Reseller
 import com.eachut.cylinder.response.AddNewResellerResponse
+import com.eachut.cylinder.response.GetResellerResponse
 
 class ResellerRepository : MyApiRequest() {
     private val resellerAPI =
@@ -16,4 +17,11 @@ class ResellerRepository : MyApiRequest() {
             resellerAPI.addNewReseller(reseller)
         }
     }
+
+        suspend fun resellerList():GetResellerResponse{
+        return apiRequest {
+            resellerAPI.resellerList()
+        }
+    }
+
 }
