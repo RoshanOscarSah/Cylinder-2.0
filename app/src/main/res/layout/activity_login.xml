@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/root_layout"
+    tools:context=".LoginActivity">
+
+
+
+    <LinearLayout
+        android:id="@+id/animateFallDiagnol"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_gravity="top|start"
+        android:background="@drawable/ic_rectangle_downcurve"
+        android:foregroundGravity="bottom"
+        android:orientation="vertical"
+        android:gravity="top|end">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="20dp">
+            <ToggleButton
+                android:id="@+id/setting"
+                android:paddingTop="5dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="#0003DAC5"
+                android:textOff=""
+                android:textOn=""
+                android:checked="false"
+                android:drawableTop="@drawable/ic_settings"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/title_login"
+            android:fontFamily="@font/sofia_pro_black_az"
+            android:textAlignment="center"
+            android:textSize="40sp"
+            android:foregroundGravity="top"
+            android:paddingTop="25dp"
+            android:paddingBottom="50dp"
+            android:textStyle="bold"
+            android:textFontWeight="900"
+            android:gravity="center_horizontal" />
+        <EditText
+            android:id="@+id/etUsername"
+            android:paddingLeft="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/sofia_pro_regular_az"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:hint="@string/title_Username"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:background="@drawable/ic_rectangle_username"
+            app:backgroundTint="#fff"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_rectangle_password"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_weight="5"
+                android:id="@+id/etPassword"
+                android:paddingLeft="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:inputType="textPassword"
+                android:fontFamily="@font/sofia_pro_regular_az"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:hint="@string/title_Password"
+                android:textColor="@color/black"
+                android:shadowColor="@color/black"
+                app:backgroundTint="#fff"/>
+
+            <ToggleButton
+                android:id="@+id/togglePasswordView"
+                android:layout_weight="1"
+                android:layout_width="20dp"
+                android:layout_margin="15dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_eye"
+                android:textOff=""
+                android:textOn=""
+                android:checked="false"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_rectangle_loginbtn"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/loginbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_login"
+                android:layout_gravity="center"
+                android:layout_marginLeft="25dp"
+                android:textAlignment="center"
+                android:fontFamily="@font/sofia_pro_semi_bold_az"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textFontWeight="900"
+                android:textColor="#f55a63"
+                android:layout_weight="3"/>
+
+            <ImageView
+                android:id="@+id/fingerReader"
+                android:layout_width="10dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="25dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/ic_fingerprint"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center|bottom"
+        android:layout_margin="25dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_RakeshKiranaPasal"
+            android:textAlignment="center"
+            android:layout_weight="900"
+            android:textStyle="normal"
+            android:gravity="center_horizontal"
+            android:textColor="#99FFFFFF"
+            android:textSize="24dp"
+            android:fontFamily="@font/sofia_pro_regular_az"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:layout_weight="900"
+            android:textStyle="normal"
+            android:gravity="center_horizontal"
+            android:textColor="#4DFFFFFF"
+            android:textSize="16dp"
+            android:fontFamily="@font/sofia_pro_regular_az"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/title_PoweredbyEachut"
+            android:textAlignment="center"
+            android:layout_weight="900"
+            android:textStyle="normal"
+            android:gravity="center_horizontal"
+            android:textColor="#4DFFFFFF"
+            android:textSize="16dp"
+            android:letterSpacing="0.3"
+            android:fontFamily="@font/sofia_pro_regular_az"/>
+
+    </LinearLayout>
+
+</LinearLayout>

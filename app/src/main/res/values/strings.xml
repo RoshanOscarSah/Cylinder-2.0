@@ -1,0 +1,89 @@
+<resources>
+    <!--    app-->
+    <string name="app_name">Cylinder 2.0</string>
+    <!--    nav-->
+    <string name="title_entry">Entry</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_stock">Stock</string>
+    <string name="title_notifications">Notification</string>
+    <string name="title_profiles">Profiles</string>
+    <!--    welcome-->
+    <string name="title_welcome">Welcome</string>
+    <string name="title_Letsgetstarted">Let\'s Get Started</string>
+    <string name="title_SelectLanguage">Select Language</string>
+    <!--    login-->
+    <string name="title_login">Login</string>
+    <string name="title_Username">username</string>
+    <string name="title_Password">password</string>
+    <string name="title_RakeshKiranaPasal">Rakesh Kirana Pasal</string>
+    <string name="title_PoweredbyEachut">Powered by Eachut</string>
+    <string name="title_Touchid">Touch id</string>
+    <string name="title_ChangePassword">Change Password</string>
+    <string name="title_NewPassword">new Password</string>
+    <string name="title_DefaultPassword">default Password</string>
+    <string name="title_ChangeDefaultPassword">Change Default Password</string>
+    <!--    entry-->
+    <string name="title_Reseller">Reseller</string>
+    <string name="title_Company">Company</string>
+    <string name="title_SelectReseller">Select Reseller</string>
+    <string name="title_SelectCompany">Select Company</string>
+    <string name="title_Full">Full</string>
+    <string name="title_Half">Half</string>
+    <string name="title_Empty">Empty</string>
+    <string name="title_Regular">Regular</string>
+    <string name="title_Leak">Leak</string>
+    <string name="title_Sold">Sold</string>
+    <string name="title_Send">Send</string>
+    <string name="title_Receive">Receive</string>
+    <string name="title_Amount">Amount</string>
+    <string name="title_Ratenoofcylinder">Rate * no. of cylinder</string>
+    <string name="title_Remarks">Remarks</string>
+    <string name="title_Comments">Comments...</string>
+    <!--bill-->
+    <string name="title_Bhokraha2">Bhokraha-2</string>
+    <string name="title_Receipt">Receipt</string>
+    <string name="title_Prima">Prima</string>
+    <string name="title_Kamakhya">Kamakhya</string>
+    <string name="title_Suvidha">Suvidha</string>
+    <string name="title_Others">Others</string>
+    <string name="title_Rate">Rate</string>
+    <string name="title_Purchase">Purchase</string>
+    <string name="title_Due">Due</string>
+    <string name="title_Cylinder">Cylinder</string>
+    <string name="title_Cash">Cash</string>
+    <string name="title_Download">Download</string>
+    <string name="title_SendMessage">Send Message</string>
+    <string name="title_Submit">Submit</string>
+    <!--dashboard-->
+    <string name="title_TotalReseller">Total Reseller</string>
+    <string name="title_Latest">Latest</string>
+    <string name="title_Profit">Profit</string>
+    <string name="title_Investment">Investment</string>
+    <string name="title_GasSold">Gas Sold</string>
+    <string name="title_CylinderSold">Cylinder Sold</string>
+    <string name="title_NextOrder">Next Order</string>
+    <string name="title_FullLeft">full left</string>
+    <string name="title_BestSelling">Best Selling</string>
+    <!--stock-->
+    <string name="title_Total">Total</string>
+    <!--notification-->
+    <string name="title_All">All</string>
+    <string name="title_Schedule">Schedule</string>
+    <string name="title_Search">Search</string>
+    <string name="title_NewReseller">New Reseller</string>
+    <string name="title_OrderNow">Order Now</string>
+    <string name="title_Today">Today</string>
+    <string name="title_Yesterday">Yesterday</string>
+    <string name="title_Week">Week</string>
+    <string name="title_Month">Month</string>
+    <string name="title_Year">Year</string>
+    <string name="Done">Done</string>
+    <!--profiles-->
+    <string name="title_Member">Member</string>
+
+    <!--    loading-->
+    <string name="title_Loading">Loading</string>
+    <string name="title_SelectedLanguage">Selected Language</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

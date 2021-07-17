@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.profiles.ProfilesFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="21dp"
+            android:id="@+id/add"
+            android:layout_height="21dp"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="left|center_vertical"
+            android:src="@drawable/ic_plus"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/llsearchBox"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/tab3_bg"/>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="-35dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:src="@drawable/ic_search"/>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/flTab3"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:animateLayoutChanges="true">
+
+                <ImageView
+                    android:id="@+id/ivToggleBackground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/tab3_bg"/>
+
+                <ImageView
+                    android:id="@+id/ivToggleActiveP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/tab3_active"
+                    android:layout_gravity="left|center_vertical"/>
+
+                <TextView
+                    android:id="@+id/tvCustomerP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_Reseller"
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/sofia_pro_regular_az"
+                    android:textSize="13dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="left|center"/>
+
+                <TextView
+                    android:id="@+id/tvCompanyP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_Company"
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/sofia_pro_regular_az"
+                    android:textSize="13dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tvMemberP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_Member"
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/sofia_pro_regular_az"
+                    android:textSize="13dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="right|center"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivSearchProfiles"
+            android:layout_width="20dp"
+            android:visibility="visible"
+            android:layout_height="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="right|center_vertical"
+            android:src="@drawable/ic_search"/>
+
+        <ImageView
+            android:id="@+id/ivCancalSearchProfiles"
+            android:visibility="gone"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/ic_icon_metro_cross"
+            android:backgroundTint="#80FFFFFF"/>
+
+        <LinearLayout
+            android:id="@+id/ivFilterProfiles"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:layout_width="27dp"
+                android:layout_height="18dp"
+                android:layout_marginRight="15dp"
+                android:layout_gravity="right|center_vertical"
+                android:src="@drawable/ic_filter"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <androidx.fragment.app.FragmentContainerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
