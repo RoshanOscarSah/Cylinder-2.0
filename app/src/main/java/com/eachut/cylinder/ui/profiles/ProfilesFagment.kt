@@ -45,7 +45,7 @@ class ProfilesFragment : Fragment() {
             params.gravity = Gravity.LEFT
             binding.ivToggleActiveP.setLayoutParams(params);
 
-            val fragment = ViewCompanyFragment()
+            val fragment = GetResellerProfile()
             val fragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(android.R.id.content, fragment)
