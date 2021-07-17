@@ -1,5 +1,6 @@
 package com.eachut.cylinder.ui.profiles
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -43,6 +44,13 @@ class ProfilesFragment : Fragment() {
             )
             params.gravity = Gravity.LEFT
             binding.ivToggleActiveP.setLayoutParams(params);
+
+            val fragment = GetResellerProfile()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(android.R.id.content, fragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
         binding.tvCompanyP.setOnClickListener { view ->
@@ -52,6 +60,13 @@ class ProfilesFragment : Fragment() {
             )
             params.gravity = Gravity.CENTER
             binding.ivToggleActiveP.setLayoutParams(params);
+
+            val fragment = ViewCompanyFragment()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(android.R.id.content, fragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
         binding.tvMemberP.setOnClickListener { view ->
