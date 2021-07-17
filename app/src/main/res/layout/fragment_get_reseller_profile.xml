@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/content"
     tools:context=".ui.profiles.GetResellerProfile">
+
     <include
         layout="@layout/fragment_profiles"
         android:layout_width="match_parent"
@@ -12,7 +13,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
+        android:layout_marginTop="50dp"
+        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>
