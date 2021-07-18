@@ -21,12 +21,12 @@ class MemberRepository
         }
     }
 
-//    //Add New Member Admin
-//    suspend fun addnewmemberadmin(user: User): AddNewMemberResponse {
-//        return apiRequest {
-//            userAPI.addnewmemberadmin(user)
-//        }
-//    }
+    //Add New Member Admin
+    suspend fun addnewmemberadmin(member: Member): AddNewMemberResponse {
+        return apiRequest {
+            memberAPI.addnewmemberadmin(member)
+        }
+    }
 //
 ////    suspend fun changepassword(user):ChangePasswordResponse{
 ////        return apiRequest {
