@@ -85,6 +85,7 @@ class WelcomeActivity : AppCompatActivity() {
 
         val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
         editor.putString("My_Lang",Lang)
+        editor.putString("welcomeOrNot","false")
         editor.apply()
     }
     private fun loadLocate(){
