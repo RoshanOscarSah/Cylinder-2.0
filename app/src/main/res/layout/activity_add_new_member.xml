@@ -131,24 +131,61 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp">
 
-
-                <EditText
-                    android:id="@+id/etUsername"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="0dp"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/sofia_pro_regular_az"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:hint="First name"
-                    android:inputType="text"
-                    android:textColor="@color/black"
-                    android:background="@drawable/ic_rectangle_member"
-                    app:backgroundTint="#fff"/>
+                    android:layout_height="wrap_content">
 
-                <LinearLayout
+                    <EditText
+                        android:id="@+id/etUsername"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:hint="First name"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:background="@drawable/ic_rectangle_member"
+                        app:backgroundTint="#fff"/>
+
+                    <EditText
+                        android:id="@+id/etCompanyname"
+                        android:paddingLeft="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:hint="Company Name"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:background="@drawable/ic_rectangle_member"
+                        app:backgroundTint="#fff"/>
+
+                    <EditText
+                        android:id="@+id/etResellerfullname"
+                        android:paddingLeft="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:hint="Reseller Fullname"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:background="@drawable/ic_rectangle_member"
+                        app:backgroundTint="#fff"/>
+                </RelativeLayout>
+
+
+
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_rectangle_memberflid"
@@ -171,10 +208,40 @@
                         android:background="@drawable/ic_rectangle_member"
                         app:backgroundTint="#fff"/>
 
+                    <EditText
+                        android:id="@+id/cylindername"
+                        android:paddingLeft="25dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:hint="Cylinder Name"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:background="@drawable/ic_rectangle_member"
+                        app:backgroundTint="#fff"/>
 
-                </LinearLayout>
+                    <EditText
+                        android:id="@+id/pasalname"
+                        android:paddingLeft="25dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:hint="Pasal Name"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:background="@drawable/ic_rectangle_member"
+                        app:backgroundTint="#fff"/>
 
-                <LinearLayout
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_rectangle_memberflid"
@@ -184,7 +251,37 @@
 
 
                     <EditText
-                        android:id="@+id/phonenum"
+                        android:id="@+id/resellerphonenum"
+                        android:paddingLeft="25dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:hint="Phone Number"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:background="@drawable/ic_rectangle_member"
+                        app:backgroundTint="#fff"/>
+
+                    <EditText
+                        android:id="@+id/companyphonenum"
+                        android:paddingLeft="25dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:hint="Phone Number"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:background="@drawable/ic_rectangle_member"
+                        app:backgroundTint="#fff"/>
+
+                    <EditText
+                        android:id="@+id/memberphonenum"
                         android:paddingLeft="25dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -199,9 +296,9 @@
                         app:backgroundTint="#fff"/>
 
 
-                </LinearLayout>
+                </RelativeLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_rectangle_memberflid"
@@ -211,7 +308,37 @@
 
 
                     <EditText
-                        android:id="@+id/address"
+                        android:id="@+id/reselleraddress"
+                        android:paddingLeft="25dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:hint="Address"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:background="@drawable/ic_rectangle_member"
+                        app:backgroundTint="#fff"/>
+
+                    <EditText
+                        android:id="@+id/companyaddress"
+                        android:paddingLeft="25dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:hint="Address"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:background="@drawable/ic_rectangle_member"
+                        app:backgroundTint="#fff"/>
+
+                    <EditText
+                        android:id="@+id/memberaddress"
                         android:paddingLeft="25dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -226,12 +353,13 @@
                         app:backgroundTint="#fff"/>
 
 
-                </LinearLayout>
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:id="@+id/status"
                     android:orientation="horizontal">
                     <!--            send-->
                     <LinearLayout
