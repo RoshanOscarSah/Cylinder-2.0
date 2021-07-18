@@ -1,5 +1,7 @@
 package com.eachut.cylinder.ui.profiles
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eachut.cylinder.Adapter.ResellerProfileAdapter
 import com.eachut.cylinder.R
+import com.eachut.cylinder.databinding.FragmentDashboardBinding
 import com.eachut.cylinder.entity.Reseller
 import com.eachut.cylinder.repository.ResellerRepository
 import kotlinx.coroutines.CoroutineScope
@@ -21,6 +24,7 @@ class GetResellerProfile : Fragment() {
 
     private var resellerList = mutableListOf<Reseller>()
     private lateinit var recyclerview: RecyclerView
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,9 +59,12 @@ class GetResellerProfile : Fragment() {
                         "Error : $ex", Toast.LENGTH_SHORT).show()
                 }
             }
+
         }
+
 
         return view
     }
+
 
 }
