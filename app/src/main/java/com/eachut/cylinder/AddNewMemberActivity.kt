@@ -11,23 +11,25 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import com.eachut.cylinder.entity.Member
+import com.eachut.cylinder.repository.MemberRepository
 import kotlinx.coroutines.*
 
 class AddNewMemberActivity : AppCompatActivity() {
 
 
-    private lateinit var etMFname : EditText
-    private lateinit var etMLname : EditText
-    private lateinit var etMPhone : EditText
-    private lateinit var etMAddress : EditText
-    private lateinit var cylincom : EditText
-    private lateinit var btnAddProfile : TextView
-    private lateinit var ivSendCheck : ImageView
-    private lateinit var ivRecieveCheck : ImageView
-    private lateinit var llAdmin : LinearLayout
-    private lateinit var llEmploye : LinearLayout
-    private lateinit var adminOrEmployee : LinearLayout
-    private lateinit var commission : LinearLayout
+    private lateinit var etMFname: EditText
+    private lateinit var etMLname: EditText
+    private lateinit var etMPhone: EditText
+    private lateinit var etMAddress: EditText
+    private lateinit var cylincom: EditText
+    private lateinit var btnAddProfile: TextView
+    private lateinit var ivSendCheck: ImageView
+    private lateinit var ivRecieveCheck: ImageView
+    private lateinit var llAdmin: LinearLayout
+    private lateinit var llEmploye: LinearLayout
+    private lateinit var adminOrEmployee: LinearLayout
+    private lateinit var commission: LinearLayout
 
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -47,7 +49,6 @@ class AddNewMemberActivity : AppCompatActivity() {
         llEmploye = findViewById(R.id.llEmploye)
         adminOrEmployee = findViewById(R.id.adminOrEmployee)
         commission = findViewById(R.id.commission)
-
 
 
 //Admin / Employee
@@ -102,54 +103,58 @@ class AddNewMemberActivity : AppCompatActivity() {
             llAdmin.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.sendreceive_fade)));
 
         }
+        btnAddProfile.setOnClickListener {
 
+            val etMFname = etMFname.text.toString()
+            val etMLname = etMLname.text.toString()
+            val etMPhone = etMPhone.text.toString()
+            val etMAddress = etMAddress.text.toString()
+            var cylincom = cylincom.text.toString()
+            val status = adminOrEmployee.getContentDescription().toString()
 
-
-
-//        btnAddProfile.setOnClickListener {
-
-//            val etMFname = etMFname.text.toString()
-//            val etMLname = etMLname.text.toString()
-//            val etMPhone = etMPhone.text.toString()
-//            val etMAddress = etMAddress.text.toString()
-//            val cylincom = cylincom.text.toString()
-//        val status = adminOrEmployee.getContentDescription()
-
-
-//            val user = User(first_name = etMFname, last_name = etMLname,phone_number = etMPhone,address = etMAddress,comission_percent = comission_percent)
-
-//            CoroutineScope(Dispatchers.IO).launch {
-//                try {
-//                    val userRepository = UserRepository()
-//                    val response = userRepository.addnewmemberadmin(user)
-//                    if (response.success == true){
-//                        startActivity(Intent(this@AddNewMemberActivity,AddNewMemberActivity::class.java))
-//                        withContext(Dispatchers.Main) {
-//                            Toast.makeText(
-//                                this@AddNewMemberActivity,
-//                                "Member Successful",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                        }
-//                    }
-//                    else{
-//                        withContext(Dispatchers.Main) {
-//                            Toast.makeText(
-//                                this@AddNewMemberActivity,
-//                                "Member Not Added",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                        }
-//                    }
-//                } catch (ex: Exception) {
-//                    withContext(Dispatchers.Main) {
-//                        Toast.makeText(this@AddNewMemberActivity,
-//                            ex.toString(),
-//                            Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//                }
-//            }
+                if (status=="ADMIN"){
+                    cylincom = "0"
+                }
+            val member = Member(
+                Firstname = etMFname,
+                Lastname = etMLname,
+                Status = status,
+                Phonenumber = etMPhone,
+                Address = etMAddress,
+                Comission = cylincom
+            )
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val memberRepository = MemberRepository()
+                    val response = memberRepository.addnewmemberadmin(member)
+                    if (response.success == true) {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(
+                                this@AddNewMemberActivity,
+                                "Member added  Successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(
+                                this@AddNewMemberActivity,
+                                "Member Not Added",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                } catch (ex: Exception) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(
+                            this@AddNewMemberActivity,
+                            ex.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
 
         }
     }
+}
