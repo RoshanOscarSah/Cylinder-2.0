@@ -1,6 +1,7 @@
 package com.eachut.cylinder.ui.profiles
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -32,15 +33,15 @@ class AddmemberFragment : Fragment() {
         // onDestroyView.
         private val binding get() = _binding!!
 
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+        @SuppressLint("NewApi")
         override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View? {
+
             profilesViewModel =
                 ViewModelProvider(this).get(ProfilesViewModel::class.java)
-
             _binding = FragmentProfilesBinding.inflate(inflater, container, false)
             val root: View = binding.root
             etUsername = root.findViewById(R.id.etUsername)
