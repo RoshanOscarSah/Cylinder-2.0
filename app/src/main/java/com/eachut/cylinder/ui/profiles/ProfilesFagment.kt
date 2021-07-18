@@ -15,12 +15,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.eachut.cylinder.AddNewMemberActivity
 import com.eachut.cylinder.R
 import com.eachut.cylinder.databinding.FragmentProfilesBinding
+import com.eachut.cylinder.entity.Reseller
 import com.eachut.cylinder.ui.profiles.ProfilesViewModel
 
 class ProfilesFragment : Fragment() {
 
     private lateinit var profilesViewModel: ProfilesViewModel
     private var _binding: FragmentProfilesBinding? = null
+    private var resellerList = mutableListOf<Reseller>()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -141,8 +143,10 @@ class ProfilesFragment : Fragment() {
             popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
                 when(item.itemId)
                 {
-                    R.id.ascending ->
-                        Toast.makeText(view?.context, "Ascending Order", Toast.LENGTH_SHORT).show()
+                    R.id.ascending ->{
+//                        val resellerAscending = resellerList
+//                        val sortingAscending = resellerAscending.sortBy{ it.reseller_fullname.toString()}
+                    }
                     R.id.descending ->
                         Toast.makeText(view?.context, "Descending Order", Toast.LENGTH_SHORT).show()
                     R.id.mostsold ->

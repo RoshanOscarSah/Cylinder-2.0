@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +23,9 @@
             android:theme="@style/Theme.Cylinder20" />
         <activity android:name=".PresettingActivity" />
         <activity android:name=".AddNewMemberActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity" >
+
+        </activity>
         <activity android:name=".WelcomeActivity" />
         <activity
             android:name=".MainActivity"
@@ -35,6 +38,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

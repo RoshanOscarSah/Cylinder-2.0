@@ -130,12 +130,8 @@
                 android:orientation="vertical"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp">
-                <RelativeLayout
 
-                <EditText
-                    android:id="@+id/etMFname"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="0dp"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -198,7 +194,7 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/etMLname"
+                        android:id="@+id/lstname"
                         android:paddingLeft="25dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -256,7 +252,6 @@
 
                     <EditText
                         android:id="@+id/resellerphonenum"
-                        android:id="@+id/etMPhone"
                         android:paddingLeft="25dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -314,7 +309,6 @@
 
                     <EditText
                         android:id="@+id/reselleraddress"
-                        android:id="@+id/etMAddress"
                         android:paddingLeft="25dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -362,8 +356,6 @@
                 </RelativeLayout>
 
                 <LinearLayout
-                    android:id="@+id/adminOrEmployee"
-                    android:contentDescription="ADMIN"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -378,12 +370,14 @@
                         android:layout_weight="1"
                         android:background="@drawable/send_recieve_bg"
                         android:backgroundTint="#5FB2F6">
+
                         <ImageView
                             android:layout_width="150dp"
                             android:layout_height="50dp"
-                            android:layout_weight="1"
                             android:layout_gravity="left|center_vertical"
-                            android:src="@drawable/ic_team_building"/>
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_team_building" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -415,7 +409,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/llEmploye"
+                        android:id="@+id/llemploye"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
                         android:layout_marginLeft="13dp"
@@ -436,16 +430,15 @@
                                 android:textColor="#99FFFFFF"
                                 android:textStyle="normal"
                                 android:textSize="12dp" />
-
                             <ImageView
                                 android:id="@+id/ivRecieveCheck"
-                                android:layout_width="205dp"
-                                android:layout_height="25dp"
-                                android:layout_gravity="right|center_vertical"
-                                android:layout_marginLeft="-120dp"
+                                android:visibility="visible"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
                                 android:layout_marginTop="10dp"
-                                android:src="@drawable/ic_checked"
-                                android:visibility="visible" />
+                                android:layout_marginLeft="-120dp"
+                                android:layout_gravity="right|center_vertical"
+                                android:src="@drawable/ic_checked"/>
                         </LinearLayout>
                         <ImageView
                             android:layout_width="match_parent"
@@ -462,7 +455,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/commission"
-                    android:visibility="gone"
                     android:background="@drawable/ic_rectangle_memberflid"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
@@ -488,6 +480,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btnAddProfile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_rectangle_addbtn"
@@ -496,7 +489,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/btnAddProfile"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Add Profile"
@@ -512,6 +505,53 @@
 
 
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/btnAddCompany"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_rectangle_addbtn"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add Company"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="25dp"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/sofia_pro_semi_bold_az"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        android:textFontWeight="900"
+                        android:textColor="#f55a63"
+                        android:layout_weight="3"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/btnAddReseller"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_rectangle_addbtn"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add Reseller"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="25dp"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/sofia_pro_semi_bold_az"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        android:textFontWeight="900"
+                        android:textColor="#f55a63"
+                        android:layout_weight="3"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -522,6 +562,9 @@
 
     </LinearLayout>
 
-
-
+    <!--        <include-->
+    <!--            layout="@layout/activity_main"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="bottom"/>-->
 </FrameLayout>
