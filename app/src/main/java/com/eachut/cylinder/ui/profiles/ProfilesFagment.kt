@@ -76,6 +76,13 @@ class ProfilesFragment : Fragment() {
             )
             params.gravity = Gravity.RIGHT
             binding.ivToggleActiveP.setLayoutParams(params);
+
+            val fragment = ViewMemberFragment()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(android.R.id.content, fragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
 //search
