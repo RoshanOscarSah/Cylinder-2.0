@@ -57,6 +57,10 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
         english.setOnClickListener {
+            val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+            editor.putString("welcomeOrNot","false")
+            editor.apply()
+
             setLocate("en")
             recreate()
             val intent = Intent(this, LoginActivity::class.java)
@@ -64,6 +68,10 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
         nepali.setOnClickListener {
+            val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+            editor.putString("welcomeOrNot","false")
+            editor.apply()
+
             setLocate("ne")
             recreate()
             val intent = Intent(this, LoginActivity::class.java)
