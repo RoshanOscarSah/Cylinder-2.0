@@ -252,7 +252,7 @@ class LoginActivity : AppCompatActivity() {
                 //need to be checked
                 catch(e:Exception){
                     withContext(Main){
-                        Toast.makeText(this@LoginActivity,"Error: ${e}" , Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity,"Unauthorized Member" , Toast.LENGTH_SHORT).show()
                     }
                 }
             }
