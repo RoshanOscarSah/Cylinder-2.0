@@ -12,6 +12,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.eachut.cylinder.AddNewMemberActivity
 import com.eachut.cylinder.R
 import com.eachut.cylinder.databinding.FragmentProfilesBinding
 import com.eachut.cylinder.ui.profiles.ProfilesViewModel
@@ -33,8 +34,36 @@ class ProfilesFragment : Fragment() {
         profilesViewModel =
             ViewModelProvider(this).get(ProfilesViewModel::class.java)
 
+        //Loading Reseller Profile
+        val fragment = GetResellerProfile()
+        val fragmentManager = requireActivity().supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(android.R.id.content, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+
         _binding = FragmentProfilesBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        //Add member/reseller/company
+        binding.add.setOnClickListener { view ->
+
+            val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.gravity = Gravity.NO_GRAVITY
+            binding.ivToggleActiveP.setLayoutParams(params);
+
+            val intent = Intent(this.context, AddNewMemberActivity::class.java)
+            startActivity(intent)
+
+//            val fragment = AddmemberFragment()
+//            val fragmentManager = requireActivity().supportFragmentManager
+//            val fragmentTransaction = fragmentManager.beginTransaction()
+//            fragmentTransaction.replace(android.R.id.content, fragment)
+//            fragmentTransaction.addToBackStack(null)
+//            fragmentTransaction.commit()
+        }
 
 //customer/company/member
         binding.tvCustomerP.setOnClickListener { view ->

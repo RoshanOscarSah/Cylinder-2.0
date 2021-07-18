@@ -21,6 +21,7 @@
             android:name=".LoadingActivity"
             android:theme="@style/Theme.Cylinder20" />
         <activity android:name=".PresettingActivity" />
+        <activity android:name=".AddNewMemberActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".WelcomeActivity" />
         <activity
