@@ -133,9 +133,25 @@ class ProfilesFragment : Fragment() {
 
 
 // FILTER
-        binding.ivFilterProfiles.setOnClickListener { view ->
+        binding.ivFilterProfiles.setOnClickListener {
 
-        }
+            val popupMenu: PopupMenu =
+                PopupMenu(this.context, view?.findViewById(R.id.ivFilterProfiles))
+            popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                when(item.itemId)
+                {
+                    R.id.ascending ->
+                        Toast.makeText(view?.context, "Ascending Order", Toast.LENGTH_SHORT).show()
+                    R.id.descending ->
+                        Toast.makeText(view?.context, "Descending Order", Toast.LENGTH_SHORT).show()
+                    R.id.mostsold ->
+                        Toast.makeText(view?.context, "Most Sold", Toast.LENGTH_SHORT).show()
+                }
+                true
+            })
+            popupMenu.show()
+            }
 
 //        val textView: TextView = binding.textProfiles
 //        profilesViewModel.text.observe(viewLifecycleOwner, Observer {
