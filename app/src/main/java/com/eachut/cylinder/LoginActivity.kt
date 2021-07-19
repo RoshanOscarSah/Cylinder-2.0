@@ -1,17 +1,16 @@
 package com.eachut.cylinder
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Point
-import androidx.biometric.BiometricManager
-import androidx.biometric.BiometricPrompt
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -19,12 +18,17 @@ import android.transition.Slide
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.Window
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.transition.TransitionManager
 import com.eachut.cylinder.repository.MemberRepository
+import com.google.android.material.snackbar.Snackbar
 import io.fajarca.project.biometricauthentication.helper.AuthenticationError
 import io.fajarca.project.biometricauthentication.helper.navigateTo
 import kotlinx.coroutines.CoroutineScope
@@ -34,13 +38,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
+
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var biometricPrompt : BiometricPrompt
+    private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var biometricManager: BiometricManager
 
     private lateinit var loginbtn: TextView
-    private lateinit var etUsername:TextView
+    private lateinit var etUsername: TextView
     private lateinit var etPassword: EditText
     private lateinit var togglePasswordView: ToggleButton
     private lateinit var fingerReader: ImageView
@@ -65,11 +70,30 @@ class LoginActivity : AppCompatActivity() {
         checkBiometricFeatureState()
 
         fingerReader.setOnClickListener {
-            if (isBiometricFeatureAvailable()) {
-                biometricPrompt.authenticate(buildBiometricPrompt())
-            }
-        }
+            val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
+            val TouchID = sharedPreferences.getString("TouchID", "")
+            if (TouchID == "true") {
+                if (isBiometricFeatureAvailable()) {
+                    biometricPrompt.authenticate(buildBiometricPrompt())
 
+                } else {
+                    Snackbar.make(fingerReader, "Sensor Not Found!", Snackbar.LENGTH_SHORT).show()
+                }
+            } else if (TouchID == "false") {
+                Snackbar.make(
+                    fingerReader,
+                    "Touch Id can be enabled from setting",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            } else {
+                Snackbar.make(
+                    fingerReader,
+                    "Fingerprint not implimented yet! Try login",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+
+        }
 
 
 //        val animSetXY = AnimatorSet()
@@ -116,7 +140,7 @@ class LoginActivity : AppCompatActivity() {
                 LinearLayout.LayoutParams.MATCH_PARENT, // Width of popup window
                 1300, // Window height
             )
-            popupWindow.setWidth(width-50);
+            popupWindow.setWidth(width - 50);
             popupWindow.setFocusable(true);
 
             // Set an elevation for the popup window
@@ -143,24 +167,61 @@ class LoginActivity : AppCompatActivity() {
             val changePassword = view.findViewById<TextView>(R.id.changePassword)
             val nepali1 = view.findViewById<Button>(R.id.nepali1)
             val english1 = view.findViewById<Button>(R.id.english1)
-//
+            val touchIdSwitch = view.findViewById<Switch>(R.id.touchIdSwitch)
+
 
             //            loadLocate
             val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
-            val language = sharedPreferences.getString("My_Lang","")
-            Log.d("OSCAR","L : $language")
-            if (language == "ne"){
+            val language = sharedPreferences.getString("My_Lang", "")
+            Log.d("OSCAR", "L : $language")
+            if (language == "ne") {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Log.d("OSCAR","L a")
+                    Log.d("OSCAR", "L a")
                     english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
                     nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
                 };
-            }else{
+            } else {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Log.d("OSCAR","L b")
+                    Log.d("OSCAR", "L b")
                     english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
                     nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
                 };
+            }
+
+            //touch id
+            val TouchID = sharedPreferences.getString("TouchID", "")
+            if (TouchID == "true") {
+                touchIdSwitch.setChecked(true)
+            } else if (TouchID == "false") {
+                touchIdSwitch.setChecked(false)
+            } else {
+                touchIdSwitch.setChecked(false)
+            }
+
+            touchIdSwitch.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                // The toggle is enabled
+                    val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+                    editor.putString("TouchID","")
+                    editor.putString("Username","")
+                    editor.putString("Password","")
+                    editor.apply()
+
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "Touch Id Reset, Please login Now",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                } else {
+                       // The toggle is disabled
+                    val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+                    editor.putString("TouchID","false")
+                    editor.putString("Username","")
+                    editor.putString("Password","")
+                    editor.apply()
+
+                }
             }
 
 //                // Set a click listener for popup's button widget
@@ -171,32 +232,38 @@ class LoginActivity : AppCompatActivity() {
 
             english1.setOnClickListener {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Log.d("OSCAR","L 1")
+                    Log.d("OSCAR", "L 1")
                     english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
                     nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
                     val locale = Locale("en")
                     Locale.setDefault(locale)
                     val config = Configuration()
                     config.locale = locale
-                    baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+                    baseContext.resources.updateConfiguration(
+                        config,
+                        baseContext.resources.displayMetrics
+                    )
                     val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
-                    editor.putString("My_Lang","en")
+                    editor.putString("My_Lang", "en")
                     editor.apply()
                     recreate()
                 };
             }
             nepali1.setOnClickListener {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Log.d("OSCAR","L 2")
+                    Log.d("OSCAR", "L 2")
                     english1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.notselectedLanguage)))
                     nepali1.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.selectedLanguage)))
                     val locale = Locale("ne")
                     Locale.setDefault(locale)
                     val config = Configuration()
                     config.locale = locale
-                    baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+                    baseContext.resources.updateConfiguration(
+                        config,
+                        baseContext.resources.displayMetrics
+                    )
                     val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
-                    editor.putString("My_Lang","ne")
+                    editor.putString("My_Lang", "ne")
                     editor.apply()
                     recreate()
                 };
@@ -213,85 +280,157 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-        loginbtn.setOnClickListener{
+        loginbtn.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                try{
+                try {
                     val Username = etUsername.text.toString()
                     val Password = etPassword.text.toString()
                     val memberRepository = MemberRepository()
-                    val memberResponse = memberRepository.checkMember(Username , Password)
-                    if(memberResponse.success == true){
-                        if(memberResponse.status == "Admin"){
-//                            withContext(Main){
-//                                Toast.makeText(this@LoginActivity,"Please Change Your Password" , Toast.LENGTH_SHORT).show()
-//                            }
-//                            startActivity(
-//                                Intent(
-//                                    this@LoginActivity,
-//                                    ChangedefpassActivity::class.java
-//                                )
-//                            )
+                    val memberResponse = memberRepository.checkMember(Username, Password)
+                    if (memberResponse.success == true) {
+                        val sharedPreferences =
+                            getSharedPreferences("Settings", Activity.MODE_PRIVATE)
+                        val TouchID = sharedPreferences.getString("TouchID", "")
+                        Log.d("OSCAR", "TouchID : $TouchID")
+                        if (TouchID == "true") {
+                            if (memberResponse.status == "Admin") {
+                                val editor =
+                                    getSharedPreferences("Admin", Context.MODE_PRIVATE).edit()
+                                editor.putString("Admin", "true")
+                                editor.apply()
 
-                            val editor = getSharedPreferences("Admin", Context.MODE_PRIVATE).edit()
-                            editor.putString("Admin","true")
-                            editor.apply()
+                                withContext(Main) {
+                                    Toast.makeText(
+                                        this@LoginActivity,
+                                        "Welcome Admin, You can also use Touch id too!!",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
 
-                            withContext(Main){
-                                Toast.makeText(this@LoginActivity,"Welcome Admin!!" , Toast.LENGTH_SHORT).show()
-                            }
-
-                            startActivity(
-                                Intent(
-                                    this@LoginActivity,
-                                    LoadingActivity::class.java
+                                startActivity(
+                                    Intent(
+                                        this@LoginActivity,
+                                        LoadingActivity::class.java
+                                    )
                                 )
-                            )
-                        }
-                        else if(memberResponse.status == "Employee"){
-                            withContext(Main){
-                                Toast.makeText(this@LoginActivity,"Welcome Employee" , Toast.LENGTH_SHORT).show()
-                            }
+                            } else if (memberResponse.status == "Employee") {
+                                withContext(Main) {
+                                    Toast.makeText(
+                                        this@LoginActivity,
+                                        "Welcome Employee, You can also use Touch id too",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
 
-                            val editor = getSharedPreferences("Admin", Context.MODE_PRIVATE).edit()
-                            editor.putString("Admin","true")
-                            editor.apply()
+                                val editor =
+                                    getSharedPreferences("Admin", Context.MODE_PRIVATE).edit()
+                                editor.putString("Admin", "false")
+                                editor.apply()
 
-                            startActivity(
-                                Intent(
-                                    this@LoginActivity,
-                                    LoadingActivity::class.java
+                                startActivity(
+                                    Intent(
+                                        this@LoginActivity,
+                                        LoadingActivity::class.java
+                                    )
                                 )
-                            )
-                        }
-                        else{
-                            withContext(Main){
-                                Toast.makeText(this@LoginActivity,"Unauthorized " , Toast.LENGTH_SHORT).show()
+                            } else {
+                                withContext(Main) {
+                                    Toast.makeText(
+                                        this@LoginActivity,
+                                        "Unauthorized ",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        } else if (TouchID == "false") {
+                            if (memberResponse.status == "Admin") {
+                                val editor =
+                                    getSharedPreferences("Admin", Context.MODE_PRIVATE).edit()
+                                editor.putString("Admin", "true")
+                                editor.apply()
+
+                                withContext(Main) {
+                                    Toast.makeText(
+                                        this@LoginActivity,
+                                        "Welcome Admin!!",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+
+                                startActivity(
+                                    Intent(
+                                        this@LoginActivity,
+                                        LoadingActivity::class.java
+                                    )
+                                )
+                            } else if (memberResponse.status == "Employee") {
+                                withContext(Main) {
+                                    Toast.makeText(
+                                        this@LoginActivity,
+                                        "Welcome Employee",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+
+                                val editor =
+                                    getSharedPreferences("Admin", Context.MODE_PRIVATE).edit()
+                                editor.putString("Admin", "false")
+                                editor.apply()
+
+                                startActivity(
+                                    Intent(
+                                        this@LoginActivity,
+                                        LoadingActivity::class.java
+                                    )
+                                )
+                            } else {
+                                withContext(Main) {
+                                    Toast.makeText(
+                                        this@LoginActivity,
+                                        "Unauthorized ",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        } else {
+                            Log.d("OSCAR", "TouchID")
+
+                            withContext(Main) {
+                                showDialog(Username,Password)
                             }
                         }
-                    }
-                    else if(memberResponse.success == false){
-                        withContext(Main){
-                            Toast.makeText(this@LoginActivity,"message : ${memberResponse.message}" , Toast.LENGTH_SHORT).show()
+
+                    } else if (memberResponse.success == false) {
+                        withContext(Main) {
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "message : ${memberResponse.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
-                    }
-                    else{
-                        withContext(Main){
-                            Toast.makeText(this@LoginActivity,"Error : Login unsuccessful" , Toast.LENGTH_SHORT).show()
+                    } else {
+                        withContext(Main) {
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Error : Login unsuccessful",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
                 //need to be checked
-                catch(e:Exception){
-                    withContext(Main){
-                        Toast.makeText(this@LoginActivity,"Unauthorized Member: $e" , Toast.LENGTH_SHORT).show()
+                catch (e: Exception) {
+                    withContext(Main) {
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Unauthorized Member: $e",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
         }
 
-       /* fingerReader.setOnClickListener {
-            Snackbar.make(fingerReader, "Fingerprint not implimented yet!", Snackbar.LENGTH_SHORT).show()
-        }*/
 
         togglePasswordView.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -304,9 +443,6 @@ class LoginActivity : AppCompatActivity() {
                 etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         }
-
-
-
 
 
     }
@@ -322,7 +458,8 @@ class LoginActivity : AppCompatActivity() {
             BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> setErrorNotice("Sorry. It seems your device has no biometric hardware")
             BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> setErrorNotice("Biometric features are currently unavailable.")
             BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> setErrorNotice("You have not registered any biometric credentials")
-            BiometricManager.BIOMETRIC_SUCCESS -> {}
+            BiometricManager.BIOMETRIC_SUCCESS -> {
+            }
         }
     }
 
@@ -342,7 +479,8 @@ class LoginActivity : AppCompatActivity() {
     private val biometricCallback = object : BiometricPrompt.AuthenticationCallback() {
         override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
             super.onAuthenticationSucceeded(result)
-            navigateTo<MainActivity>()
+//            navigateTo<LoadingActivity>()
+                TouchIDCheck()
         }
 
         override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
@@ -359,12 +497,190 @@ class LoginActivity : AppCompatActivity() {
     }
 
     // to show popup
-    fun showDialog() {
+    fun showDialog(Username:String,Password:String) {
         val dialogBuilder = AlertDialog.Builder(this)
-        dialogBuilder.setMessage("The message here")
-        dialogBuilder.setPositiveButton("Done",
-            DialogInterface.OnClickListener { dialog, whichButton -> })
+        dialogBuilder.setMessage("Enable Touch ID")
+        dialogBuilder.setPositiveButton("Okay",
+            DialogInterface.OnClickListener { dialog, whichButton ->
+                val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+                editor.putString("TouchID","true")
+                editor.putString("Username",Username)
+                editor.putString("Password",Password)
+                editor.apply()
+
+                Snackbar.make(fingerReader, "Use FingerPrint to Login", Snackbar.LENGTH_SHORT).show()
+            })
+        dialogBuilder.setNegativeButton("Cancal",
+            DialogInterface.OnClickListener { dialog, whichButton ->
+                val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+                editor.putString("TouchID","false")
+                editor.apply()
+                dialog.dismiss()
+
+                val intent = Intent(this, LoadingActivity::class.java)
+                startActivity(intent)
+            })
         val b = dialogBuilder.create()
         b.show()
     }
+
+    fun TouchIDCheck() {
+        val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
+        val Username = sharedPreferences.getString("Username", "")
+        val Password = sharedPreferences.getString("Password", "")
+        Log.d("OSCAR", "U,P : $Username , $Password")
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val Username = Username.toString()
+                val Password = Password.toString()
+                val memberRepository = MemberRepository()
+                val memberResponse = memberRepository.checkMember(Username, Password)
+                if (memberResponse.success == true) {
+                    val sharedPreferences =
+                        getSharedPreferences("Settings", Activity.MODE_PRIVATE)
+                    val TouchID = sharedPreferences.getString("TouchID", "")
+                    Log.d("OSCAR", "TouchID : $TouchID")
+                    if (TouchID == "true") {
+                        if (memberResponse.status == "Admin") {
+                            val editor =
+                                getSharedPreferences("Admin", Context.MODE_PRIVATE).edit()
+                            editor.putString("Admin", "true")
+                            editor.apply()
+
+
+                            withContext(Main) {
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "Welcome Admin!!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+
+                            startActivity(
+                                Intent(
+                                    this@LoginActivity,
+                                    LoadingActivity::class.java
+                                )
+                            )
+                        } else if (memberResponse.status == "Employee") {
+                            withContext(Main) {
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "Welcome Employee",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+
+                            val editor =
+                                getSharedPreferences("Admin", Context.MODE_PRIVATE).edit()
+                            editor.putString("Admin", "false")
+                            editor.apply()
+
+                            startActivity(
+                                Intent(
+                                    this@LoginActivity,
+                                    LoadingActivity::class.java
+                                )
+                            )
+                        } else {
+                            withContext(Main) {
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "Unauthorized ",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    } else if (TouchID == "false") {
+                        if (memberResponse.status == "Admin") {
+                            val editor =
+                                getSharedPreferences("Admin", Context.MODE_PRIVATE).edit()
+                            editor.putString("Admin", "true")
+                            editor.apply()
+
+                            withContext(Main) {
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "Welcome Admin!!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+
+                            startActivity(
+                                Intent(
+                                    this@LoginActivity,
+                                    LoadingActivity::class.java
+                                )
+                            )
+                        } else if (memberResponse.status == "Employee") {
+                            withContext(Main) {
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "Welcome Employee",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+
+                            val editor =
+                                getSharedPreferences("Admin", Context.MODE_PRIVATE).edit()
+                            editor.putString("Admin", "false")
+                            editor.apply()
+
+                            startActivity(
+                                Intent(
+                                    this@LoginActivity,
+                                    LoadingActivity::class.java
+                                )
+                            )
+                        } else {
+                            withContext(Main) {
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "Unauthorized ",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    } else {
+                        Log.d("OSCAR", "TouchID")
+
+                        withContext(Main) {
+                            showDialog(Username,Password)
+                        }
+                    }
+
+                } else if (memberResponse.success == false) {
+                    withContext(Main) {
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "message : ${memberResponse.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                } else {
+                    withContext(Main) {
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Error : Login unsuccessful",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+            //need to be checked
+            catch (e: Exception) {
+                withContext(Main) {
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "Unauthorized Member: $e",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+
+    }
+
+
+
 }
