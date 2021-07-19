@@ -19,6 +19,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/backAddPro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -360,8 +361,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:id="@+id/status"
+                    android:contentDescription="ADMIN"
                     android:orientation="horizontal">
-                    <!--            send-->
+                    <!--            Admin-->
                     <LinearLayout
                         android:id="@+id/llAdmin"
                         android:layout_width="match_parent"
@@ -455,6 +457,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/commission"
+                    android:visibility="gone"
                     android:background="@drawable/ic_rectangle_memberflid"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
@@ -480,7 +483,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/btnAddProfile"
+                    android:id="@+id/btnAddMember"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_rectangle_addbtn"
@@ -492,7 +495,7 @@
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Add Profile"
+                        android:text="Add Member"
                         android:layout_gravity="center"
                         android:layout_marginLeft="25dp"
                         android:textAlignment="center"
