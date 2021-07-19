@@ -87,7 +87,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-<!--    Popup for filtering-->
+    <!--    Popup for filtering-->
     <string name="ascending" translatable="false">Ascending</string>
     <string name="descending" translatable="false">Descending</string>
     <string name="mostsold" translatable="false">Most Sold</string>
