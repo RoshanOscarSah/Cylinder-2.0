@@ -1,15 +1,14 @@
 package com.eachut.cylinder
 
 import android.animation.ObjectAnimator
-import android.app.Activity
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
+import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.eachut.cylinder.entity.Company
 import com.eachut.cylinder.entity.Member
@@ -20,6 +19,8 @@ import com.eachut.cylinder.repository.ResellerRepository
 import kotlinx.coroutines.*
 
 class AddNewMemberActivity : AppCompatActivity() {
+
+    private lateinit var ivToggleActiveP : ImageView
 
     private lateinit var etUsername : TextView
     private lateinit var etCompanyname : TextView
@@ -51,7 +52,7 @@ class AddNewMemberActivity : AppCompatActivity() {
     private lateinit var etMPhone: EditText
     private lateinit var etMAddress: EditText
     private lateinit var cylincom: EditText
-    private lateinit var btnAddProfile: LinearLayout
+    private lateinit var btnAddMember: LinearLayout
     private lateinit var ivSendCheck: ImageView
     private lateinit var ivRecieveCheck: ImageView
     private lateinit var llAdmin: LinearLayout
@@ -66,6 +67,8 @@ class AddNewMemberActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_member)
+
+        ivToggleActiveP = findViewById(R.id.ivToggleActiveP)
 
         etUsername = findViewById(R.id.etUsername)
         etCompanyname = findViewById(R.id.etCompanyname)
@@ -85,7 +88,7 @@ class AddNewMemberActivity : AppCompatActivity() {
 
         commission = findViewById(R.id.commission)
         cylincom = findViewById(R.id.cylincom)
-        btnAddProfile = findViewById(R.id.btnAddProfile)
+        btnAddMember = findViewById(R.id.btnAddMember)
 
         tvMemberP = findViewById(R.id.tvMemberP)
         tvCompanyP = findViewById(R.id.tvCompanyP)
@@ -115,7 +118,7 @@ class AddNewMemberActivity : AppCompatActivity() {
         cylincom.isVisible = true
         btnAddReseller.isVisible = false
         btnAddCompany.isVisible = false
-        btnAddProfile.isVisible = true
+        btnAddMember.isVisible = true
 
         MemberForm()
         CompanyForm()
@@ -175,8 +178,17 @@ class AddNewMemberActivity : AppCompatActivity() {
             llAdmin.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.sendreceive_fade)));
 
         }
-        //add reseller
 
+        val backButton = findViewById<View>(R.id.backAddPro) as LinearLayout
+        backButton.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                finish()
+            }
+        })
+
+
+
+        //add reseller
         btnAddReseller.setOnClickListener {
             val etResellerfullname = etResellerfullname.text.toString()
             val pasalname = pasalname.text.toString()
@@ -222,12 +234,13 @@ class AddNewMemberActivity : AppCompatActivity() {
         }
 
         //add Member
-        btnAddProfile.setOnClickListener {
+        btnAddMember.setOnClickListener {
 
-            val etMFname = etMFname.text.toString()
-            val etMLname = etMLname.text.toString()
-            val etMPhone = etMPhone.text.toString()
-            val etMAddress = etMAddress.text.toString()
+
+            val etUsername = etUsername.text.toString()
+            val lstname = lstname.text.toString()
+            val memberphonenum = memberphonenum.text.toString()
+            val memberaddress = memberaddress.text.toString()
             var cylincom = cylincom.text.toString()
             val status = status.getContentDescription().toString()
 
@@ -235,11 +248,11 @@ class AddNewMemberActivity : AppCompatActivity() {
                     cylincom = "0"
                 }
             val member = Member(
-                Firstname = etMFname,
-                Lastname = etMLname,
+                Firstname = etUsername,
+                Lastname = lstname,
                 Status = status,
-                Phonenumber = etMPhone,
-                Address = etMAddress,
+                Phonenumber = memberphonenum,
+                Address = memberaddress,
                 Comission = cylincom
             )
             CoroutineScope(Dispatchers.IO).launch {
@@ -321,9 +334,17 @@ class AddNewMemberActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun MemberForm()
     {
         tvMemberP.setOnClickListener {
+
+            val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.gravity = Gravity.RIGHT
+            ivToggleActiveP.setLayoutParams(params);
+
             etCompanyname.isVisible = false
             cylindername.isVisible = false
             companyaddress.isVisible = false
@@ -338,16 +359,22 @@ class AddNewMemberActivity : AppCompatActivity() {
             memberphonenum.isVisible = true
             cylincom.isVisible = true
             status.isVisible = true
-            commission.isVisible = true
+            commission.isVisible = false
             btnAddReseller.isVisible = false
             btnAddCompany.isVisible = false
-            btnAddProfile.isVisible = true
+            btnAddMember.isVisible = true
         }
     }
 
     private fun ResellerForm()
     {
         tvCustomerP.setOnClickListener {
+            val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.gravity = Gravity.LEFT
+            ivToggleActiveP.setLayoutParams(params);
+
             etCompanyname.isVisible = false
             cylindername.isVisible = false
             companyaddress.isVisible = false
@@ -365,13 +392,19 @@ class AddNewMemberActivity : AppCompatActivity() {
             resellerphonenum.isVisible = true
             btnAddReseller.isVisible = true
             btnAddCompany.isVisible = false
-            btnAddProfile.isVisible = false
+            btnAddMember.isVisible = false
         }
     }
 
     private fun CompanyForm()
     {
         tvCompanyP.setOnClickListener {
+            val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.gravity = Gravity.CENTER
+            ivToggleActiveP.setLayoutParams(params);
+
             etUsername.isVisible = false
             lstname.isVisible = false
             memberaddress.isVisible = false
@@ -389,7 +422,7 @@ class AddNewMemberActivity : AppCompatActivity() {
             companyphonenum.isVisible = true
             btnAddReseller.isVisible = false
             btnAddCompany.isVisible = true
-            btnAddProfile.isVisible = false
+            btnAddMember.isVisible = false
         }
     }
 }
