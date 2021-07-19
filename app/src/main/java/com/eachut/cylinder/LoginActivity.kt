@@ -220,27 +220,58 @@ class LoginActivity : AppCompatActivity() {
                     val Password = etPassword.text.toString()
                     val memberRepository = MemberRepository()
                     val memberResponse = memberRepository.checkMember(Username , Password)
-                    if(memberResponse.success==true){
-                        if(memberResponse.member?.isfirst!!){
+                    if(memberResponse.success == true){
+                        if(memberResponse.status == "Admin"){
+//                            withContext(Main){
+//                                Toast.makeText(this@LoginActivity,"Please Change Your Password" , Toast.LENGTH_SHORT).show()
+//                            }
+//                            startActivity(
+//                                Intent(
+//                                    this@LoginActivity,
+//                                    ChangedefpassActivity::class.java
+//                                )
+//                            )
+
+                            val editor = getSharedPreferences("Admin", Context.MODE_PRIVATE).edit()
+                            editor.putString("Admin","true")
+                            editor.apply()
+
                             withContext(Main){
-                                Toast.makeText(this@LoginActivity,"Please Change Your Password" , Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@LoginActivity,"Welcome Admin!!" , Toast.LENGTH_SHORT).show()
                             }
-                            startActivity(
-                                Intent(
-                                    this@LoginActivity,
-                                    ChangedefpassActivity::class.java
-                                )
-                            )
-                        }else{
-                            withContext(Main){
-                                Toast.makeText(this@LoginActivity,"You Are Welcome" , Toast.LENGTH_SHORT).show()
-                            }
+
                             startActivity(
                                 Intent(
                                     this@LoginActivity,
                                     LoadingActivity::class.java
                                 )
                             )
+                        }
+                        else if(memberResponse.status == "Employee"){
+                            withContext(Main){
+                                Toast.makeText(this@LoginActivity,"Welcome Employee" , Toast.LENGTH_SHORT).show()
+                            }
+
+                            val editor = getSharedPreferences("Admin", Context.MODE_PRIVATE).edit()
+                            editor.putString("Admin","true")
+                            editor.apply()
+
+                            startActivity(
+                                Intent(
+                                    this@LoginActivity,
+                                    LoadingActivity::class.java
+                                )
+                            )
+                        }
+                        else{
+                            withContext(Main){
+                                Toast.makeText(this@LoginActivity,"Unauthorized " , Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                    else if(memberResponse.success == false){
+                        withContext(Main){
+                            Toast.makeText(this@LoginActivity,"message : ${memberResponse.message}" , Toast.LENGTH_SHORT).show()
                         }
                     }
                     else{
@@ -252,7 +283,7 @@ class LoginActivity : AppCompatActivity() {
                 //need to be checked
                 catch(e:Exception){
                     withContext(Main){
-                        Toast.makeText(this@LoginActivity,"Unauthorized Member" , Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity,"Unauthorized Member: $e" , Toast.LENGTH_SHORT).show()
                     }
                 }
             }
