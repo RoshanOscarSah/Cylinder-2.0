@@ -43,9 +43,6 @@ class ChangedefpassActivity : AppCompatActivity() {
         changepassbtn.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    withContext(Dispatchers.Main){
-                        Toast.makeText(this@ChangedefpassActivity,"Clicked" , Toast.LENGTH_SHORT).show()
-                    }
                     val username = etdefUsername.text.toString()
                     val password = etdefPassword.text.toString()
                     val new_password = etnewPassword.text.toString()
