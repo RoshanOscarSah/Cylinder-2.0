@@ -1,5 +1,6 @@
 package com.eachut.cylinder.ui.profiles
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -11,14 +12,17 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.eachut.cylinder.AddNewMemberActivity
 import com.eachut.cylinder.R
 import com.eachut.cylinder.databinding.FragmentProfilesBinding
+import com.eachut.cylinder.entity.Reseller
 import com.eachut.cylinder.ui.profiles.ProfilesViewModel
 
 class ProfilesFragment : Fragment() {
 
     private lateinit var profilesViewModel: ProfilesViewModel
     private var _binding: FragmentProfilesBinding? = null
+    private var resellerList = mutableListOf<Reseller>()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -32,8 +36,36 @@ class ProfilesFragment : Fragment() {
         profilesViewModel =
             ViewModelProvider(this).get(ProfilesViewModel::class.java)
 
+        //Loading Reseller Profile
+        val fragment = GetResellerProfile()
+        val fragmentManager = requireActivity().supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(android.R.id.content, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+
         _binding = FragmentProfilesBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        //Add member/reseller/company
+        binding.add.setOnClickListener { view ->
+
+            val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.gravity = Gravity.NO_GRAVITY
+            binding.ivToggleActiveP.setLayoutParams(params);
+
+            val intent = Intent(this.context, AddNewMemberActivity::class.java)
+            startActivity(intent)
+
+//            val fragment = AddmemberFragment()
+//            val fragmentManager = requireActivity().supportFragmentManager
+//            val fragmentTransaction = fragmentManager.beginTransaction()
+//            fragmentTransaction.replace(android.R.id.content, fragment)
+//            fragmentTransaction.addToBackStack(null)
+//            fragmentTransaction.commit()
+        }
 
 //customer/company/member
         binding.tvCustomerP.setOnClickListener { view ->
@@ -43,6 +75,13 @@ class ProfilesFragment : Fragment() {
             )
             params.gravity = Gravity.LEFT
             binding.ivToggleActiveP.setLayoutParams(params);
+
+            val fragment = GetResellerProfile()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(android.R.id.content, fragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
         binding.tvCompanyP.setOnClickListener { view ->
@@ -52,6 +91,13 @@ class ProfilesFragment : Fragment() {
             )
             params.gravity = Gravity.CENTER
             binding.ivToggleActiveP.setLayoutParams(params);
+
+            val fragment = ViewCompanyFragment()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(android.R.id.content, fragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
         binding.tvMemberP.setOnClickListener { view ->
@@ -61,6 +107,13 @@ class ProfilesFragment : Fragment() {
             )
             params.gravity = Gravity.RIGHT
             binding.ivToggleActiveP.setLayoutParams(params);
+
+            val fragment = ViewMemberFragment()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(android.R.id.content, fragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
 //search
@@ -82,9 +135,27 @@ class ProfilesFragment : Fragment() {
 
 
 // FILTER
-        binding.ivFilterProfiles.setOnClickListener { view ->
+        binding.ivFilterProfiles.setOnClickListener {
 
-        }
+            val popupMenu: PopupMenu =
+                PopupMenu(this.context, view?.findViewById(R.id.ivFilterProfiles))
+            popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                when(item.itemId)
+                {
+                    R.id.ascending ->{
+//                        val resellerAscending = resellerList
+//                        val sortingAscending = resellerAscending.sortBy{ it.reseller_fullname.toString()}
+                    }
+                    R.id.descending ->
+                        Toast.makeText(view?.context, "Descending Order", Toast.LENGTH_SHORT).show()
+                    R.id.mostsold ->
+                        Toast.makeText(view?.context, "Most Sold", Toast.LENGTH_SHORT).show()
+                }
+                true
+            })
+            popupMenu.show()
+            }
 
 //        val textView: TextView = binding.textProfiles
 //        profilesViewModel.text.observe(viewLifecycleOwner, Observer {
