@@ -1,4 +1,4 @@
-package com.eachut.cylinder.ui.reciept
+package com.eachut.cylinder.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -28,6 +28,8 @@ class RecieptFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onCreateView(

@@ -510,7 +510,7 @@ class LoginActivity : AppCompatActivity() {
 
                 Snackbar.make(fingerReader, "Use FingerPrint to Login", Snackbar.LENGTH_SHORT).show()
             })
-        dialogBuilder.setNegativeButton("Cancal",
+        dialogBuilder.setNegativeButton("Cancel",
             DialogInterface.OnClickListener { dialog, whichButton ->
                 val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
                 editor.putString("TouchID","false")
