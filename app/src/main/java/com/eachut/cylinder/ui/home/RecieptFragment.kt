@@ -60,3 +60,14 @@ class RecieptFragment : Fragment() {
             }
     }
 }
+
+
+
+//sms send garnu lie hai guys
+
+//sendSMS("+2126000000", "Some text here")
+
+//private fun sendSMS(phoneNumber: String, message: String) {
+//    val sentPI: PendingIntent = PendingIntent.getBroadcast(this, 0, Intent("SMS_SENT"), 0)
+//    SmsManager.getDefault().sendTextMessage(phoneNumber, null, message, sentPI, null)
+//}
