@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llNameSelected"
+    android:contentDescription="id_12"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
+    android:paddingRight="15dp"
+    android:paddingLeft="30dp"
+    android:orientation="vertical"
+    android:background="@drawable/ic_name_bg">
+
+
+    <TextView
+        android:id="@+id/tv_Fullname"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manoj Sah"
+        android:contentDescription="Name"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="@font/sofia_pro_bold_az"
+        android:textSize="22sp"/>
+    <TextView
+        android:id="@+id/Tv_Pasalname"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manoj Kirana Pasal"
+        android:contentDescription="Company"
+        android:textStyle="normal"
+        android:textColor="#CCFFFFFF"
+        android:fontFamily="@font/sofia_pro_light_az"
+        android:textSize="16sp"
+        android:letterSpacing="0.1"/>
+
+    <TextView
+        android:id="@+id/tv_Address"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chirauli, Bhokraha - 1"
+        android:contentDescription="Address"
+        android:textStyle="normal"
+        android:textColor="#CCFFFFFF"
+        android:fontFamily="@font/sofia_pro_light_az"
+        android:textSize="12sp"
+        android:letterSpacing="0.2"/>
+</LinearLayout>
