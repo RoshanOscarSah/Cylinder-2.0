@@ -76,7 +76,7 @@
             <!--    selected customer/ company-->
             <LinearLayout
                 android:id="@+id/llNameSelected"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:contentDescription="id_12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -504,7 +504,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="10"
                     android:text="@string/title_SelectReseller"
-                    android:contentDescription="Change Reseller"
+                    android:contentDescription="getReseller"
                     android:textColor="#4DFFFFFF"
                     android:fontFamily="@font/sofia_pro_regular_az"
                     android:textSize="16sp"

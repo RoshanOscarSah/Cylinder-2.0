@@ -20,15 +20,33 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.eachut.cylinder.Adapter.CompanyStockViewAdapter
+import com.eachut.cylinder.Adapter.ResellerProfileAdapter
+import com.eachut.cylinder.Adapter.ResellerStockViewAdapter
 import com.eachut.cylinder.LoadingActivity
 import com.eachut.cylinder.R
 import com.eachut.cylinder.databinding.FragmentHomeBinding
+import com.eachut.cylinder.entity.Company
+import com.eachut.cylinder.entity.Reseller
+import com.eachut.cylinder.repository.CompanyRepository
+import com.eachut.cylinder.repository.ResellerRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 
 class   HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
+    private var isReseller:Boolean?=null
+    private var isCompany:Boolean?=null
+    private var resellerList= mutableListOf<Reseller>()
+    private var companyList= mutableListOf<Company>()
+
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -46,6 +64,7 @@ class   HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
 //reseller/company
         binding.tvCompany.setOnClickListener { view ->
             //for setting gravity
@@ -61,7 +80,7 @@ class   HomeFragment : Fragment() {
 //                start()
 //            }
             binding.tvCustomerOrCompany.setText("Select Company")
-            binding.tvCustomerOrCompany.setContentDescription("Change Company")
+            binding.tvCustomerOrCompany.setContentDescription("getCompany")
         }
 
         binding.tvCustomer.setOnClickListener { view ->
@@ -78,12 +97,49 @@ class   HomeFragment : Fragment() {
 //                start()
 //            }
             binding.tvCustomerOrCompany.setText("Select Reseller")
-            binding.tvCustomerOrCompany.setContentDescription("Change Reseller")
+            binding.tvCustomerOrCompany.setContentDescription("getReseller")
         }
 
 //select customer
         binding.llSelectCustomer.setOnClickListener { view ->
-            showPopup()
+            val customerOrCompany = binding.tvCustomerOrCompany.getContentDescription()
+            if(customerOrCompany=="getReseller"){
+//                isReseller=true
+//                isCompany=false
+                CoroutineScope(Dispatchers.IO).launch {
+                    try{
+                        val resellerRepository = ResellerRepository()
+                        val response =  resellerRepository.allresellerList()
+                        if(response.success!!){
+                            resellerList= response.data!!
+                            showPopupReseller(resellerList)
+                        }
+                        else{
+
+                        }
+                    }catch(e:Exception){
+
+                    }
+                }
+
+            }
+            if (customerOrCompany=="getCompany"){
+                CoroutineScope(Dispatchers.IO).launch {
+                    try{
+                        val companyRepository = CompanyRepository()
+                        val response =  companyRepository.allCompanyList()
+                        if(response.success!!){
+                            companyList=response.data!!
+                            showPopupCompany(companyList)
+                        }
+                        else{
+
+                        }
+                    }catch(e:Exception){
+
+                    }
+                }
+            }
         }
 
 //        call customer
@@ -501,15 +557,17 @@ class   HomeFragment : Fragment() {
         _binding = null
     }
 
-    fun showPopup() {
+    //popup Reseller list
+    fun showPopupReseller(mutableList: MutableList<Reseller>) {
         val inflater: LayoutInflater = this.getLayoutInflater()
         val dialogView: View = inflater.inflate(R.layout.activity_prename, null)
 
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
             override fun onDismiss(arg0: DialogInterface) {
-
-            }
+                val recyclerView = dialogView.findViewById<RecyclerView>(R.id.recyclerview)
+                recyclerView.adapter = ResellerStockViewAdapter(context!!, mutableList)
+                recyclerView.layoutManager = LinearLayoutManager(context)            }
         })
         dialogBuilder.setView(dialogView)
 
@@ -527,6 +585,42 @@ class   HomeFragment : Fragment() {
         alertDialog.setCanceledOnTouchOutside(true);
 
 
+        val llNameSelected = alertDialog.findViewById(R.id.llNameSelected) as LinearLayout
+        llNameSelected.setOnClickListener(View.OnClickListener { //do something here
+            alertDialog.dismiss()
+            val ChangeCustomerOrCompany = binding.tvCustomerOrCompany.getContentDescription()
+            binding.tvCustomerOrCompany.setText(ChangeCustomerOrCompany)
+            binding.llNameSelected.isVisible = true
+        })
+    }
+
+    //popup company List
+    fun showPopupCompany(mutableList: MutableList<Company>) {
+        val inflater: LayoutInflater = this.getLayoutInflater()
+        val dialogView: View = inflater.inflate(R.layout.activity_prename, null)
+
+        val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
+            override fun onDismiss(arg0: DialogInterface) {
+                val recyclerView = dialogView.findViewById<RecyclerView>(R.id.recyclerview)
+                recyclerView.adapter = CompanyStockViewAdapter(context!!, mutableList)
+                recyclerView.layoutManager = LinearLayoutManager(context)
+            }
+        })
+        dialogBuilder.setView(dialogView)
+
+        val alertDialog = dialogBuilder.create();
+
+        alertDialog.show();
+        val lp = WindowManager.LayoutParams()
+
+        lp.copyFrom(alertDialog.window!!.attributes)
+        lp.height = 1550
+        lp.x = 0
+        lp.y = 50
+        alertDialog.getWindow()!!.setAttributes(lp);
+        alertDialog.getWindow()!!.setBackgroundDrawableResource(R.color.dark_fade);
+        alertDialog.setCanceledOnTouchOutside(true);
         val llNameSelected = alertDialog.findViewById(R.id.llNameSelected) as LinearLayout
         llNameSelected.setOnClickListener(View.OnClickListener { //do something here
             alertDialog.dismiss()

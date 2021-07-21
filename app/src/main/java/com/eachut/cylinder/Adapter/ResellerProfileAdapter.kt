@@ -18,8 +18,6 @@ import com.eachut.cylinder.ui.profiles.GetResellerProfile
 class ResellerProfileAdapter (
     val context: Context,
     val resellerList: MutableList<Reseller>
-
-
 ): RecyclerView.Adapter<ResellerProfileAdapter.ResellerProfileViewHolder>(){
 
     private var _binding: GetResellerProfile? = null
