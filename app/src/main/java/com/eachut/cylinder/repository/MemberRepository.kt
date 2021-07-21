@@ -4,9 +4,7 @@ import com.eachut.cylinder.api.MemberAPI
 import com.eachut.cylinder.api.MyApiRequest
 import com.eachut.cylinder.api.ServiceBuilder
 import com.eachut.cylinder.entity.Member
-import com.eachut.cylinder.response.AddNewMemberResponse
-import com.eachut.cylinder.response.ChangePasswordResponse
-import com.eachut.cylinder.response.LoginResponse
+import com.eachut.cylinder.response.*
 
 class MemberRepository
     : MyApiRequest() {
@@ -40,6 +38,22 @@ class MemberRepository
             memberAPI.changePassword(Username, Password, Npassword)
         }
     }
+
+    //get member
+    suspend fun allmemberList(): GetAllMemberResponse {
+        return apiRequest {
+            memberAPI.allmemberList()
+        }
+    }
+
+    //get single member
+    suspend fun memberList(id:String): GetMemberResponse {
+        return apiRequest {
+            memberAPI.memberList(id)
+        }
+    }
+
+
     //update Product
     suspend fun updateMember(id:String, member: Member):AddNewMemberResponse{
         return apiRequest {
