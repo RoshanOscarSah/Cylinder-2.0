@@ -1,4 +1,4 @@
-package com.eachut.cylinder.ui.reciept
+package com.eachut.cylinder.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -28,6 +28,8 @@ class RecieptFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onCreateView(
@@ -58,3 +60,14 @@ class RecieptFragment : Fragment() {
             }
     }
 }
+
+
+
+//sms send garnu lie hai guys
+
+//sendSMS("+2126000000", "Some text here")
+
+//private fun sendSMS(phoneNumber: String, message: String) {
+//    val sentPI: PendingIntent = PendingIntent.getBroadcast(this, 0, Intent("SMS_SENT"), 0)
+//    SmsManager.getDefault().sendTextMessage(phoneNumber, null, message, sentPI, null)
+//}
