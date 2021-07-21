@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -35,6 +36,7 @@ import com.eachut.cylinder.repository.ResellerRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 
@@ -110,10 +112,16 @@ class   HomeFragment : Fragment() {
                     try{
                         val resellerRepository = ResellerRepository()
                         val response =  resellerRepository.allresellerList()
-                        if(response.success!!){
-                            resellerList= response.data!!
-                            showPopupReseller(resellerList)
+                        withContext(Dispatchers.Main){
+                            Toast.makeText(context, "$response", Toast.LENGTH_SHORT).show()
                         }
+                        if(response.success!!){
+
+                            resellerList= response.data!!
+                            showPopupReseller()
+
+                        }
+
                         else{
 
                         }
@@ -124,10 +132,14 @@ class   HomeFragment : Fragment() {
 
             }
             if (customerOrCompany=="getCompany"){
+                Toast.makeText(context, "Get Company", Toast.LENGTH_SHORT).show()
                 CoroutineScope(Dispatchers.IO).launch {
                     try{
                         val companyRepository = CompanyRepository()
                         val response =  companyRepository.allCompanyList()
+                        withContext(Dispatchers.Main){
+                            Toast.makeText(context, "$response", Toast.LENGTH_SHORT).show()
+                        }
                         if(response.success!!){
                             companyList=response.data!!
                             showPopupCompany(companyList)
@@ -558,15 +570,21 @@ class   HomeFragment : Fragment() {
     }
 
     //popup Reseller list
-    fun showPopupReseller(mutableList: MutableList<Reseller>) {
+    fun showPopupReseller() {
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.Main){
+                Toast.makeText(context, "Reseller PopUp", Toast.LENGTH_SHORT).show()
+            }
+        }
         val inflater: LayoutInflater = this.getLayoutInflater()
         val dialogView: View = inflater.inflate(R.layout.activity_prename, null)
+
 
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
             override fun onDismiss(arg0: DialogInterface) {
                 val recyclerView = dialogView.findViewById<RecyclerView>(R.id.recyclerview)
-                recyclerView.adapter = ResellerStockViewAdapter(context!!, mutableList)
+                recyclerView.adapter = ResellerStockViewAdapter(context!!, resellerList)
                 recyclerView.layoutManager = LinearLayoutManager(context)            }
         })
         dialogBuilder.setView(dialogView)
