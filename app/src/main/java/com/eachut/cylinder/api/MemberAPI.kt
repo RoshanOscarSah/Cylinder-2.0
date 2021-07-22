@@ -1,9 +1,7 @@
 package com.eachut.cylinder.api
 
 import com.eachut.cylinder.entity.Member
-import com.eachut.cylinder.response.AddNewMemberResponse
-import com.eachut.cylinder.response.ChangePasswordResponse
-import com.eachut.cylinder.response.LoginResponse
+import com.eachut.cylinder.response.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -40,6 +38,17 @@ interface MemberAPI {
         @Field("Password") Password : String,
         @Field("Npassword") Npassword : String
     ):Response<ChangePasswordResponse>
+
+    @GET("/memberList")
+    suspend fun allmemberList(
+//        @Header("Authorization") token : String,
+    ): Response<GetAllMemberResponse>
+
+    @GET("/memberList/{id}")
+    suspend fun memberList(
+//        @Header("Authorization") token : String,
+        @Path ("id") id: String,
+    ): Response<GetMemberResponse>
 
     @PUT("/member/update/{id}")
     suspend fun updateMember(

@@ -19,8 +19,8 @@
     <string name="title_PoweredbyEachut">Powered by Eachut</string>
     <string name="title_Touchid">Touch id</string>
     <string name="title_ChangePassword">Change Password</string>
-    <string name="title_NewPassword">new Password</string>
-    <string name="title_DefaultPassword">default Password</string>
+    <string name="title_NewPassword">New Password</string>
+    <string name="title_DefaultPassword">Default Password</string>
     <string name="title_ChangeDefaultPassword">Change Default Password</string>
     <!--    entry-->
     <string name="title_Reseller">Reseller</string>
@@ -85,10 +85,28 @@
     <string name="title_Loading">Loading</string>
     <string name="title_SelectedLanguage">Selected Language</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--    Popup for filtering-->
     <string name="ascending" translatable="false">Ascending</string>
     <string name="descending" translatable="false">Descending</string>
     <string name="mostsold" translatable="false">Most Sold</string>
+    <string name="successful">Successful</string>
+    <string name="add_profile">Add Profile</string>
+    <string name="reseller_fullname">Reseller Fullname</string>
+    <string name="pasal_name">Pasal name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="company_name">Company name</string>
+    <string name="cylinder_name">Cylinder name</string>
+    <string name="address">Address</string>
+    <string name="admin">Admin</string>
+    <string name="employe">Employe</string>
+    <string name="commission">Commission</string>
+    <string name="add_member">Add Member</string>
+    <string name="add_company">Add Company</string>
+    <string name="reciept">Reciept</string>
+    <string name="rate">Rate: रू</string>
+    <string name="add_reseller">Add Reseller</string>
+
 </resources>
