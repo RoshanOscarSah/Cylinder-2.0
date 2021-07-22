@@ -361,7 +361,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:id="@+id/status"
-                    android:contentDescription="ADMIN"
+                    android:contentDescription="Admin"
                     android:orientation="horizontal">
                     <!--            Admin-->
                     <LinearLayout
@@ -543,7 +543,7 @@
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/add_company"
+                        android:text="@string/add_reseller"
                         android:layout_gravity="center"
                         android:layout_marginLeft="25dp"
                         android:textAlignment="center"

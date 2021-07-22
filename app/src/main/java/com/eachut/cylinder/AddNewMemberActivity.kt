@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.*
@@ -147,7 +148,7 @@ class AddNewMemberActivity : AppCompatActivity() {
             ivSendCheck.isVisible = true
             commission.isVisible = false
 
-            status.setContentDescription("ADMIN")
+            status.setContentDescription("Admin")
 
 
             llEmploye.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.sendreceive_fade)));
@@ -172,7 +173,7 @@ class AddNewMemberActivity : AppCompatActivity() {
             ivSendCheck.isVisible = false
             commission.isVisible = true
 
-            status.setContentDescription("EMPLOYEE")
+            status.setContentDescription("Employee")
 
             llEmploye.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.sendreceive)));
             llAdmin.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.sendreceive_fade)));
@@ -200,10 +201,12 @@ class AddNewMemberActivity : AppCompatActivity() {
                 address = reselleraddress,
                 phone_number = resellerphonenum
             )
+            Log.d("OSCAR", "Reseller: $reseller")
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val resellerRepository = ResellerRepository()
                     val response = resellerRepository.addNewReseller(reseller)
+                    Log.d("OSCAR", "Res: $response")
                     if (response.success == true) {
                         withContext(Dispatchers.Main) {
                             Toast.makeText(
@@ -244,21 +247,24 @@ class AddNewMemberActivity : AppCompatActivity() {
             var cylincom = cylincom.text.toString()
             val status = status.getContentDescription().toString()
 
-                if (status=="ADMIN"){
+                if (status=="Admin"){
                     cylincom = "0"
                 }
+
             val member = Member(
                 Firstname = etUsername,
                 Lastname = lstname,
                 Status = status,
                 Phonenumber = memberphonenum,
                 Address = memberaddress,
-                Comission = cylincom
+                Comission = cylincom,
             )
+            Log.d("OSCAR", "Member : $member")
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val memberRepository = MemberRepository()
                     val response = memberRepository.addnewmemberadmin(member)
+                    Log.d("OSCAR", "Member : try")
                     if (response.success == true) {
                         withContext(Dispatchers.Main) {
                             Toast.makeText(
@@ -276,7 +282,9 @@ class AddNewMemberActivity : AppCompatActivity() {
                             ).show()
                         }
                     }
-                } catch (ex: Exception) {
+                }
+                catch (ex: Exception) {
+                    Log.d("OSCAR", "Member : catch $ex")
                     withContext(Dispatchers.Main) {
                         Toast.makeText(
                             this@AddNewMemberActivity,
@@ -301,10 +309,14 @@ class AddNewMemberActivity : AppCompatActivity() {
                 address = companyaddress,
                 phone_number = companyphonenum
             )
+
+            Log.d("OSCAR", "Company: $company")
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val companyRepository = CompanyRepository()
                     val response = companyRepository.newCompany(company)
+
+                    Log.d("OSCAR", "Comp resp: $response")
                     if (response.success == true){
                         withContext(Dispatchers.Main) {
                             Toast.makeText(

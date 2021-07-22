@@ -4,8 +4,8 @@ import com.eachut.cylinder.entity.Member
 
 
 data class AddNewMemberResponse (
-    val password:String?=null,
     val success : Boolean? = null,
     val message: String?=null,
-    val member: Member? =null,
+    val username: String? =null,
+    val password:String?=null,
         )
