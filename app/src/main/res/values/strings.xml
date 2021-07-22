@@ -107,5 +107,6 @@
     <string name="add_company">Add Company</string>
     <string name="reciept">Reciept</string>
     <string name="rate">Rate: रू</string>
+    <string name="add_reseller">Add Reseller</string>
 
 </resources>

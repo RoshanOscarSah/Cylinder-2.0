@@ -104,4 +104,5 @@
     <string name="add_company"> कम्पनी थप्नुहोस् </string>
     <string name="reciept"> रसिद </string>
     <string name="rate"> दर: रू </string>
+    <string name="add_reseller">Add Reseller</string>
 </resources>
