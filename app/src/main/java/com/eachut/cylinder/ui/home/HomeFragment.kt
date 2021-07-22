@@ -115,6 +115,8 @@ class   HomeFragment : Fragment() {
 //select customer
         binding.llSelectCustomer.setOnClickListener { view ->
              customerOrCompany = binding.tvCustomerOrCompany.getContentDescription().toString()
+            binding.llNameSelected.isVisible = true
+
             if (customerOrCompany == "getReseller"){
                 CoroutineScope(Dispatchers.IO).launch {
                     try {
@@ -672,6 +674,7 @@ class   HomeFragment : Fragment() {
                 binding.title.text = ResellerDetails.getReseller().reseller_fullname
                 binding.subtitle.text = ResellerDetails.getReseller().pasal_name
                 binding.address.text = ResellerDetails.getReseller().address
+
             }
         })
         dialogBuilder.setView(dialogView)
@@ -730,6 +733,11 @@ class   HomeFragment : Fragment() {
         alertDialog.getWindow()!!.setBackgroundDrawableResource(R.color.dark_fade);
         alertDialog.setCanceledOnTouchOutside(true);
 
+
+        val llNameSelected = alertDialog.findViewById(R.id.llNameSelected) as LinearLayout
+        llNameSelected.setOnClickListener(View.OnClickListener { //do something here
+            alertDialog.dismiss()
+        })
     }
 
     //    for RLS total

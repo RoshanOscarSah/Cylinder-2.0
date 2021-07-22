@@ -1,21 +1,26 @@
 package com.eachut.cylinder
 
 import android.Manifest
-import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.telephony.gsm.SmsManager
 import android.util.DisplayMetrics
+import android.util.Log
+import android.view.View
 import android.view.WindowManager
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.eachut.cylinder.entity.Company
 import com.eachut.cylinder.entity.CompanyStock
 import com.eachut.cylinder.entity.Reseller
 import com.eachut.cylinder.entity.ResellerStock
-import com.eachut.cylinder.repository.CompanyRepository
 import com.eachut.cylinder.repository.CompanyStockRepository
 import com.eachut.cylinder.repository.ResellerStockRepository
 import kotlinx.coroutines.CoroutineScope
@@ -26,18 +31,6 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import kotlin.Exception
-import android.annotation.SuppressLint
-import android.content.pm.PackageManager
-import android.graphics.Canvas
-import android.graphics.pdf.PdfDocument.PageInfo
-import android.net.Uri
-import android.os.Environment.getExternalStoragePublicDirectory
-import android.util.Log
-import android.view.View
-import android.widget.*
-import androidx.core.app.ActivityCompat
-import androidx.core.view.isVisible
 
 class ReceiptActivity : AppCompatActivity() {
     private lateinit var llpdf : LinearLayout
@@ -62,6 +55,7 @@ class ReceiptActivity : AppCompatActivity() {
     private lateinit var txtCash : TextView
     private lateinit var btnSubmit:TextView
     private lateinit var btnDownload:Button
+    private lateinit var btnSendmessage:Button
 
     private val permissions = arrayOf(
         Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -94,11 +88,33 @@ class ReceiptActivity : AppCompatActivity() {
         txtCash = findViewById(R.id.txtCash)
         btnDownload = findViewById(R.id.btnDownload)
         btnSubmit = findViewById(R.id.btnSubmit)
+        btnSendmessage = findViewById(R.id.btnSendmessage)
+
+        val imgbtnBack = findViewById<View>(R.id.imgbtnBack) as ImageView
+        imgbtnBack.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                finish()
+            }
+        })
 
         btnDownload.setOnClickListener(View.OnClickListener {
             Log.d("size", " " + llpdf.getWidth() + "  " + llpdf.getWidth())
             bitmap = loadBitmapFromView(llpdf, llpdf.getWidth(), llpdf.getHeight())
             createPdf()
+        })
+
+        btnSendmessage.setOnClickListener(View.OnClickListener {
+//            val messageToSend = "this is a message"
+//            val number = "9801149729"
+//
+//            SmsManager.getDefault().sendTextMessage(
+//                number,
+//                null,
+//                messageToSend,
+//                null,
+//                null
+//            )
+            sendSMS("9801149729", "Some text here")
         })
 
         if (!hasPermissions()) {
@@ -233,6 +249,15 @@ class ReceiptActivity : AppCompatActivity() {
         // close the document
         document.close()
         Toast.makeText(this, "Receipt PDF is created!!!", Toast.LENGTH_LONG).show()
+    }
+
+    private fun sendSMS(phoneNumber: String, message: String) {
+        Log.v("phoneNumber", phoneNumber)
+        Log.v("MEssage", message)
+        //   PendingIntent pi = PendingIntent.getActivity(this, 0,
+        //       new Intent(this, Main.class), 0);
+        val sms = SmsManager.getDefault()
+        sms.sendTextMessage(phoneNumber, null, message, null, null)
     }
 
     private fun requestPermission() {

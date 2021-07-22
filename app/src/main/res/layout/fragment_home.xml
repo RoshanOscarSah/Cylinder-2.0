@@ -76,7 +76,7 @@
             <!--    selected customer/ company-->
             <LinearLayout
                 android:id="@+id/llNameSelected"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:contentDescription="id_12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
