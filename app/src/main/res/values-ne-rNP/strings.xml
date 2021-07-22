@@ -20,6 +20,9 @@
     <string name="title_PoweredbyEachut"> Eachut द्वारा संचालित </string>
     <string name="title_Touchid"> टच आईडी </string>
     <string name="title_ChangePassword"> पासवर्ड परिवर्तन गर्नुहोस् </string>
+    <string name="title_NewPassword"> नया पासवर्ड </string>
+    <string name="title_DefaultPassword"> पूर्वनिर्धारित पासवर्ड </string>
+    <string name="title_ChangeDefaultPassword"> पूर्वनिर्धारित पासवर्ड परिवर्तन गर्नुहोस् </string>
     <!--    entry-->
     <string name="title_Reseller"> पुनर्विक्रेता </string>
     <string name="title_Company"> कम्पनी </string>
@@ -80,6 +83,25 @@
     <string name="title_Member"> सदस्य </string>
 
     <!--    loading-->
-    <string name="title_Loading">Loading</string>
-    <string name="title_SelectedLanguage">Selected Language</string>
+    <string name="title_Loading"> लोड हुँदै </string>
+    <string name="title_SelectedLanguage"> चयनित भाषा </string>
+
+    <string name="successful"> सफल </string>
+
+    <string name="add_profile"> प्रोफाइल थप्नुहोस् </string>
+    <string name="reseller_fullname"> पुनर्विक्रेता पूर्ण नाम </string>
+    <string name="pasal_name"> पसलको नाम </string>
+    <string name="phone_number"> फोन नम्बर </string>
+    <string name="first_name"> पहिलो नाम </string>
+    <string name="last_name"> थर </string>
+    <string name="company_name"> कम्पनीको नाम </string>
+    <string name="cylinder_name"> सिलिन्डरको नाम </string>
+    <string name="address"> ठेगाना </string>
+    <string name="admin"> प्रशासक </string>
+    <string name="employe"> कर्मचारी </string>
+    <string name="commission"> कमीशन </string>
+    <string name="add_member"> सदस्य थप्नुहोस् </string>
+    <string name="add_company"> कम्पनी थप्नुहोस् </string>
+    <string name="reciept"> रसिद </string>
+    <string name="rate"> दर: रू </string>
 </resources>
