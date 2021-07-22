@@ -65,7 +65,7 @@ class ReceiptActivity : AppCompatActivity() {
         txtCylinder = findViewById(R.id.txtCylinder)
         txtCash = findViewById(R.id.txtCash)
         btnSubmit = findViewById(R.id.btnSubmit)
-
+//new comment
 
         val status = intent.getStringExtra("status")
 
