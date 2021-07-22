@@ -19,8 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="50dp"
-            android:orientation="vertical">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:background="@mipmap/ic_watermark">
 
             <TextView
                 android:id="@+id/txttitlename"
@@ -37,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/title_Bhokraha2"
+                android:text="@string/title_Bhokraha2AndPhno"
                 android:textSize="18dp" />
 
             <TableRow
@@ -47,17 +48,34 @@
                 android:layout_marginBottom="8dp"
                 android:background="#444" />
 
-    <!--        <TextView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_gravity="center"-->
-    <!--            android:layout_marginTop="10dp"-->
-    <!--            android:layout_marginBottom="10dp"-->
-    <!--            android:background="@drawable/border"-->
-    <!--            android:paddingHorizontal="30dp"-->
-    <!--            android:paddingVertical="8dp"-->
-    <!--            android:text="@string/reciept"-->
-    <!--            android:textSize="18dp" />-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:background="@drawable/border"-->
+<!--                android:paddingHorizontal="30dp"-->
+<!--                android:paddingVertical="8dp"-->
+<!--                android:text="@string/reciept"-->
+<!--                android:textSize="18dp" />-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/outsilde_border">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Receipt"
+                    android:textStyle="normal"
+                    android:textSize="16dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -107,7 +125,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:text="21/7/2021"
+                        android:text="20/7/2002"
                         android:textSize="15dp" />
 
                     <TextView
@@ -154,7 +172,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/cell_shape"
                             android:padding="10dp"
-                            android:text=" Prima      "
+                            android:text=" Prima   "
                             android:textSize="15dp" />
 
                         <TextView
@@ -356,6 +374,23 @@
     <!--            android:textSize="18dp" />-->
 
             <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/outsilde_border">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Due"
+                    android:textStyle="normal"
+                    android:textSize="16dp"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -470,7 +505,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:orientation="horizontal">

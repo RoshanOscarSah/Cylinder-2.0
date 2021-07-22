@@ -58,7 +58,8 @@ class ReceiptActivity : AppCompatActivity() {
     private lateinit var btnSendmessage:Button
 
     private val permissions = arrayOf(
-        Manifest.permission.WRITE_EXTERNAL_STORAGE
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.SEND_SMS
     )
     private lateinit var bitmap: Bitmap
 
@@ -103,9 +104,17 @@ class ReceiptActivity : AppCompatActivity() {
             createPdf()
         })
 
+
+
+        if (!hasPermissions()) {
+            requestPermission()
+        }
+
         btnSendmessage.setOnClickListener(View.OnClickListener {
-//            val messageToSend = "this is a message"
-//            val number = "9801149729"
+
+
+            val message = "this is a message"
+            val phoneNumber = "9801149729"
 //
 //            SmsManager.getDefault().sendTextMessage(
 //                number,
@@ -114,13 +123,10 @@ class ReceiptActivity : AppCompatActivity() {
 //                null,
 //                null
 //            )
+
+            sendSMS(phoneNumber, message)
             sendSMS("9801149729", "Some text here")
         })
-
-        if (!hasPermissions()) {
-            requestPermission()
-        }
-//new comment
 
         val status = intent.getStringExtra("status")
 
@@ -263,7 +269,7 @@ class ReceiptActivity : AppCompatActivity() {
     private fun requestPermission() {
         ActivityCompat.requestPermissions(
             this,
-            permissions, 1
+            permissions, 12
         )
     }
 
