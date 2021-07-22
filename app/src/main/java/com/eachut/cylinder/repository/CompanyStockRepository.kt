@@ -7,14 +7,14 @@ import com.eachut.cylinder.entity.CompanyStock
 import com.eachut.cylinder.response.CompanyStockResponse
 
 class CompanyStockRepository : MyApiRequest() {
-    private val CompanyStockAPI =
-        ServiceBuilder.buildService(com.eachut.cylinder.api.CompanyStockAPI::class.java)
+    private val companyStockAPI =
+        ServiceBuilder.buildService(CompanyStockAPI::class.java)
 
     //Add Company Stock
 
-    suspend fun addcompanystock(companyStock: CompanyStock):CompanyStockResponse{
+    suspend fun addCompanyStock(companyStock: CompanyStock):CompanyStockResponse{
         return apiRequest {
-            CompanyStockAPI.addcompanystock(companyStock)
+            companyStockAPI.addCompanyStock(companyStock)
         }
     }
 }

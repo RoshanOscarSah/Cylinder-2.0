@@ -4,12 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.eachut.cylinder.Object.ResellerDetails
 import com.eachut.cylinder.R
 import com.eachut.cylinder.entity.Reseller
 import com.eachut.cylinder.ui.home.HomeFragment
 import com.eachut.cylinder.ui.profiles.GetResellerProfile
+import org.w3c.dom.Text
 
 class ResellerStockViewAdapter(
     val context: Context,
@@ -23,10 +26,12 @@ class ResellerStockViewAdapter(
         val tv_Fullname : TextView
         val Tv_Pasalname : TextView
         val tv_Address : TextView
+        val llNameSelected : LinearLayout
         init{
             tv_Fullname = view.findViewById(R.id.tv_Fullname)
             Tv_Pasalname = view.findViewById(R.id.Tv_Pasalname)
             tv_Address = view.findViewById(R.id.tv_Address)
+            llNameSelected = view.findViewById(R.id.llNameSelected)
         }
     }
 
@@ -41,6 +46,10 @@ class ResellerStockViewAdapter(
         holder.tv_Fullname.text=reseller.reseller_fullname
         holder.Tv_Pasalname.text=reseller.pasal_name
         holder.tv_Address.text=reseller.address
+
+        holder.llNameSelected.setOnClickListener {
+            ResellerDetails.setReseller(reseller)
+        }
     }
 
     override fun getItemCount(): Int {

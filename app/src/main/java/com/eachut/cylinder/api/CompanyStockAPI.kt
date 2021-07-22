@@ -10,7 +10,7 @@ interface CompanyStockAPI {
 
     //Add Company Stock
     @POST("/CompanyStock")
-    suspend fun addcompanystock(
+    suspend fun addCompanyStock(
         @Body companyStock: CompanyStock
     ): Response<CompanyStockResponse>
 }

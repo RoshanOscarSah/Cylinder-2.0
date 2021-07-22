@@ -10,7 +10,7 @@ interface ResellerStockAPI {
 
     //Add Reseller Stock
     @POST("/resellerStock")
-    suspend fun addresellerstock(
+    suspend fun addResellerStock(
         @Body resellerStock : ResellerStock
     ): Response<ResellerStockResponse>
 }

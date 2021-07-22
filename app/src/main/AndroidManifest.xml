@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cylinder20"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PrenameActivity"></activity>
+        <activity android:name=".ReceiptActivity"></activity>
+        <activity android:name=".PrenameActivity" />
         <activity
             android:name=".ui.profiles.GetResellerProfile"
             tools:ignore="Instantiatable" />
@@ -26,7 +27,7 @@
             android:theme="@style/Theme.Cylinder20" />
         <activity android:name=".PresettingActivity" />
         <activity android:name=".AddNewMemberActivity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".WelcomeActivity" />
         <activity
             android:name=".MainActivity"
@@ -37,8 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashActivity">
-        </activity>
+        <activity android:name=".SplashActivity"></activity>
     </application>
 
 </manifest>

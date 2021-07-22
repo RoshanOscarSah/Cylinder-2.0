@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -24,13 +23,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eachut.cylinder.Adapter.CompanyStockViewAdapter
-import com.eachut.cylinder.Adapter.ResellerProfileAdapter
 import com.eachut.cylinder.Adapter.ResellerStockViewAdapter
-import com.eachut.cylinder.LoadingActivity
+import com.eachut.cylinder.LoginActivity
+import com.eachut.cylinder.Object.CompanyDetails
+import com.eachut.cylinder.Object.ResellerDetails
 import com.eachut.cylinder.R
+import com.eachut.cylinder.ReceiptActivity
 import com.eachut.cylinder.databinding.FragmentHomeBinding
 import com.eachut.cylinder.entity.Company
+import com.eachut.cylinder.entity.CompanyStock
 import com.eachut.cylinder.entity.Reseller
+import com.eachut.cylinder.entity.ResellerStock
 import com.eachut.cylinder.repository.CompanyRepository
 import com.eachut.cylinder.repository.ResellerRepository
 import kotlinx.coroutines.CoroutineScope
@@ -48,6 +51,12 @@ class   HomeFragment : Fragment() {
     private var isCompany:Boolean?=null
     private var resellerList= mutableListOf<Reseller>()
     private var companyList= mutableListOf<Company>()
+    private var gasState =  String()
+    private var sendOrReceive = "Send"
+    private var customerOrCompany = String()
+    private var ResellerID = String()
+    private var CompanyID = String()
+
 
 
     // This property is only valid between onCreateView and
@@ -65,6 +74,7 @@ class   HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
 
 
 //reseller/company
@@ -104,54 +114,47 @@ class   HomeFragment : Fragment() {
 
 //select customer
         binding.llSelectCustomer.setOnClickListener { view ->
-            val customerOrCompany = binding.tvCustomerOrCompany.getContentDescription()
-            if(customerOrCompany=="getReseller"){
-//                isReseller=true
-//                isCompany=false
+             customerOrCompany = binding.tvCustomerOrCompany.getContentDescription().toString()
+            if (customerOrCompany == "getReseller"){
                 CoroutineScope(Dispatchers.IO).launch {
-                    try{
+                    try {
                         val resellerRepository = ResellerRepository()
-                        val response =  resellerRepository.allresellerList()
-                        withContext(Dispatchers.Main){
-                            Toast.makeText(context, "$response", Toast.LENGTH_SHORT).show()
-                        }
-                        if(response.success!!){
+                        val resellerResponse  =resellerRepository.allresellerList()
+                        if(resellerResponse.success!!){
+                            resellerList = resellerResponse.data!!
 
-                            resellerList= response.data!!
+                        }
+                        withContext(Dispatchers.Main){
                             showPopupReseller()
-
+                            Toast.makeText(context, "Get Reseller", Toast.LENGTH_SHORT).show()
                         }
-
-                        else{
-
-                        }
-                    }catch(e:Exception){
+                    }catch (e:Exception){
 
                     }
                 }
 
             }
-            if (customerOrCompany=="getCompany"){
-                Toast.makeText(context, "Get Company", Toast.LENGTH_SHORT).show()
+            if(customerOrCompany == "getCompany"){
                 CoroutineScope(Dispatchers.IO).launch {
-                    try{
+                    try {
                         val companyRepository = CompanyRepository()
-                        val response =  companyRepository.allCompanyList()
+                        val companyResponse  =companyRepository.allCompanyList()
+                        if(companyResponse.success!!){
+                            companyList = companyResponse.data!!
+                        }
                         withContext(Dispatchers.Main){
-                            Toast.makeText(context, "$response", Toast.LENGTH_SHORT).show()
-                        }
-                        if(response.success!!){
-                            companyList=response.data!!
-                            showPopupCompany(companyList)
-                        }
-                        else{
+                            showPopupCompany()
 
+                            Toast.makeText(context, "Get Company", Toast.LENGTH_SHORT).show()
                         }
-                    }catch(e:Exception){
+                    }catch (e:Exception){
 
                     }
                 }
+
+
             }
+
         }
 
 //        call customer
@@ -172,6 +175,7 @@ class   HomeFragment : Fragment() {
             binding.llFullSelectedTxt.setTextColor(Color.parseColor("#FFFFFF"));
             binding.llHalfSelectedTxt.setTextColor(Color.parseColor("#4DFFFFFF"));
             binding.llEmptySelectedTxt.setTextColor(Color.parseColor("#4DFFFFFF"));
+            gasState = "Full"
         }
 
         binding.llHalfSelected.setOnClickListener{ view ->
@@ -183,6 +187,7 @@ class   HomeFragment : Fragment() {
             binding.llFullSelectedTxt.setTextColor(Color.parseColor("#4DFFFFFF"));
             binding.llHalfSelectedTxt.setTextColor(Color.parseColor("#FFFFFF"));
             binding.llEmptySelectedTxt.setTextColor(Color.parseColor("#4DFFFFFF"));
+            gasState = "Half"
         }
 
         binding.llEmptySelected.setOnClickListener{ view ->
@@ -194,6 +199,8 @@ class   HomeFragment : Fragment() {
             binding.llFullSelectedTxt.setTextColor(Color.parseColor("#4DFFFFFF"));
             binding.llHalfSelectedTxt.setTextColor(Color.parseColor("#4DFFFFFF"));
             binding.llEmptySelectedTxt.setTextColor(Color.parseColor("#FFFFFF"));
+            gasState  ="Empty"
+
         }
 
 //REGULAR LEAK SOLD CYLINDER
@@ -509,6 +516,7 @@ class   HomeFragment : Fragment() {
 
             binding.ivRecieveFangro.isVisible = false
             binding.ivSendFangro.isVisible = true
+            sendOrReceive = "send"
 
             binding.llStockReceive.background.setTintList(context?.let {
                 ContextCompat.getColorStateList(
@@ -537,6 +545,7 @@ class   HomeFragment : Fragment() {
 
             binding.ivRecieveFangro.isVisible = true
             binding.ivSendFangro.isVisible = false
+            sendOrReceive =  "receive"
 
             binding.llStockReceive.background.setTintList(context?.let {
                 ContextCompat.getColorStateList(
@@ -555,6 +564,86 @@ class   HomeFragment : Fragment() {
 // GO
         binding.llGo.setOnClickListener { view ->
 
+
+
+            val Gas_state = gasState
+            val Regular_Prima = binding.etGas1R.text
+            val Regular_Kamakhya = binding.etGas2R.text
+            val Regular_Suvidha = binding.etGas3R.text
+            val Regular_Others = binding.etGas4R.text
+            val Leak_Prima = binding.etGas1L.text
+            val Leak_Kamakhya = binding.etGas2L.text
+            val Leak_Suvidha = binding.etGas3L.text
+            val Leak_Others = binding.etGas4L.text
+            val Sold_Prima = binding.etGas1S.text
+            val Sold_Kamakhya = binding.etGas2S.text
+            val Sold_Suvidha = binding.etGas3S.text
+            val Sold_Others = binding.etGas4S.text
+            val SendOrReceive = sendOrReceive
+            val Amount = binding.ettotalamount.text
+            val Remarks = binding.etremarks.text
+
+            if (customerOrCompany=="getReseller"){
+                ResellerID = ResellerDetails.getReseller()._id.toString()
+                var reseller = ResellerDetails.getReseller()
+                val resellerStock = ResellerStock(
+                    ResellerID = ResellerID, Gas_state = Gas_state, Regular_Prima = Regular_Prima.toString(),
+                    Regular_Kamakhya = Regular_Kamakhya.toString(),
+                    Regular_Suvidha = Regular_Suvidha.toString(),
+                    Regular_Others = Regular_Others.toString(),
+                    Leak_Prima = Leak_Prima.toString(),
+                    Leak_Kamakhya = Leak_Kamakhya.toString(),
+                    Leak_Suvidha = Leak_Suvidha.toString(),
+                    Leak_Others = Leak_Others.toString(),
+                    Sold_Prima = Sold_Prima.toString(),
+                    Sold_Kamakhya = Sold_Kamakhya.toString(),
+                    Sold_Suvidha = Sold_Suvidha.toString(),
+                    Sold_Others = Sold_Others.toString(),
+                    SendOrReceive = SendOrReceive,
+                    Amount = Amount.toString(),
+                    Remarks = Remarks.toString())
+
+
+                val intent = Intent(context, ReceiptActivity::class.java)
+                    .putExtra("status","reseller")
+                    .putExtra("resellerStock", resellerStock)
+                    .putExtra("reseller",reseller)
+
+                startActivity(intent)
+
+
+            }
+
+            if(customerOrCompany=="getCompany"){
+                CompanyID = CompanyDetails.getCompany()._id.toString()
+                var company = CompanyDetails.getCompany()
+                val companyStock = CompanyStock(
+                    CompanyID = CompanyID, Gas_state = Gas_state, Regular_Prima = Regular_Prima.toString().toInt(),
+                    Regular_Kamakhya = Regular_Kamakhya.toString().toInt(),
+                    Regular_Suvidha = Regular_Suvidha.toString().toInt(),
+                    Regular_Others = Regular_Others.toString().toInt(),
+                    Leak_Prima = Leak_Prima.toString().toInt(),
+                    Leak_Kamakhya = Leak_Kamakhya.toString().toInt(),
+                    Leak_Suvidha = Leak_Suvidha.toString().toInt(),
+                    Leak_Others = Leak_Others.toString().toInt(),
+                    Sold_Prima = Sold_Prima.toString().toInt(),
+                    Sold_Kamakhya = Sold_Kamakhya.toString().toInt(),
+                    Sold_Suvidha = Sold_Suvidha.toString().toInt(),
+                    Sold_Others = Sold_Others.toString().toInt(),
+                    SendOrReceive = SendOrReceive,
+                    Amount = Amount.toString(),
+                    Remarks = Remarks.toString())
+
+                val intent = Intent(context, ReceiptActivity::class.java)
+                    .putExtra("status","company")
+                    .putExtra("companyStock", companyStock)
+                    .putExtra("company",company)
+                startActivity(intent)
+
+            }
+
+
+
         }
 
 //        val textView: TextView = binding.textHome
@@ -571,21 +660,19 @@ class   HomeFragment : Fragment() {
 
     //popup Reseller list
     fun showPopupReseller() {
-        CoroutineScope(Dispatchers.IO).launch {
-            withContext(Dispatchers.Main){
-                Toast.makeText(context, "Reseller PopUp", Toast.LENGTH_SHORT).show()
-            }
-        }
+
         val inflater: LayoutInflater = this.getLayoutInflater()
         val dialogView: View = inflater.inflate(R.layout.activity_prename, null)
-
-
+        val recyclerView = dialogView.findViewById<RecyclerView>(R.id.recyclerview)
+        recyclerView.adapter = ResellerStockViewAdapter(requireContext(),resellerList)
+        recyclerView.layoutManager = LinearLayoutManager(context)
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
             override fun onDismiss(arg0: DialogInterface) {
-                val recyclerView = dialogView.findViewById<RecyclerView>(R.id.recyclerview)
-                recyclerView.adapter = ResellerStockViewAdapter(context!!, resellerList)
-                recyclerView.layoutManager = LinearLayoutManager(context)            }
+                binding.title.text = ResellerDetails.getReseller().reseller_fullname
+                binding.subtitle.text = ResellerDetails.getReseller().pasal_name
+                binding.address.text = ResellerDetails.getReseller().address
+            }
         })
         dialogBuilder.setView(dialogView)
 
@@ -602,27 +689,30 @@ class   HomeFragment : Fragment() {
         alertDialog.getWindow()!!.setBackgroundDrawableResource(R.color.dark_fade);
         alertDialog.setCanceledOnTouchOutside(true);
 
+//        recyclerView.setOnClickListener(View.OnClickListener {
+//            alertDialog.dismiss()
+//
+//        })
 
         val llNameSelected = alertDialog.findViewById(R.id.llNameSelected) as LinearLayout
         llNameSelected.setOnClickListener(View.OnClickListener { //do something here
             alertDialog.dismiss()
-            val ChangeCustomerOrCompany = binding.tvCustomerOrCompany.getContentDescription()
-            binding.tvCustomerOrCompany.setText(ChangeCustomerOrCompany)
-            binding.llNameSelected.isVisible = true
         })
     }
-
     //popup company List
-    fun showPopupCompany(mutableList: MutableList<Company>) {
+    fun showPopupCompany() {
+
         val inflater: LayoutInflater = this.getLayoutInflater()
         val dialogView: View = inflater.inflate(R.layout.activity_prename, null)
-
+        val recyclerView = dialogView.findViewById<RecyclerView>(R.id.recyclerview)
+        recyclerView.adapter = CompanyStockViewAdapter(requireContext(),companyList)
+        recyclerView.layoutManager = LinearLayoutManager(context)
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
             override fun onDismiss(arg0: DialogInterface) {
-                val recyclerView = dialogView.findViewById<RecyclerView>(R.id.recyclerview)
-                recyclerView.adapter = CompanyStockViewAdapter(context!!, mutableList)
-                recyclerView.layoutManager = LinearLayoutManager(context)
+                binding.title.text = CompanyDetails.getCompany().cylinder_name
+                binding.subtitle.text = CompanyDetails.getCompany().company_fullname
+                binding.address.text = CompanyDetails.getCompany().address
             }
         })
         dialogBuilder.setView(dialogView)
@@ -639,13 +729,7 @@ class   HomeFragment : Fragment() {
         alertDialog.getWindow()!!.setAttributes(lp);
         alertDialog.getWindow()!!.setBackgroundDrawableResource(R.color.dark_fade);
         alertDialog.setCanceledOnTouchOutside(true);
-        val llNameSelected = alertDialog.findViewById(R.id.llNameSelected) as LinearLayout
-        llNameSelected.setOnClickListener(View.OnClickListener { //do something here
-            alertDialog.dismiss()
-            val ChangeCustomerOrCompany = binding.tvCustomerOrCompany.getContentDescription()
-            binding.tvCustomerOrCompany.setText(ChangeCustomerOrCompany)
-            binding.llNameSelected.isVisible = true
-        })
+
     }
 
     //    for RLS total
