@@ -94,6 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Manoj Shah"
+                        android:contentDescription="9801149729"
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
