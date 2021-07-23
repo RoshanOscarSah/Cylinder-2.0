@@ -111,9 +111,22 @@ class ReceiptActivity : AppCompatActivity() {
         }
 
         btnSendmessage.setOnClickListener(View.OnClickListener {
+            val name = txtCname.text.toString()
+            val gasStatus = txtFull.text.toString()
+            val sendOrReceive = txtSend.text.toString()
+            val p = txtprimanumber.text.toString()
+            val k = txtkamakhyanumber.text.toString()
+            val s = txtsubhidanumber.text.toString()
+            val o = txtothersnumber.text.toString()
+            val purchaseTotal = txtPurchase.text.toString()
+            val dueTotal = txtCash.text.toString()
+            val dueCylinder = txtCylinder.text.toString()
+            val txtSerialno = txtSerialno.text.toString()
+            val totalCylinder = p + k + s + o
 
-
-            val message = "this is a message"
+            val message = "Dear $name, \n $totalCylinder $gasStatus cylinder is $sendOrReceive. " +
+                    "Total Purchase is Rs.$purchaseTotal. Due is $dueCylinder cylinder and  Rs.$dueTotal." +
+                    "  \n ThankYou \n Rakesh Kirana Pasal \n Bill no: $txtSerialno"
             val phoneNumber = "9801149729"
 //
 //            SmsManager.getDefault().sendTextMessage(
