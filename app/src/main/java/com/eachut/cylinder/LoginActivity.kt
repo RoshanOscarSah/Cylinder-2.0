@@ -1,5 +1,6 @@
 package com.eachut.cylinder
 
+import android.Manifest
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -7,6 +8,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Point
@@ -25,6 +27,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.transition.TransitionManager
 import com.eachut.cylinder.repository.MemberRepository
@@ -40,6 +43,15 @@ import java.util.*
 
 
 class LoginActivity : AppCompatActivity() {
+
+    private val permissions = arrayOf(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.SEND_SMS,
+        Manifest.permission.CALL_PHONE,
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.ACCESS_NETWORK_STATE,
+        Manifest.permission.INTERNET,
+    )
 
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var biometricManager: BiometricManager
@@ -112,6 +124,10 @@ class LoginActivity : AppCompatActivity() {
 //        animSetXY.interpolator = AccelerateDecelerateInterpolator()
 //        animSetXY.duration = 500
 //        animSetXY.start()
+
+        if (!hasPermissions()) {
+            requestPermission()
+        }
 
         setting.setOnCheckedChangeListener { _, isChecked ->
 
@@ -679,6 +695,24 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            permissions, 123456
+        )
+    }
+
+    private fun hasPermissions(): Boolean {
+        var hasPermission = true
+        for (permission in permissions) {
+            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                hasPermission = false
+            }
+        }
+        return hasPermission
     }
 
 
