@@ -126,9 +126,13 @@ class ReceiptActivity : AppCompatActivity() {
             val txtSerialno = txtSerialno.text.toString()
             val totalCylinder = p!! + k!! + s!! + o!!
 
-            val message = "Dear $name, $totalCylinder $gasStatus cylinder are $sendOrReceive. " +
-                    "Total Purchase : Rs. $purchaseTotal. Due : $dueCylinder cylinder and  Rs. $dueTotal." +
-                    "Rakesh Kirana Pasal. Bill no: $txtSerialno"
+            val message = "Dear $name,\n$totalCylinder $gasStatus cylinder are $sendOrReceive. " +
+                    "\nTotal Purchase : Rs.$purchaseTotal.\nDue : $dueCylinder cylinder and  Rs. $dueTotal." +
+                    "\nBill no: $txtSerialno \n-Rakesh Kirana Pasal"
+
+//            val message = "Dear $name, $totalCylinder $gasStatus cylinder are $sendOrReceive. " +
+//                    "Total Purchase : Rs. $purchaseTotal. Due : $dueCylinder cylinder and  Rs. $dueTotal." +
+//                    "Rakesh Kirana Pasal. Bill no: $txtSerialno"
             val phoneNumber = txtCname.getContentDescription().toString()
 //
 //            SmsManager.getDefault().sendTextMessage(
