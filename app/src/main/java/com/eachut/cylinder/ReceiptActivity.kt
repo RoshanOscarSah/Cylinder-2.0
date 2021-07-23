@@ -1,6 +1,8 @@
 package com.eachut.cylinder
 
 import android.Manifest
+import android.app.PendingIntent
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -114,20 +116,20 @@ class ReceiptActivity : AppCompatActivity() {
             val name = txtCname.text.toString()
             val gasStatus = txtFull.text.toString()
             val sendOrReceive = txtSend.text.toString()
-            val p = txtprimanumber.text.toString()
-            val k = txtkamakhyanumber.text.toString()
-            val s = txtsubhidanumber.text.toString()
-            val o = txtothersnumber.text.toString()
+            val p : Int? = txtprimanumber.text.toString().toIntOrNull()
+            val k : Int? = txtkamakhyanumber.text.toString().toIntOrNull()
+            val s : Int? = txtsubhidanumber.text.toString().toIntOrNull()
+            val o : Int? = txtothersnumber.text.toString().toIntOrNull()
             val purchaseTotal = txtPurchase.text.toString()
             val dueTotal = txtCash.text.toString()
             val dueCylinder = txtCylinder.text.toString()
             val txtSerialno = txtSerialno.text.toString()
-            val totalCylinder = p + k + s + o
+            val totalCylinder = p!! + k!! + s!! + o!!
 
-            val message = "Dear $name, \n $totalCylinder $gasStatus cylinder is $sendOrReceive. " +
-                    "Total Purchase is Rs.$purchaseTotal. Due is $dueCylinder cylinder and  Rs.$dueTotal." +
-                    "  \n ThankYou \n Rakesh Kirana Pasal \n Bill no: $txtSerialno"
-            val phoneNumber = "9801149729"
+            val message = "Dear $name, $totalCylinder $gasStatus cylinder are $sendOrReceive. " +
+                    "Total Purchase : Rs. $purchaseTotal. Due : $dueCylinder cylinder and  Rs. $dueTotal." +
+                    "Rakesh Kirana Pasal. Bill no: $txtSerialno"
+            val phoneNumber = txtCname.getContentDescription().toString()
 //
 //            SmsManager.getDefault().sendTextMessage(
 //                number,
@@ -137,8 +139,9 @@ class ReceiptActivity : AppCompatActivity() {
 //                null
 //            )
 
+            Log.d("OSCAR","phoneNo: $phoneNumber, message: $message")
             sendSMS(phoneNumber, message)
-            sendSMS("9801149729", "Some text here")
+//            sendSMS("9801149729", "Some text here")
         })
 
         val status = intent.getStringExtra("status")
@@ -275,8 +278,19 @@ class ReceiptActivity : AppCompatActivity() {
         Log.v("MEssage", message)
         //   PendingIntent pi = PendingIntent.getActivity(this, 0,
         //       new Intent(this, Main.class), 0);
+        val SENT = "SMS_SENT"
+        val DELIVERY = "SMS_DELIVERED"
+
+        val intent = Intent(SENT)
+        val sentIntent = PendingIntent.getBroadcast(this, 0, intent,
+            PendingIntent.FLAG_ONE_SHOT)
+        val intent2  = Intent(DELIVERY)
+        val deliveryIntent = PendingIntent.getBroadcast(this, 0, intent2,
+            PendingIntent.FLAG_ONE_SHOT)
+
         val sms = SmsManager.getDefault()
-        sms.sendTextMessage(phoneNumber, null, message, null, null)
+        sms.sendTextMessage(phoneNumber, null, message,  sentIntent, deliveryIntent)
+        Toast.makeText(this, "message send ($message)", Toast.LENGTH_LONG).show()
     }
 
     private fun requestPermission() {

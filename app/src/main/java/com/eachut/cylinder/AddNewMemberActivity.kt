@@ -59,6 +59,8 @@ class AddNewMemberActivity : AppCompatActivity() {
     private lateinit var llAdmin: LinearLayout
     private lateinit var llEmploye: LinearLayout
     private lateinit var commission: LinearLayout
+    private lateinit var etresellerRate: EditText
+    private lateinit var resellerRate: LinearLayout
 
     private lateinit var btnAddCompany : LinearLayout
     private lateinit var btnAddReseller : LinearLayout
@@ -100,6 +102,8 @@ class AddNewMemberActivity : AppCompatActivity() {
         ivRecieveCheck = findViewById(R.id.ivRecieveCheck)
         llAdmin = findViewById(R.id.llAdmin)
         llEmploye = findViewById(R.id.llemploye)
+        resellerRate = findViewById(R.id.resellerRate)
+        etresellerRate = findViewById(R.id.etresellerRate)
 
         btnAddCompany = findViewById(R.id.btnAddCompany)
         btnAddReseller = findViewById(R.id.btnAddReseller)
@@ -195,11 +199,13 @@ class AddNewMemberActivity : AppCompatActivity() {
             val pasalname = pasalname.text.toString()
             val reselleraddress = reselleraddress.text.toString()
             val resellerphonenum = resellerphonenum.text.toString()
+            val rateforReseller = etresellerRate.text.toString()
             val reseller = Reseller(
                 reseller_fullname = etResellerfullname,
                 pasal_name = pasalname,
                 address = reselleraddress,
-                phone_number = resellerphonenum
+                phone_number = resellerphonenum,
+                rateforReseller = rateforReseller
             )
             Log.d("OSCAR", "Reseller: $reseller")
             CoroutineScope(Dispatchers.IO).launch {
@@ -375,6 +381,7 @@ class AddNewMemberActivity : AppCompatActivity() {
             btnAddReseller.isVisible = false
             btnAddCompany.isVisible = false
             btnAddMember.isVisible = true
+            resellerRate.isVisible = false
         }
     }
 
@@ -405,6 +412,7 @@ class AddNewMemberActivity : AppCompatActivity() {
             btnAddReseller.isVisible = true
             btnAddCompany.isVisible = false
             btnAddMember.isVisible = false
+            resellerRate.isVisible = true
         }
     }
 
@@ -435,6 +443,7 @@ class AddNewMemberActivity : AppCompatActivity() {
             btnAddReseller.isVisible = false
             btnAddCompany.isVisible = true
             btnAddMember.isVisible = false
+            resellerRate.isVisible = false
         }
     }
 }
