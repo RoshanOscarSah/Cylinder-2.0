@@ -173,7 +173,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/cell_shape"
                             android:padding="10dp"
-                            android:text=" Prima   "
+                            android:text=" Prima "
                             android:textSize="15dp" />
 
                         <TextView
@@ -513,12 +513,12 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="40dp">
+                    android:layout_marginRight="70dp">
 
                     <ImageButton
                         android:id="@+id/imgbtnBack"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_gravity="center"
                         android:background="@drawable/gaslogo_bgtotal"
                         android:src="@drawable/ic_arrow_left" />
@@ -527,14 +527,14 @@
 
                 <LinearLayout
                     android:id="@+id/llGo"
-                    android:layout_width="230dp"
-                    android:layout_height="80dp"
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
                     android:background="@drawable/ic_toggle_active"
                     android:backgroundTint="#940000"
                     android:elevation="2dp"
                     android:orientation="horizontal"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp">
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
 
                     <TextView
                         android:id="@+id/btnSubmit"
@@ -543,7 +543,7 @@
                         android:gravity="center"
                         android:text="@string/title_Submit"
                         android:textColor="@color/white"
-                        android:textSize="35dp"
+                        android:textSize="30dp"
                         android:textStyle="bold" />
 
                 </LinearLayout>

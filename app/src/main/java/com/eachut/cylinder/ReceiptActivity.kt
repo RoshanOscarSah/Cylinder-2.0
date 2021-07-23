@@ -1,6 +1,8 @@
 package com.eachut.cylinder
 
 import android.Manifest
+import android.app.PendingIntent
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -124,9 +126,9 @@ class ReceiptActivity : AppCompatActivity() {
             val txtSerialno = txtSerialno.text.toString()
             val totalCylinder = p!! + k!! + s!! + o!!
 
-            val message = "Dear $name, \n $totalCylinder $gasStatus cylinder are $sendOrReceive. " +
-                    "Total Purchase : Rs.$purchaseTotal. Due : $dueCylinder cylinder and  Rs.$dueTotal." +
-                    "  \n ThankYou - Rakesh Kirana Pasal \n Bill no: $txtSerialno"
+            val message = "Dear $name, $totalCylinder $gasStatus cylinder are $sendOrReceive. " +
+                    "Total Purchase : Rs. $purchaseTotal. Due : $dueCylinder cylinder and  Rs. $dueTotal." +
+                    "Rakesh Kirana Pasal. Bill no: $txtSerialno"
             val phoneNumber = txtCname.getContentDescription().toString()
 //
 //            SmsManager.getDefault().sendTextMessage(
@@ -276,9 +278,19 @@ class ReceiptActivity : AppCompatActivity() {
         Log.v("MEssage", message)
         //   PendingIntent pi = PendingIntent.getActivity(this, 0,
         //       new Intent(this, Main.class), 0);
+        val SENT = "SMS_SENT"
+        val DELIVERY = "SMS_DELIVERED"
+
+        val intent = Intent(SENT)
+        val sentIntent = PendingIntent.getBroadcast(this, 0, intent,
+            PendingIntent.FLAG_ONE_SHOT)
+        val intent2  = Intent(DELIVERY)
+        val deliveryIntent = PendingIntent.getBroadcast(this, 0, intent2,
+            PendingIntent.FLAG_ONE_SHOT)
+
         val sms = SmsManager.getDefault()
-        sms.sendTextMessage(phoneNumber, null, message, null, null)
-        Toast.makeText(this, "message send", Toast.LENGTH_LONG).show()
+        sms.sendTextMessage(phoneNumber, null, message,  sentIntent, deliveryIntent)
+        Toast.makeText(this, "message send ($message)", Toast.LENGTH_LONG).show()
     }
 
     private fun requestPermission() {
