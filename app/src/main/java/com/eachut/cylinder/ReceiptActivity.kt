@@ -148,10 +148,9 @@ class ReceiptActivity : AppCompatActivity() {
 //            sendSMS("9801149729", "Some text here")
         })
 
+
         val status = intent.getStringExtra("status")
-
-
-                            //Company
+                            //if Company
         if(status=="company"){
             val company = intent.getParcelableExtra<CompanyStock>("companyStock")!!
             val companyInfo = intent.getParcelableExtra<Company>("company")!!
