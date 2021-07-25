@@ -52,7 +52,7 @@ class   HomeFragment : Fragment() {
     private var resellerList= mutableListOf<Reseller>()
     private var companyList= mutableListOf<Company>()
     private var gasState =  String()
-    private var sendOrReceive = "Send"
+    private var sendOrReceive = "send"
     private var customerOrCompany = String()
     private var ResellerID = String()
     private var CompanyID = String()
@@ -128,10 +128,12 @@ class   HomeFragment : Fragment() {
                         }
                         withContext(Dispatchers.Main){
                             showPopupReseller()
-                            Toast.makeText(context, "Get Reseller", Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(context, "Get Reseller", Toast.LENGTH_SHORT).show()
                         }
                     }catch (e:Exception){
-
+                        withContext(Dispatchers.Main){
+                            Toast.makeText(context, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
 
@@ -146,11 +148,12 @@ class   HomeFragment : Fragment() {
                         }
                         withContext(Dispatchers.Main){
                             showPopupCompany()
-
-                            Toast.makeText(context, "Get Company", Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(context, "Get Company", Toast.LENGTH_SHORT).show()
                         }
                     }catch (e:Exception){
-
+                        withContext(Dispatchers.Main){
+                            Toast.makeText(context, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
 
@@ -610,10 +613,7 @@ class   HomeFragment : Fragment() {
                     .putExtra("status","reseller")
                     .putExtra("resellerStock", resellerStock)
                     .putExtra("reseller",reseller)
-
                 startActivity(intent)
-
-
             }
 
             if(customerOrCompany=="getCompany"){
@@ -641,7 +641,6 @@ class   HomeFragment : Fragment() {
                     .putExtra("companyStock", companyStock)
                     .putExtra("company",company)
                 startActivity(intent)
-
             }
 
 
@@ -674,6 +673,7 @@ class   HomeFragment : Fragment() {
                 binding.title.text = ResellerDetails.getReseller().reseller_fullname
                 binding.subtitle.text = ResellerDetails.getReseller().pasal_name
                 binding.address.text = ResellerDetails.getReseller().address
+                binding.ivCall.contentDescription = ResellerDetails.getReseller().phone_number
 
             }
         })
