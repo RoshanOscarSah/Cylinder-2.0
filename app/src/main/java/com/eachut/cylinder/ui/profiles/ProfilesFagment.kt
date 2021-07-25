@@ -13,16 +13,22 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.eachut.cylinder.AddNewMemberActivity
+import com.eachut.cylinder.Object.ResellerList
 import com.eachut.cylinder.R
 import com.eachut.cylinder.databinding.FragmentProfilesBinding
 import com.eachut.cylinder.entity.Reseller
+import com.eachut.cylinder.repository.ResellerRepository
 import com.eachut.cylinder.ui.profiles.ProfilesViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ProfilesFragment : Fragment() {
 
     private lateinit var profilesViewModel: ProfilesViewModel
     private var _binding: FragmentProfilesBinding? = null
     private var resellerList = mutableListOf<Reseller>()
+    private var sortedReseller = resellerList
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -35,7 +41,14 @@ class ProfilesFragment : Fragment() {
     ): View? {
         profilesViewModel =
             ViewModelProvider(this).get(ProfilesViewModel::class.java)
-
+        CoroutineScope(Dispatchers.IO).launch {
+            val resellerRepo = ResellerRepository()
+            val  response = resellerRepo.allresellerList()
+            if(response.success!!){
+                resellerList = response.data!!
+//                ResellerList.setResellerList(sortedReseller)
+            }
+        }
         //Loading Reseller Profile
         val fragment = GetResellerProfile()
         val fragmentManager = requireActivity().supportFragmentManager
@@ -144,14 +157,19 @@ class ProfilesFragment : Fragment() {
                 when(item.itemId)
                 {
                     R.id.ascending ->{
-//                        val resellerAscending = resellerList
-//                        val sortingAscending = resellerAscending.sortBy{ it.reseller_fullname.toString()}
+                        sortedReseller = resellerList.sortedWith(compareBy { it.pasal_name!!.first() }) as MutableList<Reseller>
+                        ResellerList.setResellerList(sortedReseller)
+//                        Toast.makeText(context, "$sortedReseller", Toast.LENGTH_SHORT).show()
                     }
-                    R.id.descending ->
-                        Toast.makeText(view?.context, "Descending Order", Toast.LENGTH_SHORT).show()
-                    R.id.mostsold ->
+                    R.id.descending -> {
+                        sortedReseller =
+//                            resellerList.sortedWith(compareBy { it.pasal_name!!.first() }) as MutableList<Reseller>
+                            resellerList.sortedByDescending { it.pasal_name!!.first() } as MutableList<Reseller>
+//                        Toast.makeText(context, "$sortedReseller", Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.mostsold -> {
                         Toast.makeText(view?.context, "Most Sold", Toast.LENGTH_SHORT).show()
-                }
+                    }                }
                 true
             })
             popupMenu.show()
