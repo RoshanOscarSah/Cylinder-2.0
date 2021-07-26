@@ -61,12 +61,12 @@ class ProfilesFragment : Fragment() {
             val resellerRepo = ResellerRepository()
             val companyRepo = CompanyRepository()
             val memberRepo =  MemberRepository()
-            val  resellerResponse = resellerRepo.allresellerList()
+            val resellerResponse = resellerRepo.allresellerList()
             val companyResponse =  companyRepo.allCompanyList()
             val memberResponse = memberRepo.allmemberList()
             if(resellerResponse.success!!){
                 resellerList = resellerResponse.data!!
-//                ResellerList.setResellerList(sortedReseller)
+                ResellerList.setResellerList(sortedReseller)
             }
             if(companyResponse.success!!){
                 companyList = companyResponse.data!!
