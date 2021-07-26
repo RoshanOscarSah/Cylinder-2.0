@@ -64,28 +64,28 @@ class ProfilesFragment : Fragment() {
             val resellerRepo = ResellerRepository()
 
             val companyRepo = CompanyRepository()
-            val memberRepo = MemberRepository()
+//          val memberRepo = MemberRepository()
             val resellerResponse = resellerRepo.allresellerList()
             val companyResponse = companyRepo.allCompanyList()
-            val memberResponse = memberRepo.allmemberList()
+//            val memberResponse = memberRepo.allmemberList()
 
             //load reseller
             if (resellerResponse.success!!) {
                 resellerList = resellerResponse.data!!
-                ResellerList.setResellerList(sortedReseller)
+                ResellerList.setResellerList(resellerList)
             }
-
-            //load Company
+//
+//            //load Company
             if (companyResponse.success!!) {
                 companyList = companyResponse.data!!
                 CompanyList.setCompanyList(companyList)
             }
-
-            //load Member
-            if (memberResponse.success!!) {
-                memberList = memberResponse.data!!
-                MemberList.setMemberList(memberList)
-            }
+//
+//            //load Member
+//            if (memberResponse.success!!) {
+//                memberList = memberResponse.data!!
+//                MemberList.setMemberList(memberList)
+//            }
         }
 
             //Loading Reseller Profile
@@ -202,9 +202,9 @@ class ProfilesFragment : Fragment() {
 
 
 //                            //sort Company
-//                            sortedCompany =
-//                                companyList.sortedWith(compareBy { it.cylinder_name!!.first() }) as MutableList<Company>
-//                            CompanyList.setCompanyList(sortedCompany)
+                            sortedCompany =
+                                companyList.sortedWith(compareBy { it.cylinder_name!!.first() }) as MutableList<Company>
+                            CompanyList.setCompanyList(sortedCompany)
 //
 //                            //sort Member
 //                            sortedMember =
@@ -219,9 +219,9 @@ class ProfilesFragment : Fragment() {
                             ResellerList.setResellerList(sortedReseller)
 
 //                        //sort company
-//                        sortedCompany =
-//                            companyList.sortedByDescending { it.cylinder_name!!.first() } as MutableList<Company>
-//                        CompanyList.setCompanyList(sortedCompany)
+                        sortedCompany =
+                            companyList.sortedByDescending { it.cylinder_name!!.first() } as MutableList<Company>
+                        CompanyList.setCompanyList(sortedCompany)
 //
 //                        //sort member
 //                        sortedMember = memberList.sortedByDescending { it.Firstname!!.first() } as MutableList<Member>
