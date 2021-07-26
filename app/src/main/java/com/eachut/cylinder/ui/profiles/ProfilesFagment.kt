@@ -194,16 +194,16 @@ class ProfilesFragment : Fragment() {
                             ResellerList.setResellerList(sortedReseller)
 
 
-                            //sort Company
-                            sortedCompany =
-                                companyList.sortedWith(compareBy { it.cylinder_name!!.first() }) as MutableList<Company>
-                            CompanyList.setCompanyList(sortedCompany)
-
-                            //sort Member
-                            sortedMember =
-                                memberList.sortedBy { it.Firstname!!.first() } as MutableList<Member>
-                            MemberList.setMemberList(sortedMember)
-//                        Toast.makeText(context, "$sortedReseller", Toast.LENGTH_SHORT).show()
+//                            //sort Company
+//                            sortedCompany =
+//                                companyList.sortedWith(compareBy { it.cylinder_name!!.first() }) as MutableList<Company>
+//                            CompanyList.setCompanyList(sortedCompany)
+//
+//                            //sort Member
+//                            sortedMember =
+//                                memberList.sortedBy { it.Firstname!!.first() } as MutableList<Member>
+//                            MemberList.setMemberList(sortedMember)
+////                        Toast.makeText(context, "$sortedReseller", Toast.LENGTH_SHORT).show()
                         }
                         R.id.descending -> {
                             //sort reseller
