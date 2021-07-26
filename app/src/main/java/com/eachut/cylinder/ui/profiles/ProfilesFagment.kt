@@ -59,21 +59,21 @@ class ProfilesFragment : Fragment() {
             ViewModelProvider(this).get(ProfilesViewModel::class.java)
         CoroutineScope(Dispatchers.IO).launch {
             val resellerRepo = ResellerRepository()
-            val companyRepo = CompanyRepository()
-            val memberRepo =  MemberRepository()
+//            val companyRepo = CompanyRepository()
+//            val memberRepo =  MemberRepository()
             val  resellerResponse = resellerRepo.allresellerList()
-            val companyResponse =  companyRepo.allCompanyList()
-            val memberResponse = memberRepo.allmemberList()
+//            val companyResponse =  companyRepo.allCompanyList()
+//            val memberResponse = memberRepo.allmemberList()
             if(resellerResponse.success!!){
                 resellerList = resellerResponse.data!!
-//                ResellerList.setResellerList(sortedReseller)
+                ResellerList.setResellerList(resellerList)
             }
-            if(companyResponse.success!!){
-                companyList = companyResponse.data!!
-            }
-            if(memberResponse.success!!){
-                memberList = memberResponse.data!!
-            }
+//            if(companyResponse.success!!){
+//                companyList = companyResponse.data!!
+//            }
+//            if(memberResponse.success!!){
+//                memberList = memberResponse.data!!
+//            }
         }
         //Loading Reseller Profile
         val fragment = GetResellerProfile()
@@ -187,14 +187,14 @@ class ProfilesFragment : Fragment() {
                         sortedReseller = resellerList.sortedWith(compareBy { it.pasal_name!!.first() }) as MutableList<Reseller>
                         ResellerList.setResellerList(sortedReseller)
 
-                        //sort Company
-                        sortedCompany = companyList.sortedWith(compareBy { it.cylinder_name!!.first() }) as MutableList<Company>
-                        CompanyList.setCompanyList(sortedCompany)
-
-                        //sort Member
-                        sortedMember = memberList.sortedBy { it.Firstname!!.first() } as MutableList<Member>
-                        MemberList.setMemberList(sortedMember)
-//                        Toast.makeText(context, "$sortedReseller", Toast.LENGTH_SHORT).show()
+//                        //sort Company
+//                        sortedCompany = companyList.sortedWith(compareBy { it.cylinder_name!!.first() }) as MutableList<Company>
+//                        CompanyList.setCompanyList(sortedCompany)
+//
+//                        //sort Member
+//                        sortedMember = memberList.sortedBy { it.Firstname!!.first() } as MutableList<Member>
+//                        MemberList.setMemberList(sortedMember)
+////                        Toast.makeText(context, "$sortedReseller", Toast.LENGTH_SHORT).show()
                     }
                     R.id.descending -> {
                         //sort reseller
@@ -202,15 +202,15 @@ class ProfilesFragment : Fragment() {
                             resellerList.sortedByDescending { it.pasal_name!!.first() } as MutableList<Reseller>
                         ResellerList.setResellerList(sortedReseller)
 
-                        //sort company
-                        sortedCompany =
-                            companyList.sortedByDescending { it.cylinder_name!!.first() } as MutableList<Company>
-                        CompanyList.setCompanyList(sortedCompany)
-
-                        //sort member
-                        sortedMember = memberList.sortedByDescending { it.Firstname!!.first() } as MutableList<Member>
-                        MemberList.setMemberList(sortedMember)
-//                        Toast.makeText(context, "$sortedReseller", Toast.LENGTH_SHORT).show()
+//                        //sort company
+//                        sortedCompany =
+//                            companyList.sortedByDescending { it.cylinder_name!!.first() } as MutableList<Company>
+//                        CompanyList.setCompanyList(sortedCompany)
+//
+//                        //sort member
+//                        sortedMember = memberList.sortedByDescending { it.Firstname!!.first() } as MutableList<Member>
+//                        MemberList.setMemberList(sortedMember)
+////                        Toast.makeText(context, "$sortedReseller", Toast.LENGTH_SHORT).show()
                     }
                     R.id.mostsold -> {
                         Toast.makeText(view?.context, "Most Sold", Toast.LENGTH_SHORT).show()

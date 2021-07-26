@@ -61,37 +61,37 @@ class ViewMemberFragment : Fragment() {
 
 
         //get member
-        val memberList= MemberList.getMemberList()
-        recyclerview.adapter = MemberProfileAdapter(requireContext(), memberList)
-        recyclerview.layoutManager = LinearLayoutManager(context)
+//        val memberList= MemberList.getMemberList()
+//        recyclerview.adapter = MemberProfileAdapter(requireContext(), memberList)
+//        recyclerview.layoutManager = LinearLayoutManager(context)
 
-//        CoroutineScope(Dispatchers.IO).launch {
-//            try {
-//                val memberRepository = MemberRepository()
-//                val response = memberRepository.allmemberList()
-//                if(response.success==true){
-//                    // Put all the student details in lstStudents
-//                    memberList = response.data!!
-//                    withContext(Dispatchers.Main){
-////                        Toast.makeText(context, "$cartList", Toast.LENGTH_SHORT).show()
-//                        recyclerview.adapter = MemberProfileAdapter(requireContext(), memberList)
-//                        recyclerview.layoutManager = LinearLayoutManager(context)
-//                    }
-//                }
-//                else{
-//                    withContext(Dispatchers.Main){
-//                        Toast.makeText(context,
-//                            response.message.toString(), Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }catch(ex : Exception){
-//                withContext(Dispatchers.Main){
-//                    Toast.makeText(context,
-//                        "Error : $ex", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//
-//        }
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val memberRepository = MemberRepository()
+                val response = memberRepository.allmemberList()
+                if(response.success==true){
+                    // Put all the student details in lstStudents
+                    memberList = response.data!!
+                    withContext(Dispatchers.Main){
+//                        Toast.makeText(context, "$cartList", Toast.LENGTH_SHORT).show()
+                        recyclerview.adapter = MemberProfileAdapter(requireContext(), memberList)
+                        recyclerview.layoutManager = LinearLayoutManager(context)
+                    }
+                }
+                else{
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(context,
+                            response.message.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }catch(ex : Exception){
+                withContext(Dispatchers.Main){
+                    Toast.makeText(context,
+                        "Error : $ex", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
 
         return view
     }
