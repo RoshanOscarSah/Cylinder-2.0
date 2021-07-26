@@ -68,15 +68,23 @@ class ProfilesFragment : Fragment() {
             val resellerResponse = resellerRepo.allresellerList()
             val companyResponse = companyRepo.allCompanyList()
             val memberResponse = memberRepo.allmemberList()
+
+            //load reseller
             if (resellerResponse.success!!) {
                 resellerList = resellerResponse.data!!
                 ResellerList.setResellerList(sortedReseller)
             }
+
+            //load Company
             if (companyResponse.success!!) {
                 companyList = companyResponse.data!!
+                CompanyList.setCompanyList(companyList)
             }
+
+            //load Member
             if (memberResponse.success!!) {
                 memberList = memberResponse.data!!
+                MemberList.setMemberList(memberList)
             }
         }
 
@@ -93,7 +101,6 @@ class ProfilesFragment : Fragment() {
 
             //Add member/reseller/company
             binding.add.setOnClickListener { view ->
-
                 val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
                 )
