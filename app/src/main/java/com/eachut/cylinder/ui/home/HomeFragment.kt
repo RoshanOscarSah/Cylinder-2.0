@@ -51,8 +51,8 @@ class   HomeFragment : Fragment() {
     private var isCompany:Boolean?=null
     private var resellerList= mutableListOf<Reseller>()
     private var companyList= mutableListOf<Company>()
-    private var gasState =  String()
-    private var sendOrReceive = "send"
+    private var gasState =  "Full"
+    private var sendOrReceive = "Send"
     private var customerOrCompany = String()
     private var ResellerID = String()
     private var CompanyID = String()
@@ -521,7 +521,7 @@ class   HomeFragment : Fragment() {
 
             binding.ivRecieveFangro.isVisible = false
             binding.ivSendFangro.isVisible = true
-            sendOrReceive = "send"
+            sendOrReceive = "Send"
 
             binding.llStockReceive.background.setTintList(context?.let {
                 ContextCompat.getColorStateList(
@@ -550,7 +550,7 @@ class   HomeFragment : Fragment() {
 
             binding.ivRecieveFangro.isVisible = true
             binding.ivSendFangro.isVisible = false
-            sendOrReceive =  "receive"
+            sendOrReceive =  "Receive"
 
             binding.llStockReceive.background.setTintList(context?.let {
                 ContextCompat.getColorStateList(

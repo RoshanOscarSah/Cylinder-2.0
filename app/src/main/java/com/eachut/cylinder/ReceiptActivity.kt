@@ -152,7 +152,10 @@ class ReceiptActivity : AppCompatActivity() {
         val status = intent.getStringExtra("status")
                             //if Company
         if(status=="company"){
+
             val company = intent.getParcelableExtra<CompanyStock>("companyStock")!!
+            Toast.makeText(this@ReceiptActivity, "${company}", Toast.LENGTH_SHORT).show()
+
             val companyInfo = intent.getParcelableExtra<Company>("company")!!
             txtFull.setText("${company.Gas_state}")
             txtprimanumber.setText("${company.Regular_Prima}")
@@ -172,6 +175,9 @@ class ReceiptActivity : AppCompatActivity() {
                     try{
                         val companyRepository  = CompanyStockRepository()
                         val companyResponse = companyRepository.addCompanyStock(company)
+                        withContext(Main){
+                            Toast.makeText(this@ReceiptActivity, "${companyResponse}", Toast.LENGTH_SHORT).show()
+                        }
                         if (companyResponse.success!!){
                             withContext(Main){
                                 Toast.makeText(this@ReceiptActivity, "${companyResponse.message}", Toast.LENGTH_SHORT).show()
@@ -196,6 +202,8 @@ class ReceiptActivity : AppCompatActivity() {
         }
         if (status=="reseller"){
             val reseller = intent.getParcelableExtra<ResellerStock>("resellerStock")!!
+            Toast.makeText(this@ReceiptActivity, "${reseller}", Toast.LENGTH_SHORT).show()
+
             val resellerInfo = intent.getParcelableExtra<Reseller>("reseller")!!
             txtFull.setText("${reseller.Gas_state}")
             txtprimanumber.setText("${reseller.Regular_Prima}")
