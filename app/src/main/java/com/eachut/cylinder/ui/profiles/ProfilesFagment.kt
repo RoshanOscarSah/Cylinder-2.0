@@ -12,6 +12,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.eachut.cylinder.Adapter.ResellerStockViewAdapter
 import com.eachut.cylinder.AddNewMemberActivity
 import com.eachut.cylinder.Object.CompanyList
 import com.eachut.cylinder.Object.MemberList
@@ -184,8 +185,10 @@ class ProfilesFragment : Fragment() {
                 {
                     R.id.ascending ->{
                         //sort reseller
+
                         sortedReseller = resellerList.sortedWith(compareBy { it.pasal_name!!.first() }) as MutableList<Reseller>
                         ResellerList.setResellerList(sortedReseller)
+
 
                         //sort Company
                         sortedCompany = companyList.sortedWith(compareBy { it.cylinder_name!!.first() }) as MutableList<Company>
