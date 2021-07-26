@@ -34,35 +34,35 @@ class ViewCompanyFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_view_company, container, false)
         recyclerview = view.findViewById(R.id.recyclerview)
         //get company
-        val companyList= CompanyList.getCompanyList()
-        recyclerview.adapter = CompanyProfileAdapter(requireContext(), companyList)
-        recyclerview.layoutManager = LinearLayoutManager(context)
-//        CoroutineScope(Dispatchers.IO).launch {
-//            try {
-//                val companyRepository = CompanyRepository()
-//                val response = companyRepository.allCompanyList()
-//                if(response.success==true){
-//                    // Put all the student details in lstStudents
-//                    companyList = response.data!!
-//                    withContext(Dispatchers.Main){
-////                        Toast.makeText(context, "$cartList", Toast.LENGTH_SHORT).show()
-//                        recyclerview.adapter = CompanyProfileAdapter(requireContext(), companyList)
-//                        recyclerview.layoutManager = LinearLayoutManager(context)
-//                    }
-//                }
-//                else{
-//                    withContext(Dispatchers.Main){
-//                        Toast.makeText(context,
-//                            response.message.toString(), Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }catch(ex : Exception){
-//                withContext(Dispatchers.Main){
-//                    Toast.makeText(context,
-//                        "Error : $ex", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
+//        val companyList= CompanyList.getCompanyList()
+//        recyclerview.adapter = CompanyProfileAdapter(requireContext(), companyList)
+//        recyclerview.layoutManager = LinearLayoutManager(context)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val companyRepository = CompanyRepository()
+                val response = companyRepository.allCompanyList()
+                if(response.success==true){
+                    // Put all the student details in lstStudents
+                    companyList = response.data!!
+                    withContext(Dispatchers.Main){
+//                        Toast.makeText(context, "$cartList", Toast.LENGTH_SHORT).show()
+                        recyclerview.adapter = CompanyProfileAdapter(requireContext(), companyList)
+                        recyclerview.layoutManager = LinearLayoutManager(context)
+                    }
+                }
+                else{
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(context,
+                            response.message.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }catch(ex : Exception){
+                withContext(Dispatchers.Main){
+                    Toast.makeText(context,
+                        "Error : $ex", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
         return view
     }
 }
