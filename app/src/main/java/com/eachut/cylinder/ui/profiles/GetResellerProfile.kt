@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eachut.cylinder.Adapter.ResellerProfileAdapter
+import com.eachut.cylinder.Object.ResellerList
 import com.eachut.cylinder.R
 import com.eachut.cylinder.databinding.FragmentDashboardBinding
 import com.eachut.cylinder.entity.Reseller
@@ -20,9 +21,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class GetResellerProfile : Fragment() {
+class GetResellerProfile() : Fragment() {
 
-    private var resellerList = mutableListOf<Reseller>()
+//    private var resellerList = mutableListOf<Reseller>()
     private lateinit var recyclerview: RecyclerView
 
 
@@ -34,33 +35,36 @@ class GetResellerProfile : Fragment() {
         val view = inflater.inflate(R.layout.fragment_get_reseller_profile, container, false)
         recyclerview = view.findViewById(R.id.recyclerview)
         //get reseller
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val resellserRepository = ResellerRepository()
-                val response = resellserRepository.allresellerList()
-                if(response.success==true){
-                    // Put all the student details in lstStudents
-                    resellerList = response.data!!
-                    withContext(Dispatchers.Main){
-//                        Toast.makeText(context, "$cartList", Toast.LENGTH_SHORT).show()
-                        recyclerview.adapter = ResellerProfileAdapter(requireContext(), resellerList)
-                        recyclerview.layoutManager = LinearLayoutManager(context)
-                    }
-                }
-                else{
-                    withContext(Dispatchers.Main){
-                        Toast.makeText(context,
-                            response.message.toString(), Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }catch(ex : Exception){
-                withContext(Dispatchers.Main){
-                    Toast.makeText(context,
-                        "Error : $ex", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-        }
+        val resellerList=ResellerList.getResellerList()
+        recyclerview.adapter = ResellerProfileAdapter(requireContext(), resellerList)
+        recyclerview.layoutManager = LinearLayoutManager(context)
+//        CoroutineScope(Dispatchers.IO).launch {
+//            try {
+//                val resellserRepository = ResellerRepository()
+//                val response = resellserRepository.allresellerList()
+//                if(response.success==true){
+//                    // Put all the student details in lstStudents
+//                    resellerList = response.data!!
+//                    withContext(Dispatchers.Main){
+////                        Toast.makeText(context, "$cartList", Toast.LENGTH_SHORT).show()
+//                        recyclerview.adapter = ResellerProfileAdapter(requireContext(), resellerList)
+//                        recyclerview.layoutManager = LinearLayoutManager(context)
+//                    }
+//                }
+//                else{
+//                    withContext(Dispatchers.Main){
+//                        Toast.makeText(context,
+//                            response.message.toString(), Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//            }catch(ex : Exception){
+//                withContext(Dispatchers.Main){
+//                    Toast.makeText(context,
+//                        "Error : $ex", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//        }
 
 
         return view
