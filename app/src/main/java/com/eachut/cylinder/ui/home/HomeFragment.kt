@@ -568,9 +568,6 @@ class   HomeFragment : Fragment() {
 
 // GO
         binding.llGo.setOnClickListener { view ->
-
-
-
             val Gas_state = gasState
             val Regular_Prima = binding.etGas1R.text
             val Regular_Kamakhya = binding.etGas2R.text

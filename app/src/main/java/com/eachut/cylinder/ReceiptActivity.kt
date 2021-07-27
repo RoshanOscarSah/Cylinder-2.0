@@ -154,8 +154,6 @@ class ReceiptActivity : AppCompatActivity() {
         if(status=="company"){
 
             val company = intent.getParcelableExtra<CompanyStock>("companyStock")!!
-            Toast.makeText(this@ReceiptActivity, "${company}", Toast.LENGTH_SHORT).show()
-
             val companyInfo = intent.getParcelableExtra<Company>("company")!!
             txtFull.setText("${company.Gas_state}")
             txtprimanumber.setText("${company.Regular_Prima}")
@@ -170,7 +168,6 @@ class ReceiptActivity : AppCompatActivity() {
             txtSold.text = (company.Sold_Prima!!.toInt()+ company.Sold_Kamakhya!!.toInt() + company.Sold_Suvidha!!.toInt() + company.Sold_Others!!.toInt()).toString()
 
             btnSubmit.setOnClickListener {
-
                 CoroutineScope(Dispatchers.IO).launch{
                     try{
                         val companyRepository  = CompanyStockRepository()
@@ -202,8 +199,6 @@ class ReceiptActivity : AppCompatActivity() {
         }
         if (status=="reseller"){
             val reseller = intent.getParcelableExtra<ResellerStock>("resellerStock")!!
-            Toast.makeText(this@ReceiptActivity, "${reseller}", Toast.LENGTH_SHORT).show()
-
             val resellerInfo = intent.getParcelableExtra<Reseller>("reseller")!!
             txtFull.setText("${reseller.Gas_state}")
             txtprimanumber.setText("${reseller.Regular_Prima}")
@@ -218,7 +213,6 @@ class ReceiptActivity : AppCompatActivity() {
             txtSold.text = (reseller.Sold_Prima!!.toInt()+ reseller.Sold_Kamakhya!!.toInt() + reseller.Sold_Suvidha!!.toInt() + reseller.Sold_Others!!.toInt()).toString()
 
             btnSubmit.setOnClickListener {
-
                 CoroutineScope(Dispatchers.IO).launch{
                     try{
                         val resellerRepository  = ResellerStockRepository()
