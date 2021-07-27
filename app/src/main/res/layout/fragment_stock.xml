@@ -1,22 +1,1167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.stock.StockFragment">
 
-    <TextView
-        android:id="@+id/text_notifications"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="25dp">
+
+        <!--        stock setting edit-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_stock"
+                android:textAllCaps="true"
+                android:fontFamily="@font/sofia_pro_black_az"
+                android:textSize="36dp"
+                android:textStyle="bold"
+                android:textFontWeight="900"
+                android:textColor="#99FFFFFF"
+                android:letterSpacing="0.06"/>
+
+            <FrameLayout
+                android:id="@+id/flStockEditDone"
+                android:layout_weight="0"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_gravity="center_vertical"
+                android:animateLayoutChanges="true">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/gaslogo_bgtotal"
+                    android:backgroundTint="#840000"/>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ic_check_mark"
+                    android:backgroundTint="@color/white"
+                    android:layout_gravity="center"/>
+
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/setting2"
+                android:layout_width="30dp"
+                android:layout_marginRight="15dp"
+                android:layout_height="30dp"
+                android:layout_gravity="left|center_vertical"
+                android:background="@drawable/ic_settings"
+                android:backgroundTint="#840000"/>
+
+            <FrameLayout
+                android:id="@+id/flStockEditCancal"
+                android:layout_weight="0"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:animateLayoutChanges="true">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/gaslogo_bgtotal"/>
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_icon_metro_cross"
+                    android:layout_gravity="center"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flStockEdit"
+                android:layout_weight="0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:animateLayoutChanges="true">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/gaslogo_bgtotal"
+                    android:backgroundTint="#840000"/>
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_edit"
+                    android:layout_gravity="center"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <!--        total-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_Total"
+                    android:textAllCaps="true"
+                    android:layout_weight="1"
+                    android:paddingRight="10dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginBottom="-1dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/sofia_pro_semi_bold_az"
+                    android:textSize="20dp"
+                    android:textFontWeight="900"
+                    android:layout_gravity="bottom"
+                    android:textColor="@color/white"/>
+
+                <FrameLayout
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:animateLayoutChanges="true">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_margin="0dp"
+                        android:background="@drawable/stock_bg"
+                        android:backgroundTint="#CC4A4949"/>
+
+                    <TextView
+                        android:id="@+id/etTotalT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="900"
+                        android:paddingRight="10dp"
+                        android:textAlignment="textEnd"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/sofia_pro_semi_bold_az"
+                        android:textSize="27dp"
+                        android:textColor="#3ac4ce"/>
+
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingBottom="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="40dp"
+                android:orientation="horizontal"
+                android:background="@drawable/stock_bg">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gaslogo_bg"/>
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_cylinder_full"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <EditText
+                        android:id="@+id/etTotalF"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:hint="600"
+                        android:text="600"
+                        android:textCursorDrawable="@null"
+                        android:inputType="number"
+                        android:background="@null"
+                        android:textColorHint="#80FFFFFF"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="24dp"
+                        android:textColor="#3ac4ce"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gaslogo_bg"/>
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_cylinder_half"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/etTotalH"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="24dp"
+                        android:textColor="#3ac4ce"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gaslogo_bg"/>
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_cylinder_empty"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/etTotalE"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="300"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="24dp"
+                        android:textColor="#3ac4ce"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="-175dp"
+                android:layout_marginLeft="50dp"
+                android:src="@drawable/ic_total"/>
+
+        </LinearLayout>
+
+        <!--        PRIMA-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_Prima"
+                    android:textAllCaps="true"
+                    android:layout_weight="1"
+                    android:paddingRight="10dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginBottom="-1dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/sofia_pro_semi_bold_az"
+                    android:textSize="20dp"
+                    android:textFontWeight="900"
+                    android:layout_gravity="bottom"
+                    android:textColor="@color/white"/>
+
+                <FrameLayout
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:animateLayoutChanges="true">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_margin="0dp"
+                        android:background="@drawable/stock_bg"
+                        android:backgroundTint="#CC4A4949"/>
+
+                    <TextView
+                        android:id="@+id/etPrimaT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="410"
+                        android:paddingRight="10dp"
+                        android:textAlignment="textEnd"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/sofia_pro_semi_bold_az"
+                        android:textSize="27dp"
+                        android:textColor="#3ac4ce"/>
+
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingBottom="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="40dp"
+                android:orientation="horizontal"
+                android:background="@drawable/stock_bg">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gaslogo_bg"/>
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_cylinder_full"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <EditText
+                        android:id="@+id/etPrimaF"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:hint="290"
+                        android:text="290"
+                        android:textCursorDrawable="@null"
+                        android:inputType="number"
+                        android:background="@null"
+                        android:textColorHint="#80FFFFFF"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="24dp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gaslogo_bg"/>
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_cylinder_half"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etPrimaH"
+                        android:focusable="false"
+                        android:hint="0"
+                        android:text="0"
+                        android:textCursorDrawable="@null"
+                        android:inputType="number"
+                        android:background="@null"
+                        android:textColorHint="#80FFFFFF"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="24dp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gaslogo_bg"/>
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_cylinder_empty"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etPrimaE"
+                        android:focusable="false"
+                        android:hint="120"
+                        android:text="120"
+                        android:textCursorDrawable="@null"
+                        android:inputType="number"
+                        android:background="@null"
+                        android:textColorHint="#80FFFFFF"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="24dp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="-175dp"
+                android:layout_marginLeft="50dp"
+                android:src="@drawable/ic_prima"/>
+
+        </LinearLayout>
+
+        <!--        KAMAKHYA-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_Kamakhya"
+                    android:textAllCaps="true"
+                    android:layout_weight="1"
+                    android:paddingRight="10dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginBottom="-1dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/sofia_pro_semi_bold_az"
+                    android:textSize="20dp"
+                    android:textFontWeight="900"
+                    android:layout_gravity="bottom"
+                    android:textColor="@color/white"/>
+
+                <FrameLayout
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:animateLayoutChanges="true">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_margin="0dp"
+                        android:background="@drawable/stock_bg"
+                        android:backgroundTint="#CC4A4949"/>
+
+                    <TextView
+                        android:id="@+id/etKamakhyaT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="410"
+                        android:paddingRight="10dp"
+                        android:textAlignment="textEnd"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/sofia_pro_semi_bold_az"
+                        android:textSize="27dp"
+                        android:textColor="#3ac4ce"/>
+
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingBottom="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="40dp"
+                android:orientation="horizontal"
+                android:background="@drawable/stock_bg">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gaslogo_bg"/>
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_cylinder_full"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etKamakhyaF"
+                        android:focusable="false"
+                        android:hint="290"
+                        android:text="290"
+                        android:textCursorDrawable="@null"
+                        android:inputType="number"
+                        android:background="@null"
+                        android:textColorHint="#80FFFFFF"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="24dp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gaslogo_bg"/>
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_cylinder_half"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etKamakhyaH"
+                        android:focusable="false"
+                        android:hint="0"
+                        android:text="0"
+                        android:textCursorDrawable="@null"
+                        android:inputType="number"
+                        android:background="@null"
+                        android:textColorHint="#80FFFFFF"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="24dp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gaslogo_bg"/>
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_cylinder_empty"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etKamakhyaE"
+                        android:focusable="false"
+                        android:hint="120"
+                        android:text="120"
+                        android:textCursorDrawable="@null"
+                        android:inputType="number"
+                        android:background="@null"
+                        android:textColorHint="#80FFFFFF"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="24dp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="-175dp"
+                android:layout_marginLeft="50dp"
+                android:src="@drawable/ic_kamakhya"/>
+
+        </LinearLayout>
+
+        <!--        SUVIDHA-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_Suvidha"
+                    android:textAllCaps="true"
+                    android:layout_weight="1"
+                    android:paddingRight="10dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginBottom="-1dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/sofia_pro_semi_bold_az"
+                    android:textSize="20dp"
+                    android:textFontWeight="900"
+                    android:layout_gravity="bottom"
+                    android:textColor="@color/white"/>
+
+                <FrameLayout
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:animateLayoutChanges="true">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_margin="0dp"
+                        android:background="@drawable/stock_bg"
+                        android:backgroundTint="#CC4A4949"/>
+
+                    <TextView
+                        android:id="@+id/etSuvidhaT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="70"
+                        android:paddingRight="10dp"
+                        android:textAlignment="textEnd"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/sofia_pro_semi_bold_az"
+                        android:textSize="27dp"
+                        android:textColor="#3ac4ce"/>
+
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingBottom="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="40dp"
+                android:orientation="horizontal"
+                android:background="@drawable/stock_bg">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gaslogo_bg"/>
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_cylinder_full"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etSuvidhaF"
+                        android:focusable="false"
+                        android:hint="120"
+                        android:text="120"
+                        android:textCursorDrawable="@null"
+                        android:inputType="number"
+                        android:background="@null"
+                        android:textColorHint="#80FFFFFF"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="24dp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gaslogo_bg"/>
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_cylinder_half"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etSuvidhaH"
+                        android:focusable="false"
+                        android:hint="0"
+                        android:text="0"
+                        android:textCursorDrawable="@null"
+                        android:inputType="number"
+                        android:background="@null"
+                        android:textColorHint="#80FFFFFF"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="24dp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gaslogo_bg"/>
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_cylinder_empty"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etSuvidhaE"
+                        android:focusable="false"
+                        android:hint="20"
+                        android:text="20"
+                        android:textCursorDrawable="@null"
+                        android:inputType="number"
+                        android:background="@null"
+                        android:textColorHint="#80FFFFFF"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="24dp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="-175dp"
+                android:layout_marginLeft="50dp"
+                android:src="@drawable/ic_suvidha"/>
+
+        </LinearLayout>
+
+        <!--        OTHERS-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_Others"
+                    android:textAllCaps="true"
+                    android:layout_weight="1"
+                    android:paddingRight="10dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginBottom="-1dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/sofia_pro_semi_bold_az"
+                    android:textSize="20dp"
+                    android:textFontWeight="900"
+                    android:layout_gravity="bottom"
+                    android:textColor="@color/white"/>
+
+                <FrameLayout
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:animateLayoutChanges="true">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_margin="0dp"
+                        android:background="@drawable/stock_bg"
+                        android:backgroundTint="#CC4A4949"/>
+
+                    <TextView
+                        android:id="@+id/etOthersT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="13"
+                        android:paddingRight="10dp"
+                        android:textAlignment="textEnd"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/sofia_pro_semi_bold_az"
+                        android:textSize="27dp"
+                        android:textColor="#3ac4ce"/>
+
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingBottom="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="40dp"
+                android:orientation="horizontal"
+                android:background="@drawable/stock_bg">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gaslogo_bg"/>
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_cylinder_full"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etOthersF"
+                        android:focusable="false"
+                        android:hint="0"
+                        android:text="0"
+                        android:textCursorDrawable="@null"
+                        android:inputType="number"
+                        android:background="@null"
+                        android:textColorHint="#80FFFFFF"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="24dp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gaslogo_bg"/>
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_cylinder_half"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etOthersH"
+                        android:focusable="false"
+                        android:hint="0"
+                        android:text="0"
+                        android:textCursorDrawable="@null"
+                        android:inputType="number"
+                        android:background="@null"
+                        android:textColorHint="#80FFFFFF"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="24dp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/gaslogo_bg"/>
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_cylinder_empty"
+                            android:layout_gravity="center"/>
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etOthersE"
+                        android:focusable="false"
+                        android:hint="12"
+                        android:text="12"
+                        android:textCursorDrawable="@null"
+                        android:inputType="number"
+                        android:background="@null"
+                        android:textColorHint="#80FFFFFF"
+                        android:fontFamily="@font/sofia_pro_regular_az"
+                        android:textSize="24dp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="-175dp"
+                android:layout_marginLeft="50dp"
+                android:src="@drawable/ic_other"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"/>
+
+    </LinearLayout>
+</ScrollView>
