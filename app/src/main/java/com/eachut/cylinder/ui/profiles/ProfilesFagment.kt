@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.eachut.cylinder.Adapter.ResellerStockViewAdapter
@@ -85,6 +86,8 @@ class ProfilesFragment : Fragment() {
             val fragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(android.R.id.content, fragment)
+            fragmentTransaction.remove(fragment)
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
 
@@ -124,6 +127,8 @@ class ProfilesFragment : Fragment() {
                 val fragmentManager = requireActivity().supportFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(android.R.id.content, fragment)
+                fragmentTransaction.remove(fragment)
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()
             }
@@ -140,6 +145,8 @@ class ProfilesFragment : Fragment() {
                 val fragmentManager = requireActivity().supportFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(android.R.id.content, fragment)
+                fragmentTransaction.remove(fragment)
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()
             }
@@ -156,6 +163,8 @@ class ProfilesFragment : Fragment() {
                 val fragmentManager = requireActivity().supportFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(android.R.id.content, fragment)
+                fragmentTransaction.remove(fragment)
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()
             }
