@@ -2,30 +2,19 @@ package com.eachut.cylinder.ui.stock
 
 import android.animation.ObjectAnimator
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
-import android.graphics.Point
-import android.os.Build
 import android.os.Bundle
-import android.transition.Slide
 import android.util.Log
 import android.view.*
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.transition.TransitionManager
 import com.eachut.cylinder.R
-import com.eachut.cylinder.WelcomeActivity
 import com.eachut.cylinder.databinding.FragmentStockBinding
-import com.eachut.cylinder.repository.CompanyRepository
-import com.eachut.cylinder.repository.MemberRepository
-import com.eachut.cylinder.repository.ResellerRepository
+import com.eachut.cylinder.entity.Stock
 import com.eachut.cylinder.repository.StockRepository
-import com.eachut.cylinder.ui.stock.StockViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -50,6 +39,11 @@ class StockFragment : Fragment() {
 
         _binding = FragmentStockBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+
+        var hint = binding.etPrimaF.getHint().toString();
+
+        Log.d("OSCAR","hint: $hint")
 
         loadStock()
 
@@ -109,6 +103,8 @@ class StockFragment : Fragment() {
             binding.etKamakhyaE.setFocusable(false)
             binding.etSuvidhaE.setFocusable(false)
             binding.etOthersE.setFocusable(false)
+
+            updateStock()
         }
 
 //for setting
@@ -237,6 +233,100 @@ class StockFragment : Fragment() {
             }
         }
     }
+
+    fun updateStock() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+
+                val etPrimaFA = binding.etPrimaF.text.toString() //300
+                val etPrimaFB = binding.etPrimaF.getHint().toString(); //290
+                var etPrimaFD = etPrimaFA.toInt() - etPrimaFB.toInt()  //10
+
+                val etPrimaHA = binding.etPrimaH.text.toString()
+                val etPrimaHB = binding.etPrimaH.getHint().toString();
+                var etPrimaHD = etPrimaHA.toInt() - etPrimaHB.toInt()
+
+                val etPrimaEA = binding.etPrimaE.text.toString()
+                val etPrimaEB = binding.etPrimaE.getHint().toString();
+                val etPrimaED = etPrimaEA.toInt() - etPrimaEB.toInt()
+
+
+
+                val etKamakhyaFA = binding.etKamakhyaF.text.toString()
+                val etKamakhyaFB = binding.etKamakhyaF.getHint().toString();
+                val etKamakhyaFD = etKamakhyaFA.toInt() - etKamakhyaFB.toInt()
+
+
+                val etKamakhyaHA = binding.etKamakhyaH.text.toString()
+                val etKamakhyaHB = binding.etKamakhyaH.getHint().toString();
+                val etKamakhyaHD = etKamakhyaHA.toInt() - etKamakhyaHB.toInt()
+
+
+                val etKamakhyaEA = binding.etKamakhyaE.text.toString()
+                val etKamakhyaEB = binding.etKamakhyaE.getHint().toString();
+                val etKamakhyaED = etKamakhyaEA.toInt() - etKamakhyaEB.toInt()
+
+                val etSuvidhaFA = binding.etSuvidhaF.text.toString()
+                val etSuvidhaFB = binding.etSuvidhaF.getHint().toString();
+                val etSuvidhaFD = etSuvidhaFA.toInt() - etSuvidhaFB.toInt()
+
+                val etSuvidhaHA = binding.etSuvidhaH.text.toString()
+                val etSuvidhaHB = binding.etSuvidhaH.getHint().toString();
+                val etSuvidhaHD = etSuvidhaHA.toInt() - etSuvidhaHB.toInt()
+
+                val etSuvidhaEA = binding.etSuvidhaE.text.toString()
+                val etSuvidhaEB = binding.etSuvidhaE.getHint().toString();
+                val etSuvidhaED = etSuvidhaEA.toInt() - etSuvidhaEB.toInt()
+
+                val etOthersFA = binding.etOthersF.text.toString()
+                val etOthersFB = binding.etOthersF.getHint().toString();
+                val etOthersFD = etOthersFA.toInt() - etOthersFB.toInt()
+
+                val etOthersHA = binding.etOthersH.text.toString()
+                val etOthersHB = binding.etOthersH.getHint().toString();
+                val etOthersHD = etOthersHA.toInt() - etOthersHB.toInt()
+
+                val etOthersEA = binding.etOthersE.text.toString()
+                val etOthersEB = binding.etOthersE.getHint().toString();
+                val etOthersED = etOthersEA.toInt() - etOthersEB.toInt()
+
+                val stock = Stock(
+                    etPrimaF = etPrimaFD,
+                    etPrimaH = etPrimaHD,
+                    etPrimaE = etPrimaED,
+                    etKamakhyaF = etKamakhyaFD,
+                    etKamakhyaH = etKamakhyaHD,
+                    etKamakhyaE = etKamakhyaED,
+                    etSuvidhaF = etSuvidhaFD,
+                    etSuvidhaH = etSuvidhaHD,
+                    etSuvidhaE = etSuvidhaED,
+                    etOthersF = etOthersFD,
+                    etOthersH = etOthersHD,
+                    etOthersE = etOthersED,
+                )
+                val stockRepo = StockRepository()
+                val stockResponse = stockRepo.updateStock(stock)
+                if (stockResponse.success == true) {
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(context, "${stockResponse.message}", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(context, "${stockResponse.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }catch (e:Exception){
+                withContext(Dispatchers.Main){
+                    Toast.makeText(context, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+
+
+
+
 
 
 }

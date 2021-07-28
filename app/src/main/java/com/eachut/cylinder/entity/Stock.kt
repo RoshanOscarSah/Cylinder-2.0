@@ -1,17 +1,16 @@
 package com.eachut.cylinder.entity
 
-data class Stock (
-    var _id : String ? = null,
-    var etPrimaF : String? = null,
-    var etPrimaH  :String?=null,
-    var etPrimaE : String ? =null,
-    var etKamakhyaF : String? = null,
-    var etKamakhyaH  :String?=null,
-    var etKamakhyaE : String ? =null,
-    var etSuvidhaF : String? = null,
-    var etSuvidhaH  :String?=null,
-    var etSuvidhaE : String ? =null,
-    var etOthersF : String? = null,
-    var etOthersH  :String?=null,
-    var etOthersE : String ? =null,
+data class Stock(
+    var etPrimaF: Int? = null,
+    var etPrimaH: Int? =null,
+    var etPrimaE: Int? =null,
+    var etKamakhyaF: Int? = null,
+    var etKamakhyaH:Int?=null,
+    var etKamakhyaE: Int ? =null,
+    var etSuvidhaF: Int? = null,
+    var etSuvidhaH:Int?=null,
+    var etSuvidhaE: Int ? =null,
+    var etOthersF: Int? = null,
+    var etOthersH:Int?=null,
+    var etOthersE: Int ? =null,
 )
