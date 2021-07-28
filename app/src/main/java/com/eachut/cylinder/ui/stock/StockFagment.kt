@@ -9,12 +9,10 @@ import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
 import android.transition.Slide
+import android.util.Log
 import android.view.*
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.PopupWindow
-import android.widget.TextView
+import android.widget.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -23,7 +21,15 @@ import androidx.transition.TransitionManager
 import com.eachut.cylinder.R
 import com.eachut.cylinder.WelcomeActivity
 import com.eachut.cylinder.databinding.FragmentStockBinding
+import com.eachut.cylinder.repository.CompanyRepository
+import com.eachut.cylinder.repository.MemberRepository
+import com.eachut.cylinder.repository.ResellerRepository
+import com.eachut.cylinder.repository.StockRepository
 import com.eachut.cylinder.ui.stock.StockViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class StockFragment : Fragment() {
 
@@ -44,6 +50,9 @@ class StockFragment : Fragment() {
 
         _binding = FragmentStockBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+
+        loadStock()
 
 //EDIT STOCK
         binding.flStockEdit.setOnClickListener { view ->
@@ -156,6 +165,81 @@ class StockFragment : Fragment() {
 
 
     }
+
+
+    fun loadStock() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+
+                val stockRepo = StockRepository()
+                val stockResponse = stockRepo.viewStock()
+                if (stockResponse.success == true) {
+
+                    Log.d("OSCAR","Aa: $stockResponse")
+                    binding.etPrimaF.setHint("${stockResponse.etPrimaF}");
+                    binding.etPrimaF.setText("${stockResponse.etPrimaF}");
+                    binding.etPrimaH.setHint("${stockResponse.etPrimaH}");
+                    binding.etPrimaH.setText("${stockResponse.etPrimaH}");
+                    binding.etPrimaE.setHint("${stockResponse.etPrimaE}");
+                    binding.etPrimaE.setText("${stockResponse.etPrimaE}");
+
+                    binding.etKamakhyaF.setHint("${stockResponse.etKamakhyaF}");
+                    binding.etKamakhyaF.setText("${stockResponse.etKamakhyaF}");
+                    binding.etKamakhyaH.setHint("${stockResponse.etKamakhyaH}");
+                    binding.etKamakhyaH.setText("${stockResponse.etKamakhyaH}");
+                    binding.etKamakhyaE.setHint("${stockResponse.etKamakhyaE}");
+                    binding.etKamakhyaE.setText("${stockResponse.etKamakhyaE}");
+
+                    binding.etSuvidhaF.setHint("${stockResponse.etSuvidhaF}");
+                    binding.etSuvidhaF.setText("${stockResponse.etSuvidhaF}");
+                    binding.etSuvidhaH.setHint("${stockResponse.etSuvidhaH}");
+                    binding.etSuvidhaH.setText("${stockResponse.etSuvidhaH}");
+                    binding.etSuvidhaE.setHint("${stockResponse.etSuvidhaE}");
+                    binding.etSuvidhaE.setText("${stockResponse.etSuvidhaE}");
+
+                    binding.etOthersF.setHint("${stockResponse.etOthersF}");
+                    binding.etOthersF.setText("${stockResponse.etOthersF}");
+                    binding.etOthersH.setHint("${stockResponse.etOthersH}");
+                    binding.etOthersH.setText("${stockResponse.etOthersH}");
+                    binding.etOthersE.setHint("${stockResponse.etOthersE}");
+                    binding.etOthersE.setText("${stockResponse.etOthersE}");
+
+                    var etTotalF = stockResponse.etPrimaF + stockResponse.etKamakhyaF + stockResponse.etSuvidhaF + stockResponse.etOthersF
+                    var etTotalH = stockResponse.etPrimaH + stockResponse.etKamakhyaH + stockResponse.etSuvidhaH + stockResponse.etOthersH
+                    var etTotalE = stockResponse.etPrimaE + stockResponse.etKamakhyaE + stockResponse.etSuvidhaE + stockResponse.etOthersE
+                    var etTotalT = etTotalF + etTotalH + etTotalE
+
+                    binding.etTotalF.setText("$etTotalF");
+                    binding.etTotalH.setText("$etTotalH");
+                    binding.etTotalE.setText("$etTotalE");
+                    binding.etTotalT.setText("$etTotalT");
+
+                    var etPrimaT = stockResponse.etPrimaF + stockResponse.etPrimaH + stockResponse.etPrimaE
+                    var etKamakhyaT = stockResponse.etKamakhyaF + stockResponse.etKamakhyaH + stockResponse.etKamakhyaE
+                    var etSuvidhaT = stockResponse.etSuvidhaF + stockResponse.etSuvidhaH + stockResponse.etSuvidhaE
+                    var etOthersT = stockResponse.etOthersF + stockResponse.etOthersH + stockResponse.etOthersE
+
+                    binding.etTotalF.setText("$etPrimaT");
+                    binding.etTotalH.setText("$etKamakhyaT");
+                    binding.etTotalE.setText("$etSuvidhaT");
+                    binding.etTotalE.setText("$etOthersT");
+
+
+
+
+                } else {
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(context, "${stockResponse.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }catch (e:Exception){
+                withContext(Dispatchers.Main){
+                    Toast.makeText(context, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
 
 
 }
