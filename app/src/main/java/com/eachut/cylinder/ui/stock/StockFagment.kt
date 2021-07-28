@@ -51,6 +51,7 @@ class StockFragment : Fragment() {
         _binding = FragmentStockBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
         loadStock()
 
 //EDIT STOCK
@@ -165,6 +166,7 @@ class StockFragment : Fragment() {
 
     }
 
+
     fun loadStock() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -237,6 +239,7 @@ class StockFragment : Fragment() {
             }
         }
     }
+
 
 
 }
