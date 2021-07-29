@@ -1,6 +1,7 @@
 package com.eachut.cylinder
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
@@ -278,6 +279,12 @@ class AddNewMemberActivity : AppCompatActivity() {
                                 "Member added  Successfully",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            val username = response.username.toString()
+                            val password = response.password.toString()
+                            val intent = Intent(this@AddNewMemberActivity,SuccessMemberAdd::class.java)
+                                .putExtra("username", username)
+                                .putExtra("password", password)
+                            startActivity(intent)
                         }
                     } else {
                         withContext(Dispatchers.Main) {
