@@ -86,7 +86,6 @@ class ProfilesFragment : Fragment() {
             val fragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(android.R.id.content, fragment)
-            fragmentTransaction.remove(fragment)
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
@@ -127,7 +126,6 @@ class ProfilesFragment : Fragment() {
                 val fragmentManager = requireActivity().supportFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(android.R.id.content, fragment)
-                fragmentTransaction.remove(fragment)
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()
@@ -145,7 +143,6 @@ class ProfilesFragment : Fragment() {
                 val fragmentManager = requireActivity().supportFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(android.R.id.content, fragment)
-                fragmentTransaction.remove(fragment)
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()
@@ -163,7 +160,6 @@ class ProfilesFragment : Fragment() {
                 val fragmentManager = requireActivity().supportFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(android.R.id.content, fragment)
-                fragmentTransaction.remove(fragment)
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()
