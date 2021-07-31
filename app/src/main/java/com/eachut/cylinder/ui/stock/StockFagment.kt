@@ -1,7 +1,9 @@
 package com.eachut.cylinder.ui.stock
 
 import android.animation.ObjectAnimator
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
@@ -39,11 +41,6 @@ class StockFragment : Fragment() {
 
         _binding = FragmentStockBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-
-        var hint = binding.etPrimaF.getHint().toString();
-
-        Log.d("OSCAR","hint: $hint")
 
         loadStock()
 
@@ -198,26 +195,30 @@ class StockFragment : Fragment() {
                     binding.etOthersE.setHint("${stockResponse.etOthersE}");
                     binding.etOthersE.setText("${stockResponse.etOthersE}");
 
-                    var etTotalF = stockResponse.etPrimaF + stockResponse.etKamakhyaF + stockResponse.etSuvidhaF + stockResponse.etOthersF
-                    var etTotalH = stockResponse.etPrimaH + stockResponse.etKamakhyaH + stockResponse.etSuvidhaH + stockResponse.etOthersH
-                    var etTotalE = stockResponse.etPrimaE + stockResponse.etKamakhyaE + stockResponse.etSuvidhaE + stockResponse.etOthersE
+                    Log.d("OSCAR", "data : ${stockResponse.etPrimaF}")
+
+                    var etPrimaT = stockResponse.etPrimaF!!.toInt() + stockResponse.etPrimaH!!.toInt() + stockResponse.etPrimaE!!.toInt()
+                    var etKamakhyaT = stockResponse.etKamakhyaF!!.toInt() + stockResponse.etKamakhyaH!!.toInt() + stockResponse.etKamakhyaE!!.toInt()
+                    var etSuvidhaT = stockResponse.etSuvidhaF!!.toInt() + stockResponse.etSuvidhaH!!.toInt() + stockResponse.etSuvidhaE!!.toInt()
+                    var etOthersT = stockResponse.etOthersF!!.toInt() + stockResponse.etOthersH!!.toInt() + stockResponse.etOthersE!!.toInt()
+
+                    Log.d("OSCAR", "data : ${stockResponse.etPrimaF}")
+                    Log.d("OSCAR", "data : ${stockResponse.etPrimaF?.toInt()}")
+                    Log.d("OSCAR", "etPrimaT : $etPrimaT")
+                    binding.etPrimaT.text = etPrimaT.toString()
+                    binding.etKamakhyaT.text = etKamakhyaT.toString()
+                    binding.etSuvidhaT.text = etSuvidhaT.toString()
+                    binding.etOthersT.text = etOthersT.toString()
+
+                    var etTotalF = stockResponse.etPrimaF!!.toInt() + stockResponse.etKamakhyaF!!.toInt() + stockResponse.etSuvidhaF!!.toInt() + stockResponse.etOthersF!!.toInt()
+                    var etTotalH = stockResponse.etPrimaH!!.toInt() + stockResponse.etKamakhyaH!!.toInt() + stockResponse.etSuvidhaH!!.toInt() + stockResponse.etOthersH!!.toInt()
+                    var etTotalE = stockResponse.etPrimaE!!.toInt() + stockResponse.etKamakhyaE!!.toInt() + stockResponse.etSuvidhaE!!.toInt()+ stockResponse.etOthersE!!.toInt()
                     var etTotalT = etTotalF + etTotalH + etTotalE
 
                     binding.etTotalF.setText("$etTotalF");
                     binding.etTotalH.setText("$etTotalH");
                     binding.etTotalE.setText("$etTotalE");
                     binding.etTotalT.setText("$etTotalT");
-
-                    var etPrimaT = stockResponse.etPrimaF + stockResponse.etPrimaH + stockResponse.etPrimaE
-                    var etKamakhyaT = stockResponse.etKamakhyaF + stockResponse.etKamakhyaH + stockResponse.etKamakhyaE
-                    var etSuvidhaT = stockResponse.etSuvidhaF + stockResponse.etSuvidhaH + stockResponse.etSuvidhaE
-                    var etOthersT = stockResponse.etOthersF + stockResponse.etOthersH + stockResponse.etOthersE
-
-                    binding.etTotalF.setText("$etPrimaT");
-                    binding.etTotalH.setText("$etKamakhyaT");
-                    binding.etTotalE.setText("$etSuvidhaT");
-                    binding.etTotalE.setText("$etOthersT");
-
 
 
 
@@ -290,6 +291,11 @@ class StockFragment : Fragment() {
                 val etOthersEB = binding.etOthersE.getHint().toString();
                 val etOthersED = etOthersEA.toInt() - etOthersEB.toInt()
 
+                val sharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
+                val Entryby = sharedPreferences.getString("Username","Admin")
+
+                Log.d("OSCAR","Entryby: $Entryby")
+
                 val stock = Stock(
                     etPrimaF = etPrimaFD,
                     etPrimaH = etPrimaHD,
@@ -303,12 +309,15 @@ class StockFragment : Fragment() {
                     etOthersF = etOthersFD,
                     etOthersH = etOthersHD,
                     etOthersE = etOthersED,
+                    Entryby = Entryby,
                 )
                 val stockRepo = StockRepository()
                 val stockResponse = stockRepo.updateStock(stock)
                 if (stockResponse.success == true) {
                     withContext(Dispatchers.Main){
                         Toast.makeText(context, "${stockResponse.message}", Toast.LENGTH_SHORT).show()
+
+                        loadStock()
                     }
                 } else {
                     withContext(Dispatchers.Main){

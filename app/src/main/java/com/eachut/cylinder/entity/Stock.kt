@@ -13,4 +13,5 @@ data class Stock(
     var etOthersF: Int? = null,
     var etOthersH:Int?=null,
     var etOthersE: Int ? =null,
+    var Entryby: String ? =null,
 )

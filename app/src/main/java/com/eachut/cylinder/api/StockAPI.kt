@@ -15,7 +15,7 @@ interface StockAPI {
     ): Response<StockResponse>
 
     //update Stock
-    @POST("/updateStock")
+    @POST("/addStock")
     suspend fun updateStock(
         @Body stock: Stock
     ):Response<StockResponse>
