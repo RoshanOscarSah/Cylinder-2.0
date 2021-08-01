@@ -202,10 +202,11 @@
                                 android:src="@drawable/ic_profile_databg"/>
 
                             <TextView
+                                android:id="@+id/tv_dashboard_rate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text=""
+                                android:text="234"
                                 android:fontFamily="@font/sofia_pro_regular_az"
                                 android:textStyle="normal"
                                 android:textSize="14dp"
@@ -254,6 +255,7 @@
                                 android:src="@drawable/ic_profile_databg"/>
 
                             <TextView
+                                android:id="@+id/tv_dashboard_halfcylinder"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
@@ -305,6 +307,7 @@
                                 android:src="@drawable/ic_profile_databg"/>
 
                             <TextView
+                                android:id="@+id/tv_dashboard_leakcylinder"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
@@ -364,6 +367,7 @@
                                 android:layout_height="35dp"/>
 
                             <TextView
+                                android:id="@+id/tv_dashboard_tag"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
@@ -416,6 +420,7 @@
                                 android:layout_height="35dp"/>
 
                             <TextView
+                                android:id="@+id/tv_dashboard_burn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
@@ -468,6 +473,7 @@
                                 android:layout_height="35dp"/>
 
                             <TextView
+                                android:id="@+id/tv_dashboard_cylinder"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"

@@ -166,7 +166,7 @@ class ReceiptActivity : AppCompatActivity() {
             txtSerialno.setText("${companyInfo._id}")
             txtLeak.text= (company.Leak_Prima!!.toInt() + company.Leak_Kamakhya!!.toInt() + company.Leak_Suvidha!!.toInt() + company.Leak_Others!!.toInt()).toString()
             txtSold.text = (company.Sold_Prima!!.toInt()+ company.Sold_Kamakhya!!.toInt() + company.Sold_Suvidha!!.toInt() + company.Sold_Others!!.toInt()).toString()
-
+            Toast.makeText(this, "$company", Toast.LENGTH_SHORT).show()
             btnSubmit.setOnClickListener {
                 CoroutineScope(Dispatchers.IO).launch{
                     try{
@@ -211,7 +211,7 @@ class ReceiptActivity : AppCompatActivity() {
             txtSerialno.setText("${resellerInfo._id}")
             txtLeak.text= (reseller.Leak_Prima!!.toInt() + reseller.Leak_Kamakhya!!.toInt() + reseller.Leak_Suvidha!!.toInt() + reseller.Leak_Others!!.toInt()).toString()
             txtSold.text = (reseller.Sold_Prima!!.toInt()+ reseller.Sold_Kamakhya!!.toInt() + reseller.Sold_Suvidha!!.toInt() + reseller.Sold_Others!!.toInt()).toString()
-
+            Toast.makeText(this, "$reseller", Toast.LENGTH_SHORT).show()
             btnSubmit.setOnClickListener {
                 CoroutineScope(Dispatchers.IO).launch{
                     try{
