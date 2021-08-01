@@ -23,7 +23,7 @@ import kotlinx.coroutines.withContext
 
 class GetResellerProfile : Fragment() {
 
-//    private var resellerList = mutableListOf<Reseller>()
+    private var resellerList = mutableListOf<Reseller>()
     private lateinit var recyclerview: RecyclerView
 
 
@@ -35,8 +35,8 @@ class GetResellerProfile : Fragment() {
         val view = inflater.inflate(R.layout.fragment_get_reseller_profile, container, false)
         recyclerview = view.findViewById(R.id.recyclerview)
 
-        //get reseller
-        val resellerList= ResellerList.getResellerList()
+//        get reseller
+        resellerList= ResellerList.getResellerList()
         recyclerview.adapter = ResellerProfileAdapter(requireContext(), resellerList)
         recyclerview.layoutManager = LinearLayoutManager(context)
 
