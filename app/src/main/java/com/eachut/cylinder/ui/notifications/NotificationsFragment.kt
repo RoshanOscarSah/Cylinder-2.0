@@ -1,5 +1,6 @@
 package com.eachut.cylinder.ui.notifications
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -12,6 +13,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.eachut.cylinder.AddNewMemberActivity
+import com.eachut.cylinder.AddSchedule
 import com.eachut.cylinder.R
 import com.eachut.cylinder.databinding.FragmentNotificationsBinding
 import com.eachut.cylinder.ui.notifications.NotificationsViewModel
@@ -35,6 +38,16 @@ class NotificationsFragment : Fragment() {
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        //schedule
+
+        binding.Plus.setOnClickListener { view ->
+
+
+            val intent = Intent(this.context, AddSchedule::class.java)
+            startActivity(intent)
+
+        }
 
 //search
         binding.ivSearchProfiles.setOnClickListener { view ->
