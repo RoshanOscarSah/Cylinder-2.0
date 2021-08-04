@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ExtraWorkAcitivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="25dp">
+
+        <!--reseller/company-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:animateLayoutChanges="true">
+
+
+            <LinearLayout
+                android:id="@+id/backAddPro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/Back"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginLeft="15dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Add Extra Work"
+                android:fontFamily="@font/sofia_pro_black_az"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:foregroundGravity="top"
+                android:paddingTop="20dp"
+                android:paddingBottom="5dp"
+                android:textStyle="bold"
+                android:textFontWeight="900"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                />
+
+        </FrameLayout>
+
+
+
+
+
+
+        <!--        Date-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/ic_rect_corner"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_weight="1.8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textColor="@color/white"
+                android:fontFamily="@font/sofia_pro_regular_az"
+                android:textSize="20dp"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/ETDate"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/title_Ratenoofcylinder"
+                android:text="dd-MM-yyyy"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:fontFamily="@font/sofia_pro_regular_az"
+                android:textSize="16dp"
+                android:backgroundTint="#707070"
+                android:layout_gravity="center_vertical"
+                android:textColorHint="#99FFFFFF"/>
+
+        </LinearLayout>
+
+        <!--        Time-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/ic_rect_corner"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_weight="1.8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                android:textColor="@color/white"
+                android:fontFamily="@font/sofia_pro_regular_az"
+                android:textSize="20dp"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/TVTime"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/title_Ratenoofcylinder"
+                android:text="PM/AM"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:fontFamily="@font/sofia_pro_regular_az"
+                android:textSize="16dp"
+                android:backgroundTint="#707070"
+                android:layout_gravity="center_vertical"
+                android:textColorHint="#99FFFFFF"/>
+
+        </LinearLayout>
+
+        <!--        Subject-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/ic_rect_corner"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_weight="1.8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Subject"
+                android:textColor="@color/white"
+                android:fontFamily="@font/sofia_pro_regular_az"
+                android:textSize="20dp"
+                android:layout_gravity="center_vertical"/>
+
+            <EditText
+                android:id="@+id/etsubject"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_Comments"
+                android:textColor="@color/white"
+                android:fontFamily="@font/sofia_pro_regular_az"
+                android:textSize="16dp"
+                android:backgroundTint="#707070"
+                android:layout_gravity="center_vertical"
+                android:textColorHint="#99FFFFFF"/>
+
+        </LinearLayout>
+
+        <!--        message-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/ic_rect_corner"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_weight="1.8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Message"
+                android:textColor="@color/white"
+                android:fontFamily="@font/sofia_pro_regular_az"
+                android:textSize="20dp"
+                android:layout_gravity="center_vertical"/>
+
+            <EditText
+                android:id="@+id/etmessage"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_Comments"
+                android:textColor="@color/white"
+                android:fontFamily="@font/sofia_pro_regular_az"
+                android:textSize="16dp"
+                android:backgroundTint="#707070"
+                android:layout_gravity="center_vertical"
+                android:textColorHint="#99FFFFFF"/>
+
+        </LinearLayout>
+
+        <!--        Go-->
+        <LinearLayout
+            android:id="@+id/llGo"
+            android:layout_width="230dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/ic_toggle_active"
+            android:backgroundTint="#940000"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:elevation="2dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_arrow_right"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"/>
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

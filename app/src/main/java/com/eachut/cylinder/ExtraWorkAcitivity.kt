@@ -2,59 +2,32 @@ package com.eachut.cylinder
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.*
-import androidx.core.view.isVisible
-import com.eachut.cylinder.repository.CompanyRepository
-import com.eachut.cylinder.repository.ResellerRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import java.lang.Exception
+import android.widget.ImageView
+import android.widget.TextView
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AddSchedule : AppCompatActivity() {
+class ExtraWorkAcitivity : AppCompatActivity() {
 
     private lateinit var ETDate : TextView
     private lateinit var TVtime : TextView
-    private lateinit var Setting : Button
-    private lateinit var llSelectCustomer : LinearLayout
-    private lateinit var llNameSelected : LinearLayout
+    private lateinit var Back : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_schedule)
+        setContentView(R.layout.activity_extra_work_acitivity)
 
-        llSelectCustomer = findViewById(R.id.llSelectReseller)
+        Back = findViewById(R.id.Back)
         ETDate = findViewById(R.id.ETDate)
         TVtime = findViewById(R.id.TVTime)
-        Setting = findViewById(R.id.setting)
 
-
-        llSelectCustomer.setOnClickListener { view ->
-
-        }
-
-//Back to Notification fragment
-        val backButton = findViewById<View>(R.id.Back) as ImageView
-        backButton.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                finish()
-            }
-        })
-
-
-//Extra Work Activity
-        Setting.setOnClickListener {
-            val intent = Intent(this, ExtraWorkAcitivity::class.java)
+        Back.setOnClickListener {
+            val intent = Intent(this, AddSchedule::class.java)
             startActivity(intent)
         }
-
-        //Time PIcker
 
         val cal = Calendar.getInstance()
         val hour = cal.get(Calendar.HOUR_OF_DAY)
@@ -68,8 +41,6 @@ class AddSchedule : AppCompatActivity() {
             timePickerDialog.show()
         }
 
-        //Date Picker
-
 
         val myCalendar = Calendar.getInstance()
 
@@ -81,8 +52,9 @@ class AddSchedule : AppCompatActivity() {
             updateTable(myCalendar)
         }
         ETDate.setOnClickListener{
-            DatePickerDialog(this, datePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-            myCalendar.get(Calendar.DAY_OF_MONTH)).show()
+            DatePickerDialog(this, datePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(
+                Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show()
         }
     }
 

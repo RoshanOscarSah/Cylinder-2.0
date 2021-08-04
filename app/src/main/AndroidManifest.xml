@@ -19,10 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cylinder20"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddSchedule">
-
-
-        </activity>
+        <activity android:name=".ExtraWorkAcitivity"></activity>
+        <activity android:name=".ExtraWorkActivity" />
+        <activity android:name=".AddSchedule" />
         <activity android:name=".SuccessMemberAdd" />
         <activity
             android:name=".ReceiptActivity"
@@ -49,7 +48,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".SplashActivity" />
     </application>
 
 </manifest>
