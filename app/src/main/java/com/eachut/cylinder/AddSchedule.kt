@@ -1,5 +1,6 @@
 package com.eachut.cylinder
 
+import android.animation.ObjectAnimator
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
@@ -9,6 +10,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.eachut.cylinder.databinding.ActivityAddScheduleBinding
 import com.eachut.cylinder.databinding.FragmentHomeBinding
@@ -68,6 +70,15 @@ class AddSchedule : AppCompatActivity() {
     private var customerOrCompany = String()
     private var ResellerID = String()
     private var CompanyID = String()
+    private lateinit var tvCompany : TextView
+    private lateinit var ivToggleActive : ImageView
+    private lateinit var tvCustomerOrCompany : TextView
+    private lateinit var tvCustomer : TextView
+    private var sendOrReceive = "Send"
+    private lateinit var llStockSend : LinearLayout
+    private lateinit var ivSendFangro : ImageView
+    private lateinit var ivRecieveFangro : ImageView
+    private lateinit var llStockReceive : LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,7 +122,36 @@ class AddSchedule : AppCompatActivity() {
         ETDate = findViewById(R.id.ETDate)
         TVtime = findViewById(R.id.TVTime)
         Setting = findViewById(R.id.setting)
+        tvCompany = findViewById(R.id.tvCompany)
+        ivToggleActive = findViewById(R.id.ivToggleActive)
+        tvCustomerOrCompany = findViewById(R.id.tvCustomerOrCompany)
+        tvCustomer = findViewById(R.id.tvCustomer)
+        llStockSend = findViewById(R.id.llStockSend)
+        ivSendFangro = findViewById(R.id.ivSendFangro)
+        ivRecieveFangro = findViewById(R.id.ivRecieveFangro)
+        llStockReceive = findViewById(R.id.llStockReceive)
 
+
+
+
+
+//Company reseller selection
+        tvCompany.setOnClickListener { view ->
+            //for setting gravity
+            val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.gravity = Gravity.RIGHT
+            ivToggleActive.setLayoutParams(params);
+
+            //for sliding animation
+//            ObjectAnimator.ofFloat(binding.ivToggleActive, "translationX", 460f).apply {
+//                duration = 200
+//                start()
+//            }
+            tvCustomerOrCompany.setText("Select Company")
+            tvCustomerOrCompany.setContentDescription("getCompany")
+        }
 
 
         tvCompany.setOnClickListener { view ->
@@ -130,7 +170,6 @@ class AddSchedule : AppCompatActivity() {
             tvCustomerOrCompany.setText("Select Company")
             tvCustomerOrCompany.setContentDescription("getCompany")
         }
-
         tvCustomer.setOnClickListener { view ->
             //for setting gravity
             val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
