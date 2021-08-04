@@ -178,6 +178,8 @@ class AddSchedule : AppCompatActivity() {
 
 
 
+
+//Company reseller selection
         tvCompany.setOnClickListener { view ->
             //for setting gravity
             val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
@@ -195,6 +197,23 @@ class AddSchedule : AppCompatActivity() {
             tvCustomerOrCompany.setContentDescription("getCompany")
         }
 
+
+        tvCompany.setOnClickListener { view ->
+            //for setting gravity
+            val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.gravity = Gravity.RIGHT
+            ivToggleActive.setLayoutParams(params);
+
+            //for sliding animation
+//            ObjectAnimator.ofFloat(binding.ivToggleActive, "translationX", 460f).apply {
+//                duration = 200
+//                start()
+//            }
+            tvCustomerOrCompany.setText("Select Company")
+            tvCustomerOrCompany.setContentDescription("getCompany")
+        }
         tvCustomer.setOnClickListener { view ->
             //for setting gravity
             val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
