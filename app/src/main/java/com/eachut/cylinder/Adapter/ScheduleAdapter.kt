@@ -47,7 +47,7 @@ class ScheduleAdapter(
         holder.txtDetail.text="${schedule.SendOrReceive}.${schedule.Gas_state}.P.$total"
         CoroutineScope(Dispatchers.IO).launch{
             val resellerRepo = ResellerRepository()
-            val response = resellerRepo.resellerList(schedule.ResellerId!!)
+            val response = resellerRepo.resellerList(schedule.ResellerID!!)
             if(response.success!!){
                 val reseller = response.reseller!!
                 holder.txtName.text = reseller.reseller_fullname

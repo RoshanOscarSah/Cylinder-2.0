@@ -5,7 +5,7 @@ import android.os.Parcelable
 
 data class ScheduleResellerStock(
     val _id : String ? = null,
-    val ResellerId: String ? = null,
+    val ResellerID: String ? = null,
     var Gas_state: String ? =null,
     val Regular_Prima:  Number ? = null,
     val Regular_Kamakhya: Number ? = null,
@@ -51,7 +51,7 @@ data class ScheduleResellerStock(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(_id)
-        parcel.writeString(ResellerId)
+        parcel.writeString(ResellerID)
         parcel.writeString(Gas_state)
         parcel.writeInt(Regular_Prima as Int)
         parcel.writeInt(Regular_Kamakhya as Int)
