@@ -97,11 +97,11 @@ class NotificationsFragment : Fragment() {
             val maxormin = binding.lltodayToggle.getContentDescription()
             if (maxormin == "max") {
                 binding.lltodayToggle.setContentDescription("min")
-                binding.lltodayDiscription.isVisible = false
+//                binding.lltodayDiscription.isVisible = false
                 binding.lltodayToggleUpDown.animate().rotation(0f).start();
             }else{
                 binding.lltodayToggle.setContentDescription("max")
-                binding.lltodayDiscription.isVisible = true
+//                binding.lltodayDiscription.isVisible = true
                 binding.lltodayToggleUpDown.animate().rotation(180f).start();
             }
         }
