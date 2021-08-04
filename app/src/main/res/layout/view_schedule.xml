@@ -31,6 +31,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/txtName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Dammar Yadav"
@@ -42,6 +43,7 @@
                         android:textColor="#ffffff"/>
 
                     <TextView
+                        android:id="@+id/txtCname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Bajrang traders"
@@ -52,6 +54,7 @@
                         android:textColor="#CCFFFFFF"/>
 
                     <TextView
+                        android:id="@+id/txtCaddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Phool Chowlk, Bhokraha - 3"
@@ -69,13 +72,14 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/txtDetail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Send · Full · P : 15"
-                        android:gravity="right"
                         android:fontFamily="@font/sofia_pro_light_az"
-                        android:textSize="16dp"
-                        android:textColor="#ffffff"/>
+                        android:gravity="right"
+                        android:text="Send · Full · P : 15"
+                        android:textColor="#ffffff"
+                        android:textSize="16dp" />
 
                     <FrameLayout
                         android:visibility="visible"

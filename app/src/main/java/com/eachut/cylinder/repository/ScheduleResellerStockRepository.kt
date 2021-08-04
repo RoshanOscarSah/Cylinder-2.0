@@ -4,6 +4,7 @@ import com.eachut.cylinder.api.MyApiRequest
 import com.eachut.cylinder.api.ScheduleResellerStockAPI
 import com.eachut.cylinder.api.ServiceBuilder
 import com.eachut.cylinder.entity.ScheduleResellerStock
+import com.eachut.cylinder.response.GetScheduleResellerStockResponse
 import com.eachut.cylinder.response.ScheduleResellerStockResponse
 
 class ScheduleResellerStockRepository: MyApiRequest() {
@@ -16,4 +17,11 @@ class ScheduleResellerStockRepository: MyApiRequest() {
             scheduleResellerStockAPI.addScheduleResellerStock(scheduleResellerStock)
         }
     }
+
+    suspend fun getScheduleResellerStock() : GetScheduleResellerStockResponse{
+        return apiRequest {
+            scheduleResellerStockAPI.getScheduleResellerStock()
+        }
+    }
+
 }

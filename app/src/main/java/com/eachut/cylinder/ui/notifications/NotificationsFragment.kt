@@ -7,22 +7,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.PopupMenu
-import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.eachut.cylinder.AddNewMemberActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.eachut.cylinder.Adapter.ScheduleAdapter
 import com.eachut.cylinder.AddSchedule
 import com.eachut.cylinder.R
 import com.eachut.cylinder.databinding.FragmentNotificationsBinding
-import com.eachut.cylinder.ui.notifications.NotificationsViewModel
+import com.eachut.cylinder.entity.ScheduleResellerStock
+import com.eachut.cylinder.repository.ScheduleResellerStockRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NotificationsFragment : Fragment() {
 
+    private lateinit var recyclerview : RecyclerView
     private lateinit var notificationsViewModel: NotificationsViewModel
     private var _binding: FragmentNotificationsBinding? = null
+    private var scheduleList = mutableListOf<ScheduleResellerStock>()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -38,6 +46,23 @@ class NotificationsFragment : Fragment() {
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        recyclerview = root.findViewById(R.id.recyclerview)
+
+        CoroutineScope(Dispatchers.IO).launch{
+            val repo = ScheduleResellerStockRepository()
+            val response = repo.getScheduleResellerStock()
+            if(response.success!!){
+                scheduleList=response.data!!
+                recyclerview.adapter = ScheduleAdapter(requireContext(), scheduleList)
+                recyclerview.layoutManager = LinearLayoutManager(context)
+            }
+            else{
+                withContext(Main){
+                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
         //schedule
 
