@@ -691,7 +691,7 @@ class AddSchedule : AppCompatActivity() {
             val SendOrReceive = sendOrReceive
             val scheduledDate = ETDate.text.toString()
             val scheduledTime = TVTime.text.toString()
-            val Remarks = TVTime.text.toString()
+            val Remarks = etremarks.text.toString()
 
             val scheduleResellerStock = ScheduleResellerStock(
                 ResellerID = "123456",
@@ -713,14 +713,14 @@ class AddSchedule : AppCompatActivity() {
                 scheduledTime = scheduledTime,
                 Remarks = Remarks
             )
-            Log.d("OSCAR", "ScheduleResellerStock: $scheduleResellerStock")
+            Log.d("ANISH", "ScheduleResellerStock: $scheduleResellerStock")
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val scheduleResellerStockRepository = ScheduleResellerStockRepository()
                     val response = scheduleResellerStockRepository.addScheduleResellerStock(
                         scheduleResellerStock
                     )
-                    Log.d("OSCAR", "Res: $response")
+                    Log.d("ANISH", "Res: $response")
                     if (response.success == true) {
                         withContext(Dispatchers.Main) {
                             Toast.makeText(
