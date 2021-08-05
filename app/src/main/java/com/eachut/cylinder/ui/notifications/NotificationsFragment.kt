@@ -13,11 +13,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.eachut.cylinder.Adapter.ExtraScheduleAdapter
 import com.eachut.cylinder.Adapter.ScheduleAdapter
 import com.eachut.cylinder.AddSchedule
 import com.eachut.cylinder.R
 import com.eachut.cylinder.databinding.FragmentNotificationsBinding
+import com.eachut.cylinder.entity.ScheduleExtraWork
 import com.eachut.cylinder.entity.ScheduleResellerStock
+import com.eachut.cylinder.repository.ScheduleExtraWorkRepository
 import com.eachut.cylinder.repository.ScheduleResellerStockRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,9 +31,11 @@ import kotlinx.coroutines.withContext
 class NotificationsFragment : Fragment() {
 
     private lateinit var recyclerview : RecyclerView
+    private lateinit var extrarecyclerview : RecyclerView
     private lateinit var notificationsViewModel: NotificationsViewModel
     private var _binding: FragmentNotificationsBinding? = null
     private var scheduleList = mutableListOf<ScheduleResellerStock>()
+    private var extrascheduleList = mutableListOf<ScheduleExtraWork>()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -48,6 +53,7 @@ class NotificationsFragment : Fragment() {
         val root: View = binding.root
 
         recyclerview = root.findViewById(R.id.recyclerview)
+        extrarecyclerview = root.findViewById(R.id.Extrarecyclerview)
 
         CoroutineScope(Dispatchers.IO).launch{
             val repo = ScheduleResellerStockRepository()
@@ -55,6 +61,21 @@ class NotificationsFragment : Fragment() {
             if(response.success!!){
                 scheduleList=response.data!!
                 recyclerview.adapter = ScheduleAdapter(requireContext(), scheduleList)
+                recyclerview.layoutManager = LinearLayoutManager(context)
+            }
+            else{
+                withContext(Main){
+                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        CoroutineScope(Dispatchers.IO).launch{
+            val repo = ScheduleExtraWorkRepository()
+            val response = repo.getExtraWorkSchedule()
+            if(response.success!!){
+                extrascheduleList=response.data!!
+                recyclerview.adapter = ExtraScheduleAdapter(requireContext(), extrascheduleList)
                 recyclerview.layoutManager = LinearLayoutManager(context)
             }
             else{
@@ -135,11 +156,11 @@ class NotificationsFragment : Fragment() {
             val maxormin = binding.lllaterToggle.getContentDescription()
             if (maxormin == "max") {
                 binding.lllaterToggle.setContentDescription("min")
-                binding.lllaterDiscription.isVisible = false
+//                binding.lllaterDiscription.isVisible = false
                 binding.lllaterToggleUpDown.animate().rotation(0f).start();
             }else{
                 binding.lllaterToggle.setContentDescription("max")
-                binding.lllaterDiscription.isVisible = true
+//                binding.lllaterDiscription.isVisible = true
                 binding.lllaterToggleUpDown.animate().rotation(180f).start();
             }
         }
