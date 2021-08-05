@@ -4,6 +4,8 @@ import com.eachut.cylinder.api.MyApiRequest
 import com.eachut.cylinder.api.ScheduleExtraWorkAPI
 import com.eachut.cylinder.api.ServiceBuilder
 import com.eachut.cylinder.entity.ScheduleExtraWork
+import com.eachut.cylinder.response.GetExtraWorkSchedule
+import com.eachut.cylinder.response.GetScheduleResellerStockResponse
 import com.eachut.cylinder.response.ScheduleExtraWorkResponse
 
 class ScheduleExtraWorkRepository: MyApiRequest() {
@@ -14,6 +16,13 @@ class ScheduleExtraWorkRepository: MyApiRequest() {
     suspend fun addExtraWorkSchedule(scheduleExtraWork: ScheduleExtraWork): ScheduleExtraWorkResponse{
         return apiRequest {
             scheduleExtraWorkAPI.addExtraWorkSchedule(scheduleExtraWork)
+        }
+    }
+
+    //get Extra Work Schedule
+    suspend fun getExtraWorkSchedule() : GetExtraWorkSchedule {
+        return apiRequest {
+            scheduleExtraWorkAPI.getExtraWorkSchedule()
         }
     }
 }
