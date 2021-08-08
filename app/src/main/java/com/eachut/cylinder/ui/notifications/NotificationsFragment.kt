@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eachut.cylinder.Adapter.ExtraScheduleAdapter
-import com.eachut.cylinder.Adapter.ScheduleAdapter
+import com.eachut.cylinder.Adapter.WorkScheduleAdapter
 import com.eachut.cylinder.AddSchedule
 import com.eachut.cylinder.R
 import com.eachut.cylinder.databinding.FragmentNotificationsBinding
@@ -55,34 +55,57 @@ class NotificationsFragment : Fragment() {
         recyclerview = root.findViewById(R.id.recyclerview)
         extrarecyclerview = root.findViewById(R.id.Extrarecyclerview)
 
-        CoroutineScope(Dispatchers.IO).launch{
-            val repo = ScheduleResellerStockRepository()
-            val response = repo.getScheduleResellerStock()
-            if(response.success!!){
-                scheduleList=response.data!!
-                recyclerview.adapter = ScheduleAdapter(requireContext(), scheduleList)
-                recyclerview.layoutManager = LinearLayoutManager(context)
-            }
-            else{
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val repo1 = ScheduleResellerStockRepository()
+                val response1 = repo1.getScheduleResellerStock()
+
+                if(response1.success!!){
+
+                    scheduleList = response1.data!!
+
+                    withContext(Main) {
+                        recyclerview.adapter = WorkScheduleAdapter(requireContext(), scheduleList)
+                        recyclerview.layoutManager = LinearLayoutManager(context)
+
+                    }
+                }
+                else{
+                    withContext(Main) {
+                        Toast.makeText(context, "Not Success", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            }catch (e : Exception){
                 withContext(Main){
-                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
         CoroutineScope(Dispatchers.IO).launch{
-            val repo = ScheduleExtraWorkRepository()
-            val response = repo.getExtraWorkSchedule()
-            if(response.success!!){
-                extrascheduleList=response.data!!
-                recyclerview.adapter = ExtraScheduleAdapter(requireContext(), extrascheduleList)
-                recyclerview.layoutManager = LinearLayoutManager(context)
-            }
-            else{
+            try{
+                val repo = ScheduleExtraWorkRepository()
+                val response = repo.getExtraWorkSchedule()
+                if(response.success!!){
+                    extrascheduleList=response.data!!
+
+                    withContext(Main){
+                        extrarecyclerview.adapter = ExtraScheduleAdapter(requireContext(), extrascheduleList)
+                        extrarecyclerview.layoutManager = LinearLayoutManager(context)
+                    }
+                }
+                else{
+                    withContext(Main){
+                        Toast.makeText(context, "${response.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }catch(e : Exception) {
                 withContext(Main){
-                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
                 }
             }
+
         }
 
         //schedule
