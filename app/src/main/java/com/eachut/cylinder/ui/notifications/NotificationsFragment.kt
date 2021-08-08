@@ -166,11 +166,11 @@ class NotificationsFragment : Fragment() {
             val maxormin = binding.lltodayToggle.getContentDescription()
             if (maxormin == "max") {
                 binding.lltodayToggle.setContentDescription("min")
-//                binding.lltodayDiscription.isVisible = false
+                binding.recyclerview.isVisible = false
                 binding.lltodayToggleUpDown.animate().rotation(0f).start();
             }else{
                 binding.lltodayToggle.setContentDescription("max")
-//                binding.lltodayDiscription.isVisible = true
+                binding.recyclerview.isVisible = true
                 binding.lltodayToggleUpDown.animate().rotation(180f).start();
             }
         }
@@ -179,11 +179,11 @@ class NotificationsFragment : Fragment() {
             val maxormin = binding.lllaterToggle.getContentDescription()
             if (maxormin == "max") {
                 binding.lllaterToggle.setContentDescription("min")
-//                binding.lllaterDiscription.isVisible = false
+                binding.Extrarecyclerview.isVisible = false
                 binding.lllaterToggleUpDown.animate().rotation(0f).start();
             }else{
                 binding.lllaterToggle.setContentDescription("max")
-//                binding.lllaterDiscription.isVisible = true
+                binding.Extrarecyclerview.isVisible = true
                 binding.lllaterToggleUpDown.animate().rotation(180f).start();
             }
         }
