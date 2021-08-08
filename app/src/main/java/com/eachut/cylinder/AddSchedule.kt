@@ -159,6 +159,7 @@ class AddSchedule : AppCompatActivity() {
         ivRecieveFangro = findViewById(R.id.ivRecieveFangro)
         ivSendFangro = findViewById(R.id.ivSendFangro)
         llNameSelected = findViewById(R.id.llNameSelected)
+        llSelectReseller = findViewById(R.id.llSelectReseller)
         ivSendFangro = findViewById(R.id.ivSendFangro)
         llGo = findViewById(R.id.llGo)
         ETDate = findViewById(R.id.ETDate)
@@ -694,7 +695,7 @@ class AddSchedule : AppCompatActivity() {
             val Remarks = etremarks.text.toString()
 
             val scheduleResellerStock = ScheduleResellerStock(
-                ResellerID = "123456",
+                ResellerID = "60ed6ce16cf3d811b03bdf95",
                 Gas_state = Gas_state,
                 Regular_Prima = Regular_Prima,
                 Regular_Kamakhya = Regular_Kamakhya,

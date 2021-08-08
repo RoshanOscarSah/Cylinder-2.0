@@ -5,5 +5,5 @@ import com.eachut.cylinder.entity.Reseller
 data class GetResellerResponse (
     val success:Boolean?=null,
     val message:String?=null,
-    val reseller: Reseller?= null
+    val info: Reseller?= null
 )
