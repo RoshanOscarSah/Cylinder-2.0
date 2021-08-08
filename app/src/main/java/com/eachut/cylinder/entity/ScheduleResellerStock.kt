@@ -23,8 +23,10 @@ data class ScheduleResellerStock(
     val scheduledDate: String ? = null,
     val scheduledTime: String ? = null,
     val Remarks: String ? = null,
-    val Entryby: String ? = null
-):Parcelable {
+    val Entryby: String ? = null,
+    val isAccepted: Boolean ? = null,
+    val acceptedBy: String ? = null
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
@@ -45,6 +47,8 @@ data class ScheduleResellerStock(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readString(),
+        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
         parcel.readString()
     ) {
     }
@@ -70,6 +74,8 @@ data class ScheduleResellerStock(
         parcel.writeString(scheduledTime)
         parcel.writeString(Remarks)
         parcel.writeString(Entryby)
+        parcel.writeValue(isAccepted)
+        parcel.writeString(acceptedBy)
     }
 
     override fun describeContents(): Int {
@@ -85,4 +91,5 @@ data class ScheduleResellerStock(
             return arrayOfNulls(size)
         }
     }
+
 }

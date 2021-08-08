@@ -5,5 +5,5 @@ import com.eachut.cylinder.entity.ScheduleExtraWork
 data class GetExtraWorkSchedule(
     val success : Boolean ? = null,
     val message : String ? = null,
-    val data : MutableList<ScheduleExtraWork> ? = null
+    val data : ArrayList<ScheduleExtraWork> ? = null
 )

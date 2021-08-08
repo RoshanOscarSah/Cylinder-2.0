@@ -4,20 +4,26 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class ScheduleExtraWork(
-    val _id : String ? = null,
-    val scheduledDate : String ? = null,
-    val scheduledTime : String ? = null,
-    val subject : String ? = null,
-    val message : String ? = null,
-    val acceptedBy : String ? = null,
-):Parcelable {
+    val _id: String ? = null,
+    val scheduledDate: String? = null,
+    val scheduledTime: String? = null,
+    val subject: String ? = null,
+    val message: String ? = null,
+    val acceptedBy: String ? = null,
+    val createdAt: String ? = null,
+    val scheduledBy: String ? = null,
+    val isAccepted: Boolean ? = null,
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readValue(Boolean::class.java.classLoader) as? Boolean
     ) {
     }
 
@@ -28,6 +34,9 @@ data class ScheduleExtraWork(
         parcel.writeString(subject)
         parcel.writeString(message)
         parcel.writeString(acceptedBy)
+        parcel.writeString(createdAt)
+        parcel.writeString(scheduledBy)
+        parcel.writeValue(isAccepted)
     }
 
     override fun describeContents(): Int {
@@ -43,4 +52,5 @@ data class ScheduleExtraWork(
             return arrayOfNulls(size)
         }
     }
+
 }
