@@ -54,7 +54,7 @@ class WorkScheduleAdapter(
                 val resellerRepo = ResellerRepository()
                 val response = resellerRepo.resellerList(workschedule.ResellerID!!)
                 if(response.success!!){
-                    val reseller = response.reseller!!
+                    val reseller = response.info!!
                     holder.txtName.text = reseller.reseller_fullname
                     holder.txtCname.text = reseller.pasal_name
                     holder.txtCaddress.text = reseller.address
