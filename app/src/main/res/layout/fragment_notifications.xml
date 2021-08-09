@@ -162,7 +162,7 @@
             <!--today-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:layout_margin="25dp"
                 android:orientation="vertical">
 
@@ -263,7 +263,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/Extrarecyclerview"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
