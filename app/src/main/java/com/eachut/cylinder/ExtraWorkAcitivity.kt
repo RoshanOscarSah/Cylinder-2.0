@@ -39,6 +39,7 @@ class ExtraWorkAcitivity : AppCompatActivity() {
         Back.setOnClickListener {
             val intent = Intent(this, AddSchedule::class.java)
             startActivity(intent)
+            finish()
         }
 
         llGo.setOnClickListener {

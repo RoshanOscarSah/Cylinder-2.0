@@ -22,6 +22,7 @@ import android.widget.*
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eachut.cylinder.Adapter.CompanyStockViewAdapter
@@ -36,6 +37,8 @@ import com.eachut.cylinder.entity.ScheduleResellerStock
 import com.eachut.cylinder.repository.CompanyRepository
 import com.eachut.cylinder.repository.ResellerRepository
 import com.eachut.cylinder.repository.ScheduleResellerStockRepository
+import com.eachut.cylinder.ui.notifications.NotificationsFragment
+import com.eachut.cylinder.ui.profiles.GetResellerProfile
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -46,6 +49,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class AddSchedule : AppCompatActivity() {
+    private lateinit var Back : ImageView
     private lateinit var ivToggleBackground : ImageView
     private lateinit var ivToggleActive : ImageView
     private lateinit var tvCustomerOrCompany : TextView
@@ -117,6 +121,7 @@ class AddSchedule : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_schedule)
 
+        Back = findViewById(R.id.Back)
         ivToggleBackground = findViewById(R.id.ivToggleBackground)
         ivToggleActive = findViewById(R.id.ivToggleActive)
         tvCustomerOrCompany = findViewById(R.id.tvCustomerOrCompany)
@@ -754,13 +759,17 @@ class AddSchedule : AppCompatActivity() {
 
 
 //Back to Notification fragment
-        val backButton = findViewById<View>(R.id.Back) as ImageView
-        backButton.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                finish()
-            }
-        })
 
+        Back.setOnClickListener {
+            val fragment = NotificationsFragment()
+            val fragmentManager = supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(android.R.id.content, fragment)
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+            finishAfterTransition()
+        }
 
 //Extra Work Activity
         Setting.setOnClickListener {
