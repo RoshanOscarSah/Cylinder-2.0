@@ -58,6 +58,14 @@ class DashboardFragment : Fragment() {
                 val response2 = stockRepository.bestSelling()
                 val response3 = stockRepository.nextOrder()
 
+                val resellerRepository = ResellerRepository()
+                val response5 = resellerRepository.totalreseller()
+
+                withContext(Dispatchers.Main) {
+                    binding.txtTotalresellerdashboard.setText("${response5.totalReseller}")
+                    binding.txtLatestReseller.setText("${response5.latest?.reseller_fullname}")
+                }
+
                 if(response.success == true) {
                     withContext(Dispatchers.Main) {
                         binding.txtGassold.setText("${response.Gas_Sold}")
@@ -72,26 +80,6 @@ class DashboardFragment : Fragment() {
 
             }catch (ex: Exception) {
 
-            }
-        }
-
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val resellerRepository = ResellerRepository()
-                val response = resellerRepository.totalreseller()
-
-                Toast.makeText(context, "${response.success}", Toast.LENGTH_SHORT).show()
-
-                if(response.success == true) {
-                    withContext(Dispatchers.Main) {
-                        binding.txtTotalresellerdashboard.setText("${response.totalReseller}")
-                    }
-                }
-
-            }catch (e: Exception) {
-                withContext(Dispatchers.Main){
-                    Toast.makeText(context, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
-                }
             }
         }
 
