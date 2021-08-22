@@ -3,10 +3,7 @@ package com.eachut.cylinder.api
 
 import com.eachut.cylinder.entity.Member
 import com.eachut.cylinder.entity.Reseller
-import com.eachut.cylinder.response.AddNewMemberResponse
-import com.eachut.cylinder.response.AddNewResellerResponse
-import com.eachut.cylinder.response.GetAllResellerResponse
-import com.eachut.cylinder.response.GetResellerResponse
+import com.eachut.cylinder.response.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -36,4 +33,8 @@ interface ResellerAPI {
         @Body reseller: Reseller
     ): Response<AddNewResellerResponse>
 
+    @GET("/reseller/total-latest")
+    suspend fun totalreseller(
+//        @Header("Authorization") token : String,
+    ): Response<GettotalResellerResponse>
 }

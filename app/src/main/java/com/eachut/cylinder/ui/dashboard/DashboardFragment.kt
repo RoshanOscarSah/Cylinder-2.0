@@ -9,9 +9,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.eachut.cylinder.databinding.FragmentDashboardBinding
+import com.eachut.cylinder.repository.ResellerRepository
+import com.eachut.cylinder.repository.StockRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class DashboardFragment : Fragment() {
@@ -41,6 +50,51 @@ class DashboardFragment : Fragment() {
             intent.data = Uri.parse("tel:$number")
             startActivity(intent)
         }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val stockRepository = StockRepository()
+                val response = stockRepository.gascylindersold()
+                val response2 = stockRepository.bestSelling()
+                val response3 = stockRepository.nextOrder()
+
+                if(response.success == true) {
+                    withContext(Dispatchers.Main) {
+                        binding.txtGassold.setText("${response.Gas_Sold}")
+                        binding.txtCylinderSold.setText("${response.Cylinder_Sold}")
+                        binding.txtBestSellingKamakhya.setText("${response2.Kamakhya_BestSelling}")
+                        binding.txtBestSellingPrima.setText("${response2.Prima_BestSelling}")
+                        binding.txtBestSellingSuvidha.setText("${response2.Suvidha_BestSelling}")
+                        binding.txtCompanyname.setText("${response3.nextOrder}")
+                        binding.txtNoofCylinder.setText("${response3.left}")
+                    }
+                }
+
+            }catch (ex: Exception) {
+
+            }
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val resellerRepository = ResellerRepository()
+                val response = resellerRepository.totalreseller()
+
+                Toast.makeText(context, "${response.success}", Toast.LENGTH_SHORT).show()
+
+                if(response.success == true) {
+                    withContext(Dispatchers.Main) {
+                        binding.txtTotalresellerdashboard.setText("${response.totalReseller}")
+                    }
+                }
+
+            }catch (e: Exception) {
+                withContext(Dispatchers.Main){
+                    Toast.makeText(context, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
 
 // BEST SELLER
         var primaTotalSell = 3544.toFloat() //3544
