@@ -20,6 +20,22 @@ interface StockAPI {
         @Body stock: Stock
     ):Response<StockResponse>
 
+    //Get Gas Sold / Cylinder Sold
+    @GET("/gas-cylinder-Sold")
+    suspend fun gascylindersold(
+//        @Header("Authorization") token : String,
+    ): Response<Getgascylinderresponse>
 
+    //Get Best Selling Cylinder
+    @GET("bestSelling")
+    suspend fun bestSelling(
+//        @Header("Authorization") token : String,
+    ): Response<GetbestSellingresponse>
+
+    //Get Next Order
+    @GET("nextorder")
+    suspend fun nextOrder(
+//        @Header("Authorization") token : String,
+    ): Response<GetnextOrderresponse>
 
 }
