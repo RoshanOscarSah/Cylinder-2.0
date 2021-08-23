@@ -67,6 +67,7 @@ class ProfilesFragment : Fragment() {
         profilesViewModel =
             ViewModelProvider(this).get(ProfilesViewModel::class.java)
 
+
 //        CoroutineScope(Dispatchers.IO).launch {
 //            val resellerRepo = ResellerRepository()
 //            val  response = resellerRepo.allresellerList()
@@ -102,7 +103,16 @@ class ProfilesFragment : Fragment() {
                 memberList = memberResponse.data!!
                 MemberList.setMemberList(memberList)
             }
-        }
+
+//             CoroutineScope(Dispatchers.IO).launch {
+//                 val resellerRepo = ResellerRepository()
+//                 val  response = resellerRepo.allresellerList()
+//                 if(response.success!!){
+//                     resellerList = response.data!!
+// //                    ResellerList.setResellerList(sortedReseller)
+//                 }
+//             }
+
 
         //Loading Reseller Profile
         val fragment = GetResellerProfile()

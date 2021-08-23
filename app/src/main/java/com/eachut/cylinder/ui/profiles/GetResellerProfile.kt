@@ -35,8 +35,9 @@ class GetResellerProfile() : Fragment() {
         val view = inflater.inflate(R.layout.fragment_get_reseller_profile, container, false)
         recyclerview = view.findViewById(R.id.recyclerview)
 
-        //get reseller
-        val resellerList=ResellerList.getResellerList()
+
+//        get reseller
+        val resellerList= ResellerList.getResellerList()
         recyclerview.adapter = ResellerProfileAdapter(requireContext(), resellerList)
         recyclerview.layoutManager = LinearLayoutManager(context)
 
