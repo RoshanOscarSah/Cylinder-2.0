@@ -74,42 +74,6 @@ class ProfilesFragment : Fragment() {
 //                    ResellerList.setResellerList(sortedReseller)
                 }
             }
-        //Loading Reseller Profile
-        val fragment = GetResellerProfile()
-        val fragmentManager = requireActivity().supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(android.R.id.content, fragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
-
-
-        CoroutineScope(Dispatchers.IO).launch {
-            val resellerRepo = ResellerRepository()
-
-            val companyRepo = CompanyRepository()
-//          val memberRepo = MemberRepository()
-            val resellerResponse = resellerRepo.allresellerList()
-            val companyResponse = companyRepo.allCompanyList()
-//            val memberResponse = memberRepo.allmemberList()
-
-            //load reseller
-            if (resellerResponse.success!!) {
-                resellerList = resellerResponse.data!!
-                ResellerList.setResellerList(resellerList)
-            }
-//
-//            //load Company
-            if (companyResponse.success!!) {
-                companyList = companyResponse.data!!
-                CompanyList.setCompanyList(companyList)
-            }
-//
-//            //load Member
-//            if (memberResponse.success!!) {
-//                memberList = memberResponse.data!!
-//                MemberList.setMemberList(memberList)
-//            }
-        }
 
             //Loading Reseller Profile
             val fragment = GetResellerProfile()
