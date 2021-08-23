@@ -34,52 +34,13 @@ class GetResellerProfile() : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_get_reseller_profile, container, false)
         recyclerview = view.findViewById(R.id.recyclerview)
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         //get reseller
         val resellerList=ResellerList.getResellerList()
         recyclerview.adapter = ResellerProfileAdapter(requireContext(), resellerList)
         recyclerview.layoutManager = LinearLayoutManager(context)
-=======
-=======
->>>>>>> 0c074457d84a0cd4bb41df4de07c0edc4eac43ce
 
-//        get reseller
-        resellerList= ResellerList.getResellerList()
-        recyclerview.adapter = ResellerProfileAdapter(requireContext(), resellerList)
-        recyclerview.layoutManager = LinearLayoutManager(context)
 
-<<<<<<< HEAD
->>>>>>> origin
-=======
->>>>>>> 0c074457d84a0cd4bb41df4de07c0edc4eac43ce
-//        CoroutineScope(Dispatchers.IO).launch {
-//            try {
-//                val resellserRepository = ResellerRepository()
-//                val response = resellserRepository.allresellerList()
-//                if(response.success==true){
-//                    // Put all the student details in lstStudents
-//                    resellerList = response.data!!
-//                    withContext(Dispatchers.Main){
-////                        Toast.makeText(context, "$cartList", Toast.LENGTH_SHORT).show()
-//                        recyclerview.adapter = ResellerProfileAdapter(requireContext(), resellerList)
-//                        recyclerview.layoutManager = LinearLayoutManager(context)
-//                    }
-//                }
-//                else{
-//                    withContext(Dispatchers.Main){
-//                        Toast.makeText(context,
-//                            response.message.toString(), Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }catch(ex : Exception){
-//                withContext(Dispatchers.Main){
-//                    Toast.makeText(context,
-//                        "Error : $ex", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//
-//        }
 
 
         return view
