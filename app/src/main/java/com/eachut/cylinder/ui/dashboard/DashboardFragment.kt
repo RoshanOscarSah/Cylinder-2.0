@@ -2,6 +2,8 @@ package com.eachut.cylinder.ui.dashboard
 
 import android.R.interpolator.linear
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -75,6 +77,51 @@ class DashboardFragment : Fragment() {
                         binding.txtBestSellingSuvidha.setText("${response2.Suvidha_BestSelling}")
                         binding.txtCompanyname.setText("${response3.nextOrder}")
                         binding.txtNoofCylinder.setText("${response3.left}")
+
+
+                        // BEST SELLER
+                        var primaTotalSell = binding.txtBestSellingPrima.text.toString().toFloat()
+                        var KamakhyaTotalSell = binding.txtBestSellingKamakhya.text.toString().toFloat()
+                        var SuvidhaTotalSell = binding.txtBestSellingSuvidha.text.toString().toFloat()
+                        Log.d("oscar", "prima gas percentage is $primaTotalSell")
+                        Log.d("oscar", "k gas percentage is $KamakhyaTotalSell")
+                        Log.d("oscar", "s gas percentage is $SuvidhaTotalSell")
+
+                        var primaPercent = (primaTotalSell * 100) /(primaTotalSell + KamakhyaTotalSell + SuvidhaTotalSell)
+                        var kamakhyaPercent = (KamakhyaTotalSell * 100) /(primaTotalSell + KamakhyaTotalSell + SuvidhaTotalSell)
+                        var suvidhaPercent = (SuvidhaTotalSell * 100) /(primaTotalSell + KamakhyaTotalSell + SuvidhaTotalSell)
+                        Log.d("oscar", "prima gas percentage is $primaPercent")
+                        Log.d("oscar", "k gas percentage is $kamakhyaPercent")
+                        Log.d("oscar", "s gas percentage is $suvidhaPercent")
+
+//                        var primaWeight = primaPercent / 50
+//                        var primaBlankWeight = 2 - primaWeight
+//                        var kamakhyaWeight = kamakhyaPercent / 50
+//                        var kamakhyaBlankWeight = 2 - kamakhyaWeight
+//                        var suvidhaWeight = suvidhaPercent / 50
+//                        var suvidhaBlankWeight = 2 - suvidhaWeight
+
+                        binding.primabar.setProgress(primaPercent.toInt()) //100.0
+                        binding.primabar.setProgressTintList(ColorStateList.valueOf(Color.WHITE));
+                        binding.primabar.setProgressBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT))
+
+                        binding.kamakhyabar.setProgress(kamakhyaPercent.toInt())
+                        binding.kamakhyabar.setProgressTintList(ColorStateList.valueOf(Color.WHITE));
+
+                        binding.suvidhabar.setProgress(suvidhaPercent.toInt())
+                        binding.suvidhabar.setProgressTintList(ColorStateList.valueOf(Color.WHITE));
+
+
+
+//                        binding.ivPrimaBSE.setLayoutParams(
+//                            LinearLayout.LayoutParams(
+//                                LinearLayout.LayoutParams.FILL_PARENT,
+//                                LinearLayout.LayoutParams.WRAP_CONTENT,
+//                                1F
+//                            )
+//                        )
+
+
                     }
                 }
 
@@ -84,48 +131,7 @@ class DashboardFragment : Fragment() {
         }
 
 
-// BEST SELLER
-        var primaTotalSell = 3544.toFloat() //3544
-        var KamakhyaTotalSell = 1500.toFloat()
-        var SuvidhaTotalSell = 2000.toFloat()
 
-        var primaPercent = (primaTotalSell * 100) /(primaTotalSell + KamakhyaTotalSell + SuvidhaTotalSell)
-        var kamakhyaPercent = (KamakhyaTotalSell * 100) /(primaTotalSell + KamakhyaTotalSell + SuvidhaTotalSell)
-        var suvidhaPercent = (SuvidhaTotalSell * 100) /(primaTotalSell + KamakhyaTotalSell + SuvidhaTotalSell)
-        Log.d("oscar", "prima gas percentage is $primaPercent")
-        Log.d("oscar", "k gas percentage is $kamakhyaPercent")
-        Log.d("oscar", "s gas percentage is $suvidhaPercent")
-
-        var primaWeight = primaPercent / 50
-        var primaBlankWeight = 2 - primaWeight
-        var kamakhyaWeight = kamakhyaPercent / 50
-        var kamakhyaBlankWeight = 2 - kamakhyaWeight
-        var suvidhaWeight = suvidhaPercent / 50
-        var suvidhaBlankWeight = 2 - suvidhaWeight
-
-        Log.d("oscar", "prima gas w is $primaWeight")
-        Log.d("oscar", "prima gas wb is $primaBlankWeight")
-        Log.d("oscar", "k gas w is $kamakhyaWeight")
-        Log.d("oscar", "k gas wb is $kamakhyaBlankWeight")
-        Log.d("oscar", "s gas w is $suvidhaWeight")
-        Log.d("oscar", "s gas wb is $suvidhaBlankWeight")
-
-//        binding.ivPrimaBS
-        binding.ivPrimaBS.setLayoutParams(
-            LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.FILL_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                1F
-            )
-        )
-
-        binding.ivPrimaBSE.setLayoutParams(
-            LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.FILL_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                1F
-            )
-        )
 
 
 //        val textView: TextView = binding.textDashboard
