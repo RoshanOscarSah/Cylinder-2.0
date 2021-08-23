@@ -738,6 +738,7 @@ class   HomeFragment : Fragment() {
                 binding.title.text = CompanyDetails.getCompany().cylinder_name
                 binding.subtitle.text = CompanyDetails.getCompany().company_fullname
                 binding.address.text = CompanyDetails.getCompany().address
+
             }
         })
         dialogBuilder.setView(dialogView)

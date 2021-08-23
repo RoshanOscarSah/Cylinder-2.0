@@ -6,26 +6,23 @@
         <entry key="..\:/Cylinder-2.0/app/src/main/res/drawable/ic_tab2_active.xml" value="0.2203125" />
         <entry key="..\:/Cylinder-2.0/app/src/main/res/layout/activity_add_schedule.xml" value="0.25" />
         <entry key="..\:/Cylinder-2.0/app/src/main/res/layout/activity_extra_work_acitivity.xml" value="0.14166666666666666" />
-        <entry key="..\:/Cylinder-2.0/app/src/main/res/layout/activity_receipt.xml" value="0.20416666666666666" />
-        <entry key="..\:/Cylinder-2.0/app/src/main/res/layout/fragment_dashboard.xml" value="0.20416666666666666" />
         <entry key="..\:/Cylinder-2.0/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Cylinder-2.0/app/src/main/res/layout/fragment_notifications.xml" value="0.20416666666666666" />
-        <entry key="..\:/Cylinder-2.0/app/src/main/res/layout/fragment_profiles.xml" value="0.20416666666666666" />
         <entry key="..\:/Cylinder-2.0/app/src/main/res/layout/view_schedule.xml" value="0.17037037037037037" />
-        <entry key="..\:/OSCAR/study/Softwarica/3rd Year/6th Sem/Agile/Cylinder 2.0/app/src/main/res/layout/fragment_dashboard.xml" value="0.15895765472312703" />
-        <entry key="..\:/OSCAR/study/Softwarica/3rd Year/6th Sem/Agile/Cylinder 2.0/app/src/main/res/layout/fragment_notifications.xml" value="0.15895765472312703" />
-        <entry key="..\:/OSCAR/study/Softwarica/3rd Year/6th Sem/Agile/Cylinder 2.0/app/src/main/res/layout/fragment_stock.xml" value="0.15895765472312703" />
         <entry key="..\:/Users/CSabin/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/activity_extra_work_acitivity.xml" value="0.1763157894736842" />
+        <entry key="..\:/Users/CSabin/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="..\:/Users/CSabin/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
         <entry key="..\:/Users/CSabin/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/view_extrawork.xml" value="0.33" />
         <entry key="..\:/Users/CSabin/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/view_schedule.xml" value="0.25" />
         <entry key="..\:/Users/CSabin/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/viewcompany.xml" value="0.1" />
+
         <entry key="..\:/Users/Renish Shah/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/drawable-xxhdpi/circle_button.xml" value="0.13914473684210527" />
         <entry key="..\:/Users/Renish Shah/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/fragment_dashboard.xml" value="0.18" />
         <entry key="..\:/Users/Renish Shah/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/view_schedule.xml" value="0.22" />
         <entry key="..\:/Users/Renish Shah/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/viewcompany.xml" value="0.18" />
         <entry key="..\:/Users/Renish Shah/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/viewmember.xml" value="0.18" />
         <entry key="..\:/Users/Renish Shah/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/viewresellerprofile.xml" value="0.1" />
+
       </map>
     </option>
   </component>
