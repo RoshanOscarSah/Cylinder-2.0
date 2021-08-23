@@ -9,6 +9,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.telephony.gsm.SmsManager
@@ -17,6 +18,7 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.eachut.cylinder.entity.Company
@@ -33,6 +35,8 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.util.*
+import kotlin.random.Random as Random1
 
 class ReceiptActivity : AppCompatActivity() {
     private lateinit var llpdf : LinearLayout
@@ -92,6 +96,12 @@ class ReceiptActivity : AppCompatActivity() {
         btnDownload = findViewById(R.id.btnDownload)
         btnSubmit = findViewById(R.id.btnSubmit)
         btnSendmessage = findViewById(R.id.btnSendmessage)
+
+
+        //Random Receipt Number Generator
+        val rnd = Random()
+        val number: Int = rnd.nextInt(999999)
+        val randomNumber = String.format("%06d", number)
 
         val imgbtnBack = findViewById<View>(R.id.imgbtnBack) as ImageView
         imgbtnBack.setOnClickListener(object : View.OnClickListener {
@@ -163,7 +173,7 @@ class ReceiptActivity : AppCompatActivity() {
             txtCname.setText("${companyInfo.cylinder_name}")
             txtSname.setText("${companyInfo.company_fullname }")
             txtPurchase.setText("${company.Amount}")
-            txtSerialno.setText("${companyInfo._id}")
+            txtSerialno.setText(randomNumber)
             txtLeak.text= (company.Leak_Prima!!.toInt() + company.Leak_Kamakhya!!.toInt() + company.Leak_Suvidha!!.toInt() + company.Leak_Others!!.toInt()).toString()
             txtSold.text = (company.Sold_Prima!!.toInt()+ company.Sold_Kamakhya!!.toInt() + company.Sold_Suvidha!!.toInt() + company.Sold_Others!!.toInt()).toString()
             Toast.makeText(this, "$company", Toast.LENGTH_SHORT).show()
@@ -208,7 +218,7 @@ class ReceiptActivity : AppCompatActivity() {
             txtCname.setText("${resellerInfo.reseller_fullname}")
             txtSname.setText("${resellerInfo.pasal_name}")
             txtPurchase.setText("${reseller.Amount}")
-            txtSerialno.setText("${resellerInfo._id}")
+            txtSerialno.setText(randomNumber)
             txtLeak.text= (reseller.Leak_Prima!!.toInt() + reseller.Leak_Kamakhya!!.toInt() + reseller.Leak_Suvidha!!.toInt() + reseller.Leak_Others!!.toInt()).toString()
             txtSold.text = (reseller.Sold_Prima!!.toInt()+ reseller.Sold_Kamakhya!!.toInt() + reseller.Sold_Suvidha!!.toInt() + reseller.Sold_Others!!.toInt()).toString()
             Toast.makeText(this, "$reseller", Toast.LENGTH_SHORT).show()
