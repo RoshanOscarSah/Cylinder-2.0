@@ -26,6 +26,25 @@ class StockRepository: MyApiRequest() {
         }
     }
 
+    //get gas cylinder
+    suspend fun gascylindersold(): Getgascylinderresponse {
+        return apiRequest {
+            StockAPI.gascylindersold()
+        }
+    }
 
+    //get gas cylinder
+    suspend fun bestSelling(): GetbestSellingresponse {
+        return apiRequest {
+            StockAPI.bestSelling()
+        }
+    }
+
+    //get next Order
+    suspend fun nextOrder(): GetnextOrderresponse {
+        return apiRequest {
+            StockAPI.nextOrder()
+        }
+    }
 
 }
