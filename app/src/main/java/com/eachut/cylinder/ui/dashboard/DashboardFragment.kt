@@ -59,6 +59,7 @@ class DashboardFragment : Fragment() {
                 val response = stockRepository.gascylindersold()
                 val response2 = stockRepository.bestSelling()
                 val response3 = stockRepository.nextOrder()
+                val response4 = stockRepository.profitLoss()
 
                 val resellerRepository = ResellerRepository()
                 val response5 = resellerRepository.totalreseller()
@@ -72,11 +73,15 @@ class DashboardFragment : Fragment() {
                     withContext(Dispatchers.Main) {
                         binding.txtGassold.setText("${response.Gas_Sold}")
                         binding.txtCylinderSold.setText("${response.Cylinder_Sold}")
+                        binding.txtGassoldAmount.setText("${response.gasAmount}")
+                        binding.txtCylinderSoldAmount.setText("${response.cylinderAmount}")
                         binding.txtBestSellingKamakhya.setText("${response2.Kamakhya_BestSelling}")
                         binding.txtBestSellingPrima.setText("${response2.Prima_BestSelling}")
                         binding.txtBestSellingSuvidha.setText("${response2.Suvidha_BestSelling}")
                         binding.txtCompanyname.setText("${response3.nextOrder}")
                         binding.txtNoofCylinder.setText("${response3.left}")
+                        binding.txtProfit.setText("${response4.profitLossAmount}")
+                        binding.txtInvestment.setText("${response4.investment}")
 
 
                         // BEST SELLER

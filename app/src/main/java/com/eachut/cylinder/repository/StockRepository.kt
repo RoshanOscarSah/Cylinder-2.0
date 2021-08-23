@@ -47,4 +47,11 @@ class StockRepository: MyApiRequest() {
         }
     }
 
+    //get profit and loss
+    suspend fun profitLoss(): GetProfitLossresponse {
+        return apiRequest {
+            StockAPI.profitloss()
+        }
+    }
+
 }
