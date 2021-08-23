@@ -105,16 +105,16 @@ class StockFragment : Fragment() {
         }
 
 //for setting
-        binding.setting2.setOnClickListener { view ->
-            val animation = ObjectAnimator.ofFloat(binding.setting2, "rotation", 0f, 180f)
-            animation.duration = 500
-            animation.interpolator = AccelerateDecelerateInterpolator()
-            animation.start()
-
-            //starting popup
-            showSetting2()
-
-        }
+//        binding.setting2.setOnClickListener { view ->
+//            val animation = ObjectAnimator.ofFloat(binding.setting2, "rotation", 0f, 180f)
+//            animation.duration = 500
+//            animation.interpolator = AccelerateDecelerateInterpolator()
+//            animation.start()
+//
+//            //starting popup
+//            showSetting2()
+//
+//        }
 
 //        val textView: TextView = binding.textStock
 //        stockViewModel.text.observe(viewLifecycleOwner, Observer {
@@ -130,33 +130,33 @@ class StockFragment : Fragment() {
 
 
     // for setting popup
-    fun showSetting2() {
-        val inflater: LayoutInflater = this.getLayoutInflater()
-        val dialogView: View = inflater.inflate(R.layout.activity_presetting, null)
-
-        val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-        dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
-            override fun onDismiss(arg0: DialogInterface) {
-
-            }
-        })
-        dialogBuilder.setView(dialogView)
-
-        val alertDialog = dialogBuilder.create();
-
-        alertDialog.show();
-        val lp = WindowManager.LayoutParams()
-
-        lp.copyFrom(alertDialog.window!!.attributes)
-        lp.height = 1250
-        lp.x = 0
-        lp.y = -120
-        alertDialog.getWindow()!!.setAttributes(lp);
-        alertDialog.getWindow()!!.setBackgroundDrawableResource(R.color.dark_fade);
-        alertDialog.setCanceledOnTouchOutside(true);
-
-
-    }
+//    fun showSetting2() {
+//        val inflater: LayoutInflater = this.getLayoutInflater()
+//        val dialogView: View = inflater.inflate(R.layout.activity_presetting, null)
+//
+//        val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+//        dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
+//            override fun onDismiss(arg0: DialogInterface) {
+//
+//            }
+//        })
+//        dialogBuilder.setView(dialogView)
+//
+//        val alertDialog = dialogBuilder.create();
+//
+//        alertDialog.show();
+//        val lp = WindowManager.LayoutParams()
+//
+//        lp.copyFrom(alertDialog.window!!.attributes)
+//        lp.height = 1250
+//        lp.x = 0
+//        lp.y = -120
+//        alertDialog.getWindow()!!.setAttributes(lp);
+//        alertDialog.getWindow()!!.setBackgroundDrawableResource(R.color.dark_fade);
+//        alertDialog.setCanceledOnTouchOutside(true);
+//
+//
+//    }
 
     fun loadStock() {
         CoroutineScope(Dispatchers.IO).launch {
