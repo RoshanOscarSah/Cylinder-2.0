@@ -4,63 +4,72 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class ResellerStock (
+    val _id : String? = null,
+    val ResellerReceiptNo : String? = null,
     var ResellerID : String ? =null,
-    var Gas_state : String ? =null,
-    var Regular_Prima : String ? =null,
-    var Regular_Kamakhya : String ? =null,
-    var Regular_Suvidha : String ? =null,
-    var Regular_Others : String ? =null,
-    var Leak_Prima : String?= null,
-    var Leak_Kamakhya : String?= null,
-    var Leak_Suvidha : String?= null,
-    var Leak_Others : String?= null,
-    var Sold_Prima : String?= null,
-    var Sold_Kamakhya : String?= null,
-    var Sold_Suvidha : String?= null,
-    var Sold_Others : String?= null,
-    var SendOrReceive : String?= null,
-    var Amount : String?= null,
-    var Remarks : String?= null,
-):Parcelable {
+    var Gas_state: String ? =null,
+    var Regular_Prima: Number? =null,
+    var Regular_Kamakhya: Number ? =null,
+    var Regular_Suvidha: Number ? =null,
+    var Regular_Others: Number ? =null,
+    var Leak_Prima: Number?= null,
+    var Leak_Kamakhya: Number?= null,
+    var Leak_Suvidha: Number?= null,
+    var Leak_Others: Number?= null,
+    var Sold_Prima: Number?= null,
+    var Sold_Kamakhya: Number?= null,
+    var Sold_Suvidha: Number?= null,
+    var Sold_Others: Number?= null,
+    var SendOrReceive: String?= null,
+    var Amount: String?= null,
+    var Remarks: String?= null,
+    var StockAddedAt: String?= null,
+    ):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString()
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(_id)
+        parcel.writeString(ResellerReceiptNo)
         parcel.writeString(ResellerID)
         parcel.writeString(Gas_state)
-        parcel.writeString(Regular_Prima)
-        parcel.writeString(Regular_Kamakhya)
-        parcel.writeString(Regular_Suvidha)
-        parcel.writeString(Regular_Others)
-        parcel.writeString(Leak_Prima)
-        parcel.writeString(Leak_Kamakhya)
-        parcel.writeString(Leak_Suvidha)
-        parcel.writeString(Leak_Others)
-        parcel.writeString(Sold_Prima)
-        parcel.writeString(Sold_Kamakhya)
-        parcel.writeString(Sold_Suvidha)
-        parcel.writeString(Sold_Others)
+        parcel.writeInt(Regular_Prima as Int)
+        parcel.writeInt(Regular_Kamakhya as Int)
+        parcel.writeInt(Regular_Suvidha as Int)
+        parcel.writeInt(Regular_Others as Int)
+        parcel.writeInt(Leak_Prima as Int)
+        parcel.writeInt(Leak_Kamakhya as Int)
+        parcel.writeInt(Leak_Suvidha as Int)
+        parcel.writeInt(Leak_Others as Int)
+        parcel.writeInt(Sold_Prima as Int)
+        parcel.writeInt(Sold_Kamakhya as Int)
+        parcel.writeInt(Sold_Suvidha as Int)
+        parcel.writeInt(Sold_Others as Int)
         parcel.writeString(SendOrReceive)
         parcel.writeString(Amount)
         parcel.writeString(Remarks)
+        parcel.writeString(StockAddedAt)
     }
 
     override fun describeContents(): Int {

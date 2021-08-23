@@ -10,8 +10,7 @@ data class Reseller (
     var pasal_name  :String?=null,
     var address  :String?=null,
     var phone_number  :String?=null,
-    var rateforReseller  :String?=null,
-    var isActive  :String?=null,
+    var rateforReseller  :String?=null
 
 ):Parcelable {
     constructor(parcel: Parcel) : this(
@@ -30,7 +29,6 @@ data class Reseller (
         parcel.writeString(pasal_name)
         parcel.writeString(address)
         parcel.writeString(phone_number)
-        parcel.writeString(isActive)
         parcel.writeString(rateforReseller)
     }
 

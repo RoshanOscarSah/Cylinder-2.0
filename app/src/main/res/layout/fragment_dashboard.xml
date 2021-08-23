@@ -441,16 +441,16 @@
                         android:textAlignment="textStart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="PRIMA"
+                        android:text="KAMAKHYA"
                         android:fontFamily="@font/sofia_pro_black_az"
-                        android:textSize="26dp"
+                        android:textSize="24dp"
                         android:textStyle="bold"
                         android:textColor="@color/white"/>
 
                     <TextView
                         android:id="@+id/txtNoofCylinder"
                         android:textAlignment="textEnd"
-                        android:layout_width="50dp"
+                        android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/sofia_pro_light_az"
                         android:text="15"
@@ -544,20 +544,14 @@
                     android:layout_gravity="center_vertical"
                     android:padding="10dp"
                     android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:id="@+id/ivPrimaBS"
-                        android:layout_width="0dp"
-                        android:layout_weight="1.54"
-                        android:layout_height="10dp"
-                        android:background="@drawable/dashoard_widget"
-                        android:backgroundTint="@color/white"
-                        android:orientation="horizontal" />
-                    <LinearLayout
-                        android:id="@+id/ivPrimaBSE"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.46"
-                        android:layout_height="1dp"
-                        android:orientation="horizontal" />
+
+                    <ProgressBar
+                        android:id="@+id/primabar"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:progress="25"/>
+
                 </LinearLayout>
                 <TextView
                     android:id="@+id/txtBestSellingPrima"
@@ -588,16 +582,26 @@
                     android:layout_gravity="center_vertical"
                     android:padding="10dp"
                     android:layout_height="wrap_content">
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_weight="1.54"
-                        android:layout_height="10dp"
-                        android:background="@drawable/dashoard_widget"
-                        android:backgroundTint="@color/white"/>
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_weight="0.46"
-                        android:layout_height="1dp"/>
+<!--                    <ImageView-->
+<!--                        android:id="@+id/ivKamakhyaBS"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_weight="1.54"-->
+<!--                        android:layout_height="10dp"-->
+<!--                        android:background="@drawable/dashoard_widget"-->
+<!--                        android:backgroundTint="@color/white"/>-->
+<!--                    <View-->
+<!--                        android:id="@+id/ivKamakhyaBSE"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_weight="0.46"-->
+<!--                        android:layout_height="1dp"/>-->
+
+                    <ProgressBar
+                        android:id="@+id/kamakhyabar"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:progress="25"/>
+
                 </LinearLayout>
 
                 <TextView
@@ -629,16 +633,12 @@
                     android:layout_gravity="center_vertical"
                     android:padding="10dp"
                     android:layout_height="wrap_content">
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_weight="1.54"
-                        android:layout_height="10dp"
-                        android:background="@drawable/dashoard_widget"
-                        android:backgroundTint="@color/white"/>
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_weight="0.46"
-                        android:layout_height="1dp"/>
+                    <ProgressBar
+                        android:id="@+id/suvidhabar"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:progress="25"/>
                 </LinearLayout>
                 <TextView
                     android:id="@+id/txtBestSellingSuvidha"

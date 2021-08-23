@@ -172,9 +172,9 @@ class ReceiptActivity : AppCompatActivity() {
                     try{
                         val companyRepository  = CompanyStockRepository()
                         val companyResponse = companyRepository.addCompanyStock(company)
-                        withContext(Main){
-                            Toast.makeText(this@ReceiptActivity, "${companyResponse}", Toast.LENGTH_SHORT).show()
-                        }
+//                        withContext(Main){
+//                            Toast.makeText(this@ReceiptActivity, "${companyResponse}", Toast.LENGTH_SHORT).show()
+//                        }
                         if (companyResponse.success!!){
                             withContext(Main){
                                 Toast.makeText(this@ReceiptActivity, "${companyResponse.message}", Toast.LENGTH_SHORT).show()
