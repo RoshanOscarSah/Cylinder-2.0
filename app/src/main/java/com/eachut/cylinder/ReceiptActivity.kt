@@ -1,16 +1,28 @@
 package com.eachut.cylinder
 
+import android.Manifest
+import android.app.PendingIntent
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.pdf.PdfDocument
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.os.Environment
+import android.telephony.gsm.SmsManager
+import android.util.DisplayMetrics
+import android.util.Log
+import android.view.View
+import android.view.WindowManager
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.eachut.cylinder.entity.Company
 import com.eachut.cylinder.entity.CompanyStock
 import com.eachut.cylinder.entity.Reseller
 import com.eachut.cylinder.entity.ResellerStock
-import com.eachut.cylinder.repository.CompanyRepository
 import com.eachut.cylinder.repository.CompanyStockRepository
 import com.eachut.cylinder.repository.ResellerStockRepository
 import kotlinx.coroutines.CoroutineScope
@@ -18,9 +30,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.Exception
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 class ReceiptActivity : AppCompatActivity() {
+    private lateinit var llpdf : LinearLayout
+    private lateinit var rlbottom : RelativeLayout
     private lateinit var txttitlename : TextView
     private lateinit var txtaddress : TextView
     private lateinit var txtCname : TextView
@@ -40,12 +56,21 @@ class ReceiptActivity : AppCompatActivity() {
     private lateinit var txtCylinder : TextView
     private lateinit var txtCash : TextView
     private lateinit var btnSubmit:TextView
+    private lateinit var btnDownload:Button
+    private lateinit var btnSendmessage:Button
 
+    private val permissions = arrayOf(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.SEND_SMS
+    )
+    private lateinit var bitmap: Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_receipt)
 
+        llpdf = findViewById(R.id.llpdf)
+        rlbottom = findViewById(R.id.rlbottom)
         txttitlename = findViewById(R.id.txttitlename)
         txtaddress = findViewById(R.id.txtaddress)
         txtCname = findViewById(R.id.txtCname)
@@ -64,14 +89,70 @@ class ReceiptActivity : AppCompatActivity() {
         txtSold = findViewById(R.id.txtSold)
         txtCylinder = findViewById(R.id.txtCylinder)
         txtCash = findViewById(R.id.txtCash)
+        btnDownload = findViewById(R.id.btnDownload)
         btnSubmit = findViewById(R.id.btnSubmit)
-//new comment
+        btnSendmessage = findViewById(R.id.btnSendmessage)
+
+        val imgbtnBack = findViewById<View>(R.id.imgbtnBack) as ImageView
+        imgbtnBack.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                finish()
+            }
+        })
+
+        btnDownload.setOnClickListener(View.OnClickListener {
+            Log.d("size", " " + llpdf.getWidth() + "  " + llpdf.getWidth())
+            bitmap = loadBitmapFromView(llpdf, llpdf.getWidth(), llpdf.getHeight())
+            createPdf()
+        })
+
+
+
+        if (!hasPermissions()) {
+            requestPermission()
+        }
+
+        btnSendmessage.setOnClickListener(View.OnClickListener {
+            val name = txtCname.text.toString()
+            val gasStatus = txtFull.text.toString()
+            val sendOrReceive = txtSend.text.toString()
+            val p : Int? = txtprimanumber.text.toString().toIntOrNull()
+            val k : Int? = txtkamakhyanumber.text.toString().toIntOrNull()
+            val s : Int? = txtsubhidanumber.text.toString().toIntOrNull()
+            val o : Int? = txtothersnumber.text.toString().toIntOrNull()
+            val purchaseTotal = txtPurchase.text.toString()
+            val dueTotal = txtCash.text.toString()
+            val dueCylinder = txtCylinder.text.toString()
+            val txtSerialno = txtSerialno.text.toString()
+            val totalCylinder = p!! + k!! + s!! + o!!
+
+            val message = "Dear $name,\n$totalCylinder $gasStatus cylinder are $sendOrReceive. " +
+                    "\nTotal Purchase : Rs.$purchaseTotal.\nDue : $dueCylinder cylinder and  Rs. $dueTotal." +
+                    "\nBill no: $txtSerialno \n-Rakesh Kirana Pasal"
+
+//            val message = "Dear $name, $totalCylinder $gasStatus cylinder are $sendOrReceive. " +
+//                    "Total Purchase : Rs. $purchaseTotal. Due : $dueCylinder cylinder and  Rs. $dueTotal." +
+//                    "Rakesh Kirana Pasal. Bill no: $txtSerialno"
+            val phoneNumber = txtCname.getContentDescription().toString()
+//
+//            SmsManager.getDefault().sendTextMessage(
+//                number,
+//                null,
+//                messageToSend,
+//                null,
+//                null
+//            )
+
+            Log.d("OSCAR","phoneNo: $phoneNumber, message: $message")
+            sendSMS(phoneNumber, message)
+//            sendSMS("9801149729", "Some text here")
+        })
+
 
         val status = intent.getStringExtra("status")
-
-
-                            //Company
+                            //if Company
         if(status=="company"){
+
             val company = intent.getParcelableExtra<CompanyStock>("companyStock")!!
             val companyInfo = intent.getParcelableExtra<Company>("company")!!
             txtFull.setText("${company.Gas_state}")
@@ -85,13 +166,15 @@ class ReceiptActivity : AppCompatActivity() {
             txtSerialno.setText("${companyInfo._id}")
             txtLeak.text= (company.Leak_Prima!!.toInt() + company.Leak_Kamakhya!!.toInt() + company.Leak_Suvidha!!.toInt() + company.Leak_Others!!.toInt()).toString()
             txtSold.text = (company.Sold_Prima!!.toInt()+ company.Sold_Kamakhya!!.toInt() + company.Sold_Suvidha!!.toInt() + company.Sold_Others!!.toInt()).toString()
-
+            Toast.makeText(this, "$company", Toast.LENGTH_SHORT).show()
             btnSubmit.setOnClickListener {
-
                 CoroutineScope(Dispatchers.IO).launch{
                     try{
                         val companyRepository  = CompanyStockRepository()
                         val companyResponse = companyRepository.addCompanyStock(company)
+                        withContext(Main){
+                            Toast.makeText(this@ReceiptActivity, "${companyResponse}", Toast.LENGTH_SHORT).show()
+                        }
                         if (companyResponse.success!!){
                             withContext(Main){
                                 Toast.makeText(this@ReceiptActivity, "${companyResponse.message}", Toast.LENGTH_SHORT).show()
@@ -128,9 +211,8 @@ class ReceiptActivity : AppCompatActivity() {
             txtSerialno.setText("${resellerInfo._id}")
             txtLeak.text= (reseller.Leak_Prima!!.toInt() + reseller.Leak_Kamakhya!!.toInt() + reseller.Leak_Suvidha!!.toInt() + reseller.Leak_Others!!.toInt()).toString()
             txtSold.text = (reseller.Sold_Prima!!.toInt()+ reseller.Sold_Kamakhya!!.toInt() + reseller.Sold_Suvidha!!.toInt() + reseller.Sold_Others!!.toInt()).toString()
-
+            Toast.makeText(this, "$reseller", Toast.LENGTH_SHORT).show()
             btnSubmit.setOnClickListener {
-
                 CoroutineScope(Dispatchers.IO).launch{
                     try{
                         val resellerRepository  = ResellerStockRepository()
@@ -157,10 +239,88 @@ class ReceiptActivity : AppCompatActivity() {
 
         }
 
-
-
     }
 
+    private fun createPdf() {
+        val wm = getSystemService(WINDOW_SERVICE) as WindowManager
+        val displaymetrics = DisplayMetrics()
+        this.windowManager.defaultDisplay.getMetrics(displaymetrics)
+        val hight = displaymetrics.heightPixels.toFloat()
+        val width = displaymetrics.widthPixels.toFloat()
+        val convertHighet = hight.toInt()
+        val convertWidth = width.toInt()
 
+        val document = PdfDocument()
+        val pageInfo = PdfDocument.PageInfo.Builder(convertWidth, convertHighet, 1).create()
+        val page = document.startPage(pageInfo)
+        val canvas = page.canvas
+        val paint = Paint()
+        canvas.drawPaint(paint)
+        bitmap = Bitmap.createScaledBitmap(bitmap!!, convertWidth, convertHighet, true)
+        paint.color = Color.BLUE
+        canvas.drawBitmap(bitmap, 0f, 0f, null)
+        document.finishPage(page)
 
+        // write the document content
+        val targetPdf =
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+        val filePath: File
+        filePath = File(targetPdf, "CylinderReceipt.pdf")
+        try {
+            with(document) { writeTo(FileOutputStream(filePath)) }
+        } catch (e: IOException) {
+            e.printStackTrace()
+            Toast.makeText(this, "$e", Toast.LENGTH_LONG).show()
+        }
+
+        // close the document
+        document.close()
+        Toast.makeText(this, "Receipt PDF is created!!!", Toast.LENGTH_LONG).show()
+    }
+
+    private fun sendSMS(phoneNumber: String, message: String) {
+        Log.v("phoneNumber", phoneNumber)
+        Log.v("MEssage", message)
+        //   PendingIntent pi = PendingIntent.getActivity(this, 0,
+        //       new Intent(this, Main.class), 0);
+        val SENT = "SMS_SENT"
+        val DELIVERY = "SMS_DELIVERED"
+
+        val intent = Intent(SENT)
+        val sentIntent = PendingIntent.getBroadcast(this, 0, intent,
+            PendingIntent.FLAG_ONE_SHOT)
+        val intent2  = Intent(DELIVERY)
+        val deliveryIntent = PendingIntent.getBroadcast(this, 0, intent2,
+            PendingIntent.FLAG_ONE_SHOT)
+
+        val sms = SmsManager.getDefault()
+        sms.sendTextMessage(phoneNumber, null, message,  sentIntent, deliveryIntent)
+        Toast.makeText(this, "message send ($message)", Toast.LENGTH_LONG).show()
+    }
+
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            permissions, 12
+        )
+    }
+
+    private fun hasPermissions(): Boolean {
+        var hasPermission = true
+        for (permission in permissions) {
+            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                hasPermission = false
+            }
+        }
+        return hasPermission
+    }
+
+    companion object {
+        fun loadBitmapFromView(v: View?, width: Int, height: Int): Bitmap {
+            val b = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+            val c = Canvas(b)
+            v!!.draw(c)
+            return b
+        }
+    }
 }

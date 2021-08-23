@@ -1,19 +1,19 @@
 package com.eachut.cylinder
 
-import com.eachut.cylinder.repository.UserRepository
+import com.eachut.cylinder.repository.MemberRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test
 
 class UnitTesting {
 
-    private lateinit var userRepository: UserRepository
+    private lateinit var memberRepository: MemberRepository
 
     // Login Test
     @Test
     fun checkLogin() = runBlocking{
-        userRepository = UserRepository()
-        val response = userRepository.checkUser("adminadmin","4321")
+        memberRepository = MemberRepository()
+        val response = memberRepository.checkMember("adminadmin","4321")
         val expectedResult = true
         val actualResult = response.success
         Assert.assertEquals(expectedResult,actualResult)
@@ -22,8 +22,8 @@ class UnitTesting {
     // Change Password Test
     @Test
     fun checkChangePassword() = runBlocking{
-        userRepository = UserRepository()
-        val response = userRepository.changePassword("adminadmin","4321","1234")
+        memberRepository = MemberRepository()
+        val response = memberRepository.changePassword("adminadmin","4321","1234")
         val expectedResult = true
         val actualResult = response.success
         Assert.assertEquals(expectedResult,actualResult)

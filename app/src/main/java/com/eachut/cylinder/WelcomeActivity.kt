@@ -1,4 +1,4 @@
-package com.eachut.cylinder
+  package com.eachut.cylinder
 
 import android.animation.ObjectAnimator
 import android.app.Activity
@@ -24,6 +24,8 @@ class WelcomeActivity : AppCompatActivity() {
     private lateinit var welcome: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        
         super.onCreate(savedInstanceState)
         loadLocate()
         setContentView(R.layout.activity_welcome)

@@ -1,14 +1,21 @@
 package com.eachut.cylinder.ui.profiles
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eachut.cylinder.Adapter.MemberProfileAdapter
+import com.eachut.cylinder.Adapter.ResellerProfileAdapter
+import com.eachut.cylinder.LoginActivity
+import com.eachut.cylinder.Object.MemberList
+import com.eachut.cylinder.Object.ResellerList
 import com.eachut.cylinder.R
 import com.eachut.cylinder.entity.Member
 import com.eachut.cylinder.repository.MemberRepository
@@ -17,7 +24,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+
 class ViewMemberFragment : Fragment() {
+
+    private lateinit var logout : Button
 
     private lateinit var recyclerview : RecyclerView
     private var memberList = mutableListOf<Member>()
@@ -30,8 +40,31 @@ class ViewMemberFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_view_member, container, false)
 
         recyclerview = view.findViewById(R.id.recyclerview)
+        logout = view.findViewById(R.id.logout)
+
+//        logout
+        logout.setOnClickListener { view ->
+//            val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+//            editor.putString("Username","")
+//            editor.putString("Password","")
+//            editor.apply()
+
+            val pref = requireActivity().getPreferences(Context.MODE_PRIVATE)
+            val edt = pref.edit()
+            edt.putString("token", "")
+            edt.commit()
+
+            val intent = Intent(context, LoginActivity::class.java)
+            startActivity(intent)
+
+        }
+
 
         //get member
+//        val memberList= MemberList.getMemberList()
+//        recyclerview.adapter = MemberProfileAdapter(requireContext(), memberList)
+//        recyclerview.layoutManager = LinearLayoutManager(context)
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val memberRepository = MemberRepository()

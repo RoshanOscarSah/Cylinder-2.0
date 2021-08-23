@@ -76,7 +76,7 @@
             <!--    selected customer/ company-->
             <LinearLayout
                 android:id="@+id/llNameSelected"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:contentDescription="id_12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                             android:id="@+id/title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Manoj Sah"
+                            android:text="Name"
                             android:contentDescription="Name"
                             android:textStyle="bold"
                             android:textColor="@color/white"
@@ -112,7 +112,7 @@
                             android:id="@+id/subtitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Manoj Kirana Pasal"
+                            android:text="Registered name"
                             android:contentDescription="Company"
                             android:textStyle="normal"
                             android:textColor="#CCFFFFFF"
@@ -124,7 +124,7 @@
                             android:id="@+id/address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Chirauli, Bhokraha - 1"
+                            android:text="Address"
                             android:contentDescription="Address"
                             android:textStyle="normal"
                             android:textColor="#CCFFFFFF"
@@ -202,10 +202,11 @@
                                 android:src="@drawable/ic_profile_databg"/>
 
                             <TextView
+                                android:id="@+id/tv_dashboard_rate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="28640"
+                                android:text="234"
                                 android:fontFamily="@font/sofia_pro_regular_az"
                                 android:textStyle="normal"
                                 android:textSize="14dp"
@@ -254,10 +255,11 @@
                                 android:src="@drawable/ic_profile_databg"/>
 
                             <TextView
+                                android:id="@+id/tv_dashboard_halfcylinder"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="20"
+                                android:text=""
                                 android:fontFamily="@font/sofia_pro_regular_az"
                                 android:textStyle="normal"
                                 android:textSize="14dp"
@@ -305,10 +307,11 @@
                                 android:src="@drawable/ic_profile_databg"/>
 
                             <TextView
+                                android:id="@+id/tv_dashboard_leakcylinder"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="20"
+                                android:text=""
                                 android:fontFamily="@font/sofia_pro_regular_az"
                                 android:textStyle="normal"
                                 android:textSize="14dp"
@@ -364,10 +367,11 @@
                                 android:layout_height="35dp"/>
 
                             <TextView
+                                android:id="@+id/tv_dashboard_tag"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="1343"
+                                android:text=""
                                 android:fontFamily="@font/sofia_pro_regular_az"
                                 android:textStyle="normal"
                                 android:textSize="14dp"
@@ -416,10 +420,11 @@
                                 android:layout_height="35dp"/>
 
                             <TextView
+                                android:id="@+id/tv_dashboard_burn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="3458"
+                                android:text=""
                                 android:fontFamily="@font/sofia_pro_regular_az"
                                 android:textStyle="normal"
                                 android:textSize="14dp"
@@ -468,10 +473,11 @@
                                 android:layout_height="35dp"/>
 
                             <TextView
+                                android:id="@+id/tv_dashboard_cylinder"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="50"
+                                android:text=""
                                 android:fontFamily="@font/sofia_pro_regular_az"
                                 android:textStyle="normal"
                                 android:textSize="14dp"
