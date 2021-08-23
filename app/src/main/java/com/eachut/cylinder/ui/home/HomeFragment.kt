@@ -593,18 +593,20 @@ class   HomeFragment : Fragment() {
                 ResellerID = ResellerDetails.getReseller()._id.toString()
                 var reseller = ResellerDetails.getReseller()
                 val resellerStock = ResellerStock(
-                    ResellerID = ResellerID, Gas_state = Gas_state, Regular_Prima = Regular_Prima.toString(),
-                    Regular_Kamakhya = Regular_Kamakhya.toString(),
-                    Regular_Suvidha = Regular_Suvidha.toString(),
-                    Regular_Others = Regular_Others.toString(),
-                    Leak_Prima = Leak_Prima.toString(),
-                    Leak_Kamakhya = Leak_Kamakhya.toString(),
-                    Leak_Suvidha = Leak_Suvidha.toString(),
-                    Leak_Others = Leak_Others.toString(),
-                    Sold_Prima = Sold_Prima.toString(),
-                    Sold_Kamakhya = Sold_Kamakhya.toString(),
-                    Sold_Suvidha = Sold_Suvidha.toString(),
-                    Sold_Others = Sold_Others.toString(),
+                    ResellerID = ResellerID,
+                    Gas_state = Gas_state,
+                    Regular_Prima = Regular_Prima.toString().toInt(),
+                    Regular_Kamakhya = Regular_Kamakhya.toString().toInt(),
+                    Regular_Suvidha = Regular_Suvidha.toString().toInt(),
+                    Regular_Others = Regular_Others.toString().toInt(),
+                    Leak_Prima = Leak_Prima.toString().toInt(),
+                    Leak_Kamakhya = Leak_Kamakhya.toString().toInt(),
+                    Leak_Suvidha = Leak_Suvidha.toString().toInt(),
+                    Leak_Others = Leak_Others.toString().toInt(),
+                    Sold_Prima = Sold_Prima.toString().toInt(),
+                    Sold_Kamakhya = Sold_Kamakhya.toString().toInt(),
+                    Sold_Suvidha = Sold_Suvidha.toString().toInt(),
+                    Sold_Others = Sold_Others.toString().toInt(),
                     SendOrReceive = SendOrReceive,
                     Amount = Amount.toString(),
                     Remarks = Remarks.toString())
@@ -621,7 +623,9 @@ class   HomeFragment : Fragment() {
                 CompanyID = CompanyDetails.getCompany()._id.toString()
                 var company = CompanyDetails.getCompany()
                 val companyStock = CompanyStock(
-                    CompanyID = CompanyID, Gas_state = Gas_state, Regular_Prima = Regular_Prima.toString().toInt(),
+                    CompanyID = CompanyID,
+                    Gas_state = Gas_state,
+                    Regular_Prima = Regular_Prima.toString().toInt(),
                     Regular_Kamakhya = Regular_Kamakhya.toString().toInt(),
                     Regular_Suvidha = Regular_Suvidha.toString().toInt(),
                     Regular_Others = Regular_Others.toString().toInt(),
