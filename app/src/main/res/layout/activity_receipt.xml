@@ -9,409 +9,451 @@
     android:layout_gravity="center_horizontal"
     tools:context=".ReceiptActivity">
 
-
     <LinearLayout
+        android:id="@+id/llpdf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txttitlename"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:text="@string/title_RakeshKiranaPasal"
-            android:textSize="30dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtaddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/title_Bhokraha2"
-            android:textSize="18dp" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="8dp"
-            android:background="#444" />
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:background="@drawable/border"-->
-<!--            android:paddingHorizontal="30dp"-->
-<!--            android:paddingVertical="8dp"-->
-<!--            android:text="@string/reciept"-->
-<!--            android:textSize="18dp" />-->
+        android:background="@color/ic_watermark_background">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:background="@mipmap/ic_watermark">
+
+            <TextView
+                android:id="@+id/txttitlename"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="@string/title_RakeshKiranaPasal"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtaddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/title_Bhokraha2AndPhno"
+                android:textSize="18dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="8dp"
+                android:background="#444" />
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:background="@drawable/border"-->
+<!--                android:paddingHorizontal="30dp"-->
+<!--                android:paddingVertical="8dp"-->
+<!--                android:text="@string/reciept"-->
+<!--                android:textSize="18dp" />-->
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
+                android:layout_gravity="center"
+                android:background="@drawable/outsilde_border">
                 <TextView
-                    android:id="@+id/txtCname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Manoj Shah"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txtSname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="8dp"
-                    android:text="Manoj Kirana Pasal" />
-
-                <TextView
-                    android:id="@+id/txtFull"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Full"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txtDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="21/7/2021"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/txtSerialno"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginVertical="8dp"
-                    android:text="ID:[#serial no]" />
-
-                <TextView
-                    android:id="@+id/txtSend"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="Send"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:gravity="center">
-
-
-            <TableLayout
-                android:id="@+id/tabla_cuerpo"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp">
-
-                <TableRow
-                    android:id="@+id/tableRow1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:text="Receipt"
+                    android:textStyle="normal"
+                    android:textSize="16dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
-
+                        android:id="@+id/txtCname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/cell_shape"
-                        android:padding="10dp"
-                        android:text=" Prima      "
+                        android:text="Manoj Shah"
+                        android:contentDescription="9801149729"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtSname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="8dp"
+                        android:text="Manoj Kirana Pasal" />
+
+                    <TextView
+                        android:id="@+id/txtFull"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Full"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="20/7/2002"
                         android:textSize="15dp" />
 
                     <TextView
+                        android:id="@+id/txtSerialno"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/cell_shape"
-                        android:padding="10dp"
-                        android:text=" Kamakhya "
-                        android:textSize="15dp" />
+                        android:layout_gravity="end"
+                        android:layout_marginVertical="8dp"
+                        android:text="ID:[#serial no]" />
 
                     <TextView
+                        android:id="@+id/txtSend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/cell_shape"
-                        android:padding="10dp"
-                        android:text=" Subhida "
-                        android:textSize="15dp" />
+                        android:layout_gravity="end"
+                        android:text="Send"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
 
-                    <TextView
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center">
+
+
+                <TableLayout
+                    android:id="@+id/tabla_cuerpo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <TableRow
+                        android:id="@+id/tableRow1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/cell_shape"
+                            android:padding="10dp"
+                            android:text=" Prima "
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cell_shape"
+                            android:padding="10dp"
+                            android:text=" Kamakhya "
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cell_shape"
+                            android:padding="10dp"
+                            android:text=" Subhida "
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cell_shape"
+                            android:padding="10dp"
+                            android:text=" Others "
+                            android:textSize="15dp" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/tableRow2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txtprimanumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cell_shape"
+                            android:padding="10dp"
+                            android:text="20"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/txtkamakhyanumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cell_shape"
+                            android:padding="10dp"
+                            android:text="20"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/txtsubhidanumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cell_shape"
+                            android:padding="10dp"
+                            android:text="20"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/txtothersnumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cell_shape"
+                            android:padding="10dp"
+                            android:text="0"
+                            android:textSize="15dp" />
+
+                    </TableRow>
+
+                </TableLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/cell_shape"
-                        android:padding="10dp"
-                        android:text=" Others "
-                        android:textSize="15dp" />
+                        android:orientation="horizontal">
 
-                </TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:text="@string/rate" />
 
-                <TableRow
-                    android:id="@+id/tableRow2"
+                        <TextView
+                            android:id="@+id/txtRate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginVertical="8dp"
+                            android:text="1350" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/title_Leak" />
+
+                        <TextView
+                            android:id="@+id/txtLeak"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:text="2" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:text="@string/title_Purchase" />
+
+                        <TextView
+                            android:id="@+id/txtPurchase"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginVertical="8dp"
+                            android:text="25000" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/title_Sold" />
+
+                        <TextView
+                            android:id="@+id/txtSold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:text="0" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="8dp"
+                android:background="#444" />
+
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center"-->
+    <!--            android:layout_marginTop="10dp"-->
+    <!--            android:layout_marginBottom="10dp"-->
+    <!--            android:background="@drawable/border"-->
+    <!--            android:paddingHorizontal="40dp"-->
+    <!--            android:paddingVertical="8dp"-->
+    <!--            android:text="@string/title_Due"-->
+    <!--            android:textSize="18dp" />-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/outsilde_border">
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/txtprimanumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/cell_shape"
-                        android:padding="10dp"
-                        android:text="20"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:id="@+id/txtkamakhyanumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/cell_shape"
-                        android:padding="10dp"
-                        android:text="20"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:id="@+id/txtsubhidanumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/cell_shape"
-                        android:padding="10dp"
-                        android:text="20"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:id="@+id/txtothersnumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/cell_shape"
-                        android:padding="10dp"
-                        android:text="0"
-                        android:textSize="15dp" />
-
-                </TableRow>
-
-            </TableLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="8dp"
-                        android:text="@string/rate" />
-
-                    <TextView
-                        android:id="@+id/txtRate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="8dp"
-                        android:layout_marginVertical="8dp"
-                        android:text="1350" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/title_Leak" />
-
-                    <TextView
-                        android:id="@+id/txtLeak"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="8dp"
-                        android:text="2" />
-
-                </LinearLayout>
-
-
+                    android:text="Due"
+                    android:textStyle="normal"
+                    android:textSize="16dp"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"/>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="8dp"
-                        android:text="@string/title_Purchase" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/txtPurchase"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="8dp"
-                        android:layout_marginVertical="8dp"
-                        android:text="25000" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:text="Cylinder" />
+
+                        <TextView
+                            android:id="@+id/txtCylinder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginVertical="8dp"
+                            android:text="20" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/title_Sold" />
+                        android:layout_gravity="right"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/txtSold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="8dp"
-                        android:text="0" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="8dp"
+                            android:text="@string/title_Cash" />
 
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/txtCash"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginVertical="8dp"
+                            android:text="13500" />
 
-            </LinearLayout>
-        </LinearLayout>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="8dp"
-            android:background="#444" />
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:background="@drawable/border"-->
-<!--            android:paddingHorizontal="40dp"-->
-<!--            android:paddingVertical="8dp"-->
-<!--            android:text="@string/title_Due"-->
-<!--            android:textSize="18dp" />-->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="8dp"
-                        android:text="Cylinder" />
-
-                    <TextView
-                        android:id="@+id/txtCylinder"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="8dp"
-                        android:layout_marginVertical="8dp"
-                        android:text="20" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="8dp"
-                        android:text="@string/title_Cash" />
-
-                    <TextView
-                        android:id="@+id/txtCash"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="8dp"
-                        android:layout_marginVertical="8dp"
-                        android:text="13500" />
-
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -425,6 +467,7 @@
         android:layout_marginTop="30dp"
         android:background="@color/black"
         android:gravity="top"
+        android:id="@+id/rlbottom"
         android:textSize="14sp">
 
         <LinearLayout
@@ -463,7 +506,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -471,12 +513,12 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="40dp">
+                    android:layout_marginRight="70dp">
 
                     <ImageButton
                         android:id="@+id/imgbtnBack"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_gravity="center"
                         android:background="@drawable/gaslogo_bgtotal"
                         android:src="@drawable/ic_arrow_left" />
@@ -485,14 +527,14 @@
 
                 <LinearLayout
                     android:id="@+id/llGo"
-                    android:layout_width="230dp"
-                    android:layout_height="80dp"
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
                     android:background="@drawable/ic_toggle_active"
                     android:backgroundTint="#940000"
                     android:elevation="2dp"
                     android:orientation="horizontal"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp">
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
 
                     <TextView
                         android:id="@+id/btnSubmit"
@@ -501,7 +543,7 @@
                         android:gravity="center"
                         android:text="@string/title_Submit"
                         android:textColor="@color/white"
-                        android:textSize="35dp"
+                        android:textSize="30dp"
                         android:textStyle="bold" />
 
                 </LinearLayout>

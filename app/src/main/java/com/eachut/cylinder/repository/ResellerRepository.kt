@@ -7,6 +7,7 @@ import com.eachut.cylinder.entity.Reseller
 import com.eachut.cylinder.response.AddNewResellerResponse
 import com.eachut.cylinder.response.GetAllResellerResponse
 import com.eachut.cylinder.response.GetResellerResponse
+import com.eachut.cylinder.response.GettotalResellerResponse
 
 class ResellerRepository : MyApiRequest() {
     private val resellerAPI =
@@ -37,6 +38,13 @@ class ResellerRepository : MyApiRequest() {
     suspend fun updateReseller(id:String, reseller: Reseller):AddNewResellerResponse{
         return apiRequest {
             resellerAPI.updateReseller(id, reseller)
+        }
+    }
+
+    //get Total Reseller
+    suspend fun totalreseller():GettotalResellerResponse{
+        return apiRequest {
+            resellerAPI.totalreseller()
         }
     }
 

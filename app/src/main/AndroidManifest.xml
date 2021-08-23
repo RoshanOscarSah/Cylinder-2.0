@@ -4,6 +4,8 @@
     package="com.eachut.cylinder">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -12,11 +14,19 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_app"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_app_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cylinder20"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ReceiptActivity"></activity>
+        <activity android:name=".ExtraWorkAcitivity"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".AddSchedule"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".SuccessMemberAdd" />
+        <activity
+            android:name=".ReceiptActivity"
+            android:exported="true" />
         <activity android:name=".PrenameActivity" />
         <activity
             android:name=".ui.profiles.GetResellerProfile"
@@ -31,14 +41,15 @@
         <activity android:name=".WelcomeActivity" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".SplashActivity" />
     </application>
 
 </manifest>

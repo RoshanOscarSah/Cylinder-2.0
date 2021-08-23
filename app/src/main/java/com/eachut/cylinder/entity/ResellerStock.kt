@@ -21,7 +21,7 @@ data class ResellerStock (
     var SendOrReceive : String?= null,
     var Amount : String?= null,
     var Remarks : String?= null,
-        ):Parcelable {
+):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),

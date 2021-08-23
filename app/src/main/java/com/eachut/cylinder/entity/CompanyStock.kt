@@ -47,7 +47,7 @@ data class CompanyStock(
       parcel.readString(),
       parcel.readString(),
 
-   ) {
+      ) {
    }
 
    override fun writeToParcel(parcel: Parcel, flags: Int) {

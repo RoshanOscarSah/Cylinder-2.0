@@ -6,12 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.eachut.cylinder.Object.ResellerDetails
+import com.eachut.cylinder.Object.ResellerStockDetails
 import com.eachut.cylinder.R
 import com.eachut.cylinder.entity.Reseller
+import com.eachut.cylinder.repository.ResellerStockRepository
 import com.eachut.cylinder.ui.home.HomeFragment
 import com.eachut.cylinder.ui.profiles.GetResellerProfile
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.w3c.dom.Text
 
 class ResellerStockViewAdapter(
@@ -46,9 +54,30 @@ class ResellerStockViewAdapter(
         holder.tv_Fullname.text=reseller.reseller_fullname
         holder.Tv_Pasalname.text=reseller.pasal_name
         holder.tv_Address.text=reseller.address
-
         holder.llNameSelected.setOnClickListener {
             ResellerDetails.setReseller(reseller)
+            CoroutineScope(Dispatchers.IO).launch {
+                try{
+                    val resellerStockRepo = ResellerStockRepository()
+                    val response = resellerStockRepo.singleresellerStockList(reseller._id!!)
+                    if(response.success!!){
+                        ResellerStockDetails.setResellerStockDetails(response.data!!)
+                        withContext(Main){
+                            Toast.makeText(context, "data from database: ${response.data}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    else{
+                        withContext(Main){
+                            Toast.makeText(context, "No data received", Toast.LENGTH_SHORT).show()
+                        }
+
+                    }
+                }catch(e:Exception){
+                    withContext(Main){
+                        Toast.makeText(context, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
     }
 
