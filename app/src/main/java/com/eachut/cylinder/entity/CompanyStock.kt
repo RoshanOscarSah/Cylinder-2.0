@@ -5,6 +5,7 @@ import android.os.Parcelable
 
 data class CompanyStock(
    var _id:String?=null,
+   var CompanyReceiptNo : String ? =null,
    var CompanyID: String ? =null,
    var Gas_state: String ? =null,
    var Regular_Prima: Number? =null,
@@ -30,6 +31,7 @@ data class CompanyStock(
       parcel.readString(),
       parcel.readString(),
       parcel.readString(),
+      parcel.readString(),
       parcel.readInt(),
       parcel.readInt(),
       parcel.readInt(),
@@ -52,6 +54,7 @@ data class CompanyStock(
 
    override fun writeToParcel(parcel: Parcel, flags: Int) {
       parcel.writeString(_id)
+      parcel.writeString(CompanyReceiptNo)
       parcel.writeString(CompanyID)
       parcel.writeString(Gas_state)
       parcel.writeInt(Regular_Prima as Int)
