@@ -111,7 +111,7 @@ class ProfilesFragment : Fragment() {
 //                     resellerList = response.data!!
 // //                    ResellerList.setResellerList(sortedReseller)
 //                 }
-//             }
+            }
 
 
         //Loading Reseller Profile
