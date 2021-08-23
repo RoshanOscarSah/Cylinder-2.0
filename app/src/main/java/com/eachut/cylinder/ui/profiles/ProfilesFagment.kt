@@ -16,16 +16,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.eachut.cylinder.Adapter.ResellerStockViewAdapter
 import com.eachut.cylinder.AddNewMemberActivity
+
 import com.eachut.cylinder.Object.CompanyList
 import com.eachut.cylinder.Object.MemberList
+
 import com.eachut.cylinder.Object.ResellerList
 import com.eachut.cylinder.R
 import com.eachut.cylinder.databinding.FragmentProfilesBinding
 import com.eachut.cylinder.entity.Company
 import com.eachut.cylinder.entity.Member
 import com.eachut.cylinder.entity.Reseller
+
 import com.eachut.cylinder.repository.CompanyRepository
 import com.eachut.cylinder.repository.MemberRepository
+
 import com.eachut.cylinder.repository.ResellerRepository
 import com.eachut.cylinder.ui.profiles.ProfilesViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -49,6 +53,7 @@ class ProfilesFragment : Fragment() {
 
 
 
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -60,6 +65,22 @@ class ProfilesFragment : Fragment() {
     ): View? {
         profilesViewModel =
             ViewModelProvider(this).get(ProfilesViewModel::class.java)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                val resellerRepo = ResellerRepository()
+                val  response = resellerRepo.allresellerList()
+                if(response.success!!){
+                    resellerList = response.data!!
+//                    ResellerList.setResellerList(sortedReseller)
+                }
+            }
+        //Loading Reseller Profile
+        val fragment = GetResellerProfile()
+        val fragmentManager = requireActivity().supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(android.R.id.content, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
 
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -192,6 +213,8 @@ class ProfilesFragment : Fragment() {
 
 
 // FILTER
+
+
             binding.ivFilterProfiles.setOnClickListener {
 
                 val popupMenu: PopupMenu =

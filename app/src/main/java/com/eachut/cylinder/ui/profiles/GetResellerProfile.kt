@@ -21,9 +21,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class GetResellerProfile : Fragment() {
+class GetResellerProfile() : Fragment() {
 
-    private var resellerList = mutableListOf<Reseller>()
+//    private var resellerList = mutableListOf<Reseller>()
     private lateinit var recyclerview: RecyclerView
 
 
