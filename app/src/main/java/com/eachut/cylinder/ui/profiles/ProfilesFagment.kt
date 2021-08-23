@@ -17,10 +17,17 @@ import androidx.lifecycle.ViewModelProvider
 import com.eachut.cylinder.Adapter.ResellerStockViewAdapter
 import com.eachut.cylinder.AddNewMemberActivity
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import com.eachut.cylinder.Object.CompanyList
 import com.eachut.cylinder.Object.MemberList
 >>>>>>> origin
+=======
+
+import com.eachut.cylinder.Object.CompanyList
+import com.eachut.cylinder.Object.MemberList
+
+>>>>>>> 0c074457d84a0cd4bb41df4de07c0edc4eac43ce
 import com.eachut.cylinder.Object.ResellerList
 import com.eachut.cylinder.R
 import com.eachut.cylinder.databinding.FragmentProfilesBinding
@@ -28,10 +35,17 @@ import com.eachut.cylinder.entity.Company
 import com.eachut.cylinder.entity.Member
 import com.eachut.cylinder.entity.Reseller
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import com.eachut.cylinder.repository.CompanyRepository
 import com.eachut.cylinder.repository.MemberRepository
 >>>>>>> origin
+=======
+
+import com.eachut.cylinder.repository.CompanyRepository
+import com.eachut.cylinder.repository.MemberRepository
+
+>>>>>>> 0c074457d84a0cd4bb41df4de07c0edc4eac43ce
 import com.eachut.cylinder.repository.ResellerRepository
 import com.eachut.cylinder.ui.profiles.ProfilesViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -45,7 +59,10 @@ class ProfilesFragment : Fragment() {
     private var resellerList = mutableListOf<Reseller>()
     private var sortedReseller = resellerList
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 0c074457d84a0cd4bb41df4de07c0edc4eac43ce
 
     private var companyList = mutableListOf<Company>()
     private var sortedCompany = companyList
@@ -56,7 +73,11 @@ class ProfilesFragment : Fragment() {
 
 
 
+<<<<<<< HEAD
 >>>>>>> origin
+=======
+
+>>>>>>> 0c074457d84a0cd4bb41df4de07c0edc4eac43ce
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -70,6 +91,10 @@ class ProfilesFragment : Fragment() {
         profilesViewModel =
             ViewModelProvider(this).get(ProfilesViewModel::class.java)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0c074457d84a0cd4bb41df4de07c0edc4eac43ce
             CoroutineScope(Dispatchers.IO).launch {
                 val resellerRepo = ResellerRepository()
                 val  response = resellerRepo.allresellerList()
@@ -85,9 +110,13 @@ class ProfilesFragment : Fragment() {
         fragmentTransaction.replace(android.R.id.content, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+<<<<<<< HEAD
 =======
 
 >>>>>>> origin
+=======
+
+>>>>>>> 0c074457d84a0cd4bb41df4de07c0edc4eac43ce
 
         CoroutineScope(Dispatchers.IO).launch {
             val resellerRepo = ResellerRepository()
@@ -220,6 +249,7 @@ class ProfilesFragment : Fragment() {
 
 // FILTER
 <<<<<<< HEAD
+<<<<<<< HEAD
         binding.ivFilterProfiles.setOnClickListener {
 
             val popupMenu: PopupMenu =
@@ -247,6 +277,10 @@ class ProfilesFragment : Fragment() {
             popupMenu.show()
             }
 =======
+=======
+
+
+>>>>>>> 0c074457d84a0cd4bb41df4de07c0edc4eac43ce
             binding.ivFilterProfiles.setOnClickListener {
 
                 val popupMenu: PopupMenu =
@@ -296,7 +330,10 @@ class ProfilesFragment : Fragment() {
                     true
                 })
                 popupMenu.show()
+<<<<<<< HEAD
 >>>>>>> origin
+=======
+>>>>>>> 0c074457d84a0cd4bb41df4de07c0edc4eac43ce
 
 //        val textView: TextView = binding.textProfiles
 //        profilesViewModel.text.observe(viewLifecycleOwner, Observer {
