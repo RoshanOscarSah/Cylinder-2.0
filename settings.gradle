@@ -1,2 +1,3 @@
 rootProject.name = "Cylinder 2.0"
 include ':app'
+include ':cylinderwearos'

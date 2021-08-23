@@ -38,4 +38,10 @@ interface StockAPI {
 //        @Header("Authorization") token : String,
     ): Response<GetnextOrderresponse>
 
+    //Get Profit and Loss
+    @GET("/profit-loss-investment")
+    suspend fun profitloss(
+//        @Header("Authorization") token : String,
+    ): Response<GetProfitLossresponse>
+
 }
