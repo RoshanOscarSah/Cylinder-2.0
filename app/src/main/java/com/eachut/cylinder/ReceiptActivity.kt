@@ -97,12 +97,6 @@ class ReceiptActivity : AppCompatActivity() {
         btnSubmit = findViewById(R.id.btnSubmit)
         btnSendmessage = findViewById(R.id.btnSendmessage)
 
-
-        //Random Receipt Number Generator
-        val rnd = Random()
-        val number: Int = rnd.nextInt(999999)
-        val randomNumber = String.format("%06d", number)
-
         val imgbtnBack = findViewById<View>(R.id.imgbtnBack) as ImageView
         imgbtnBack.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
@@ -173,7 +167,7 @@ class ReceiptActivity : AppCompatActivity() {
             txtCname.setText("${companyInfo.cylinder_name}")
             txtSname.setText("${companyInfo.company_fullname }")
             txtPurchase.setText("${company.Amount}")
-            txtSerialno.setText(randomNumber)
+            txtSerialno.setText("${company.CompanyReceiptNo}")
             txtLeak.text= (company.Leak_Prima!!.toInt() + company.Leak_Kamakhya!!.toInt() + company.Leak_Suvidha!!.toInt() + company.Leak_Others!!.toInt()).toString()
             txtSold.text = (company.Sold_Prima!!.toInt()+ company.Sold_Kamakhya!!.toInt() + company.Sold_Suvidha!!.toInt() + company.Sold_Others!!.toInt()).toString()
             Toast.makeText(this, "$company", Toast.LENGTH_SHORT).show()
@@ -218,7 +212,7 @@ class ReceiptActivity : AppCompatActivity() {
             txtCname.setText("${resellerInfo.reseller_fullname}")
             txtSname.setText("${resellerInfo.pasal_name}")
             txtPurchase.setText("${reseller.Amount}")
-            txtSerialno.setText(randomNumber)
+            txtSerialno.setText("${reseller.ResellerReceiptNo}")
             txtLeak.text= (reseller.Leak_Prima!!.toInt() + reseller.Leak_Kamakhya!!.toInt() + reseller.Leak_Suvidha!!.toInt() + reseller.Leak_Others!!.toInt()).toString()
             txtSold.text = (reseller.Sold_Prima!!.toInt()+ reseller.Sold_Kamakhya!!.toInt() + reseller.Sold_Suvidha!!.toInt() + reseller.Sold_Others!!.toInt()).toString()
             Toast.makeText(this, "$reseller", Toast.LENGTH_SHORT).show()
