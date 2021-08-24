@@ -45,7 +45,7 @@ import java.lang.Exception
 import java.util.*
 
 
-class   HomeFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
