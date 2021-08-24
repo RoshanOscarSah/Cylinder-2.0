@@ -14,4 +14,5 @@
     <color name="selectedLanguage">#940000</color>
     <color name="notselectedLanguage">#ff9595</color>
     <color name="ic_app_background">#DA6157</color>
+    <color name="transparent">#00DA6157</color>
 </resources>

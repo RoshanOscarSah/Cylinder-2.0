@@ -9,12 +9,14 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.eachut.cylinder.databinding.ActivityMainBinding
+import com.eachut.cylinder.ui.home.HomeFragment
 import com.eachut.cylinder.ui.profiles.GetResellerProfile
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var bottomNavigationView: BottomNavigationView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 //        val appBarConfiguration = AppBarConfiguration(setOf(
 //                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_stock, R.id.navigation_notifications, R.id.navigation_profiles))
 //        setupActionBarWithNavController(navController, appBarConfiguration)
+
 
 
         navView.setupWithNavController(navController)

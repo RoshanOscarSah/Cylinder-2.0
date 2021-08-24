@@ -42,6 +42,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import java.util.*
 
 
 class   HomeFragment : Fragment() {
@@ -78,8 +79,10 @@ class   HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
-
+        //Random Receipt Number Generator
+        val rnd = Random()
+        val number: Int = rnd.nextInt(999999)
+        val randomNumber = String.format("%06d", number)
 
 //reseller/company
         binding.tvCompany.setOnClickListener { view ->
@@ -572,6 +575,7 @@ class   HomeFragment : Fragment() {
 
 // GO
         binding.llGo.setOnClickListener { view ->
+            val RandomNumber = randomNumber
             val Gas_state = gasState
             val Regular_Prima = binding.etGas1R.text
             val Regular_Kamakhya = binding.etGas2R.text
@@ -593,6 +597,7 @@ class   HomeFragment : Fragment() {
                 ResellerID = ResellerDetails.getReseller()._id.toString()
                 var reseller = ResellerDetails.getReseller()
                 val resellerStock = ResellerStock(
+                    ResellerReceiptNo = RandomNumber,
                     ResellerID = ResellerID,
                     Gas_state = Gas_state,
                     Regular_Prima = Regular_Prima.toString().toInt(),
@@ -623,6 +628,7 @@ class   HomeFragment : Fragment() {
                 CompanyID = CompanyDetails.getCompany()._id.toString()
                 var company = CompanyDetails.getCompany()
                 val companyStock = CompanyStock(
+                    CompanyReceiptNo = RandomNumber,
                     CompanyID = CompanyID,
                     Gas_state = Gas_state,
                     Regular_Prima = Regular_Prima.toString().toInt(),
