@@ -42,6 +42,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import java.util.*
 
 
 class   HomeFragment : Fragment() {
@@ -78,8 +79,10 @@ class   HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
-
+        //Random Receipt Number Generator
+        val rnd = Random()
+        val number: Int = rnd.nextInt(999999)
+        val randomNumber = String.format("%06d", number)
 
 //reseller/company
         binding.tvCompany.setOnClickListener { view ->
@@ -572,6 +575,7 @@ class   HomeFragment : Fragment() {
 
 // GO
         binding.llGo.setOnClickListener { view ->
+            val RandomNumber = randomNumber
             val Gas_state = gasState
             val Regular_Prima = binding.etGas1R.text
             val Regular_Kamakhya = binding.etGas2R.text
@@ -593,6 +597,7 @@ class   HomeFragment : Fragment() {
                 ResellerID = ResellerDetails.getReseller()._id.toString()
                 var reseller = ResellerDetails.getReseller()
                 val resellerStock = ResellerStock(
+                    ResellerReceiptNo = RandomNumber,
                     ResellerID = ResellerID,
                     Gas_state = Gas_state,
                     Regular_Prima = Regular_Prima.toString().toInt(),
@@ -623,6 +628,7 @@ class   HomeFragment : Fragment() {
                 CompanyID = CompanyDetails.getCompany()._id.toString()
                 var company = CompanyDetails.getCompany()
                 val companyStock = CompanyStock(
+                    CompanyReceiptNo = RandomNumber,
                     CompanyID = CompanyID,
                     Gas_state = Gas_state,
                     Regular_Prima = Regular_Prima.toString().toInt(),
@@ -667,6 +673,7 @@ class   HomeFragment : Fragment() {
     //popup Reseller list
     fun showPopupReseller() {
 
+
         val inflater: LayoutInflater = this.getLayoutInflater()
         val dialogView: View = inflater.inflate(R.layout.activity_prename, null)
         val recyclerView = dialogView.findViewById<RecyclerView>(R.id.recyclerview)
@@ -676,23 +683,34 @@ class   HomeFragment : Fragment() {
         dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
             override fun onDismiss(arg0: DialogInterface) {
                 val resellerStock = ResellerStockDetails.getResellerStockDetails()
+                val flag = ResellerStockDetails.isData()
+                var TotalCylinder = 0
+                var leakCylinder = 0
+                var halfCylinder = 0
+                if (flag){
+                     TotalCylinder = resellerStock.Leak_Kamakhya!!.toInt()+resellerStock.Leak_Others!!.toInt()+
+                            resellerStock.Leak_Prima!!.toInt()+resellerStock.Leak_Suvidha!!.toInt()+resellerStock.Regular_Kamakhya!!.toInt()+
+                            resellerStock.Regular_Prima!!.toInt()+resellerStock.Regular_Suvidha!!.toInt()+resellerStock.Regular_Others!!.toInt()+
+                            resellerStock.Sold_Kamakhya!!.toInt()+resellerStock.Sold_Suvidha!!.toInt()+resellerStock.Sold_Prima!!.toInt()+
+                            resellerStock.Sold_Others!!.toInt()
+
+                     leakCylinder = resellerStock.Leak_Kamakhya!!.toInt()+resellerStock.Leak_Others!!.toInt()+resellerStock.Leak_Prima!!.toInt()+resellerStock.Leak_Suvidha!!.toInt()
+
+                    if(resellerStock.Gas_state=="Half"){
+                         halfCylinder = TotalCylinder
+                    }
+
+
+                }
+                binding.tvDashboardHalfcylinder.text=halfCylinder.toString()
+
                 binding.title.text = ResellerDetails.getReseller().reseller_fullname
                 binding.subtitle.text = ResellerDetails.getReseller().pasal_name
                 binding.address.text = ResellerDetails.getReseller().address
                 binding.ivCall.contentDescription = ResellerDetails.getReseller().phone_number
                 binding.tvDashboardRate.text = ResellerStockDetails.getResellerStockDetails().Amount
-                val TotalCylinder = resellerStock.Leak_Kamakhya!!.toInt()+resellerStock.Leak_Others!!.toInt()+
-                        resellerStock.Leak_Prima!!.toInt()+resellerStock.Leak_Suvidha!!.toInt()+resellerStock.Regular_Kamakhya!!.toInt()+
-                        resellerStock.Regular_Prima!!.toInt()+resellerStock.Regular_Suvidha!!.toInt()+resellerStock.Regular_Others!!.toInt()+
-                        resellerStock.Sold_Kamakhya!!.toInt()+resellerStock.Sold_Suvidha!!.toInt()+resellerStock.Sold_Prima!!.toInt()+
-                        resellerStock.Sold_Others!!.toInt()
-                if(resellerStock.Gas_state=="Half"){
-                    val halfCylinder = TotalCylinder
-                    binding.tvDashboardHalfcylinder.text=halfCylinder.toString()
-                }else{
-                    binding.tvDashboardHalfcylinder.text="0"
-                }
-                val leakCylinder = resellerStock.Leak_Kamakhya!!.toInt()+resellerStock.Leak_Others!!.toInt()+resellerStock.Leak_Prima!!.toInt()+resellerStock.Leak_Suvidha!!.toInt()
+
+
                 binding.tvDashboardLeakcylinder.text = leakCylinder.toString()
                 binding.tvDashboardTag.text
                 binding.tvDashboardBurn.text

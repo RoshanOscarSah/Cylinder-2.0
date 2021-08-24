@@ -80,8 +80,17 @@ class DashboardFragment : Fragment() {
                         binding.txtBestSellingSuvidha.setText("${response2.Suvidha_BestSelling}")
                         binding.txtCompanyname.setText("${response3.nextOrder}")
                         binding.txtNoofCylinder.setText("${response3.left}")
-                        binding.txtProfit.setText("${response4.profitLossAmount}")
-                        binding.txtInvestment.setText("${response4.investment}")
+
+                        val number:Double = response4.profitLossAmount.toString().toDouble()
+                        val number3digits:Double = String.format("%.3f", number).toDouble()
+                        val profitloss:Double = String.format("%.2f", number3digits).toDouble()
+
+                        val number2:Double = response4.investment.toString().toDouble()
+                        val number3digits2:Double = String.format("%.3f", number2).toDouble()
+                        val investment:Double = String.format("%.2f", number3digits2).toDouble()
+
+                        binding.txtProfit.setText("${profitloss}")
+                        binding.txtInvestment.setText("${investment}")
 
 
                         // BEST SELLER
