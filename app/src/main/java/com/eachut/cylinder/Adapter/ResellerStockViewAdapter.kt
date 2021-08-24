@@ -60,6 +60,9 @@ class ResellerStockViewAdapter(
                 try{
                     val resellerStockRepo = ResellerStockRepository()
                     val response = resellerStockRepo.singleresellerStockList(reseller._id!!)
+                    withContext(Main){
+                        Toast.makeText(context, "Response : ${response.success}", Toast.LENGTH_SHORT).show()
+                    }
                     if(response.success!!){
                         ResellerStockDetails.setResellerStockDetails(response.data!!)
                         withContext(Main){
@@ -74,7 +77,7 @@ class ResellerStockViewAdapter(
                     }
                 }catch(e:Exception){
                     withContext(Main){
-                        Toast.makeText(context, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Error : ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
