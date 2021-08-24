@@ -1330,9 +1330,6 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="20dp"/>
     </ScrollView>
 
     <!--SCHEDULE-->
@@ -1394,10 +1391,10 @@
                         android:textSize="16dp"/>
                 </LinearLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
