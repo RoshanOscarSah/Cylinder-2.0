@@ -33,7 +33,7 @@ class StockRepository: MyApiRequest() {
         }
     }
 
-    //get gas cylinder
+    //get best selling
     suspend fun bestSelling(): GetbestSellingresponse {
         return apiRequest {
             StockAPI.bestSelling()
