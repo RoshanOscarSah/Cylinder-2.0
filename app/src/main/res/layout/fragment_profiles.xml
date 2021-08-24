@@ -134,9 +134,39 @@
             android:backgroundTint="#80FFFFFF"/>
 
         <LinearLayout
-            android:id="@+id/ivFilterProfiles"
+            android:id="@+id/ivFilterProfiles1"
             android:layout_width="wrap_content"
             android:layout_height="50dp">
+
+            <ImageView
+                android:layout_width="27dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/ic_filter" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ivFilterProfiles2"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="27dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/ic_filter" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ivFilterProfiles3"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="27dp"
