@@ -332,10 +332,4 @@ class StockFragment : Fragment() {
         }
     }
 
-
-
-
-
-
-
 }
