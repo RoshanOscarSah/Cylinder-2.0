@@ -148,6 +148,9 @@ class ProfilesFragment : Fragment() {
 //customer/company/member
         binding.tvCustomerP.setOnClickListener { view ->
             //for setting gravity
+            binding.ivFilterProfiles1.isVisible = true
+            binding.ivFilterProfiles2.isVisible = false
+            binding.ivFilterProfiles3.isVisible = false
             val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
             )
@@ -165,6 +168,9 @@ class ProfilesFragment : Fragment() {
 
         binding.tvCompanyP.setOnClickListener { view ->
             //for setting gravity
+            binding.ivFilterProfiles1.isVisible = false
+            binding.ivFilterProfiles2.isVisible = true
+            binding.ivFilterProfiles3.isVisible = false
             val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
             )
@@ -182,6 +188,9 @@ class ProfilesFragment : Fragment() {
 
         binding.tvMemberP.setOnClickListener { view ->
             //for setting gravity
+            binding.ivFilterProfiles1.isVisible = false
+            binding.ivFilterProfiles2.isVisible = false
+            binding.ivFilterProfiles3.isVisible = true
             val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
             )
@@ -218,10 +227,10 @@ class ProfilesFragment : Fragment() {
 // FILTER
 
 
-        binding.ivFilterProfiles.setOnClickListener {
+        binding.ivFilterProfiles1.setOnClickListener {
 
             val popupMenu: PopupMenu =
-                PopupMenu(this.context, view?.findViewById(R.id.ivFilterProfiles))
+                PopupMenu(this.context, view?.findViewById(R.id.ivFilterProfiles1))
             popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
                 when (item.itemId) {
@@ -229,9 +238,15 @@ class ProfilesFragment : Fragment() {
                         //sort reseller
 
                         sortedReseller =
-                            resellerList.sortedWith(compareBy { it.pasal_name!!.first() }) as MutableList<Reseller>
+                            resellerList.sortedWith(compareBy { it.reseller_fullname!!.first() }) as MutableList<Reseller>
                         ResellerList.setResellerList(sortedReseller)
-
+                        val fragment = GetResellerProfile()
+                        val fragmentManager = requireActivity().supportFragmentManager
+                        val fragmentTransaction = fragmentManager.beginTransaction()
+                        fragmentTransaction.replace(android.R.id.content, fragment)
+                        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        fragmentTransaction.addToBackStack(null)
+                        fragmentTransaction.commit()
 
 //                            //sort Company
                         sortedCompany =
@@ -239,16 +254,23 @@ class ProfilesFragment : Fragment() {
                         CompanyList.setCompanyList(sortedCompany)
 //
 //                            //sort Member
-                            sortedMember =
-                                memberList.sortedWith(compareBy { it.Firstname!!.first() }) as MutableList<Member>
-                             MemberList.setMemberList(sortedMember)
+                        sortedMember =
+                            memberList.sortedWith(compareBy { it.Firstname!!.first() }) as MutableList<Member>
+                        MemberList.setMemberList(sortedMember)
                         Toast.makeText(context, "${sortedMember}", Toast.LENGTH_SHORT).show()
                     }
                     R.id.descending -> {
                         //sort reseller
                         sortedReseller =
-                            resellerList.sortedByDescending { it.pasal_name!!.first() } as MutableList<Reseller>
+                            resellerList.sortedByDescending { it.reseller_fullname!!.first() } as MutableList<Reseller>
                         ResellerList.setResellerList(sortedReseller)
+                        val fragment = GetResellerProfile()
+                        val fragmentManager = requireActivity().supportFragmentManager
+                        val fragmentTransaction = fragmentManager.beginTransaction()
+                        fragmentTransaction.replace(android.R.id.content, fragment)
+                        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        fragmentTransaction.addToBackStack(null)
+                        fragmentTransaction.commit()
 
 //                        //sort company
                         sortedCompany =
@@ -273,6 +295,149 @@ class ProfilesFragment : Fragment() {
 //        profilesViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
 //        })
+
+        }
+
+        binding.ivFilterProfiles2.setOnClickListener {
+
+            val popupMenu: PopupMenu =
+                PopupMenu(this.context, view?.findViewById(R.id.ivFilterProfiles2))
+            popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.ascending -> {
+                        //sort reseller
+
+                        sortedReseller =
+                            resellerList.sortedWith(compareBy { it.pasal_name!!.first() }) as MutableList<Reseller>
+                        ResellerList.setResellerList(sortedReseller)
+
+//                            //sort Company
+                        sortedCompany =
+                            companyList.sortedWith(compareBy { it.cylinder_name!!.first() }) as MutableList<Company>
+                        CompanyList.setCompanyList(sortedCompany)
+                        val fragment = ViewCompanyFragment()
+                        val fragmentManager = requireActivity().supportFragmentManager
+                        val fragmentTransaction = fragmentManager.beginTransaction()
+                        fragmentTransaction.replace(android.R.id.content, fragment)
+                        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        fragmentTransaction.addToBackStack(null)
+                        fragmentTransaction.commit()
+//
+//                            //sort Member
+                        sortedMember =
+                            memberList.sortedWith(compareBy { it.Firstname!!.first() }) as MutableList<Member>
+                        MemberList.setMemberList(sortedMember)
+                        Toast.makeText(context, "${sortedMember}", Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.descending -> {
+                        //sort reseller
+                        sortedReseller =
+                            resellerList.sortedByDescending { it.pasal_name!!.first() } as MutableList<Reseller>
+                        ResellerList.setResellerList(sortedReseller)
+
+//                        //sort company
+                        sortedCompany =
+                            companyList.sortedByDescending { it.cylinder_name!!.first() } as MutableList<Company>
+                        CompanyList.setCompanyList(sortedCompany)
+                        val fragment = ViewCompanyFragment()
+                        val fragmentManager = requireActivity().supportFragmentManager
+                        val fragmentTransaction = fragmentManager.beginTransaction()
+                        fragmentTransaction.replace(android.R.id.content, fragment)
+                        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        fragmentTransaction.addToBackStack(null)
+                        fragmentTransaction.commit()
+//
+//                        //sort member
+                        sortedMember =
+                            memberList.sortedByDescending { it.Firstname!!.first() } as MutableList<Member>
+                        MemberList.setMemberList(sortedMember)
+////                        Toast.makeText(context, "$sortedReseller", Toast.LENGTH_SHORT).show()
+                    }
+//                    R.id.mostsold -> {
+//                        Toast.makeText(view?.context, "Most Sold", Toast.LENGTH_SHORT).show()
+//                    }
+                }
+                true
+            })
+            popupMenu.show()
+
+//        val textView: TextView = binding.textProfiles
+//        profilesViewModel.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
+
+        }
+
+        binding.ivFilterProfiles3.setOnClickListener {
+
+            val popupMenu: PopupMenu =
+                PopupMenu(this.context, view?.findViewById(R.id.ivFilterProfiles3))
+            popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.ascending -> {
+                        //sort reseller
+
+                        sortedReseller =
+                            resellerList.sortedWith(compareBy { it.pasal_name!!.first() }) as MutableList<Reseller>
+                        ResellerList.setResellerList(sortedReseller)
+
+//                            //sort Company
+                        sortedCompany =
+                            companyList.sortedWith(compareBy { it.cylinder_name!!.first() }) as MutableList<Company>
+                        CompanyList.setCompanyList(sortedCompany)
+//
+//                            //sort Member
+                        sortedMember =
+                            memberList.sortedWith(compareBy { it.Firstname!!.first() }) as MutableList<Member>
+                        MemberList.setMemberList(sortedMember)
+                        val fragment = ViewMemberFragment()
+                        val fragmentManager = requireActivity().supportFragmentManager
+                        val fragmentTransaction = fragmentManager.beginTransaction()
+                        fragmentTransaction.replace(android.R.id.content, fragment)
+                        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        fragmentTransaction.addToBackStack(null)
+                        fragmentTransaction.commit()
+                        Toast.makeText(context, "${sortedMember}", Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.descending -> {
+                        //sort reseller
+                        sortedReseller =
+                            resellerList.sortedByDescending { it.pasal_name!!.first() } as MutableList<Reseller>
+                        ResellerList.setResellerList(sortedReseller)
+
+//                        //sort company
+                        sortedCompany =
+                            companyList.sortedByDescending { it.cylinder_name!!.first() } as MutableList<Company>
+                        CompanyList.setCompanyList(sortedCompany)
+//
+//                        //sort member
+                        sortedMember =
+                            memberList.sortedByDescending { it.Firstname!!.first() } as MutableList<Member>
+                        MemberList.setMemberList(sortedMember)
+                        val fragment = ViewMemberFragment()
+                        val fragmentManager = requireActivity().supportFragmentManager
+                        val fragmentTransaction = fragmentManager.beginTransaction()
+                        fragmentTransaction.replace(android.R.id.content, fragment)
+                        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        fragmentTransaction.addToBackStack(null)
+                        fragmentTransaction.commit()
+////                        Toast.makeText(context, "$sortedReseller", Toast.LENGTH_SHORT).show()
+                    }
+//                    R.id.mostsold -> {
+//                        Toast.makeText(view?.context, "Most Sold", Toast.LENGTH_SHORT).show()
+//                    }
+                }
+                true
+            })
+            popupMenu.show()
+
+//        val textView: TextView = binding.textProfiles
+//        profilesViewModel.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
+
         }
 
         return root
