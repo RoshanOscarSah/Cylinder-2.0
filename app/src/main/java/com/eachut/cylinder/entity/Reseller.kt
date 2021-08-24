@@ -10,7 +10,8 @@ data class Reseller (
     var pasal_name  :String?=null,
     var address  :String?=null,
     var phone_number  :String?=null,
-    var rateforReseller  :String?=null
+    var rateforReseller  :String?=null,
+    var isActive : Boolean?=null,
 
 ):Parcelable {
     constructor(parcel: Parcel) : this(
@@ -19,7 +20,8 @@ data class Reseller (
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readValue(Boolean::class.java.classLoader) as? Boolean
     ) {
     }
 
@@ -30,6 +32,7 @@ data class Reseller (
         parcel.writeString(address)
         parcel.writeString(phone_number)
         parcel.writeString(rateforReseller)
+        parcel.writeValue(isActive)
     }
 
     override fun describeContents(): Int {
