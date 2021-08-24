@@ -15,12 +15,14 @@ import android.os.Environment
 import android.telephony.gsm.SmsManager
 import android.util.DisplayMetrics
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import com.eachut.cylinder.entity.Company
 import com.eachut.cylinder.entity.CompanyStock
 import com.eachut.cylinder.entity.Reseller
@@ -62,6 +64,7 @@ class ReceiptActivity : AppCompatActivity() {
     private lateinit var btnSubmit:TextView
     private lateinit var btnDownload:Button
     private lateinit var btnSendmessage:Button
+    private lateinit var llGo : LinearLayout
 
     private val permissions = arrayOf(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -96,6 +99,7 @@ class ReceiptActivity : AppCompatActivity() {
         btnDownload = findViewById(R.id.btnDownload)
         btnSubmit = findViewById(R.id.btnSubmit)
         btnSendmessage = findViewById(R.id.btnSendmessage)
+        llGo = findViewById(R.id.llGo)
 
         val imgbtnBack = findViewById<View>(R.id.imgbtnBack) as ImageView
         imgbtnBack.setOnClickListener(object : View.OnClickListener {
@@ -111,10 +115,10 @@ class ReceiptActivity : AppCompatActivity() {
         })
 
 
-
         if (!hasPermissions()) {
             requestPermission()
         }
+
 
         btnSendmessage.setOnClickListener(View.OnClickListener {
             val name = txtCname.text.toString()
@@ -182,7 +186,12 @@ class ReceiptActivity : AppCompatActivity() {
                         if (companyResponse.success!!){
                             withContext(Main){
                                 Toast.makeText(this@ReceiptActivity, "${companyResponse.message}", Toast.LENGTH_SHORT).show()
+                                btnDownload.isVisible = true
+                                btnSendmessage.isVisible = true
+                                imgbtnBack.isVisible = false
+                                llGo.isVisible = false
                             }
+
                         }
                         else{
                             withContext(Main){
@@ -196,6 +205,7 @@ class ReceiptActivity : AppCompatActivity() {
                     }
 
                 }
+
 
             }
 
@@ -224,7 +234,12 @@ class ReceiptActivity : AppCompatActivity() {
                         if (resellerResponse.success!!){
                             withContext(Main){
                                 Toast.makeText(this@ReceiptActivity, "${resellerResponse.message}", Toast.LENGTH_SHORT).show()
+                                btnDownload.isVisible = true
+                                btnSendmessage.isVisible = true
+                                imgbtnBack.isVisible = false
+                                llGo.isVisible = false
                             }
+
                         }else{
                             withContext(Main){
                                 Toast.makeText(this@ReceiptActivity, "${resellerResponse.message}", Toast.LENGTH_SHORT).show()
@@ -240,6 +255,8 @@ class ReceiptActivity : AppCompatActivity() {
                 }
 
             }
+
+
 
         }
 
