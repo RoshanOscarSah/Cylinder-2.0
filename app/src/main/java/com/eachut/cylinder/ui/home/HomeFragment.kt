@@ -45,7 +45,7 @@ import java.lang.Exception
 import java.util.*
 
 
-class   HomeFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
@@ -121,7 +121,7 @@ class   HomeFragment : Fragment() {
 
 //select customer
         binding.llSelectCustomer.setOnClickListener { view ->
-             customerOrCompany = binding.tvCustomerOrCompany.getContentDescription().toString()
+            customerOrCompany = binding.tvCustomerOrCompany.getContentDescription().toString()
             binding.llNameSelected.isVisible = true
 
             if (customerOrCompany == "getReseller"){
@@ -688,16 +688,16 @@ class   HomeFragment : Fragment() {
                 var leakCylinder = 0
                 var halfCylinder = 0
                 if (flag){
-                     TotalCylinder = resellerStock.Leak_Kamakhya!!.toInt()+resellerStock.Leak_Others!!.toInt()+
+                    TotalCylinder = resellerStock.Leak_Kamakhya!!.toInt()+resellerStock.Leak_Others!!.toInt()+
                             resellerStock.Leak_Prima!!.toInt()+resellerStock.Leak_Suvidha!!.toInt()+resellerStock.Regular_Kamakhya!!.toInt()+
                             resellerStock.Regular_Prima!!.toInt()+resellerStock.Regular_Suvidha!!.toInt()+resellerStock.Regular_Others!!.toInt()+
                             resellerStock.Sold_Kamakhya!!.toInt()+resellerStock.Sold_Suvidha!!.toInt()+resellerStock.Sold_Prima!!.toInt()+
                             resellerStock.Sold_Others!!.toInt()
 
-                     leakCylinder = resellerStock.Leak_Kamakhya!!.toInt()+resellerStock.Leak_Others!!.toInt()+resellerStock.Leak_Prima!!.toInt()+resellerStock.Leak_Suvidha!!.toInt()
+                    leakCylinder = resellerStock.Leak_Kamakhya!!.toInt()+resellerStock.Leak_Others!!.toInt()+resellerStock.Leak_Prima!!.toInt()+resellerStock.Leak_Suvidha!!.toInt()
 
                     if(resellerStock.Gas_state=="Half"){
-                         halfCylinder = TotalCylinder
+                        halfCylinder = TotalCylinder
                     }
 
 
