@@ -261,7 +261,6 @@ class ReceiptActivity : AppCompatActivity() {
         }
 
     }
-
     private fun createPdf() {
         val wm = getSystemService(WINDOW_SERVICE) as WindowManager
         val displaymetrics = DisplayMetrics()
