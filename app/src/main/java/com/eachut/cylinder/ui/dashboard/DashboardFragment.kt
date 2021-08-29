@@ -16,6 +16,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.eachut.cylinder.databinding.FragmentDashboardBinding
 import com.eachut.cylinder.repository.ResellerRepository
 import com.eachut.cylinder.repository.StockRepository
@@ -23,10 +27,17 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 
 
 class DashboardFragment : Fragment() {
 
+    private val FCM_API="https://fcm.googleapis.com/fcm/send"
+    private val serverKey= "key="+ "AAAAnuSaR24:APA91bHgq4BQ8PwZHES3T6kq-xOkgH3hUclVsxotk05JX3kk00N6AOKboQsxosU3egHPwrGIGLRm83xh6oxc0Bb6_eBeoDTy8VeeqDIZlR0LM1IfKvsarATDFnR6T8j9j-_hk0RfbWzi"
+    private val contentType = "application/json"
+    private val requestQueue : RequestQueue by lazy {
+        Volley.newRequestQueue(this.context)
+    }
     private lateinit var dashboardViewModel: DashboardViewModel
     private var _binding: FragmentDashboardBinding? = null
 
@@ -69,6 +80,7 @@ class DashboardFragment : Fragment() {
                     binding.txtLatestReseller.setText("${response5.latest?.reseller_fullname}")
                 }
 
+
                 if(response.success == true) {
                     withContext(Dispatchers.Main) {
                         binding.txtGassold.setText("${response.Gas_Sold}")
@@ -80,6 +92,10 @@ class DashboardFragment : Fragment() {
                         binding.txtBestSellingSuvidha.setText("${response2.Suvidha_BestSelling}")
                         binding.txtCompanyname.setText("${response3.nextOrder}")
                         binding.txtNoofCylinder.setText("${response3.left}")
+
+
+
+
 
                         val number:Double = response4.profitLossAmount.toString().toDouble()
                         val number3digits:Double = String.format("%.3f", number).toDouble()
@@ -139,10 +155,21 @@ class DashboardFragment : Fragment() {
                     }
                 }
 
+                val nextOrderInt = response3.left.toString().toInt()
+
+                if (nextOrderInt < 5){
+                    sendNotification(notification = JSONObject())
+
+                }
+
+
             }catch (ex: Exception) {
 
             }
+
+
         }
+
 
 
 
@@ -153,6 +180,27 @@ class DashboardFragment : Fragment() {
 //            textView.text = it
 //        })
         return root
+    }
+    private fun sendNotification(notification: JSONObject) {
+        Log.e("TAG", "sendNotification")
+        val jsonObjectRequest = object : JsonObjectRequest(FCM_API, notification,
+            Response.Listener<JSONObject> { response ->
+                Log.i("TAG", "onResponse: $response")
+//                tvName.setText("")
+            },
+            Response.ErrorListener {
+                Toast.makeText(requireContext(), "Request error", Toast.LENGTH_LONG).show()
+                Log.i("TAG", "onErrorResponse: Didn't work")
+            }) {
+            override fun getHeaders(): Map<String, String> {
+                val params = HashMap<String, String>()
+                params["Authorization"] = serverKey
+                params["Content-Type"] = contentType
+                return params
+            }
+        }
+        requestQueue.add(jsonObjectRequest)
+
     }
 
     override fun onDestroyView() {
