@@ -98,7 +98,7 @@ class ResellerStockViewAdapter(
                 {
                     withContext(Main){
                         print(e)
-                        Toast.makeText(context, "error : ${e.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Could Not Find Data in Database", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
