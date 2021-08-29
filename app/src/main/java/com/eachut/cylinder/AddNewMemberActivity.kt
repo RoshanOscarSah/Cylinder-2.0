@@ -12,15 +12,31 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import com.eachut.cylinder.databinding.ActivityAddNewMemberBinding
 import com.eachut.cylinder.entity.Company
 import com.eachut.cylinder.entity.Member
 import com.eachut.cylinder.entity.Reseller
 import com.eachut.cylinder.repository.CompanyRepository
 import com.eachut.cylinder.repository.MemberRepository
 import com.eachut.cylinder.repository.ResellerRepository
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.*
+import org.json.JSONException
+import org.json.JSONObject
 
 class AddNewMemberActivity : AppCompatActivity() {
+
+    private val FCM_API="https://fcm.googleapis.com/fcm/send"
+    private val serverKey= "key="+ "AAAAnuSaR24:APA91bHgq4BQ8PwZHES3T6kq-xOkgH3hUclVsxotk05JX3kk00N6AOKboQsxosU3egHPwrGIGLRm83xh6oxc0Bb6_eBeoDTy8VeeqDIZlR0LM1IfKvsarATDFnR6T8j9j-_hk0RfbWzi"
+    private val contentType = "application/json"
+    private val requestQueue : RequestQueue by lazy {
+        Volley.newRequestQueue(this.applicationContext)
+    }
 
     private lateinit var ivToggleActiveP : ImageView
 
@@ -72,6 +88,9 @@ class AddNewMemberActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_member)
 
+     val binding = DataBindingUtil.setContentView<ActivityAddNewMemberBinding>(this,R.layout.activity_add_new_member)
+
+        FirebaseMessaging.getInstance().subscribeToTopic("/topics/Enter_topic")
         ivToggleActiveP = findViewById(R.id.ivToggleActiveP)
 
         etUsername = findViewById(R.id.etUsername)
@@ -129,6 +148,8 @@ class AddNewMemberActivity : AppCompatActivity() {
         MemberForm()
         CompanyForm()
         ResellerForm()
+
+
 
 
 
@@ -307,6 +328,19 @@ class AddNewMemberActivity : AppCompatActivity() {
                     }
                 }
             }
+            val topic = "/topics/Enter_topic"
+            val notification = JSONObject()
+            val notificationBody = JSONObject()
+            try{
+                notificationBody.put("title","Cylinder 2.0")
+                notificationBody.put("message","New Member has been added")
+                notification.put("to",topic)
+                notification.put("data",notificationBody)
+                Log.e("TAG","try")
+            }catch (e:JSONException){
+                Log.e("TAG","OnCreate: " + e.message)
+            }
+            sendNotification(notification)
 
         }
 
@@ -358,6 +392,28 @@ class AddNewMemberActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun sendNotification(notification: JSONObject) {
+        Log.e("TAG", "sendNotification")
+        val jsonObjectRequest = object : JsonObjectRequest(FCM_API, notification,
+            Response.Listener<JSONObject> { response ->
+                Log.i("TAG", "onResponse: $response")
+//                tvName.setText("")
+            },
+            Response.ErrorListener {
+                Toast.makeText(this, "Request error", Toast.LENGTH_LONG).show()
+                Log.i("TAG", "onErrorResponse: Didn't work")
+            }) {
+            override fun getHeaders(): Map<String, String> {
+                val params = HashMap<String, String>()
+                params["Authorization"] = serverKey
+                params["Content-Type"] = contentType
+                return params
+            }
+        }
+        requestQueue.add(jsonObjectRequest)
+
     }
 
     private fun MemberForm()
