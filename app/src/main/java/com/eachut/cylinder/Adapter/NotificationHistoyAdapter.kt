@@ -1,10 +1,12 @@
 package com.eachut.cylinder.Adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.eachut.cylinder.R
@@ -25,6 +27,9 @@ class NotificationHistoyAdapter(
         val NotificationL2 : TextView
         val NotificationL3 : TextView
         val NotificationR1 : TextView
+        val btnAccept : FrameLayout
+        val ImageAccept : ImageView
+        val textAccept : TextView
 //        val NotificationR2 : FrameLayout
 
         init {
@@ -34,6 +39,9 @@ class NotificationHistoyAdapter(
             NotificationL3 = view.findViewById(R.id.NotificationL3)
             NotificationR1 = view.findViewById(R.id.NotificationR1)
 //            NotificationR2 = view.findViewById(R.id.NotificationR2)
+            btnAccept = view.findViewById(R.id.btnAccept)
+            ImageAccept = view.findViewById(R.id.ImageAccept)
+            textAccept = view.findViewById(R.id.textAccept)
         }
     }
 
@@ -46,6 +54,7 @@ class NotificationHistoyAdapter(
         return NotificationHistoryViewHolder(view)
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: NotificationHistoryViewHolder, position: Int) {
         var notificationhistory = notificationHistoryList[position]
         holder.NotificationType.text = notificationhistory.Title
@@ -53,6 +62,11 @@ class NotificationHistoyAdapter(
         holder.NotificationL2.text = notificationhistory.L2
         holder.NotificationL3.text = notificationhistory.L3
         holder.NotificationR1.text = notificationhistory.R1
+
+        holder.btnAccept.setOnClickListener {
+            holder.textAccept.text = "Accepted"
+            holder.ImageAccept.setBackgroundResource(R.drawable.ic_toggle_accepted)
+        }
     }
 
     override fun getItemCount(): Int {
