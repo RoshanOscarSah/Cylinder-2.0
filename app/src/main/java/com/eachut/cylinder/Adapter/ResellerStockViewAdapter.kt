@@ -1,6 +1,7 @@
 package com.eachut.cylinder.Adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,24 +61,44 @@ class ResellerStockViewAdapter(
                 try{
                     val resellerStockRepo = ResellerStockRepository()
                     val response = resellerStockRepo.singleresellerStockList(reseller._id!!)
-                    withContext(Main){
-                        Toast.makeText(context, "Response : ${response.success}", Toast.LENGTH_SHORT).show()
-                    }
-                    if(response.success!!){
-                        ResellerStockDetails.setResellerStockDetails(response.data!!)
-                        withContext(Main){
-                            Toast.makeText(context, "data from database: ${response.data}", Toast.LENGTH_SHORT).show()
+                    withContext(Dispatchers.Main) {
+//                        println(response.success)
+//                        Toast.makeText(
+//                            context,
+//                            "Response : ${response.success}",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+                        Log.d("UNISH","Response : ${response}")
+                        if (response.success == true) {
+                            ResellerStockDetails.setResellerStockDetails(response.data!!)
+                            withContext(Main) {
+                                Toast.makeText(
+                                    context,
+                                    "data from database: ${response.data}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
-                    }
-                    else{
-                        withContext(Main){
-                            Toast.makeText(context, "No data received", Toast.LENGTH_SHORT).show()
+                        else if(response.success == false && response.data == null) {
+                            withContext(Main) {
+                                Toast.makeText(context, "Couldn't find data", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
+                        else{
+                            withContext(Main) {
+                                Toast.makeText(context, "Else", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
                         }
 
                     }
-                }catch(e:Exception){
+                }
+                catch(e:Exception)
+                {
                     withContext(Main){
-                        Toast.makeText(context, "Error : ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                        print(e)
+                        Toast.makeText(context, "Could Not Find Data in Database", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

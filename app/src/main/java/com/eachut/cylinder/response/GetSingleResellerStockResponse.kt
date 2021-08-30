@@ -6,4 +6,4 @@ data class GetSingleResellerStockResponse (
     val success:Boolean?=null,
     val message:String?=null,
     val data: ResellerStock?=null,
-        )
+)
