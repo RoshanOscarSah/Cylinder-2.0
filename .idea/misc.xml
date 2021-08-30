@@ -26,6 +26,11 @@
         <entry key="..\:/Users/CSabin/AndroidStudioProjects/Cylinder-2.0/cylinderwearos/src/main/res/drawable/ic_prima.xml" value="0.21125" />
         <entry key="..\:/Users/CSabin/AndroidStudioProjects/Cylinder-2.0/cylinderwearos/src/main/res/font/font_family.xml" value="0.205" />
         <entry key="..\:/Users/CSabin/AndroidStudioProjects/Cylinder-2.0/cylinderwearos/src/main/res/layout/activity_cylinder_wear_os.xml" value="0.36666666666666664" />
+
+        <entry key="..\:/Users/CSabin/AndroidStudioProjects/Cylinder-2.0/cylinderwearos/src/main/res/layout/activity_cylinder_wear_os.xml" value="0.5514018691588785" />
+
+        <entry key="..\:/Users/CSabin/AndroidStudioProjects/Cylinder-2.0/cylinderwearos/src/main/res/layout/activity_cylinder_wear_os.xml" value="0.75" />
+
         <entry key="..\:/Users/Renish Shah/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/drawable-xxhdpi/circle_button.xml" value="0.13914473684210527" />
         <entry key="..\:/Users/Renish Shah/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/fragment_dashboard.xml" value="0.18" />
         <entry key="..\:/Users/Renish Shah/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/view_schedule.xml" value="0.22" />
@@ -33,7 +38,18 @@
         <entry key="..\:/Users/Renish Shah/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/viewmember.xml" value="0.18" />
         <entry key="..\:/Users/Renish Shah/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/viewresellerprofile.xml" value="0.1" />
         <entry key="..\:/Users/Unish/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/activity_receipt.xml" value="0.12613981762917933" />
+
+        <entry key="..\:/Users/Unish/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/activity_splash.xml" value="0.259375" />
+        <entry key="..\:/Users/Unish/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/activity_success_member_add.xml" value="0.259375" />
+        <entry key="..\:/Users/Unish/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/activity_welcome.xml" value="0.259375" />
+        <entry key="..\:/Users/Unish/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/fragment_dashboard.xml" value="0.4" />
         <entry key="..\:/Users/Unish/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/Unish/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/popup_view_reseller.xml" value="0.14628623188405798" />
+        <entry key="..\:/Users/Unish/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/menu/bottom_nav_menu.xml" value="0.259375" />
+        <entry key="..\:/Users/Unish/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/menu/popup_menu.xml" value="0.259375" />
+
+        <entry key="..\:/Users/Unish/AndroidStudioProjects/Cylinder-2.0/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+
       </map>
     </option>
   </component>
