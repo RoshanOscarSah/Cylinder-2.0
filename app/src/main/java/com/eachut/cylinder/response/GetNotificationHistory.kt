@@ -5,5 +5,5 @@ import com.eachut.cylinder.entity.NotificationHistory
 data class GetNotificationHistory(
     val success : Boolean ? = null,
     val message : String ? = null,
-    val data : NotificationHistory ? = null
+    val data : MutableList<NotificationHistory> ? = null
 )

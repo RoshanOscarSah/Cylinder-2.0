@@ -23,11 +23,9 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
-import com.eachut.cylinder.entity.Company
-import com.eachut.cylinder.entity.CompanyStock
-import com.eachut.cylinder.entity.Reseller
-import com.eachut.cylinder.entity.ResellerStock
+import com.eachut.cylinder.entity.*
 import com.eachut.cylinder.repository.CompanyStockRepository
+import com.eachut.cylinder.repository.NotificationRepository
 import com.eachut.cylinder.repository.ResellerStockRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -175,15 +173,28 @@ class ReceiptActivity : AppCompatActivity() {
             txtLeak.text= (company.Leak_Prima!!.toInt() + company.Leak_Kamakhya!!.toInt() + company.Leak_Suvidha!!.toInt() + company.Leak_Others!!.toInt()).toString()
             txtSold.text = (company.Sold_Prima!!.toInt()+ company.Sold_Kamakhya!!.toInt() + company.Sold_Suvidha!!.toInt() + company.Sold_Others!!.toInt()).toString()
             Toast.makeText(this, "$company", Toast.LENGTH_SHORT).show()
+
+            //for adding notification
+            val notification = NotificationHistory(
+                Title = "Stock",
+                L1 = companyInfo.cylinder_name,
+                L2 = companyInfo.company_fullname,
+                L3 = " ",
+                R1 = company.SendOrReceive + "."+ company.Gas_state + "." + "#" + company.CompanyReceiptNo + "\n" + "P:" + company.Regular_Prima + ",K:" + company.Regular_Kamakhya + ",S:" + company.Regular_Suvidha + ",O:" + company.Regular_Others,
+                R2 = company.Amount,
+                Action = "Accepted"
+            )
             btnSubmit.setOnClickListener {
                 CoroutineScope(Dispatchers.IO).launch{
                     try{
                         val companyRepository  = CompanyStockRepository()
+                        val notificationRepository = NotificationRepository()
                         val companyResponse = companyRepository.addCompanyStock(company)
+                        val response2 = notificationRepository.addNotification(notification)
 //                        withContext(Main){
 //                            Toast.makeText(this@ReceiptActivity, "${companyResponse}", Toast.LENGTH_SHORT).show()
 //                        }
-                        if (companyResponse.success!!){
+                        if (companyResponse.success!! && response2.success!!){
                             withContext(Main){
                                 Toast.makeText(this@ReceiptActivity, "${companyResponse.message}", Toast.LENGTH_SHORT).show()
                                 btnDownload.isVisible = true
@@ -226,12 +237,25 @@ class ReceiptActivity : AppCompatActivity() {
             txtLeak.text= (reseller.Leak_Prima!!.toInt() + reseller.Leak_Kamakhya!!.toInt() + reseller.Leak_Suvidha!!.toInt() + reseller.Leak_Others!!.toInt()).toString()
             txtSold.text = (reseller.Sold_Prima!!.toInt()+ reseller.Sold_Kamakhya!!.toInt() + reseller.Sold_Suvidha!!.toInt() + reseller.Sold_Others!!.toInt()).toString()
             Toast.makeText(this, "$reseller", Toast.LENGTH_SHORT).show()
+
+            //for adding notification
+            val notification = NotificationHistory(
+                Title = "Stock",
+                L1 = resellerInfo.reseller_fullname,
+                L2 = resellerInfo.pasal_name,
+                L3 = resellerInfo.address,
+                R1 = reseller.SendOrReceive + "."+ reseller.Gas_state + "." + "#" + reseller.ResellerReceiptNo + "\n" + "P:" + reseller.Regular_Prima + ",K:" + reseller.Regular_Kamakhya + ",S:" + reseller.Regular_Suvidha + ",O:" + reseller.Regular_Others,
+                R2 = reseller.Amount,
+                Action = "Accepted"
+            )
             btnSubmit.setOnClickListener {
                 CoroutineScope(Dispatchers.IO).launch{
                     try{
                         val resellerRepository  = ResellerStockRepository()
                         val resellerResponse = resellerRepository.addResellerStock(reseller)
-                        if (resellerResponse.success!!){
+                        val notificationRepository = NotificationRepository()
+                        val response2 = notificationRepository.addNotification(notification)
+                        if (resellerResponse.success!! && response2.success!!){
                             withContext(Main){
                                 Toast.makeText(this@ReceiptActivity, "${resellerResponse.message}", Toast.LENGTH_SHORT).show()
                                 btnDownload.isVisible = true
