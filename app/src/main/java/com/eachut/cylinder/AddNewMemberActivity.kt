@@ -32,7 +32,7 @@ import org.json.JSONObject
 class AddNewMemberActivity : AppCompatActivity() {
 
     private val FCM_API="https://fcm.googleapis.com/fcm/send"
-    private val serverKey= "key="+ "AAAAnuSaR24:APA91bHgq4BQ8PwZHES3T6kq-xOkgH3hUclVsxotk05JX3kk00N6AOKboQsxosU3egHPwrGIGLRm83xh6oxc0Bb6_eBeoDTy8VeeqDIZlR0LM1IfKvsarATDFnR6T8j9j-_hk0RfbWzi"
+    private val serverKey= "key="+ "AAAAbBdGiL4:APA91bGljQeX7-IrldvqgRQK3JPC8su2s2JRrsGoULXE8lR_LnW0DdpUX1Tr_KWH01ABqxEZxJ-wLxW-HBI8ra9FTaRXROKuFtyO3-NQiV8BY6XUCBVn2GWFeCdi6T33pCSFIAPXvPA3"
     private val contentType = "application/json"
     private val requestQueue : RequestQueue by lazy {
         Volley.newRequestQueue(this.applicationContext)
