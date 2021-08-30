@@ -23,8 +23,8 @@ import kotlinx.coroutines.withContext
 import org.w3c.dom.Text
 
 class ResellerStockViewAdapter(
-    val context: Context,
-    val resellerList: MutableList<Reseller>
+        val context: Context,
+        val resellerList: MutableList<Reseller>
 ): RecyclerView.Adapter<ResellerStockViewAdapter.ResellerStockViewHolder>() {
     private var _binding: HomeFragment? = null
 
@@ -45,7 +45,7 @@ class ResellerStockViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResellerStockViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.popup_view_reseller, parent, false)
+                .inflate(R.layout.popup_view_reseller, parent, false)
         return ResellerStockViewAdapter.ResellerStockViewHolder(view)
     }
 
