@@ -69,12 +69,12 @@ class HomeFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+                ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -88,7 +88,7 @@ class HomeFragment : Fragment() {
         binding.tvCompany.setOnClickListener { view ->
             //for setting gravity
             val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
+                    FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
             )
             params.gravity = Gravity.RIGHT
             binding.ivToggleActive.setLayoutParams(params);
@@ -105,7 +105,7 @@ class HomeFragment : Fragment() {
         binding.tvCustomer.setOnClickListener { view ->
             //for setting gravity
             val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
+                    FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
             )
             params.gravity = Gravity.LEFT
             binding.ivToggleActive.setLayoutParams(params);
@@ -225,7 +225,7 @@ class HomeFragment : Fragment() {
 
             //for setting gravity
             val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
+                    FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
             )
             params.gravity = Gravity.LEFT
             binding.ivRlctoggleActive.setLayoutParams(params);
@@ -245,7 +245,7 @@ class HomeFragment : Fragment() {
 
             //for setting gravity
             val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
+                    FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
             )
             params.gravity = Gravity.CENTER
             binding.ivRlctoggleActive.setLayoutParams(params);
@@ -266,7 +266,7 @@ class HomeFragment : Fragment() {
 
             //for setting gravity
             val params: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
+                    FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
             )
             params.gravity = Gravity.RIGHT
             binding.ivRlctoggleActive.setLayoutParams(params);
@@ -281,8 +281,8 @@ class HomeFragment : Fragment() {
         //for regular
         binding.etGas1R.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int,
-                count: Int
+                    s: CharSequence, start: Int, before: Int,
+                    count: Int
             ) {
                 if (s != "") { //do your work here
                     rslTotal()
@@ -290,8 +290,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int,
-                after: Int
+                    s: CharSequence, start: Int, count: Int,
+                    after: Int
             ) {
             }
 
@@ -300,8 +300,8 @@ class HomeFragment : Fragment() {
 
         binding.etGas2R.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int,
-                count: Int
+                    s: CharSequence, start: Int, before: Int,
+                    count: Int
             ) {
                 if (s != "") { //do your work here
                     rslTotal()
@@ -309,8 +309,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int,
-                after: Int
+                    s: CharSequence, start: Int, count: Int,
+                    after: Int
             ) {
             }
 
@@ -319,8 +319,8 @@ class HomeFragment : Fragment() {
 
         binding.etGas3R.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int,
-                count: Int
+                    s: CharSequence, start: Int, before: Int,
+                    count: Int
             ) {
                 if (s != "") { //do your work here
                     rslTotal()
@@ -328,8 +328,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int,
-                after: Int
+                    s: CharSequence, start: Int, count: Int,
+                    after: Int
             ) {
             }
 
@@ -338,8 +338,8 @@ class HomeFragment : Fragment() {
 
         binding.etGas4R.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int,
-                count: Int
+                    s: CharSequence, start: Int, before: Int,
+                    count: Int
             ) {
                 if (s != "") { //do your work here
                     rslTotal()
@@ -347,8 +347,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int,
-                after: Int
+                    s: CharSequence, start: Int, count: Int,
+                    after: Int
             ) {
             }
 
@@ -358,8 +358,8 @@ class HomeFragment : Fragment() {
         //for leak
         binding.etGas1L.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int,
-                count: Int
+                    s: CharSequence, start: Int, before: Int,
+                    count: Int
             ) {
                 if (s != "") { //do your work here
                     rslTotal()
@@ -367,8 +367,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int,
-                after: Int
+                    s: CharSequence, start: Int, count: Int,
+                    after: Int
             ) {
             }
 
@@ -377,8 +377,8 @@ class HomeFragment : Fragment() {
 
         binding.etGas2L.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int,
-                count: Int
+                    s: CharSequence, start: Int, before: Int,
+                    count: Int
             ) {
                 if (s != "") { //do your work here
                     rslTotal()
@@ -386,8 +386,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int,
-                after: Int
+                    s: CharSequence, start: Int, count: Int,
+                    after: Int
             ) {
             }
 
@@ -396,8 +396,8 @@ class HomeFragment : Fragment() {
 
         binding.etGas3L.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int,
-                count: Int
+                    s: CharSequence, start: Int, before: Int,
+                    count: Int
             ) {
                 if (s != "") { //do your work here
                     rslTotal()
@@ -405,8 +405,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int,
-                after: Int
+                    s: CharSequence, start: Int, count: Int,
+                    after: Int
             ) {
             }
 
@@ -415,8 +415,8 @@ class HomeFragment : Fragment() {
 
         binding.etGas4L.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int,
-                count: Int
+                    s: CharSequence, start: Int, before: Int,
+                    count: Int
             ) {
                 if (s != "") { //do your work here
                     rslTotal()
@@ -424,8 +424,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int,
-                after: Int
+                    s: CharSequence, start: Int, count: Int,
+                    after: Int
             ) {
             }
 
@@ -435,8 +435,8 @@ class HomeFragment : Fragment() {
         //for sold
         binding.etGas1S.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int,
-                count: Int
+                    s: CharSequence, start: Int, before: Int,
+                    count: Int
             ) {
                 if (s != "") { //do your work here
                     rslTotal()
@@ -444,8 +444,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int,
-                after: Int
+                    s: CharSequence, start: Int, count: Int,
+                    after: Int
             ) {
             }
 
@@ -454,8 +454,8 @@ class HomeFragment : Fragment() {
 
         binding.etGas2S.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int,
-                count: Int
+                    s: CharSequence, start: Int, before: Int,
+                    count: Int
             ) {
                 if (s != "") { //do your work here
                     rslTotal()
@@ -463,8 +463,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int,
-                after: Int
+                    s: CharSequence, start: Int, count: Int,
+                    after: Int
             ) {
             }
 
@@ -473,8 +473,8 @@ class HomeFragment : Fragment() {
 
         binding.etGas3S.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int,
-                count: Int
+                    s: CharSequence, start: Int, before: Int,
+                    count: Int
             ) {
                 if (s != "") { //do your work here
                     rslTotal()
@@ -482,8 +482,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int,
-                after: Int
+                    s: CharSequence, start: Int, count: Int,
+                    after: Int
             ) {
             }
 
@@ -492,8 +492,8 @@ class HomeFragment : Fragment() {
 
         binding.etGas4S.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int,
-                count: Int
+                    s: CharSequence, start: Int, before: Int,
+                    count: Int
             ) {
                 if (s != "") { //do your work here
                     rslTotal()
@@ -501,8 +501,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int,
-                after: Int
+                    s: CharSequence, start: Int, count: Int,
+                    after: Int
             ) {
             }
 
@@ -532,12 +532,12 @@ class HomeFragment : Fragment() {
 
             binding.llStockReceive.background.setTintList(context?.let {
                 ContextCompat.getColorStateList(
-                    it, R.color.sendreceive_fade)
+                        it, R.color.sendreceive_fade)
             })
 
             binding.llStockSend.background.setTintList(context?.let {
                 ContextCompat.getColorStateList(
-                    it, R.color.sendreceive)
+                        it, R.color.sendreceive)
             })
         }
 
@@ -561,12 +561,12 @@ class HomeFragment : Fragment() {
 
             binding.llStockReceive.background.setTintList(context?.let {
                 ContextCompat.getColorStateList(
-                    it, R.color.sendreceive)
+                        it, R.color.sendreceive)
             })
 
             binding.llStockSend.background.setTintList(context?.let {
                 ContextCompat.getColorStateList(
-                    it, R.color.sendreceive_fade)
+                        it, R.color.sendreceive_fade)
             })
         }
 
@@ -597,30 +597,30 @@ class HomeFragment : Fragment() {
                 ResellerID = ResellerDetails.getReseller()._id.toString()
                 var reseller = ResellerDetails.getReseller()
                 val resellerStock = ResellerStock(
-                    ResellerReceiptNo = RandomNumber,
-                    ResellerID = ResellerID,
-                    Gas_state = Gas_state,
-                    Regular_Prima = Regular_Prima.toString().toInt(),
-                    Regular_Kamakhya = Regular_Kamakhya.toString().toInt(),
-                    Regular_Suvidha = Regular_Suvidha.toString().toInt(),
-                    Regular_Others = Regular_Others.toString().toInt(),
-                    Leak_Prima = Leak_Prima.toString().toInt(),
-                    Leak_Kamakhya = Leak_Kamakhya.toString().toInt(),
-                    Leak_Suvidha = Leak_Suvidha.toString().toInt(),
-                    Leak_Others = Leak_Others.toString().toInt(),
-                    Sold_Prima = Sold_Prima.toString().toInt(),
-                    Sold_Kamakhya = Sold_Kamakhya.toString().toInt(),
-                    Sold_Suvidha = Sold_Suvidha.toString().toInt(),
-                    Sold_Others = Sold_Others.toString().toInt(),
-                    SendOrReceive = SendOrReceive,
-                    Amount = Amount.toString(),
-                    Remarks = Remarks.toString())
+                        ResellerReceiptNo = RandomNumber,
+                        ResellerID = ResellerID,
+                        Gas_state = Gas_state,
+                        Regular_Prima = Regular_Prima.toString().toInt(),
+                        Regular_Kamakhya = Regular_Kamakhya.toString().toInt(),
+                        Regular_Suvidha = Regular_Suvidha.toString().toInt(),
+                        Regular_Others = Regular_Others.toString().toInt(),
+                        Leak_Prima = Leak_Prima.toString().toInt(),
+                        Leak_Kamakhya = Leak_Kamakhya.toString().toInt(),
+                        Leak_Suvidha = Leak_Suvidha.toString().toInt(),
+                        Leak_Others = Leak_Others.toString().toInt(),
+                        Sold_Prima = Sold_Prima.toString().toInt(),
+                        Sold_Kamakhya = Sold_Kamakhya.toString().toInt(),
+                        Sold_Suvidha = Sold_Suvidha.toString().toInt(),
+                        Sold_Others = Sold_Others.toString().toInt(),
+                        SendOrReceive = SendOrReceive,
+                        Amount = Amount.toString(),
+                        Remarks = Remarks.toString())
 
 
                 val intent = Intent(context, ReceiptActivity::class.java)
-                    .putExtra("status","reseller")
-                    .putExtra("resellerStock", resellerStock)
-                    .putExtra("reseller",reseller)
+                        .putExtra("status","reseller")
+                        .putExtra("resellerStock", resellerStock)
+                        .putExtra("reseller",reseller)
                 startActivity(intent)
             }
 
@@ -628,29 +628,29 @@ class HomeFragment : Fragment() {
                 CompanyID = CompanyDetails.getCompany()._id.toString()
                 var company = CompanyDetails.getCompany()
                 val companyStock = CompanyStock(
-                    CompanyReceiptNo = RandomNumber,
-                    CompanyID = CompanyID,
-                    Gas_state = Gas_state,
-                    Regular_Prima = Regular_Prima.toString().toInt(),
-                    Regular_Kamakhya = Regular_Kamakhya.toString().toInt(),
-                    Regular_Suvidha = Regular_Suvidha.toString().toInt(),
-                    Regular_Others = Regular_Others.toString().toInt(),
-                    Leak_Prima = Leak_Prima.toString().toInt(),
-                    Leak_Kamakhya = Leak_Kamakhya.toString().toInt(),
-                    Leak_Suvidha = Leak_Suvidha.toString().toInt(),
-                    Leak_Others = Leak_Others.toString().toInt(),
-                    Sold_Prima = Sold_Prima.toString().toInt(),
-                    Sold_Kamakhya = Sold_Kamakhya.toString().toInt(),
-                    Sold_Suvidha = Sold_Suvidha.toString().toInt(),
-                    Sold_Others = Sold_Others.toString().toInt(),
-                    SendOrReceive = SendOrReceive,
-                    Amount = Amount.toString(),
-                    Remarks = Remarks.toString())
+                        CompanyReceiptNo = RandomNumber,
+                        CompanyID = CompanyID,
+                        Gas_state = Gas_state,
+                        Regular_Prima = Regular_Prima.toString().toInt(),
+                        Regular_Kamakhya = Regular_Kamakhya.toString().toInt(),
+                        Regular_Suvidha = Regular_Suvidha.toString().toInt(),
+                        Regular_Others = Regular_Others.toString().toInt(),
+                        Leak_Prima = Leak_Prima.toString().toInt(),
+                        Leak_Kamakhya = Leak_Kamakhya.toString().toInt(),
+                        Leak_Suvidha = Leak_Suvidha.toString().toInt(),
+                        Leak_Others = Leak_Others.toString().toInt(),
+                        Sold_Prima = Sold_Prima.toString().toInt(),
+                        Sold_Kamakhya = Sold_Kamakhya.toString().toInt(),
+                        Sold_Suvidha = Sold_Suvidha.toString().toInt(),
+                        Sold_Others = Sold_Others.toString().toInt(),
+                        SendOrReceive = SendOrReceive,
+                        Amount = Amount.toString(),
+                        Remarks = Remarks.toString())
 
                 val intent = Intent(context, ReceiptActivity::class.java)
-                    .putExtra("status","company")
-                    .putExtra("companyStock", companyStock)
-                    .putExtra("company",company)
+                        .putExtra("status","company")
+                        .putExtra("companyStock", companyStock)
+                        .putExtra("company",company)
                 startActivity(intent)
             }
 
@@ -819,65 +819,65 @@ class HomeFragment : Fragment() {
     fun rslTotal(){
         //regular
         val etGas1Rvalue = if (TextUtils.isEmpty(
-                binding.etGas1R.getText().toString()
-            )
+                        binding.etGas1R.getText().toString()
+                )
         ) 0 else binding.etGas1R.getText().toString().toInt()
 
         val etGas2Rvalue = if (TextUtils.isEmpty(
-                binding.etGas2R.getText().toString()
-            )
+                        binding.etGas2R.getText().toString()
+                )
         ) 0 else binding.etGas2R.getText().toString().toInt()
 
         val etGas3Rvalue = if (TextUtils.isEmpty(
-                binding.etGas3R.getText().toString()
-            )
+                        binding.etGas3R.getText().toString()
+                )
         ) 0 else binding.etGas3R.getText().toString().toInt()
 
         val etGas4Rvalue = if (TextUtils.isEmpty(
-                binding.etGas4R.getText().toString()
-            )
+                        binding.etGas4R.getText().toString()
+                )
         ) 0 else binding.etGas4R.getText().toString().toInt()
 
         //leak
         val etGas1Lvalue = if (TextUtils.isEmpty(
-                binding.etGas1L.getText().toString()
-            )
+                        binding.etGas1L.getText().toString()
+                )
         ) 0 else binding.etGas1L.getText().toString().toInt()
 
         val etGas2Lvalue = if (TextUtils.isEmpty(
-                binding.etGas2L.getText().toString()
-            )
+                        binding.etGas2L.getText().toString()
+                )
         ) 0 else binding.etGas2L.getText().toString().toInt()
 
         val etGas3Lvalue = if (TextUtils.isEmpty(
-                binding.etGas3L.getText().toString()
-            )
+                        binding.etGas3L.getText().toString()
+                )
         ) 0 else binding.etGas3L.getText().toString().toInt()
 
         val etGas4Lvalue = if (TextUtils.isEmpty(
-                binding.etGas4L.getText().toString()
-            )
+                        binding.etGas4L.getText().toString()
+                )
         ) 0 else binding.etGas4L.getText().toString().toInt()
 
         //sold
         val etGas1Svalue = if (TextUtils.isEmpty(
-                binding.etGas1S.getText().toString()
-            )
+                        binding.etGas1S.getText().toString()
+                )
         ) 0 else binding.etGas1S.getText().toString().toInt()
 
         val etGas2Svalue = if (TextUtils.isEmpty(
-                binding.etGas2S.getText().toString()
-            )
+                        binding.etGas2S.getText().toString()
+                )
         ) 0 else binding.etGas2S.getText().toString().toInt()
 
         val etGas3Svalue = if (TextUtils.isEmpty(
-                binding.etGas3S.getText().toString()
-            )
+                        binding.etGas3S.getText().toString()
+                )
         ) 0 else binding.etGas3S.getText().toString().toInt()
 
         val etGas4Svalue = if (TextUtils.isEmpty(
-                binding.etGas4S.getText().toString()
-            )
+                        binding.etGas4S.getText().toString()
+                )
         ) 0 else binding.etGas4S.getText().toString().toInt()
 
 
