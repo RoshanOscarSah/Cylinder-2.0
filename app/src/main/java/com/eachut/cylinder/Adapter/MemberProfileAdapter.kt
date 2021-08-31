@@ -8,11 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.eachut.cylinder.R
 import com.eachut.cylinder.entity.Company
 import com.eachut.cylinder.entity.Member
+import com.eachut.cylinder.repository.MemberRepository
+import com.eachut.cylinder.repository.ResellerStockRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.w3c.dom.Text
 
 class MemberProfileAdapter (
@@ -20,7 +27,8 @@ class MemberProfileAdapter (
     val memberList :MutableList<Member>
         ): RecyclerView.Adapter<MemberProfileAdapter.MemberProfileViewHolder>(){
     class MemberProfileViewHolder(view: View): RecyclerView.ViewHolder(view) {
-    val tv_Fullname : TextView
+
+        val tv_Fullname : TextView
     val tv_employee : TextView
     val tv_Address : TextView
     val TV_Price : TextView
@@ -53,6 +61,35 @@ class MemberProfileAdapter (
 
     override fun onBindViewHolder(holder: MemberProfileViewHolder, position: Int) {
         val member = memberList[position]
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val repo = MemberRepository()
+                val response = repo.MemberDetails(member._id!!)
+                if (response.success== true){
+                    holder.TV_Price.text = response.Amount
+                    holder.tv_leakcylinder.text = response.LeakCylinderGiven
+                    holder.tv_Burn.text = response.GasSold
+                    holder.tv_Cylinder.text = response.CylinderSold
+                    holder.tv_Tag.text = response.Rate
+                    holder.tv_Halfcylinder.text = response.CylinderLended
+
+                }
+                else{
+                    holder.TV_Price.text = 0.toString()
+                    holder.tv_leakcylinder.text = 0.toString()
+                    holder.tv_Burn.text = 0.toString()
+                    holder.tv_Cylinder.text = 0.toString()
+                    holder.tv_Tag.text = "null"
+                    holder.tv_Halfcylinder.text = 0.toString()
+                }
+            }
+            catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         holder.tv_Fullname.text = "${member.Firstname.toString()}  ${member.Lastname.toString()}"
         holder.tv_Address.text=member.Address
         holder.tv_employee.text=member.Status

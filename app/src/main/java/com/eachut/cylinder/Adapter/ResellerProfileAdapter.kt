@@ -8,16 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.eachut.cylinder.R
 import com.eachut.cylinder.api.ServiceBuilder
 import com.eachut.cylinder.entity.Reseller
+import com.eachut.cylinder.entity.ResellerStock
+import com.eachut.cylinder.repository.ResellerStockRepository
 import com.eachut.cylinder.ui.profiles.GetResellerProfile
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ResellerProfileAdapter (
     val context: Context,
-    val resellerList: MutableList<Reseller>
+    val resellerList: MutableList<Reseller>,
 ): RecyclerView.Adapter<ResellerProfileAdapter.ResellerProfileViewHolder>(){
 
     private var _binding: GetResellerProfile? = null
@@ -65,6 +72,37 @@ class ResellerProfileAdapter (
 
     override fun onBindViewHolder(holder: ResellerProfileViewHolder, position: Int) {
         val reseller = resellerList[position]
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val repo = ResellerStockRepository()
+                val response = repo.ProfileDetails(reseller._id!!)
+                if (response.success== true){
+                    holder.TV_Price.text = response.Amount
+                    holder.tv_leckcyclinder.text = response.LeakCylinderGiven
+                    holder.tv_Burn.text = response.GasSold
+                    holder.tv_Cylinder.text = response.CylinderSold
+                    holder.tv_Tag.text = response.Rate
+                    holder.tv_Halfcylinder.text = response.CylinderLended
+
+                }
+                else{
+                    holder.TV_Price.text = 0.toString()
+                    holder.tv_leckcyclinder.text = 0.toString()
+                    holder.tv_Burn.text = 0.toString()
+                    holder.tv_Cylinder.text = 0.toString()
+                    holder.tv_Tag.text = "null"
+                    holder.tv_Halfcylinder.text = 0.toString()
+                }
+            }
+            catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+
         holder.tv_Fullname.text=reseller.reseller_fullname
         holder.Tv_Pasalname.text=reseller.pasal_name
         holder.iv_Call.setContentDescription(reseller.phone_number)
@@ -75,6 +113,10 @@ class ResellerProfileAdapter (
                 intent.data = Uri.parse("tel:$number")
             startActivity(context,intent, null)
         }
+
+
+
+
     }
 
     override fun getItemCount(): Int {
