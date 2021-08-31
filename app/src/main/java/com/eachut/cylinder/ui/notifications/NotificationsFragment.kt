@@ -65,6 +65,34 @@ class NotificationsFragment : Fragment() {
         extrarecyclerview = root.findViewById(R.id.Extrarecyclerview)
         notificationrecyclerview = root.findViewById(R.id.notificationrecyclerview)
 
+        //load notification on notification
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val repo3 = NotificationRepository()
+                val response3 = repo3.notificationHistoryList()
+
+                if(response3.success!!)
+                {
+                    notificationList = response3.data!!
+
+                    withContext(Main){
+                        notificationrecyclerview.adapter = NotificationHistoyAdapter(requireContext(), notificationList)
+                        notificationrecyclerview.layoutManager = LinearLayoutManager(context)
+                    }
+                }
+                else{
+                    withContext(Main) {
+                        Toast.makeText(context, "Not Success", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            catch (e:Exception){
+                withContext(Main){
+                    Toast.makeText(context, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         //schedule
 
         binding.Plus.setOnClickListener { view ->

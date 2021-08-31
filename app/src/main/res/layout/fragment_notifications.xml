@@ -246,16 +246,6 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Leak send - 2 · Receive - 1"
-                                android:layout_gravity="center_vertical"
-                                android:fontFamily="@font/sofia_pro_regular_az"
-                                android:textSize="16dp"
-                                android:letterSpacing="0.1"
-                                android:textColor="#CCFFFFFF"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
                                 android:text="Previous Rate - रू 1315"
                                 android:layout_gravity="center_vertical"
                                 android:fontFamily="@font/sofia_pro_regular_az"
@@ -313,7 +303,7 @@
             </LinearLayout>
 
 
-            <!--            STOCK RECEIVE-->
+<!--STOCK RECEIVE-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -962,6 +952,16 @@
                                 android:textSize="16dp"
                                 android:letterSpacing="0.1"
                                 android:textColor="#CCFFFFFF"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/sofia_pro_regular_az"
+                                android:letterSpacing="0.1"
+                                android:text="Leak send - 2 · Receive - 1"
+                                android:textColor="#CCFFFFFF"
+                                android:textSize="16dp" />
 
                             <TextView
                                 android:layout_width="match_parent"
