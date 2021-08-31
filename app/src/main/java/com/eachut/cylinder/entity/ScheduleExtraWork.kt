@@ -2,6 +2,7 @@ package com.eachut.cylinder.entity
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.util.*
 
 data class ScheduleExtraWork(
     val _id: String ? = null,
@@ -13,7 +14,7 @@ data class ScheduleExtraWork(
     val createdAt: String ? = null,
     val scheduledBy: String ? = null,
     val isAccepted: Boolean ? = null,
-) : Parcelable {
+): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
@@ -52,5 +53,4 @@ data class ScheduleExtraWork(
             return arrayOfNulls(size)
         }
     }
-
 }
