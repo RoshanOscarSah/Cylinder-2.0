@@ -16,13 +16,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.eachut.cylinder.Adapter.ExtraScheduleAdapter
+import com.eachut.cylinder.Adapter.NotificationHistoyAdapter
 import com.eachut.cylinder.Adapter.WorkScheduleAdapter
 import com.eachut.cylinder.AddSchedule
 import com.eachut.cylinder.MainActivity
 import com.eachut.cylinder.R
 import com.eachut.cylinder.databinding.FragmentNotificationsBinding
+import com.eachut.cylinder.entity.NotificationHistory
 import com.eachut.cylinder.entity.ScheduleExtraWork
 import com.eachut.cylinder.entity.ScheduleResellerStock
+import com.eachut.cylinder.repository.NotificationRepository
 import com.eachut.cylinder.repository.ScheduleExtraWorkRepository
 import com.eachut.cylinder.repository.ScheduleResellerStockRepository
 import com.eachut.cylinder.ui.profiles.GetResellerProfile
@@ -36,8 +39,10 @@ class NotificationsFragment : Fragment() {
 
     private lateinit var recyclerview : RecyclerView
     private lateinit var extrarecyclerview : RecyclerView
+    private lateinit var notificationrecyclerview : RecyclerView
     private lateinit var notificationsViewModel: NotificationsViewModel
     private var _binding: FragmentNotificationsBinding? = null
+    private var notificationList = mutableListOf<NotificationHistory>()
     private var scheduleList = mutableListOf<ScheduleResellerStock>()
     private var extrascheduleList = mutableListOf<ScheduleExtraWork>()
 
@@ -58,6 +63,35 @@ class NotificationsFragment : Fragment() {
 
         recyclerview = root.findViewById(R.id.recyclerview)
         extrarecyclerview = root.findViewById(R.id.Extrarecyclerview)
+        notificationrecyclerview = root.findViewById(R.id.notificationrecyclerview)
+
+        //load notification on notification
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val repo3 = NotificationRepository()
+                val response3 = repo3.notificationHistoryList()
+
+                if(response3.success!!)
+                {
+                    notificationList = response3.data!!
+
+                    withContext(Main){
+                        notificationrecyclerview.adapter = NotificationHistoyAdapter(requireContext(), notificationList)
+                        notificationrecyclerview.layoutManager = LinearLayoutManager(context)
+                    }
+                }
+                else{
+                    withContext(Main) {
+                        Toast.makeText(context, "Not Success", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            catch (e:Exception){
+                withContext(Main){
+                    Toast.makeText(context, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
         //schedule
 
@@ -99,6 +133,33 @@ class NotificationsFragment : Fragment() {
             )
             params.gravity = Gravity.LEFT
             binding.ivToggleActiveNoti.setLayoutParams(params);
+
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val repo3 = NotificationRepository()
+                    val response3 = repo3.notificationHistoryList()
+
+                    if(response3.success!!)
+                    {
+                        notificationList = response3.data!!
+
+                        withContext(Main){
+                            notificationrecyclerview.adapter = NotificationHistoyAdapter(requireContext(), notificationList)
+                            notificationrecyclerview.layoutManager = LinearLayoutManager(context)
+                        }
+                    }
+                    else{
+                        withContext(Main) {
+                            Toast.makeText(context, "Not Success", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                catch (e:Exception){
+                    withContext(Main){
+                        Toast.makeText(context, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
 
         }
 

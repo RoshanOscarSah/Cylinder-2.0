@@ -6,5 +6,5 @@ import com.eachut.cylinder.entity.Company
 data class AddNewCompanyResponse (
     val success : Boolean? = null,
     val message: String?=null,
-    val company: Company? =null,
+    val company: Company? =null
 )

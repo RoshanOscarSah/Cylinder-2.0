@@ -4,8 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.eachut.cylinder.R
 import com.eachut.cylinder.entity.ScheduleResellerStock
@@ -25,11 +27,15 @@ class WorkScheduleAdapter(
         val txtCname : TextView
         val txtCaddress : TextView
         val txtDetail : TextView
+        val ScheduleAccepted : FrameLayout
+        val ScheduleAccept : FrameLayout
         init{
             txtName = view.findViewById(R.id.txtName)
             txtCname = view.findViewById(R.id.txtCname)
             txtCaddress = view.findViewById(R.id.txtCaddress)
             txtDetail = view.findViewById(R.id.txtDetail)
+            ScheduleAccepted = view.findViewById(R.id.ScheduleAccepted)
+            ScheduleAccept = view.findViewById(R.id.ScheduleAccept)
         }
     }
 
@@ -58,6 +64,11 @@ class WorkScheduleAdapter(
                     holder.txtName.text = reseller.reseller_fullname
                     holder.txtCname.text = reseller.pasal_name
                     holder.txtCaddress.text = reseller.address
+
+                    holder.ScheduleAccept.setOnClickListener {
+                        holder.ScheduleAccepted.isVisible = true
+                        holder.ScheduleAccept.isVisible = false
+                    }
 
                 }
             }catch (e : Exception){

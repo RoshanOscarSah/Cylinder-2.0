@@ -58,17 +58,17 @@
                             android:letterSpacing="0.1"
                             android:textColor="#ffffff"/>
 
-                        <TextView
-                            android:id="@+id/txtName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Note"
-                            android:layout_gravity="center_vertical"
-                            android:fontFamily="@font/sofia_pro_semi_bold_az"
-                            android:textSize="20dp"
-                            android:textStyle="bold"
-                            android:letterSpacing="0.1"
-                            android:textColor="#ffffff"/>
+<!--                        <TextView-->
+<!--                            android:id="@+id/txtName"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Note"-->
+<!--                            android:layout_gravity="center_vertical"-->
+<!--                            android:fontFamily="@font/sofia_pro_semi_bold_az"-->
+<!--                            android:textSize="20dp"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:letterSpacing="0.1"-->
+<!--                            android:textColor="#ffffff"/>-->
                     </LinearLayout>
 
                     <TextView
@@ -111,6 +111,7 @@
                         android:textColor="#ffffff"/>
 
                     <FrameLayout
+                        android:id="@+id/ExtraWorkAcceptorNot"
                         android:visibility="visible"
                         android:layout_marginTop="10dp"
                         android:layout_width="100dp"
@@ -119,12 +120,14 @@
                         android:animateLayoutChanges="true">
 
                         <ImageView
+                            android:id="@+id/ExtraworkAcceptbackground"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/ic_toggle_active"
                             android:layout_gravity="left|center_vertical"/>
 
                         <TextView
+                            android:id="@+id/ExtraworkAccepted"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Accept"

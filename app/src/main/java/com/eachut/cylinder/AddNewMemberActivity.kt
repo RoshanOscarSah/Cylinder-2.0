@@ -20,9 +20,11 @@ import com.android.volley.toolbox.Volley
 import com.eachut.cylinder.databinding.ActivityAddNewMemberBinding
 import com.eachut.cylinder.entity.Company
 import com.eachut.cylinder.entity.Member
+import com.eachut.cylinder.entity.NotificationHistory
 import com.eachut.cylinder.entity.Reseller
 import com.eachut.cylinder.repository.CompanyRepository
 import com.eachut.cylinder.repository.MemberRepository
+import com.eachut.cylinder.repository.NotificationRepository
 import com.eachut.cylinder.repository.ResellerRepository
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.*
@@ -32,7 +34,7 @@ import org.json.JSONObject
 class AddNewMemberActivity : AppCompatActivity() {
 
     private val FCM_API="https://fcm.googleapis.com/fcm/send"
-    private val serverKey= "key="+ "AAAAnuSaR24:APA91bHgq4BQ8PwZHES3T6kq-xOkgH3hUclVsxotk05JX3kk00N6AOKboQsxosU3egHPwrGIGLRm83xh6oxc0Bb6_eBeoDTy8VeeqDIZlR0LM1IfKvsarATDFnR6T8j9j-_hk0RfbWzi"
+    private val serverKey= "key="+ "AAAA8G-jvlU:APA91bGbqbLKaMHAjXQ_hEzvu1G8Im7x9ydVQYG8Nj200wqmPGx5heZ87KVIPsEzmGfj_On4ZeVP67Ylq0oeSrvRZ1sa341tNJ0QGvizIzPuGIIKXbntXGJERiWNbgKKx1cJhCBoEAeM"
     private val contentType = "application/json"
     private val requestQueue : RequestQueue by lazy {
         Volley.newRequestQueue(this.applicationContext)
@@ -222,6 +224,17 @@ class AddNewMemberActivity : AppCompatActivity() {
             val reselleraddress = reselleraddress.text.toString()
             val resellerphonenum = resellerphonenum.text.toString()
             val rateforReseller = etresellerRate.text.toString()
+
+            //For Adding this data into Notification
+            val notification = NotificationHistory(
+                Title = "New Reseller",
+                L1 = etResellerfullname,
+                L2 = pasalname,
+                L3 = reselleraddress,
+                R1 = "Anish",
+                R2 = "Active",
+                Action = "Accepted"
+            )
             val reseller = Reseller(
                 reseller_fullname = etResellerfullname,
                 pasal_name = pasalname,
@@ -233,9 +246,11 @@ class AddNewMemberActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val resellerRepository = ResellerRepository()
+                    val notificationRepository = NotificationRepository()
                     val response = resellerRepository.addNewReseller(reseller)
+                    val response2 = notificationRepository.addNotification(notification)
                     Log.d("OSCAR", "Res: $response")
-                    if (response.success == true) {
+                    if (response.success == true && response2.success == true) {
                         withContext(Dispatchers.Main) {
                             Toast.makeText(
                                 this@AddNewMemberActivity,
