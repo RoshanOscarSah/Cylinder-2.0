@@ -37,6 +37,10 @@ import com.eachut.cylinder.entity.Reseller
 import com.eachut.cylinder.entity.ResellerStock
 import com.eachut.cylinder.repository.CompanyRepository
 import com.eachut.cylinder.repository.ResellerRepository
+import com.eachut.cylinder.ui.profiles.GetResellerProfile
+import com.eachut.cylinder.ui.profiles.ProfilesFragment
+import com.eachut.cylinder.ui.profiles.ViewCompanyFragment
+import com.eachut.cylinder.ui.profiles.ViewMemberFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -60,7 +64,6 @@ class HomeFragment : Fragment() {
     private var customerOrCompany = String()
     private var ResellerID = String()
     private var CompanyID = String()
-
 
 
     // This property is only valid between onCreateView and
