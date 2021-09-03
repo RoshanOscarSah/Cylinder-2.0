@@ -171,18 +171,18 @@
 
                     <EditText
                         android:id="@+id/etResellerfullname"
-                        android:paddingLeft="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:background="@drawable/ic_rectangle_member"
                         android:fontFamily="@font/sofia_pro_regular_az"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
                         android:hint="@string/reseller_fullname"
                         android:inputType="text"
+                        android:paddingLeft="20dp"
                         android:textColor="@color/black"
-                        android:background="@drawable/ic_rectangle_member"
-                        app:backgroundTint="#fff"/>
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="#fff" />
                 </RelativeLayout>
 
 
@@ -228,18 +228,18 @@
 
                     <EditText
                         android:id="@+id/pasalname"
-                        android:paddingLeft="25dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:background="@drawable/ic_rectangle_member"
                         android:fontFamily="@font/sofia_pro_regular_az"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
                         android:hint="@string/pasal_name"
                         android:inputType="text"
+                        android:paddingLeft="25dp"
                         android:textColor="@color/black"
-                        android:background="@drawable/ic_rectangle_member"
-                        app:backgroundTint="#fff"/>
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="#fff" />
 
 
                 </RelativeLayout>
@@ -285,18 +285,18 @@
 
                     <EditText
                         android:id="@+id/memberphonenum"
-                        android:paddingLeft="25dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:background="@drawable/ic_rectangle_member"
                         android:fontFamily="@font/sofia_pro_regular_az"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
                         android:hint="@string/phone_number"
                         android:inputType="text"
+                        android:paddingLeft="25dp"
                         android:textColor="@color/black"
-                        android:background="@drawable/ic_rectangle_member"
-                        app:backgroundTint="#fff"/>
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="#fff" />
 
 
                 </RelativeLayout>
@@ -344,18 +344,18 @@
 
                     <EditText
                         android:id="@+id/memberaddress"
-                        android:paddingLeft="25dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:background="@drawable/ic_rectangle_member"
                         android:fontFamily="@font/sofia_pro_regular_az"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
                         android:hint="@string/address"
                         android:inputType="text"
+                        android:paddingLeft="25dp"
                         android:textColor="@color/black"
-                        android:background="@drawable/ic_rectangle_member"
-                        app:backgroundTint="#fff"/>
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="#fff" />
 
 
                 </RelativeLayout>
