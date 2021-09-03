@@ -189,8 +189,14 @@ class DashboardFragment : Fragment() {
 //                tvName.setText("")
             },
             Response.ErrorListener {
-                Toast.makeText(requireContext(), "Request error", Toast.LENGTH_LONG).show()
-                Log.i("TAG", "onErrorResponse: Didn't work")
+                try{
+                    Toast.makeText(requireContext(), "Request error", Toast.LENGTH_LONG).show()
+                    Log.i("TAG", "onErrorResponse: Didn't work")
+
+                }catch(e: Exception){
+                    e.printStackTrace()
+                }
+
             }) {
             override fun getHeaders(): Map<String, String> {
                 val params = HashMap<String, String>()

@@ -1,5 +1,6 @@
 package com.eachut.cylinder.Adapter
 
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,11 @@ import com.eachut.cylinder.Object.ResellerDetails
 import com.eachut.cylinder.R
 import com.eachut.cylinder.entity.Company
 
-class CompanyStockViewAdapter (
+class CompanyStockViewAdapter(
     val context: Context,
-    val companyList: MutableList<Company>
-    ): RecyclerView.Adapter<CompanyStockViewAdapter.CompanyStockViewHolder>(){
+    val companyList: MutableList<Company>,
+    val alertDialog: AlertDialog
+): RecyclerView.Adapter<CompanyStockViewAdapter.CompanyStockViewHolder>(){
     class CompanyStockViewHolder(view: View): RecyclerView.ViewHolder(view){
         val txtCylindername : TextView
         val txtFcname : TextView
@@ -32,14 +34,14 @@ class CompanyStockViewAdapter (
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CompanyStockViewAdapter.CompanyStockViewHolder {
+    ): CompanyStockViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.popup_view_company, parent, false)
-        return CompanyStockViewAdapter.CompanyStockViewHolder(view)
+        return CompanyStockViewHolder(view)
     }
 
     override fun onBindViewHolder(
-        holder: CompanyStockViewAdapter.CompanyStockViewHolder,
+        holder: CompanyStockViewHolder,
         position: Int
     ) {
         val company = companyList[position]
@@ -49,7 +51,10 @@ class CompanyStockViewAdapter (
 
         holder.llNameSelected.setOnClickListener {
             CompanyDetails.setCompany(company)
+
+            alertDialog.dismiss()
         }
+
     }
 
     override fun getItemCount(): Int {

@@ -35,6 +35,7 @@ import com.eachut.cylinder.ui.profiles.ProfilesViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ProfilesFragment : Fragment() {
 
@@ -50,11 +51,6 @@ class ProfilesFragment : Fragment() {
     private var sortedMember = memberList
 
 
-
-
-
-
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -66,16 +62,6 @@ class ProfilesFragment : Fragment() {
     ): View? {
         profilesViewModel =
             ViewModelProvider(this).get(ProfilesViewModel::class.java)
-
-
-//        CoroutineScope(Dispatchers.IO).launch {
-//            val resellerRepo = ResellerRepository()
-//            val  response = resellerRepo.allresellerList()
-//            if(response.success!!){
-//                resellerList = response.data!!
-////                    ResellerList.setResellerList(sortedReseller)
-//            }
-//        }
 
         CoroutineScope(Dispatchers.IO).launch {
             val resellerRepo = ResellerRepository()
@@ -90,6 +76,15 @@ class ProfilesFragment : Fragment() {
             if (resellerResponse.success!!) {
                 resellerList = resellerResponse.data!!
                 ResellerList.setResellerList(resellerList)
+                withContext(Dispatchers.Main){
+                    val fragment = GetResellerProfile()
+                    val fragmentManager = requireActivity().supportFragmentManager
+                    val fragmentTransaction = fragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.fcv, fragment)
+                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    fragmentTransaction.addToBackStack(null)
+                    fragmentTransaction.commit()
+                }
             }
 //
 //            //load Company
@@ -103,25 +98,8 @@ class ProfilesFragment : Fragment() {
                 memberList = memberResponse.data!!
                 MemberList.setMemberList(memberList)
             }
-
-//             CoroutineScope(Dispatchers.IO).launch {
-//                 val resellerRepo = ResellerRepository()
-//                 val  response = resellerRepo.allresellerList()
-//                 if(response.success!!){
-//                     resellerList = response.data!!
-// //                    ResellerList.setResellerList(sortedReseller)
-//                 }
         }
 
-
-        //Loading Reseller Profile
-        val fragment = GetResellerProfile()
-        val fragmentManager = requireActivity().supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(android.R.id.content, fragment)
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
 
         _binding = FragmentProfilesBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -136,13 +114,6 @@ class ProfilesFragment : Fragment() {
 
             val intent = Intent(this.context, AddNewMemberActivity::class.java)
             startActivity(intent)
-
-//            val fragment = AddmemberFragment()
-//            val fragmentManager = requireActivity().supportFragmentManager
-//            val fragmentTransaction = fragmentManager.beginTransaction()
-//            fragmentTransaction.replace(android.R.id.content, fragment)
-//            fragmentTransaction.addToBackStack(null)
-//            fragmentTransaction.commit()
         }
 
 //customer/company/member
@@ -160,7 +131,7 @@ class ProfilesFragment : Fragment() {
             val fragment = GetResellerProfile()
             val fragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(android.R.id.content, fragment)
+            fragmentTransaction.replace(R.id.fcv, fragment)
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
@@ -180,7 +151,7 @@ class ProfilesFragment : Fragment() {
             val fragment = ViewCompanyFragment()
             val fragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(android.R.id.content, fragment)
+            fragmentTransaction.replace(R.id.fcv, fragment)
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
@@ -200,7 +171,7 @@ class ProfilesFragment : Fragment() {
             val fragment = ViewMemberFragment()
             val fragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(android.R.id.content, fragment)
+            fragmentTransaction.replace(R.id.fcv, fragment)
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
@@ -244,7 +215,7 @@ class ProfilesFragment : Fragment() {
                         val fragment = GetResellerProfile()
                         val fragmentManager = requireActivity().supportFragmentManager
                         val fragmentTransaction = fragmentManager.beginTransaction()
-                        fragmentTransaction.replace(android.R.id.content, fragment)
+                        fragmentTransaction.replace(R.id.fcv, fragment)
                         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         fragmentTransaction.addToBackStack(null)
                         fragmentTransaction.commit()
@@ -258,7 +229,7 @@ class ProfilesFragment : Fragment() {
                         sortedMember =
                             memberList.sortedWith(compareBy { it.Firstname!!.first() }) as MutableList<Member>
                         MemberList.setMemberList(sortedMember)
-                        Toast.makeText(context, "${sortedMember}", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(context, "${sortedMember}", Toast.LENGTH_SHORT).show()
                     }
                     R.id.descending -> {
                         //sort reseller
@@ -268,7 +239,7 @@ class ProfilesFragment : Fragment() {
                         val fragment = GetResellerProfile()
                         val fragmentManager = requireActivity().supportFragmentManager
                         val fragmentTransaction = fragmentManager.beginTransaction()
-                        fragmentTransaction.replace(android.R.id.content, fragment)
+                        fragmentTransaction.replace(R.id.fcv, fragment)
                         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         fragmentTransaction.addToBackStack(null)
                         fragmentTransaction.commit()
@@ -320,7 +291,7 @@ class ProfilesFragment : Fragment() {
                         val fragment = ViewCompanyFragment()
                         val fragmentManager = requireActivity().supportFragmentManager
                         val fragmentTransaction = fragmentManager.beginTransaction()
-                        fragmentTransaction.replace(android.R.id.content, fragment)
+                        fragmentTransaction.replace(R.id.fcv, fragment)
                         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         fragmentTransaction.addToBackStack(null)
                         fragmentTransaction.commit()
@@ -329,7 +300,7 @@ class ProfilesFragment : Fragment() {
                         sortedMember =
                             memberList.sortedWith(compareBy { it.Firstname!!.first() }) as MutableList<Member>
                         MemberList.setMemberList(sortedMember)
-                        Toast.makeText(context, "${sortedMember}", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(context, "${sortedMember}", Toast.LENGTH_SHORT).show()
                     }
                     R.id.descending -> {
                         //sort reseller
@@ -344,7 +315,7 @@ class ProfilesFragment : Fragment() {
                         val fragment = ViewCompanyFragment()
                         val fragmentManager = requireActivity().supportFragmentManager
                         val fragmentTransaction = fragmentManager.beginTransaction()
-                        fragmentTransaction.replace(android.R.id.content, fragment)
+                        fragmentTransaction.replace(R.id.fcv, fragment)
                         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         fragmentTransaction.addToBackStack(null)
                         fragmentTransaction.commit()
@@ -396,11 +367,11 @@ class ProfilesFragment : Fragment() {
                         val fragment = ViewMemberFragment()
                         val fragmentManager = requireActivity().supportFragmentManager
                         val fragmentTransaction = fragmentManager.beginTransaction()
-                        fragmentTransaction.replace(android.R.id.content, fragment)
+                        fragmentTransaction.replace(R.id.fcv, fragment)
                         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         fragmentTransaction.addToBackStack(null)
                         fragmentTransaction.commit()
-                        Toast.makeText(context, "${sortedMember}", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(context, "${sortedMember}", Toast.LENGTH_SHORT).show()
                     }
                     R.id.descending -> {
                         //sort reseller
@@ -420,7 +391,7 @@ class ProfilesFragment : Fragment() {
                         val fragment = ViewMemberFragment()
                         val fragmentManager = requireActivity().supportFragmentManager
                         val fragmentTransaction = fragmentManager.beginTransaction()
-                        fragmentTransaction.replace(android.R.id.content, fragment)
+                        fragmentTransaction.replace(R.id.fcv, fragment)
                         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         fragmentTransaction.addToBackStack(null)
                         fragmentTransaction.commit()
