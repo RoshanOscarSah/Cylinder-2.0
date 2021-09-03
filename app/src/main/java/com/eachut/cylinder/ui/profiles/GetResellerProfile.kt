@@ -3,6 +3,7 @@ package com.eachut.cylinder.ui.profiles
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,8 +39,9 @@ class GetResellerProfile() : Fragment() {
 
 //        get reseller
         val resellerList= ResellerList.getResellerList()
+        Log.d("ResellerList", resellerList.toString())
         recyclerview.adapter = ResellerProfileAdapter(requireContext(), resellerList)
-        recyclerview.layoutManager = LinearLayoutManager(context)
+        recyclerview.layoutManager = LinearLayoutManager(requireContext())
 
 
 
