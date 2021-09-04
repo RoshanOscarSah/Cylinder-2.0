@@ -416,6 +416,7 @@ class LoginActivity : AppCompatActivity() {
                             }
                         }
 
+
                     } else if (memberResponse.success == false) {
                         withContext(Main) {
                             Toast.makeText(
@@ -423,6 +424,11 @@ class LoginActivity : AppCompatActivity() {
                                 "message : ${memberResponse.message}",
                                 Toast.LENGTH_SHORT
                             ).show()
+                        }
+                    } else if (memberResponse.message == "Please change your default password.") {
+                        withContext(Main) {
+                            startActivity(Intent(this@LoginActivity,ChangedefpassActivity::class.java))
+                            finish()
                         }
                     } else {
                         withContext(Main) {
