@@ -53,6 +53,11 @@ class MemberRepository
         }
     }
 
+    suspend fun MemberDetails(id: String): GetMemberDetailsResponse {
+        return apiRequest {
+            memberAPI.MemberDetails(id)
+        }
+    }
 
     //update Product
     suspend fun updateMember(id:String, member: Member):AddNewMemberResponse{
