@@ -1,5 +1,6 @@
 package com.eachut.cylinder.Adapter
 
+import android.app.AlertDialog
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,17 +16,16 @@ import com.eachut.cylinder.R
 import com.eachut.cylinder.entity.Reseller
 import com.eachut.cylinder.repository.ResellerStockRepository
 import com.eachut.cylinder.ui.home.HomeFragment
-import com.eachut.cylinder.ui.profiles.GetResellerProfile
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.w3c.dom.Text
 
 class ResellerStockViewAdapter(
-        val context: Context,
-        val resellerList: MutableList<Reseller>
+    val context: Context,
+    val resellerList: MutableList<Reseller>,
+    val alertDialog: AlertDialog
 ): RecyclerView.Adapter<ResellerStockViewAdapter.ResellerStockViewHolder>() {
     private var _binding: HomeFragment? = null
 
@@ -47,11 +47,12 @@ class ResellerStockViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResellerStockViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.popup_view_reseller, parent, false)
-        return ResellerStockViewAdapter.ResellerStockViewHolder(view)
+        return ResellerStockViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ResellerStockViewHolder, position: Int) {
         val reseller = resellerList[position]
+
         holder.tv_Fullname.text=reseller.reseller_fullname
         holder.Tv_Pasalname.text=reseller.pasal_name
         holder.tv_Address.text=reseller.address
@@ -103,6 +104,8 @@ class ResellerStockViewAdapter(
                     }
                 }
             }
+
+            alertDialog.dismiss()
         }
     }
 

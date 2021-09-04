@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
@@ -19,7 +18,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentTransaction
@@ -32,18 +30,15 @@ import com.eachut.cylinder.Object.ResellerDetails
 import com.eachut.cylinder.Object.ResellerStockDetails
 import com.eachut.cylinder.entity.Company
 import com.eachut.cylinder.entity.Reseller
-import com.eachut.cylinder.entity.ResellerStock
 import com.eachut.cylinder.entity.ScheduleResellerStock
 import com.eachut.cylinder.repository.CompanyRepository
 import com.eachut.cylinder.repository.ResellerRepository
 import com.eachut.cylinder.repository.ScheduleResellerStockRepository
 import com.eachut.cylinder.ui.notifications.NotificationsFragment
-import com.eachut.cylinder.ui.profiles.GetResellerProfile
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.w3c.dom.Text
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
@@ -896,8 +891,6 @@ class AddSchedule : AppCompatActivity() {
         val inflater: LayoutInflater = this.getLayoutInflater()
         val dialogView: View = inflater.inflate(R.layout.activity_prename, null)
         val recyclerView = dialogView.findViewById<RecyclerView>(R.id.recyclerview)
-        recyclerView.adapter = ResellerStockViewAdapter(this,resellerList)
-        recyclerView.layoutManager = LinearLayoutManager(this)
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(this)
         dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
             override fun onDismiss(arg0: DialogInterface) {
@@ -944,11 +937,14 @@ class AddSchedule : AppCompatActivity() {
 //            alertDialog.dismiss()
 //
 //        })
+//
+//        val llNameSelected = alertDialog.findViewById(R.id.llNameSelected) as LinearLayout
+//        llNameSelected.setOnClickListener(View.OnClickListener { //do something here
+//            alertDialog.dismiss()
+//        })
 
-        val llNameSelected = alertDialog.findViewById(R.id.llNameSelected) as LinearLayout
-        llNameSelected.setOnClickListener(View.OnClickListener { //do something here
-            alertDialog.dismiss()
-        })
+        recyclerView.adapter = ResellerStockViewAdapter(this, resellerList, alertDialog)
+        recyclerView.layoutManager = LinearLayoutManager(this)
     }
 
     private fun showPopupCompany() {
@@ -956,8 +952,6 @@ class AddSchedule : AppCompatActivity() {
         val inflater: LayoutInflater = this.getLayoutInflater()
         val dialogView: View = inflater.inflate(R.layout.activity_prename, null)
         val recyclerView = dialogView.findViewById<RecyclerView>(R.id.recyclerview)
-        recyclerView.adapter = CompanyStockViewAdapter(this,companyList)
-        recyclerView.layoutManager = LinearLayoutManager(this)
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(this)
         dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
             override fun onDismiss(arg0: DialogInterface) {
@@ -982,9 +976,13 @@ class AddSchedule : AppCompatActivity() {
         alertDialog.setCanceledOnTouchOutside(true);
 
 
-        val llNameSelected = alertDialog.findViewById(R.id.llNameSelected) as LinearLayout
-        llNameSelected.setOnClickListener(View.OnClickListener { //do something here
-            alertDialog.dismiss()
-        })
+//        val llNameSelected = alertDialog.findViewById(R.id.llNameSelected) as LinearLayout
+//        llNameSelected.setOnClickListener(View.OnClickListener { //do something here
+//            alertDialog.dismiss()
+//        })
+
+
+        recyclerView.adapter = CompanyStockViewAdapter(this, companyList, alertDialog)
+        recyclerView.layoutManager = LinearLayoutManager(this)
     }
 }
