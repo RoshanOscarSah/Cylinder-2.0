@@ -23,11 +23,11 @@ class LoginInstrumentedTest {
     @Test
     fun testLoginUI(){
         onView(withId(R.id.etUsername))
-            .perform(typeText("AnishNepal"))
+            .perform(typeText("AlexNepal"))
 
 
         onView(withId(R.id.etPassword))
-            .perform(typeText("anish10"))
+            .perform(typeText("alexnepal"))
 
         closeSoftKeyboard()
 
@@ -36,7 +36,7 @@ class LoginInstrumentedTest {
 
         Thread.sleep(5000)
 
-        Espresso.onView(ViewMatchers.withId(R.id.root_layout))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+//        onView(withId(R.id.containerfirst))
+//            .check(matches(isDisplayed()))
     }
 }

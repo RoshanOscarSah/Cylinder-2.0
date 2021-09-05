@@ -17,12 +17,12 @@ class AddCompanyInstrumentedTesting {
     val testRule = ActivityScenarioRule(AddNewMemberActivity::class.java)
 
     @Test
-    fun testAddResellerUI() {
+    fun testAddCompanyUI() {
         onView(withId(R.id.tvCompanyP))
             .perform(click())
 
         onView(withId(R.id.etCompanyname))
-            .perform(typeText("Bhakta Gas Udhyog Pvt. Ltd."))
+            .perform(typeText("Bhakta Gas and Cylinder Udhyog Pvt. Ltd."))
 
         closeSoftKeyboard()
         Thread.sleep(3000)
