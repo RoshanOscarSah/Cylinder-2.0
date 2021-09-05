@@ -8,4 +8,5 @@ data class GetProfileDetailsResponse (
     val Rate: String?=null,
     val GasSold: String?=null,
     val CylinderSold: String?=null,
-)
+) {
+}

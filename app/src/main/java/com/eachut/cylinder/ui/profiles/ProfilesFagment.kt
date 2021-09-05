@@ -1,8 +1,8 @@
 package com.eachut.cylinder.ui.profiles
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.PopupMenu
@@ -16,21 +16,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.eachut.cylinder.Adapter.ResellerStockViewAdapter
 import com.eachut.cylinder.AddNewMemberActivity
+import com.eachut.cylinder.Object.*
 
-import com.eachut.cylinder.Object.CompanyList
-import com.eachut.cylinder.Object.MemberList
-
-import com.eachut.cylinder.Object.ResellerList
 import com.eachut.cylinder.R
 import com.eachut.cylinder.databinding.FragmentProfilesBinding
-import com.eachut.cylinder.entity.Company
-import com.eachut.cylinder.entity.Member
-import com.eachut.cylinder.entity.Reseller
+import com.eachut.cylinder.entity.*
+import com.eachut.cylinder.repository.*
 
-import com.eachut.cylinder.repository.CompanyRepository
-import com.eachut.cylinder.repository.MemberRepository
-
-import com.eachut.cylinder.repository.ResellerRepository
 import com.eachut.cylinder.ui.profiles.ProfilesViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -43,6 +35,9 @@ class ProfilesFragment : Fragment() {
     private var _binding: FragmentProfilesBinding? = null
     private var resellerList = mutableListOf<Reseller>()
     private var sortedReseller = resellerList
+
+    private var resellerStockList = ResellerStockDetails.getResellerStockList()
+    private var sortedResellerStock = resellerStockList
 
     private var companyList = mutableListOf<Company>()
     private var sortedCompany = companyList
@@ -63,14 +58,19 @@ class ProfilesFragment : Fragment() {
         profilesViewModel =
             ViewModelProvider(this).get(ProfilesViewModel::class.java)
 
+
+
+
         CoroutineScope(Dispatchers.IO).launch {
             val resellerRepo = ResellerRepository()
-
-            val companyRepo = CompanyRepository()
+            val resellerStockRepo = ResellerStockRepository()
             val memberRepo = MemberRepository()
+            val companyRepo = CompanyRepository()
+
             val resellerResponse = resellerRepo.allresellerList()
-            val companyResponse = companyRepo.allCompanyList()
+            val resellerStockResponse = resellerStockRepo.resellerStockList()
             val memberResponse = memberRepo.allmemberList()
+            val companyResponse = companyRepo.allCompanyList()
 
             //load reseller
             if (resellerResponse.success!!) {
@@ -87,17 +87,26 @@ class ProfilesFragment : Fragment() {
                 }
             }
 //
-//            //load Company
-            if (companyResponse.success!!) {
-                companyList = companyResponse.data!!
-                CompanyList.setCompanyList(companyList)
-            }
-//
 //            //load Member
             if (memberResponse.success!!) {
                 memberList = memberResponse.data!!
                 MemberList.setMemberList(memberList)
             }
+
+            //load Company
+            if (companyResponse.success!!) {
+                companyList = companyResponse.data!!
+                CompanyList.setCompanyList(companyList)
+            }
+
+            //load Reseller Stock
+            if(resellerStockResponse.success!!){
+                resellerStockList = resellerStockResponse.data!!
+                ResellerStockDetails.setResellerStockList(resellerStockList)
+                Log.d("ResellerStock","$resellerStockList")
+            }
+
+
         }
 
 
@@ -255,9 +264,18 @@ class ProfilesFragment : Fragment() {
                         MemberList.setMemberList(sortedMember)
 ////                        Toast.makeText(context, "$sortedReseller", Toast.LENGTH_SHORT).show()
                     }
-//                    R.id.mostsold -> {
-//                        Toast.makeText(view?.context, "Most Sold", Toast.LENGTH_SHORT).show()
-//                    }
+                    R.id.mostsold -> {
+                        sortedResellerStock =
+                            resellerStockList.sortedByDescending { it.Amount!!.first()} as MutableList<ResellerStock>
+                        ResellerStockDetails.setResellerStockList(sortedResellerStock)
+                        val fragment = GetResellerProfile()
+                        val fragmentManager = requireActivity().supportFragmentManager
+                        val fragmentTransaction = fragmentManager.beginTransaction()
+                        fragmentTransaction.replace(R.id.fcv, fragment)
+                        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        fragmentTransaction.addToBackStack(null)
+                        fragmentTransaction.commit()
+                    }
                 }
                 true
             })
@@ -300,7 +318,6 @@ class ProfilesFragment : Fragment() {
                         sortedMember =
                             memberList.sortedWith(compareBy { it.Firstname!!.first() }) as MutableList<Member>
                         MemberList.setMemberList(sortedMember)
-//                        Toast.makeText(context, "${sortedMember}", Toast.LENGTH_SHORT).show()
                     }
                     R.id.descending -> {
                         //sort reseller
@@ -324,10 +341,18 @@ class ProfilesFragment : Fragment() {
                         sortedMember =
                             memberList.sortedByDescending { it.Firstname!!.first() } as MutableList<Member>
                         MemberList.setMemberList(sortedMember)
-////                        Toast.makeText(context, "$sortedReseller", Toast.LENGTH_SHORT).show()
                     }
 //                    R.id.mostsold -> {
-//                        Toast.makeText(view?.context, "Most Sold", Toast.LENGTH_SHORT).show()
+//                        sortedResellerStock =
+//                            resellerStockList.sortedByDescending { it.Amount!!.first()} as MutableList<ResellerStock>
+//                        ResellerStockDetails.setResellerStockList(sortedResellerStock)
+//                        val fragment = GetResellerProfile()
+//                        val fragmentManager = requireActivity().supportFragmentManager
+//                        val fragmentTransaction = fragmentManager.beginTransaction()
+//                        fragmentTransaction.replace(R.id.fcv, fragment)
+//                        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+//                        fragmentTransaction.addToBackStack(null)
+//                        fragmentTransaction.commit()
 //                    }
                 }
                 true
@@ -345,7 +370,7 @@ class ProfilesFragment : Fragment() {
 
             val popupMenu: PopupMenu =
                 PopupMenu(this.context, view?.findViewById(R.id.ivFilterProfiles3))
-            popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
+            popupMenu.menuInflater.inflate(R.menu.popup_menu_for_member, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.ascending -> {
@@ -397,9 +422,6 @@ class ProfilesFragment : Fragment() {
                         fragmentTransaction.commit()
 ////                        Toast.makeText(context, "$sortedReseller", Toast.LENGTH_SHORT).show()
                     }
-//                    R.id.mostsold -> {
-//                        Toast.makeText(view?.context, "Most Sold", Toast.LENGTH_SHORT).show()
-//                    }
                 }
                 true
             })

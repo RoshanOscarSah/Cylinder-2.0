@@ -4,6 +4,7 @@ import com.eachut.cylinder.api.MyApiRequest
 import com.eachut.cylinder.api.ResellerStockAPI
 import com.eachut.cylinder.api.ServiceBuilder
 import com.eachut.cylinder.entity.ResellerStock
+import com.eachut.cylinder.response.GetAllResellerStockResponse
 import com.eachut.cylinder.response.GetProfileDetailsResponse
 import com.eachut.cylinder.response.GetSingleResellerStockResponse
 import com.eachut.cylinder.response.ResellerStockResponse
@@ -30,6 +31,12 @@ class ResellerStockRepository: MyApiRequest() {
     suspend fun ProfileDetails(id: String): GetProfileDetailsResponse {
         return apiRequest {
             resellerStockAPI.ProfileDetails(id)
+        }
+    }
+
+    suspend fun resellerStockList():GetAllResellerStockResponse{
+        return apiRequest {
+            resellerStockAPI.allresellerStockList()
         }
     }
 

@@ -31,6 +31,4 @@ class CompanyStockRepository : MyApiRequest() {
         }
     }
 
-
-
 }
