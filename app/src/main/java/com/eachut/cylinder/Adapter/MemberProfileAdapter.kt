@@ -61,7 +61,7 @@ class MemberProfileAdapter (
 
     override fun onBindViewHolder(holder: MemberProfileViewHolder, position: Int) {
         val member = memberList[position]
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Main).launch {
             try {
                 val repo = MemberRepository()
                 val response = repo.MemberDetails(member._id!!)

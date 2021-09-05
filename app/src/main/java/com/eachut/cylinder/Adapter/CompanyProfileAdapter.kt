@@ -61,7 +61,7 @@ class CompanyProfileAdapter(
     override fun onBindViewHolder(holder: CompanyProfileViewHolder, position: Int) {
         val company = companyList[position]
 
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Main).launch {
             try {
                 val repo = CompanyStockRepository()
                 val response = repo.CompanyDetails(company._id!!)

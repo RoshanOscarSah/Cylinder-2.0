@@ -24,7 +24,7 @@ import kotlinx.coroutines.withContext
 
 class ResellerProfileAdapter (
     val context: Context,
-    val resellerList: MutableList<Reseller>,
+    val resellerList: MutableList<Reseller>
 ): RecyclerView.Adapter<ResellerProfileAdapter.ResellerProfileViewHolder>(){
 
     private var _binding: GetResellerProfile? = null
@@ -73,7 +73,7 @@ class ResellerProfileAdapter (
     override fun onBindViewHolder(holder: ResellerProfileViewHolder, position: Int) {
         val reseller = resellerList[position]
 
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Main).launch {
             try {
                 val repo = ResellerStockRepository()
                 val response = repo.ProfileDetails(reseller._id!!)
