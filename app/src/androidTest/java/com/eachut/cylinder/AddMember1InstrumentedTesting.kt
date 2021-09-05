@@ -53,7 +53,7 @@ class AddMember1InstrumentedTesting {
         closeSoftKeyboard()
         Thread.sleep(3000)
 
-        onView(withId(R.id.commission))
+        onView(withId(R.id.cylincom))
             .perform(typeText("7.22"))
 
         closeSoftKeyboard()

@@ -1,6 +1,7 @@
 package com.eachut.cylinder
 
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
@@ -19,7 +20,12 @@ class GeneratePDFInstrumentedTesting {
     @Test
     fun testGeneratePDF()
     {
-        Espresso.onView(withId(R.id.btnDownload))
+        onView(withId(R.id.btnSubmit))
+            .perform(ViewActions.click())
+
+        Thread.sleep(2000)
+
+        onView(withId(R.id.btnDownload))
             .perform(ViewActions.click())
     }
 }
