@@ -2,9 +2,7 @@ package com.eachut.cylinder.api
 
 import com.eachut.cylinder.Object.CompanyDetails
 import com.eachut.cylinder.entity.CompanyStock
-import com.eachut.cylinder.response.CompanyStockResponse
-import com.eachut.cylinder.response.GetCompanyDetailsResponse
-import com.eachut.cylinder.response.GetProfileDetailsResponse
+import com.eachut.cylinder.response.*
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -25,5 +23,11 @@ interface CompanyStockAPI {
         @Path("id") id: String,
     ): Response<GetCompanyDetailsResponse>
 
+//    singlecompanyStockList
+    @GET("/companyStockList/{id}")
+    suspend fun singlecompanyStockList(
+    //        @Header("Authorization") token : String,
+        @Path("id") id: String,
+    ): Response<GetSingleCompanyStockResponse>
 
 }
