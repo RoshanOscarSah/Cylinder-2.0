@@ -5,6 +5,8 @@ import com.eachut.cylinder.api.MyApiRequest
 import com.eachut.cylinder.api.ServiceBuilder
 import com.eachut.cylinder.entity.CompanyStock
 import com.eachut.cylinder.response.CompanyStockResponse
+import com.eachut.cylinder.response.GetCompanyDetailsResponse
+import com.eachut.cylinder.response.GetProfileDetailsResponse
 
 class CompanyStockRepository : MyApiRequest() {
     private val companyStockAPI =
@@ -17,4 +19,14 @@ class CompanyStockRepository : MyApiRequest() {
             companyStockAPI.addCompanyStock(companyStock)
         }
     }
+
+
+    suspend fun CompanyDetails(id: String): GetCompanyDetailsResponse {
+        return apiRequest {
+            companyStockAPI.CompanyDetails(id)
+        }
+    }
+
+
+
 }

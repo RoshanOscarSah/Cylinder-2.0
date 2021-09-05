@@ -417,6 +417,7 @@ class LoginActivity : AppCompatActivity() {
                             }
                         }
 
+
                     }
                     else if (memberResponse.message == "Please change your default password." && memberResponse.success == false){
 
@@ -431,6 +432,10 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                     else if (memberResponse.success == false ) {
+
+
+                    } else if (memberResponse.success == false) {
+
                         withContext(Main) {
                             Toast.makeText(
                                 this@LoginActivity,
@@ -441,6 +446,12 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                     else {
+                    } else if (memberResponse.message == "Please change your default password.") {
+                        withContext(Main) {
+                            startActivity(Intent(this@LoginActivity,ChangedefpassActivity::class.java))
+                            finish()
+                        }
+                    } else {
                         withContext(Main) {
                             Toast.makeText(
                                 this@LoginActivity,

@@ -1,10 +1,7 @@
 package com.eachut.cylinder.api
 
 import com.eachut.cylinder.entity.ResellerStock
-import com.eachut.cylinder.response.GetAllResellerResponse
-import com.eachut.cylinder.response.GetAllResellerStockResponse
-import com.eachut.cylinder.response.GetSingleResellerStockResponse
-import com.eachut.cylinder.response.ResellerStockResponse
+import com.eachut.cylinder.response.*
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -30,4 +27,12 @@ interface ResellerStockAPI {
 //        @Header("Authorization") token : String,
         @Path("id") id: String,
     ): Response<GetSingleResellerStockResponse>
+
+    @GET("/profile/{id}")
+    suspend fun ProfileDetails(
+//        @Header("Authorization") token : String,
+        @Path("id") id: String,
+    ): Response<GetProfileDetailsResponse>
+
+
 }

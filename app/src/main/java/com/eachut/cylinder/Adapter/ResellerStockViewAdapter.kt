@@ -72,6 +72,7 @@ class ResellerStockViewAdapter(
                         Log.d("UNISH","Response : ${response}")
                         if (response.success == true) {
                             ResellerStockDetails.setResellerStockDetails(response.data!!)
+
                             withContext(Main) {
                                 Toast.makeText(
                                     context,

@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eachut.cylinder.Adapter.ResellerProfileAdapter
 import com.eachut.cylinder.Object.ResellerList
+import com.eachut.cylinder.Object.ResellerStockDetails
 import com.eachut.cylinder.R
 import com.eachut.cylinder.databinding.FragmentDashboardBinding
 import com.eachut.cylinder.entity.Reseller
+import com.eachut.cylinder.entity.ResellerStock
 import com.eachut.cylinder.repository.ResellerRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,7 +41,9 @@ class GetResellerProfile() : Fragment() {
 
 //        get reseller
         val resellerList= ResellerList.getResellerList()
+
         Log.d("ResellerList", resellerList.toString())
+
         recyclerview.adapter = ResellerProfileAdapter(requireContext(), resellerList)
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
 

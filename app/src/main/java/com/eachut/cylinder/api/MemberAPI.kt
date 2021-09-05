@@ -57,6 +57,11 @@ interface MemberAPI {
         @Body member: Member
     ): Response<AddNewMemberResponse>
 
+    @GET("/member/{id}")
+    suspend fun MemberDetails(
+//        @Header("Authorization") token : String,
+        @Path("id") id: String,
+    ): Response<GetMemberDetailsResponse>
 
 
 }
