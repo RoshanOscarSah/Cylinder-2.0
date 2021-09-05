@@ -303,6 +303,7 @@ class LoginActivity : AppCompatActivity() {
                     val Password = etPassword.text.toString()
                     val memberRepository = MemberRepository()
                     val memberResponse = memberRepository.checkMember(Username, Password)
+                    Log.d("Anish", "Password: ${memberResponse.message}")
                     if (memberResponse.success == true) {
                         val sharedPreferences =
                             getSharedPreferences("Settings", Activity.MODE_PRIVATE)
@@ -416,15 +417,30 @@ class LoginActivity : AppCompatActivity() {
                             }
                         }
 
-                    } else if (memberResponse.success == false) {
+                    }
+                    else if (memberResponse.message == "Please change your default password." && memberResponse.success == false){
+
+                        withContext(Main)
+                        {
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "message : ${memberResponse.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            startActivity(Intent(this@LoginActivity, ChangedefpassActivity::class.java))
+                        }
+                    }
+                    else if (memberResponse.success == false ) {
                         withContext(Main) {
                             Toast.makeText(
                                 this@LoginActivity,
                                 "message : ${memberResponse.message}",
                                 Toast.LENGTH_SHORT
                             ).show()
+
                         }
-                    } else {
+                    }
+                    else {
                         withContext(Main) {
                             Toast.makeText(
                                 this@LoginActivity,
