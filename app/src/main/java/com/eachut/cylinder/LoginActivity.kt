@@ -216,7 +216,7 @@ class LoginActivity : AppCompatActivity() {
 
             touchIdSwitch.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                // The toggle is enabled
+                    // The toggle is enabled
                     val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
                     editor.putString("TouchID","")
                     editor.putString("Username","")
@@ -230,7 +230,7 @@ class LoginActivity : AppCompatActivity() {
                     ).show()
 
                 } else {
-                       // The toggle is disabled
+                    // The toggle is disabled
                     val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
                     editor.putString("TouchID","false")
                     editor.putString("Username","")
@@ -444,14 +444,14 @@ class LoginActivity : AppCompatActivity() {
                             ).show()
 
                         }
-                    }
-                    else {
-                    } else if (memberResponse.message == "Please change your default password.") {
+                    }else if (memberResponse.message == "Please change your default password.") {
                         withContext(Main) {
                             startActivity(Intent(this@LoginActivity,ChangedefpassActivity::class.java))
                             finish()
                         }
-                    } else {
+                    }
+                    else
+                    {
                         withContext(Main) {
                             Toast.makeText(
                                 this@LoginActivity,
@@ -523,7 +523,7 @@ class LoginActivity : AppCompatActivity() {
         override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
             super.onAuthenticationSucceeded(result)
 //            navigateTo<LoadingActivity>()
-                TouchIDCheck()
+            TouchIDCheck()
         }
 
         override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
