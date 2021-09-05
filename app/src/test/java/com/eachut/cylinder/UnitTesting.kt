@@ -21,7 +21,7 @@ class UnitTesting {
     @Test
     fun checkLogin() = runBlocking{
         memberRepository = MemberRepository()
-        val response = memberRepository.checkMember("adminadmin","4321")
+        val response = memberRepository.checkMember("AlexNepal","AlexNepal")
         val expectedResult = true
         val actualResult = response.success
         Assert.assertEquals(expectedResult,actualResult)
@@ -31,7 +31,7 @@ class UnitTesting {
     @Test
     fun checkChangePassword() = runBlocking{
         memberRepository = MemberRepository()
-        val response = memberRepository.changePassword("adminadmin","4321","1234")
+        val response = memberRepository.changePassword("AlexNepal","alexnepal","AlexNepal")
         val expectedResult = true
         val actualResult = response.success
         Assert.assertEquals(expectedResult,actualResult)
@@ -41,7 +41,7 @@ class UnitTesting {
     @Test
     fun checkAddnewCompany() = runBlocking {
         companyRepository = CompanyRepository()
-        val company = Company(company_fullname = "Loop", cylinder_name = "Mechi", address = "Kathmandu", phone_number = "9814028312")
+        val company = Company(company_fullname = "Anish pVt. Ltd", cylinder_name = "Anish GAsssss", address = "Kathmandu", phone_number = "9814028312")
         val response = companyRepository.newCompany(company)
         val expectedResult = true
         val actualResult = response.success

@@ -431,10 +431,7 @@ class LoginActivity : AppCompatActivity() {
                             startActivity(Intent(this@LoginActivity, ChangedefpassActivity::class.java))
                         }
                     }
-                    else if (memberResponse.success == false ) {
-
-
-                    } else if (memberResponse.success == false) {
+                    else if (memberResponse.success == false) {
 
                         withContext(Main) {
                             Toast.makeText(
@@ -443,11 +440,6 @@ class LoginActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             ).show()
 
-                        }
-                    }else if (memberResponse.message == "Please change your default password.") {
-                        withContext(Main) {
-                            startActivity(Intent(this@LoginActivity,ChangedefpassActivity::class.java))
-                            finish()
                         }
                     }
                     else
