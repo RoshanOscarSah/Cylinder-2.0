@@ -8,9 +8,11 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -25,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eachut.cylinder.Adapter.CompanyStockViewAdapter
 import com.eachut.cylinder.Adapter.ResellerStockViewAdapter
 import com.eachut.cylinder.Object.CompanyDetails
+import com.eachut.cylinder.Object.CompanyStockDetails
 import com.eachut.cylinder.Object.ResellerDetails
 import com.eachut.cylinder.Object.ResellerStockDetails
 import com.eachut.cylinder.R
@@ -35,7 +38,9 @@ import com.eachut.cylinder.entity.CompanyStock
 import com.eachut.cylinder.entity.Reseller
 import com.eachut.cylinder.entity.ResellerStock
 import com.eachut.cylinder.repository.CompanyRepository
+import com.eachut.cylinder.repository.CompanyStockRepository
 import com.eachut.cylinder.repository.ResellerRepository
+import com.eachut.cylinder.repository.ResellerStockRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -678,39 +683,9 @@ class HomeFragment : Fragment() {
         dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
             override fun onDismiss(arg0: DialogInterface) {
 
-//                val resellerStock = ResellerStockDetails.getResellerStockDetails()
-//                val flag = ResellerStockDetails.isData()
-//                var TotalCylinder = 0
-//                var leakCylinder = 0
-//                var halfCylinder = 0
-//                if (flag){
-//                     TotalCylinder = resellerStock.Leak_Kamakhya!!.toInt()+resellerStock.Leak_Others!!.toInt()+
-//                            resellerStock.Leak_Prima!!.toInt()+resellerStock.Leak_Suvidha!!.toInt()+resellerStock.Regular_Kamakhya!!.toInt()+
-//                            resellerStock.Regular_Prima!!.toInt()+resellerStock.Regular_Suvidha!!.toInt()+resellerStock.Regular_Others!!.toInt()+
-//                            resellerStock.Sold_Kamakhya!!.toInt()+resellerStock.Sold_Suvidha!!.toInt()+resellerStock.Sold_Prima!!.toInt()+
-//                            resellerStock.Sold_Others!!.toInt()
-//
-//                     leakCylinder = resellerStock.Leak_Kamakhya!!.toInt()+resellerStock.Leak_Others!!.toInt()+resellerStock.Leak_Prima!!.toInt()+resellerStock.Leak_Suvidha!!.toInt()
-//
-//                    if(resellerStock.Gas_state=="Half"){
-//                         halfCylinder = TotalCylinder
-//                    }
-//
-//
-//                }
-//                binding.tvDashboardHalfcylinder.text=halfCylinder.toString()
-//
-//                binding.title.text = ResellerDetails.getReseller().reseller_fullname
-//                binding.subtitle.text = ResellerDetails.getReseller().pasal_name
-//                binding.address.text = ResellerDetails.getReseller().address
-//                binding.ivCall.contentDescription = ResellerDetails.getReseller().phone_number
-//                binding.tvDashboardRate.text = ResellerStockDetails.getResellerStockDetails().Amount
-//
-//
-//                binding.tvDashboardLeakcylinder.text = leakCylinder.toString()
-//                binding.tvDashboardTag.text
-//                binding.tvDashboardBurn.text
-//                binding.tvDashboardCylinder.text=TotalCylinder.toString()
+
+
+
 
                 val resellerStock = ResellerStockDetails.getResellerStockDetails()
                 val flag = ResellerStockDetails.isData()
@@ -732,19 +707,59 @@ class HomeFragment : Fragment() {
 
 
                 }
-                binding.tvDashboardHalfcylinder.text=halfCylinder.toString()
 
                 binding.title.text = ResellerDetails.getReseller().reseller_fullname
                 binding.subtitle.text = ResellerDetails.getReseller().pasal_name
                 binding.address.text = ResellerDetails.getReseller().address
                 binding.ivCall.contentDescription = ResellerDetails.getReseller().phone_number
-                binding.tvDashboardRate.text = ResellerStockDetails.getResellerStockDetails().Amount
 
+                Log.d("OSCAR","ID: ${ResellerStockDetails.getResellerStockDetails().ResellerID}")
+                Handler().postDelayed({
+                CoroutineScope(Dispatchers.IO).launch {
+                    try{
+                        val resellerStockRepo = ResellerStockRepository()
+                        val response = resellerStockRepo.ProfileDetails(ResellerStockDetails.getResellerStockDetails().ResellerID!!)
+                        withContext(Dispatchers.Main) {
+//                        println(response.success)
+//                        Toast.makeText(
+//                            context,
+//                            "Response : ${response.success}",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+                            Log.d("UNISH","Response : ${response}")
+                            if (response.success == true) {
+                                Log.d("OSCAR", "Success : ${response}")
+                                binding.tvDashboardRate.text = response.Amount
+                                binding.tvDashboardLeakcylinder.text = response.LeakCylinderGiven
+                                binding.tvDashboardBurn.text = response.GasSold
+                                binding.tvDashboardCylinder.text = response.CylinderSold
+                                binding.tvDashboardTag.text = response.Rate
+                                binding.tvDashboardHalfcylinder.text = response.CylinderLended
+                            }
+                            else if(response.success == false) {
+                                withContext(Dispatchers.Main) {
+                                    Toast.makeText(context, "Couldn't find data", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                            }
+                            else{
+                                withContext(Dispatchers.Main) {
+                                    Toast.makeText(context, "Else", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                            }
 
-                binding.tvDashboardLeakcylinder.text = leakCylinder.toString()
-                binding.tvDashboardTag.text
-                binding.tvDashboardBurn.text
-                binding.tvDashboardCylinder.text=TotalCylinder.toString()
+                        }
+                    }
+                    catch(e:Exception)
+                    {
+                        withContext(Dispatchers.Main){
+                            print(e)
+                            Toast.makeText(context, "Could Not Find Data in Database", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                }, 1000)
 
             }
         })
@@ -784,9 +799,63 @@ class HomeFragment : Fragment() {
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
             override fun onDismiss(arg0: DialogInterface) {
+
+
                 binding.title.text = CompanyDetails.getCompany().cylinder_name
                 binding.subtitle.text = CompanyDetails.getCompany().company_fullname
                 binding.address.text = CompanyDetails.getCompany().address
+                binding.ivCall.contentDescription = CompanyDetails.getCompany().phone_number
+
+                Handler().postDelayed({
+                CoroutineScope(Dispatchers.IO).launch {
+                    try{
+                        val companyStockRepo = CompanyStockRepository()
+//                        ResellerStockDetails.getResellerStockDetails().ResellerID
+//                        val response = resellerStockRepo.ProfileDetails(ResellerStockDetails.getResellerStockDetails().ResellerID!!)
+                        Log.d("OSCAR","ComID: ${CompanyStockDetails.getCompanyStockDetails().CompanyID}")
+//                        ResellerStockDetails.getResellerStockDetails().ResellerID
+                        val response = companyStockRepo.CompanyDetails(CompanyStockDetails.getCompanyStockDetails().CompanyID!!)
+                        withContext(Dispatchers.Main) {
+//                        println(response.success)
+//                        Toast.makeText(
+//                            context,
+//                            "Response : ${response.success}",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+                            Log.d("UNISH","Response : ${response}")
+                            if (response.success == true) {
+                                Log.d("OSCAR", "Success : ${response}")
+                                binding.tvDashboardRate.text = response.Amount
+                                binding.tvDashboardLeakcylinder.text = response.LeakCylinderGiven
+                                binding.tvDashboardBurn.text = response.GasSold
+                                binding.tvDashboardCylinder.text = response.CylinderSold
+                                binding.tvDashboardTag.text = response.Rate
+                                binding.tvDashboardHalfcylinder.text = response.CylinderLended
+                            }
+                            else if(response.success == false) {
+                                withContext(Dispatchers.Main) {
+                                    Toast.makeText(context, "Couldn't find data", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                            }
+                            else{
+                                withContext(Dispatchers.Main) {
+                                    Toast.makeText(context, "Else", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                            }
+
+                        }
+                    }
+                    catch(e:Exception)
+                    {
+                        withContext(Dispatchers.Main){
+                            print(e)
+                            Toast.makeText(context, "Could Not Find Data in Database", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                }, 1000)
 
             }
         })

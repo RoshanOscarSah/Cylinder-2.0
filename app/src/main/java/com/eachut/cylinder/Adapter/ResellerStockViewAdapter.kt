@@ -32,6 +32,13 @@ class ResellerStockViewAdapter(
     private val binding get() = _binding!!
 
     class ResellerStockViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+//        val tv_dashboard_rate : TextView
+//        val tv_dashboard_halfcylinder : TextView
+//        val tv_dashboard_leakcylinder : TextView
+//        val tv_dashboard_tag : TextView
+//        val tv_dashboard_burn : TextView
+//        val tv_dashboard_cylinder : TextView
         val tv_Fullname : TextView
         val Tv_Pasalname : TextView
         val tv_Address : TextView
@@ -41,6 +48,12 @@ class ResellerStockViewAdapter(
             Tv_Pasalname = view.findViewById(R.id.Tv_Pasalname)
             tv_Address = view.findViewById(R.id.tv_Address)
             llNameSelected = view.findViewById(R.id.llNameSelected)
+//            tv_dashboard_rate = view.findViewById(R.id.tv_dashboard_rate)
+//            tv_dashboard_leakcylinder = view.findViewById(R.id.tv_dashboard_leakcylinder)
+//            tv_dashboard_halfcylinder = view.findViewById(R.id.tv_dashboard_halfcylinder)
+//            tv_dashboard_tag = view.findViewById(R.id.tv_dashboard_tag)
+//            tv_dashboard_burn = view.findViewById(R.id.tv_dashboard_burn)
+//            tv_dashboard_cylinder = view.findViewById(R.id.tv_dashboard_cylinder)
         }
     }
 
@@ -104,6 +117,9 @@ class ResellerStockViewAdapter(
                     }
                 }
             }
+
+
+
 
             alertDialog.dismiss()
         }

@@ -4,9 +4,7 @@ import com.eachut.cylinder.api.CompanyStockAPI
 import com.eachut.cylinder.api.MyApiRequest
 import com.eachut.cylinder.api.ServiceBuilder
 import com.eachut.cylinder.entity.CompanyStock
-import com.eachut.cylinder.response.CompanyStockResponse
-import com.eachut.cylinder.response.GetCompanyDetailsResponse
-import com.eachut.cylinder.response.GetProfileDetailsResponse
+import com.eachut.cylinder.response.*
 
 class CompanyStockRepository : MyApiRequest() {
     private val companyStockAPI =
@@ -17,6 +15,12 @@ class CompanyStockRepository : MyApiRequest() {
     suspend fun addCompanyStock(companyStock: CompanyStock):CompanyStockResponse{
         return apiRequest {
             companyStockAPI.addCompanyStock(companyStock)
+        }
+    }
+
+    suspend fun singlecompanyStockList(id: String): GetSingleCompanyStockResponse {
+        return apiRequest {
+            companyStockAPI.singlecompanyStockList(id)
         }
     }
 
