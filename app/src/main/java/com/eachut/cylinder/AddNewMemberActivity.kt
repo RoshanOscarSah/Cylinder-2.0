@@ -30,6 +30,12 @@ import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.*
 import org.json.JSONException
 import org.json.JSONObject
+import android.text.InputFilter
+
+import android.text.Spanned
+
+
+
 
 class AddNewMemberActivity : AppCompatActivity() {
 
@@ -92,14 +98,30 @@ class AddNewMemberActivity : AppCompatActivity() {
 
      val binding = DataBindingUtil.setContentView<ActivityAddNewMemberBinding>(this,R.layout.activity_add_new_member)
 
+        //Authentication
+        val filtertxt =
+            InputFilter { source, start, end, dest, dstart, dend ->
+                for (i in start until end) {
+                    if (!Character.isLetter(source[i])) {
+                        return@InputFilter ""
+                    }
+                }
+                null
+            }
+
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/Enter_topic")
         ivToggleActiveP = findViewById(R.id.ivToggleActiveP)
 
         etUsername = findViewById(R.id.etUsername)
+        etUsername.setFilters(arrayOf(filtertxt))
+
         etCompanyname = findViewById(R.id.etCompanyname)
         etResellerfullname = findViewById(R.id.etResellerfullname)
+        etResellerfullname.setFilters(arrayOf(filtertxt))
 
         lstname = findViewById(R.id.lstname)
+        lstname.setFilters(arrayOf(filtertxt))
+
         cylindername = findViewById(R.id.cylindername)
         pasalname = findViewById(R.id.pasalname)
 
