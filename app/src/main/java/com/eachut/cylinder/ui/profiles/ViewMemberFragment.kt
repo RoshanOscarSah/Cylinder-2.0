@@ -56,7 +56,7 @@ class ViewMemberFragment : Fragment() {
 
             val intent = Intent(context, LoginActivity::class.java)
             startActivity(intent)
-
+            activity!!.finish()
         }
 
 

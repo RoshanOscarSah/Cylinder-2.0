@@ -330,6 +330,7 @@ class LoginActivity : AppCompatActivity() {
                                         LoadingActivity::class.java
                                     )
                                 )
+                                finish()
                             } else if (memberResponse.status == "Employee") {
                                 withContext(Main) {
                                     Toast.makeText(
@@ -350,6 +351,7 @@ class LoginActivity : AppCompatActivity() {
                                         LoadingActivity::class.java
                                     )
                                 )
+                                finish()
                             } else {
                                 withContext(Main) {
                                     Toast.makeText(
@@ -380,6 +382,7 @@ class LoginActivity : AppCompatActivity() {
                                         LoadingActivity::class.java
                                     )
                                 )
+                                finish()
                             } else if (memberResponse.status == "Employee") {
                                 withContext(Main) {
                                     Toast.makeText(
