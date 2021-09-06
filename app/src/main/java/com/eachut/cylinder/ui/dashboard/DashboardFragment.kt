@@ -23,10 +23,12 @@ import com.android.volley.toolbox.Volley
 import com.eachut.cylinder.databinding.FragmentDashboardBinding
 import com.eachut.cylinder.repository.ResellerRepository
 import com.eachut.cylinder.repository.StockRepository
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONException
 import org.json.JSONObject
 
 
@@ -52,6 +54,8 @@ class DashboardFragment : Fragment() {
     ): View? {
         dashboardViewModel =
                 ViewModelProvider(this).get(DashboardViewModel::class.java)
+
+        FirebaseMessaging.getInstance().subscribeToTopic("/topics/Enter_topic")
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -158,13 +162,26 @@ class DashboardFragment : Fragment() {
                 val nextOrderInt = response3.left.toString().toInt()
 
                 if (nextOrderInt < 5){
-                    sendNotification(notification = JSONObject())
-
+                    val topic = "/topics/Enter_topic"
+                    val notification = JSONObject()
+                    val notificationBody = JSONObject()
+                    try{
+                        notificationBody.put("title", "Cylinder 2.0")
+                        notificationBody.put("message","$nextOrderInt is left.")
+                        notification.put("to",topic)
+                        notification.put("data",notificationBody)
+                        Log.e("TAG","try")
+                    }
+                    catch (e:JSONException)
+                    {
+                        Log.e("TAG", "OnCreate: "+e.message)
+                    }
+                    sendNotification(notification)
                 }
 
 
             }catch (ex: Exception) {
-
+                Log.e("Anish","$ex")
             }
 
 
