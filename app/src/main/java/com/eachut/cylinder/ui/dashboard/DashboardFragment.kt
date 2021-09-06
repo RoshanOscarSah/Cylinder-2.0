@@ -33,7 +33,7 @@ import org.json.JSONObject
 class DashboardFragment : Fragment() {
 
     private val FCM_API="https://fcm.googleapis.com/fcm/send"
-    private val serverKey= "key="+ "AAAAnuSaR24:APA91bHgq4BQ8PwZHES3T6kq-xOkgH3hUclVsxotk05JX3kk00N6AOKboQsxosU3egHPwrGIGLRm83xh6oxc0Bb6_eBeoDTy8VeeqDIZlR0LM1IfKvsarATDFnR6T8j9j-_hk0RfbWzi"
+    private val serverKey= "key="+ "AAAA8G-jvlU:APA91bGbqbLKaMHAjXQ_hEzvu1G8Im7x9ydVQYG8Nj200wqmPGx5heZ87KVIPsEzmGfj_On4ZeVP67Ylq0oeSrvRZ1sa341tNJ0QGvizIzPuGIIKXbntXGJERiWNbgKKx1cJhCBoEAeM"
     private val contentType = "application/json"
     private val requestQueue : RequestQueue by lazy {
         Volley.newRequestQueue(this.context)

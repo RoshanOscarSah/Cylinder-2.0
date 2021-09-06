@@ -1,5 +1,6 @@
 package com.eachut.cylinder
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +10,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.eachut.cylinder.databinding.ActivityMainBinding
+import com.eachut.cylinder.databinding.FragmentProfilesBinding
+import com.eachut.cylinder.databinding.FragmentViewMemberBinding
 import com.eachut.cylinder.ui.home.HomeFragment
 import com.eachut.cylinder.ui.profiles.GetResellerProfile
+import com.eachut.cylinder.ui.profiles.ProfilesFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,7 +40,6 @@ class MainActivity : AppCompatActivity() {
 //        val appBarConfiguration = AppBarConfiguration(setOf(
 //                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_stock, R.id.navigation_notifications, R.id.navigation_profiles))
 //        setupActionBarWithNavController(navController, appBarConfiguration)
-
 
 
         navView.setupWithNavController(navController)
